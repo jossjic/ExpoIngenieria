@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador de Proyecto</title>
+
+    <link rel="stylesheet" href="header_footer.css">
+    <link rel="stylesheet" href="administradordeproyecto.css">
+</head>
+<body>
+    
+    <header>
+        <img class="Logo__EscNegCie" src="media/logotec-ings.svg" alt="Logo TEC">
+        <ul>
+            <li><a href="#">Layout Proyectos</a></li>
+            <li><a href="#">Galeria de Proyectos</a></li>
+        </ul>
+        <a class="Otros" href="#">Cerrar Sesion</a>
+    </header>
+
+    <aside>
+        <h1>Bienvenido <br> de nuevo!</h1>
+
+        
+        <form action="" class="Upload__Video">
+            <iframe width="100%" height="90%" src="media/HomePageImage.jpg" ></iframe>
+            <div>
+                <label for="url">Video URL:</label>
+                <input type="url" name="url" id="url"
+                    placeholder="https://example.com"
+                    pattern="https://.*" size="30"
+                    required>
+            </div>
+            <input class="Add__Video__Btn" type="submit" value="Agregar Video">
+        </form>
+
+        <form action="" class="Upload__Poster">
+            <iframe width="100%" height="600px" src="media/HomePageImage.jpg"></iframe>
+            <input type="file" name="Poster" id="Poster__File" accept=".pdf">
+            <input class="Add__Poster__Btn" type="submit" value="Agregar Archivo">
+        </form>
+    </aside>
+
+    <main>
+            <section class="First__Form">
+                <form action="" method="post">
+                    <table >
+                        <tr>
+                            <th><label for="">Nombre del proyecto</label></th>
+                            <th><label for="">Categoria</label></th>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="" id=""></td>
+                            <td>
+                                <select name="" id="">
+                                    <option value="">Cyber</option>
+                                    <option value="">Proto</option>
+                                    <option value="">Bio</option>
+                                </select>
+                            </td>
+                            
+                        </tr>
+                    </table>
+                </form>
+            </section>
+
+            <section class="Second__Form">
+                <form action="">
+                    <label for="">Descripcion del Proyecto</label>
+                    <textarea class="input" name="" id="" cols="30" rows="10"></textarea>
+                </form>
+            </section>
+
+            <section class="Third__Form">
+                <form action="">
+                    <div>
+                        <input type="submit" value="Agregar Alumno">
+                        <input type="submit" value="Agregar Profesor">
+                    </div>
+                    <div>
+                        <fieldset >
+                            <table width="100%">                            
+                                <td><span>Alberto Martinez Martinez</span></td>
+                                <td><span>A0173XXXX</span></td>
+                                <td><span>A0173XXXX@tec.mx</span></td>
+                            </table>
+                        </fieldset>
+                        <fieldset >
+                            <table width="100%">                            
+                                <td><span>Alberto Martinez Martinez</span></td>
+                                <td><span>A0173XXXX@tec.mx</span></td>
+                            </table>
+                        </fieldset>
+                    </div>
+                </form>
+            </section>
+
+            <section>
+                <span>Lugar Asignado</span>
+                <span>#</span>
+            </section>
+
+    </main>
+
+    <footer>
+        <img class="Logo__Tec" src="media/LogoTec.png" alt="Logo TEC">
+    </footer>
+</body>
+</html>

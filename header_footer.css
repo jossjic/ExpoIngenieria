@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header{
+    background-color: #0033A0;
+    height: 100px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    place-items: center;
+
+}
+
+.Logo__EscNegCie{
+    grid-column: 1/2;
+    width: 350px;
+    justify-self: center;
+}
+
+header ul{
+    grid-column: 2/3;
+    justify-self: start;
+    list-style: none;
+}
+
+header ul li{
+    display: inline;
+    padding: 0 0 0 20px;
+}
+
+header ul li a, .Otros{
+    text-decoration: none;
+    color: white;
+    font-weight: 400;
+    font-family: 'Inter', sans-serif;
+}
+
+
+footer{
+    
+    height: 100px;
+    width: 100%;
+    background-color: black;
+    display: grid;
+    place-items: center;
+}
+
+footer .Logo__Tec{
+    height: 100px;
+}
