@@ -1,0 +1,72 @@
+*{
+    font-family: 'Inter', sans-serif;
+}
+
+main{
+    display: grid;
+    height: calc(100vh - 200px);
+    grid-template-columns: 30% 40% 30%;
+    grid-template-rows: 1fr 1fr 1fr;
+
+    place-items: center;
+}
+
+main h1{
+    grid-column: 2/3;
+
+    font-size: 1em;
+    text-align: center;
+}
+
+main form{
+    align-self: normal;
+    grid-column: 2/3;
+    grid-row: 2/3;
+}
+
+main form table{
+    border-spacing: 25px;
+}
+
+.Text__Input{
+    background-color: #D9D9D9;
+    border: none;
+    height: 1.5em;
+}
+
+.Btn__Iniciar__Sesion, .Btn__Registrar, .Btn__Admin__Options{
+    border: none;
+    background-color: #0033A0;
+    color: white;
+    height: 40px;
+    width: 150px;
+}
+
+.Td__Iniciar__Sesion, .Td__Registrar{
+    text-align: center;
+}
+
+main h2{
+    grid-column: 2/3;
+    grid-row: 3/4;
+
+    font-size: 1em;
+    text-align: center;
+}
+
+main h2 a{
+    color: #0033A0;
+    text-decoration: none;
+}
+
+.Admin_Options{
+    align-self: normal;
+    grid-column: 2/3;
+    grid-row: 2/3;
+
+    border-spacing: 25px;
+}
+
+.Admin_Options td{
+    text-align: center;
+}
