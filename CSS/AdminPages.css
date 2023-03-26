@@ -1,0 +1,103 @@
+*{
+    font-family: 'Inter', sans-serif;
+}
+
+h1{
+    color: #0022BB;
+    font-size: 1.5em;
+}
+
+main{
+    display: grid;
+    height: calc(100vh - 200px);
+    grid-template-columns: 5% 90% 5%;
+    grid-template-rows: 100px 100px calc(100vh - 375px) 50px;
+    place-items: center;
+}
+
+.Admin__Start{
+    grid-column: 2/3;
+    grid-row: 1/2;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    
+    width: 100%;
+}
+
+.Admin__Start__Left{
+    grid-column: 1/2;
+    justify-self: start;
+}
+
+.Projects__Explorer, .Users__Explorer, .Winners__Explorer{
+    grid-row: 2/3;
+    grid-column: 2/3;
+
+    width: 100%;
+    height: 80%;
+
+    align-self: end;
+
+    background-color: #ECECEC;
+}
+
+.Projects__Explorer table, .Users__Explorer table, .Winners__Explorer table{
+    width: 80%;
+    
+}
+
+.Projects__Explorer .Header__Table, .Users__Explorer .Header__Table, .Winners__Explorer .Header__Table{
+    width: 95%;
+    text-align: center;
+}
+
+.Admin__Start__Right__Btn, .Admin__Submit__Btn{
+    grid-column: 2/3;
+    place-self: center;
+
+    width: 20em;
+    height: 3.5em;
+    
+    border: none;
+    color: white;
+    background-color: #325DB8;
+
+    font-weight: 600;
+}
+
+.Admin__Submit__Btn{
+    grid-column: 2/3;
+    grid-row: 4/5;
+}
+
+.Projects__View, .Users__View, .Winners__View{
+    grid-column: 2/3;
+    grid-row: 3/4;
+
+    place-self: center;
+    width: 100%;
+    height: 80%;
+
+    background-color: #ECECEC;
+
+    overflow: auto;
+
+    align-self: start;
+}
+
+.Projects__View::-webkit-scrollbar , .Users__View::-webkit-scrollbar, .Winners__View::-webkit-scrollbar{
+    width: 10px;
+    height: 10px;
+  }
+  
+.Projects__View::-webkit-scrollbar-thumb, .Users__View::-webkit-scrollbar-thumb, .Winners__View::-webkit-scrollbar-thumb{
+    background-color: #aaa;
+    border-radius: 5px;
+}
+
+.Projects__View table, .Users__View table, .Winners__View table{
+    width: 90%;
+    text-align: center;
+}
+
