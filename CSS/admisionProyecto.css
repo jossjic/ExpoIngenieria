@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+.headerPage{
+    color:BLACK;
+    height:17%;
+    font-family:arial;
+    /*font-size:15;*/
+    text-align:left;
+    /*border:3px solid blue*/;
+    background:#0033A0;
+    padding-top: 15px;
+    padding-left: 25px;
+}
+
+.logoexpo{
+  width : 300px;
+  height : 100px
+}
+
+#footerPage{
+    color:BLACK;
+    height:23%;
+    font-family:arial;
+    /*font-size:15;*/
+    text-align:center;
+    /*border:3px solid blue*/;
+    background:#000000;
+    padding-top: 30px;}
+
+td {
+    padding: 10px;
+}
+
+td.especial{
+    padding-left: 50px;
+}
+
+#divProyectos{
+  background-color: #ECECEC;
+  padding-left: 5%;
+  padding-right: 5%;
+  width: 1100px;
+  position: relative; left: 40px;
+}
+
+.linkLayout{
+  position: relative; left: 100px; top:-50px;
+  color:#ffffff;
+  font-family: 'Abhaya Libre Medium';
+}
+
+.linkClose{
+  position: relative; left: 550px; top:-50px;
+  color:#ffffff;
+    font-family: 'Abhaya Libre Medium';
+}
+
+.textFirst{
+  font-weight: bold; 
+  font-family: 'Inter', sans-serif;
+}
+
+.textSec{ 
+  font-family:'Inter';
+}
+
+.textP{ 
+  font-family:'Inter';
+  color: #325DB8
+}
+
+.rob{
+  width : 150px;
+  height : 140px
+}
+
+#divProyectoEsp{
+  background-color: #ECECEC;
+  padding-left: 5%;
+  padding-right: 5%;
+  width: 1300px;
+  position: relative; left: 40px;
+}
+
+.btnA{
+  font-family:'Inter';
+    text-decoration:none;
+    font-weight:400;
+    font-size:20px;
+    color:#ffffff;
+    padding-top:15px;
+    padding-bottom:15px;
+    padding-left:20px;
+    padding-right:20px;
+    background-color:#0033A0;
+  border-radius:15px;
+}
+
+.btnR{
+  font-family:'Inter';
+    text-decoration:none;
+    font-weight:400;
+    font-size:20px;
+    color:#ffffff;
+    padding-top:15px;
+    padding-bottom:15px;
+    padding-left:20px;
+    padding-right:20px;
+    background-color:#0033A0;
+  border-radius:15px;
+  position: relative; left: 85px; 
+}

@@ -1,0 +1,64 @@
+*{
+    font-family: 'Inter', sans-serif;
+}
+
+.rubric-elements {
+    margin: 1.5rem 0 1.5rem 0;
+}
+
+.rubric-elements table, th, td {
+    border-collapse: collapse;
+}
+
+.rubric-elements th, td {
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    padding-left: 60px;
+    padding-right: 70px;
+}
+
+input.box_input, select.box_input {
+    width: 41rem;
+    height: 1.8rem;
+}
+
+textarea.box_input {
+    width: 41rem;
+    height: 6rem;
+}
+
+.container {
+    margin: 2rem 5rem 2rem 5rem;
+}
+
+.top-page h1 {
+    color: #0022BB;
+    font-size: 1.5em;
+}
+
+.top-page dd {
+    margin-inline-start: 40px;
+}
+
+.top-page dl {
+    line-height: 1.6;
+}
+
+fieldset.rubric-container {
+    background-color: #ECECEC;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0 1.5rem 1.5rem 1.5rem;
+}
+
+.submit-btn {
+    background-color: #325DB8;
+    border: none;
+    color: white;
+    width: 20em;
+    height: 3.5em;
+    font-weight: 600;
+    display: block;
+    margin: 0 auto;
+}

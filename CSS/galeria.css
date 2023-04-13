@@ -1,0 +1,91 @@
+
+*{
+    font-family: 'Inter', sans-serif;
+    
+}
+
+p.categoria{
+    color: #5B5B5B;
+    padding-bottom: 5px;
+}
+
+p{
+    color: #0033A0;
+}
+
+div{
+    background-color: #ECECEC;
+    margin: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+div.proyecto{
+    margin: 10px;
+}
+
+div.main{
+    margin: 10px;
+    background-color: white;
+}
+
+img.proimg{
+    width: 50px;
+    height: 60px;
+}
+
+table.pro{
+
+    width: 100%;
+    
+}
+
+main{
+    display: grid;
+    height: calc(100vh - 200px);
+    grid-template-columns: 5% 90% 5%;
+    grid-template-rows: 100px 100px calc(100vh - 375px) 50px;
+    place-items: center;
+}
+
+.imagenpropatineta{
+    background-image: url("/media/patineta.png");
+    background-repeat: no-repeat;
+    background-size:cover;
+    text-align: center;
+}
+
+.imagenprorobot{
+    background-image: url("/media/robot.png");
+    background-repeat: no-repeat;
+    background-size:cover;
+    text-align: center;
+}
+
+.btn{
+    height: 198px;
+    width: 198px;
+    background-color: transparent;
+    border:transparent;
+
+}
+
+img.btn{
+    height: 100px;
+    width: 100px;
+
+}
+
+li{
+    color: #0033A0;
+}
+
+  
+
+td {
+    padding: 10px;
+}
+
+td.especial{
+    padding-left: 50px;
+}
