@@ -1,18 +1,31 @@
 <?php
+	class Database {
+		private static $dbName 					= 'TC2005B_401_5';
+		private static $dbHost 					= 'localhost';
+		private static $dbUsername 			= 'TC2005B_401_5';
+		private static $dbUserPassword 	= 'b#-ap+E4ru97?STi';
 
+		private static $cont  = null;
 
-$dbhost = "Localhost";
-$dbuser = "TC2005B_401_5";
-$dbpass = "b#-ap+E4ru97?STi";
-$dbname = "TC2005B_401_5";
+		public function __construct() {
+			exit('Init function is not allowed');
+		}
 
+		public static function connect(){
+		   // One connection through whole application
+	    	if ( null == self::$cont ) {
+		    	try {
+		        	self::$cont =  new PDO( "mysql:host=".self::$dbHost.";"."dbname=".self::$dbName, self::$dbUsername, self::$dbUserPassword);
+		        }
+		        catch(PDOException $e) {
+		        	die($e->getMessage());
+		        }
+	       	}
+	       	return self::$cont;
+		}
 
-$conn= mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
-if (!$conn)
-{
-   die("NO hay conexión: ".mysqli_connect_error());
-}
-
-
-
+		public static function disconnect() {
+			self::$cont = null;
+		}
+	}
 ?>
