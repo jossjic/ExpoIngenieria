@@ -1,77 +1,111 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	    <meta 	charset="utf-8">
+	    <link   href="css/bootstrap.min.css" rel="stylesheet">
+	    <script src="js/bootstrap.min.js"></script>
+		<title>Admin Usuarios</title>
+	</head>
 
-require 'dataBase.php';
+	<body>
+	    <div class="container">
 
+    		<div class="row">
+    			<h3>Admin Usuarios</h3>
+    		</div>
 
-// Consultas
-$sqlDo = 'SELECT * FROM DOCENTEV1 ORDER BY d_apellido_paterno';
-$sqlJu = 'SELECT * FROM JURADOV1 ORDER BY j_apellido_paterno';
-$sqlAl = 'SELECT * FROM ALUMNOV1 ORDER BY a_apellido_paterno';
-$sqlAd = 'SELECT * FROM ADMINV1 ORDER BY adm_usu';
+				<div class="row">
+					<p>
+						<a href="../PHP/registroUsuarios.php" class="btn btn-success">Registrar Usuario</a>
+					</p>
 
-// Ejecución de las consultas
-$resultDo = mysqli_query($conn, $sqlDo);
-$resultJu = mysqli_query($conn, $sqlJu);
-$resultAl = mysqli_query($conn, $sqlAl);
-$resultAd = mysqli_query($conn, $sqlAd);
+					<table class="table table-striped table-bordered">
+	            <thead>
+	                <tr>
+	                	<th>Nombre	</th>
+	                	<th>Apellido				</th>
+                    <th>Correo				</th>
+	                </tr>
+	            </thead>
+	            <tbody>
+	              	<?php
+								   	include 'database.php';
+								   	$pdo = Database::connect();
+								   	$sql = 'SELECT * FROM V2_DOCENTE ORDER BY d_apellido_paterno';
+				 				   	foreach ($pdo->query($sql) as $row) {
+											echo '<tr>';
+			    					   	echo '<td>'. $row['d_nombre'] . '</td>';
+			    					  	echo '<td>'. $row['d_apellido_paterno'] . '</td>';
+                      					echo '<td>'. $row['d_correo'] . '</td>';
+			                            //echo '<td>';    echo ($row['ac'])?"SI":"NO"; echo'</td>';
+			                            echo '<td width=250>';
+			    					   	echo '<a class="btn" href="read.php?id='.$row['d_nomina'].'">Detalles</a>';
+			    					   	echo '&nbsp;';
+			    					  	echo '<a class="btn btn-success" href="update.php?id='.$row['d_nomina'].'">Actualizar</a>';
+			    					   	echo '&nbsp;';
+			    					   	echo '<a class="btn btn-danger" href="delete.php?id='.$row['d_nomina'].'">Eliminar</a>';
+			    					   	echo '</td>';
+										  echo '</tr>';
+								    }
 
-// Mostrar resultados
-while ($row = mysqli_fetch_assoc($resultDo)) {
-	echo '<tr>';
-	echo '<td>'. $row['d_nombre'] . '</td>';
-	echo '<td>'. $row['d_apellido_paterno'] . '</td>';
-	echo '<td>'. $row['d_correo'] . '</td>';
-	//echo '<td>'; echo ($row['ac'])?"SI":"NO"; echo'</td>';
-	echo '<a class="btn" href="read.php?id='.$row['d_nomina'].'">Detalles</a>';
-	echo '&nbsp;';
-	echo '<a class="btn btn-success" href="update.php?id='.$row['d_nomina'].'">Actualizar</a>';
-	echo '&nbsp;';
-	echo '<a class="btn btn-danger" href="delete.php?id='.$row['d_nomina'].'">Eliminar</a>';
-	echo '</tr>';
-}
+									$sql = 'SELECT * FROM V2_JURADO ORDER BY j_apellido_paterno';
+									foreach ($pdo->query($sql) as $row) {
+										echo '<tr>';
+									   echo '<td>'. $row['j_nombre'] . '</td>';
+									  echo '<td>'. $row['j_apellido_paterno'] . '</td>';
+				  					echo '<td>'. $row['j_correo'] . '</td>';
+									//echo '<td>';    echo ($row['ac'])?"SI":"NO"; echo'</td>';
+									echo '<td width=250>';
+									   echo '<a class="btn" href="read.php?id='.$row['j_id'].'">Detalles</a>';
+									   echo '&nbsp;';
+									  echo '<a class="btn btn-success" href="update.php?id='.$row['j_id'].'">Actualizar</a>';
+									   echo '&nbsp;';
+									   echo '<a class="btn btn-danger" href="delete.php?id='.$row['j_id'].'">Eliminar</a>';
+									   echo '</td>';
+									  echo '</tr>';
+								}
 
-while ($row = mysqli_fetch_assoc($resultJu)) {
-	echo '<tr>';
-	echo '<td>'. $row['j_nombre'] . '</td>';
-	echo '<td>'. $row['j_apellido_paterno'] . '</td>';
-	echo '<td>'. $row['j_correo'] . '</td>';
-	//echo '<td>'; echo ($row['ac'])?"SI":"NO"; echo'</td>';
-	echo '<a class="btn" href="read.php?id='.$row['j_id'].'">Detalles</a>';
-	echo '&nbsp;';
-	echo '<a class="btn btn-success" href="update.php?id='.$row['j_id'].'">Actualizar</a>';
-	echo '&nbsp;';
-	echo '<a class="btn btn-danger" href="delete.php?id='.$row['j_id'].'">Eliminar</a>';
-	echo '</tr>';
-}
+								$sql = 'SELECT * FROM V2_ALUMNO ORDER BY a_apellido_paterno';
+								foreach ($pdo->query($sql) as $row) {
+									echo '<tr>';
+								   echo '<td>'. $row['a_nombre'] . '</td>';
+								  echo '<td>'. $row['a_apellido_paterno'] . '</td>';
+			  					echo '<td>'. $row['a_correo'] . '</td>';
+								//echo '<td>';    echo ($row['ac'])?"SI":"NO"; echo'</td>';
+								echo '<td width=250>';
+								   echo '<a class="btn" href="read.php?id='.$row['a_matricula'].'">Detalles</a>';
+								   echo '&nbsp;';
+								  echo '<a class="btn btn-success" href="update.php?id='.$row['a_matricula'].'">Actualizar</a>';
+								   echo '&nbsp;';
+								   echo '<a class="btn btn-danger" href="delete.php?id='.$row['a_matricula'].'">Eliminar</a>';
+								   echo '</td>';
+								  echo '</tr>';
+							}
 
-while ($row = mysqli_fetch_assoc($resultAl)) {
-	echo '<tr>';
-	echo '<td>'. $row['a_matricula'] . '</td>';
-	echo '<td>'. $row['a_apellido_paterno'] . '</td>';
-	echo '<td>'. $row['a_correo'] . '</td>';
-	//echo '<td>'; echo ($row['ac'])?"SI":"NO"; echo'</td>';
-	echo '<a class="btn" href="read.php?id='.$row['a_nomina'].'">Detalles</a>';
-	echo '&nbsp;';
-	echo '<a class="btn btn-success" href="update.php?id='.$row['a_nomina'].'">Actualizar</a>';
-	echo '&nbsp;';
-	echo '<a class="btn btn-danger" href="delete.php?id='.$row['a_nomina'].'">Eliminar</a>';
-	echo '</tr>';
-}
+							$sql = 'SELECT * FROM DOCENTEV1 ORDER BY d_apellido_paterno';
+							foreach ($pdo->query($sql) as $row) {
+								echo '<tr>';
+							   echo '<td>'. $row['d_nombre'] . '</td>';
+							  echo '<td>'. $row['d_apellido_paterno'] . '</td>';
+		  echo '<td>'. $row['d_correo'] . '</td>';
+							//echo '<td>';    echo ($row['ac'])?"SI":"NO"; echo'</td>';
+							echo '<td width=250>';
+							   echo '<a class="btn" href="read.php?id='.$row['d_nomina'].'">Detalles</a>';
+							   echo '&nbsp;';
+							  echo '<a class="btn btn-success" href="update.php?id='.$row['d_nomina'].'">Actualizar</a>';
+							   echo '&nbsp;';
+							   echo '<a class="btn btn-danger" href="delete.php?id='.$row['d_nomina'].'">Eliminar</a>';
+							   echo '</td>';
+							  echo '</tr>';
+						}
 
-while ($row = mysqli_fetch_assoc($resultAd)) {
-	echo '<tr>';
-	echo '<td>'. $row['adm_usu'] . '</td>';
-	echo '<td>'. $row['adm_correo'] . '</td>';
-	//echo '<td>'; echo ($row['ac'])?"SI":"NO"; echo'</td>';
-	echo '<a class="btn" href="read.php?id='.$row['adm_usu'].'">Detalles</a>';
-	echo '&nbsp;';
-	echo '<a class="btn btn-success" href="update.php?id='.$row['adm_usu'].'">Actualizar</a>';
-	echo '&nbsp;';
-	echo '<a class="btn btn-danger" href="delete.php?id='.$row['adm_usu'].'">Eliminar</a>';
-	echo '</tr>';
-}
-// Cerrar conexión
-mysqli_close($conn);
+								   	Database::disconnect();
+				  				?>
+			    		</tbody>
+		      </table>
 
+		    </div>
 
-?>
+	    </div> <!-- /container -->
+	</body>
+</html>
