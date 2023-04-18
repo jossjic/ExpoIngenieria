@@ -2,8 +2,6 @@
 <html lang="en">
 	<head>
 	    <meta 	charset="utf-8">
-	    <link   href="css/bootstrap.min.css" rel="stylesheet">
-	    <script src="js/bootstrap.min.js"></script>
 		<title>Admin Usuarios</title>
 	</head>
 
@@ -87,7 +85,7 @@
 								echo '<tr>';
 							   echo '<td>'. $row['d_nombre'] . '</td>';
 							  echo '<td>'. $row['d_apellido_paterno'] . '</td>';
-		  echo '<td>'. $row['d_correo'] . '</td>';
+		  					echo '<td>'. $row['d_correo'] . '</td>';
 							//echo '<td>';    echo ($row['ac'])?"SI":"NO"; echo'</td>';
 							echo '<td width=250>';
 							   echo '<a class="btn" href="read.php?id='.$row['d_nomina'].'">Detalles</a>';
