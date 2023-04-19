@@ -7,13 +7,13 @@
   <title>Admin Certificados</title>
 
 
-  <link rel="stylesheet" href="/CSS/AdminPages.css">
-  <link rel="stylesheet" href="/CSS/HeaderFooterStructure.css">
+  <link rel="stylesheet" href="../CSS/AdminPages.css">
+  <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
 </head>
 <body>
 
     <header>
-        <img class="Logo__EscNegCie" src="/media/logotec-ings.svg" alt="Logo__EscNegCie">
+        <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
         <ul>
             <li>
                 <a href="#">Cerrar Sesion</a>
@@ -21,9 +21,9 @@
         </ul>
         <nav>
             <ul>
+                <li><a href="#">Reconocimientos</a></li>
                 <li><a href="#">Proyectos</a></li>
                 <li><a href="#">Usuarios</a></li>
-                <li><a href="#">Reconocimientos</a></li>
                 <li><a href="#">Eastadísticas</a></li>
             </ul>
         </nav>
@@ -49,271 +49,54 @@
                 </table>
             </div>
 
-            <input class="Admin__Start__Right__Btn" type="button" value="Estadisticas Usuarios">
+            <div class="Estadisticas__Btn">
+                <a class="Admin__Start__Right__Btn" href="../PHP/EstadisticasUsuarios.php">Estadisticas Usuarios</a>
+            </div>
         </div>
 
-        <fieldset class="Winners__Explorer">
+
+    
+        <form method="post" class="Winners__Explorer">
             <table>
                 <tr>
-                  <td>Buscar</td>
-                  <td>
-                        <select name="bus" id="bus">
-                            <option value="bus_1">Por ID</option>
-                            <option value="bus_2">Lorem ipsum 2</option>
-                            <option value="bus_3">Lorem ipsum 3</option>
-                            <option value="bus_4">Lorem ipsum 4</option>
+                    <td>
+                        Buscar
+                    </td>
+                    <td>
+                        <select name="ProyectoID" id="ProyectoID">
+                            <option value="bus_1">ID</option>
+                            <option value="bus_2">Nombre</option>
                         </select>
-                  </td>
-                  <td><input value="Ingrese el ID del Proyecto" type="text" /></td>
-                </tr>
-
-                <tr>
-                  <td>Acción</td>
-                  <td>
-                        <select name="acc" id="acc">
-                            <option value="acc_1">Enviar</option>
-                            <option value="acc_2">Lorem ipsum 2</option>
-                            <option value="acc_3">Lorem ipsum 3</option>
-                            <option value="acc_4">Lorem ipsum 4</option>
-                        </select>
-                  </td>
+                    </td>
+                    <td>
+                        
+                        <input type="search" name="BuscarNombre" class="Text__Search" id="" placeholder="Ingresa el valor">
+                        <input type="submit" name="BtnBuscar" class="Search__Btn" id="" value="Buscar">
+                        
+                    </td>
+                    
                 </tr>
               </table>
+        </form>
 
-              <table class="Header__Table">
-                <tr>
-                    <td>&nbsp;</td>
-                    <td><strong>ID</strong></td>
-                    <td><strong>Nombre</strong></td>
-                    <td><strong>Tipo</strong></td>
-                    <td><strong>Estado</strong></td>
-                    <td><strong>Última Modificación</strong></td>
-                  </tr>
-              </table>
-        </fieldset>
-
-        <fieldset class="Winners__View">
-            <table>
-                <tr>
-                        <td><input type="checkbox"></td>
-                        <td>26</td>
-                        <td>Microcosmos</td>
-                        <td>Ganador</td>
-                        <td>Faltante</td>
-                        <td>14 de Octubre de 2022, 16:45 PM</td>
-                  </tr>
-                  <tr>
-                        <td><input type="checkbox"></td>
-                        <td>28</td>
-                        <td>Patineta E</td>
-                        <td>Ganador</td>
-                        <td>Enviado</td>
-                        <td>14 de Octubre de 2022, 16:45 PM</td>
-                  </tr>
-                  <tr>
-                        <td><input type="checkbox"></td>
-                        <td>29</td>
-                        <td>Laptop Biodegradable</td>
-                        <td>Participante</td>
-                        <td>Faltante</td>
-                        <td>14 de Octubre de 2022, 16:45 PM</td>
-                  </tr>
-                  <tr>
-                    <td><input type="checkbox"></td>
-                    <td>26</td>
-                    <td>Microcosmos</td>
-                    <td>Ganador</td>
-                    <td>Faltante</td>
-                    <td>14 de Octubre de 2022, 16:45 PM</td>
-              </tr>
-              <tr>
-                    <td><input type="checkbox"></td>
-                    <td>28</td>
-                    <td>Patineta E</td>
-                    <td>Ganador</td>
-                    <td>Enviado</td>
-                    <td>14 de Octubre de 2022, 16:45 PM</td>
-              </tr>
-              <tr>
-                    <td><input type="checkbox"></td>
-                    <td>29</td>
-                    <td>Laptop Biodegradable</td>
-                    <td>Participante</td>
-                    <td>Faltante</td>
-                    <td>14 de Octubre de 2022, 16:45 PM</td>
-              </tr>
-              <tr>
-                <td><input type="checkbox"></td>
-                <td>26</td>
-                <td>Microcosmos</td>
-                <td>Ganador</td>
-                <td>Faltante</td>
-                <td>14 de Octubre de 2022, 16:45 PM</td>
-          </tr>
-          <tr>
-                <td><input type="checkbox"></td>
-                <td>28</td>
-                <td>Patineta E</td>
-                <td>Ganador</td>
-                <td>Enviado</td>
-                <td>14 de Octubre de 2022, 16:45 PM</td>
-          </tr>
-          <tr>
-                <td><input type="checkbox"></td>
-                <td>29</td>
-                <td>Laptop Biodegradable</td>
-                <td>Participante</td>
-                <td>Faltante</td>
-                <td>14 de Octubre de 2022, 16:45 PM</td>
-          </tr>
-          <tr>
-            <td><input type="checkbox"></td>
-            <td>26</td>
-            <td>Microcosmos</td>
-            <td>Ganador</td>
-            <td>Faltante</td>
-            <td>14 de Octubre de 2022, 16:45 PM</td>
-      </tr>
-      <tr>
-            <td><input type="checkbox"></td>
-            <td>28</td>
-            <td>Patineta E</td>
-            <td>Ganador</td>
-            <td>Enviado</td>
-            <td>14 de Octubre de 2022, 16:45 PM</td>
-      </tr>
-      <tr>
-            <td><input type="checkbox"></td>
-            <td>29</td>
-            <td>Laptop Biodegradable</td>
-            <td>Participante</td>
-            <td>Faltante</td>
-            <td>14 de Octubre de 2022, 16:45 PM</td>
-      </tr>
-      <tr>
-        <td><input type="checkbox"></td>
-        <td>26</td>
-        <td>Microcosmos</td>
-        <td>Ganador</td>
-        <td>Faltante</td>
-        <td>14 de Octubre de 2022, 16:45 PM</td>
-  </tr>
-  <tr>
-        <td><input type="checkbox"></td>
-        <td>28</td>
-        <td>Patineta E</td>
-        <td>Ganador</td>
-        <td>Enviado</td>
-        <td>14 de Octubre de 2022, 16:45 PM</td>
-  </tr>
-  <tr>
-        <td><input type="checkbox"></td>
-        <td>29</td>
-        <td>Laptop Biodegradable</td>
-        <td>Participante</td>
-        <td>Faltante</td>
-        <td>14 de Octubre de 2022, 16:45 PM</td>
-  </tr>
-  <tr>
-    <td><input type="checkbox"></td>
-    <td>26</td>
-    <td>Microcosmos</td>
-    <td>Ganador</td>
-    <td>Faltante</td>
-    <td>14 de Octubre de 2022, 16:45 PM</td>
-</tr>
-<tr>
-    <td><input type="checkbox"></td>
-    <td>28</td>
-    <td>Patineta E</td>
-    <td>Ganador</td>
-    <td>Enviado</td>
-    <td>14 de Octubre de 2022, 16:45 PM</td>
-</tr>
-<tr>
-    <td><input type="checkbox"></td>
-    <td>29</td>
-    <td>Laptop Biodegradable</td>
-    <td>Participante</td>
-    <td>Faltante</td>
-    <td>14 de Octubre de 2022, 16:45 PM</td>
-</tr>
-<tr>
-    <td><input type="checkbox"></td>
-    <td>26</td>
-    <td>Microcosmos</td>
-    <td>Ganador</td>
-    <td>Faltante</td>
-    <td>14 de Octubre de 2022, 16:45 PM</td>
-</tr>
-<tr>
-    <td><input type="checkbox"></td>
-    <td>28</td>
-    <td>Patineta E</td>
-    <td>Ganador</td>
-    <td>Enviado</td>
-    <td>14 de Octubre de 2022, 16:45 PM</td>
-</tr>
-<tr>
-    <td><input type="checkbox"></td>
-    <td>29</td>
-    <td>Laptop Biodegradable</td>
-    <td>Participante</td>
-    <td>Faltante</td>
-    <td>14 de Octubre de 2022, 16:45 PM</td>
-</tr>
-<tr>
-    <td><input type="checkbox"></td>
-    <td>26</td>
-    <td>Microcosmos</td>
-    <td>Ganador</td>
-    <td>Faltante</td>
-    <td>14 de Octubre de 2022, 16:45 PM</td>
-</tr>
-<tr>
-    <td><input type="checkbox"></td>
-    <td>28</td>
-    <td>Patineta E</td>
-    <td>Ganador</td>
-    <td>Enviado</td>
-    <td>14 de Octubre de 2022, 16:45 PM</td>
-</tr>
-<tr>
-    <td><input type="checkbox"></td>
-    <td>29</td>
-    <td>Laptop Biodegradable</td>
-    <td>Participante</td>
-    <td>Faltante</td>
-    <td>14 de Octubre de 2022, 16:45 PM</td>
-</tr>
-<tr>
-    <td><input type="checkbox"></td>
-    <td>26</td>
-    <td>Microcosmos</td>
-    <td>Ganador</td>
-    <td>Faltante</td>
-    <td>14 de Octubre de 2022, 16:45 PM</td>
-</tr>
-<tr>
-    <td><input type="checkbox"></td>
-    <td>28</td>
-    <td>Patineta E</td>
-    <td>Ganador</td>
-    <td>Enviado</td>
-    <td>14 de Octubre de 2022, 16:45 PM</td>
-</tr>
-<tr>
-    <td><input type="checkbox"></td>
-    <td>29</td>
-    <td>Laptop Biodegradable</td>
-    <td>Participante</td>
-    <td>Faltante</td>
-    <td>14 de Octubre de 2022, 16:45 PM</td>
-</tr>
-            </table>
-        </fieldset>
-
-        <input class="Admin__Submit__Btn" value="Confirmar" type="button"> 
+        <form method="post" class="Winners__View">
+            <div class="Winners__View__Header">
+                <p class="Winners__View__Column-1">&nbsp;</p>
+                <p class="Winners__View__Column-2">ID</p>
+                <p class="Winners__View__Column-3">Nombre</p>
+                <p class="Winners__View__Column-4">Tipo</p>
+                <p class="Winners__View__Column-5">Estado</p>
+                <p class="Winners__View__Column-6">Ultima Modificación</p>
+            </div>
+            <div class="Winners__View__Table">
+                <p class="Winners__View__Column-1">&nbsp;</p>
+                <p class="Winners__View__Column-2">ID</p>
+                <p class="Winners__View__Column-3">Nombre</p>
+                <p class="Winners__View__Column-4">Tipo</p>
+                <p class="Winners__View__Column-5">Estado</p>
+                <p class="Winners__View__Column-6">Ultima Modificación</p>
+            <input class="Admin__Submit__Btn" value="Enviar Reconocimientos" type="button"> 
+        </form>
 
     </main>
 
