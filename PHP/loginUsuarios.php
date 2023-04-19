@@ -1,6 +1,6 @@
 <?php
 
-    require 'database.php';
+    require 'dataBase.php';
 
     $CorreoError = null;
     $ContraseñaError = null;

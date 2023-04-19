@@ -1,6 +1,6 @@
 <?php
 
-    require 'database.php';
+    require 'dataBase.php';
 
     $NominaError = null;
     $NombreError = null;

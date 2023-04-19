@@ -1,5 +1,5 @@
 <?php
-    require "database.php";
+    require "dataBase.php";
 
     $NombreError = null;
     $ContraseñaError = null;
