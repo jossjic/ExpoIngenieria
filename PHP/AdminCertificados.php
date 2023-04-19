@@ -48,7 +48,7 @@
                         <td id="TotalParticipantes">
                                 <?php 
                                     $pdo = Database::connect();
-                                    $sql = "SELECT * FROM PROYECTO";
+                                    $sql = "SELECT * FROM PROYECTOV1";
                                     $q = $pdo->query($sql)->rowCount();
                                     echo "$q";
                                     Database::disconnect();
@@ -60,7 +60,7 @@
                         <td id="TotalActivos">
                                 <?php 
                                     $pdo = Database::connect();
-                                    $sql = "SELECT * FROM PROYECTO";
+                                    $sql = "SELECT * FROM PROYECTOV1";
                                     $q = $pdo->query($sql)->rowCount();
                                     echo "$q";
                                     Database::disconnect();
@@ -72,7 +72,7 @@
                         <td id="TotalGanadores">
                                 <?php 
                                     $pdo = Database::connect();
-                                    $sql = "SELECT * FROM PROYECTO";
+                                    $sql = "SELECT * FROM PROYECTOV1";
                                     $q = $pdo->query($sql)->rowCount();
                                     echo "$q";
                                     Database::disconnect();
@@ -124,7 +124,7 @@
             <div class="Winners__View__Table">
                                 <?php
                                     $pdo = Database::connect();
-                                    $sql = "SELECT * FROM PROYECTO";
+                                    $sql = "SELECT * FROM PROYECTOV1";
                                     foreach ($pdo->query($sql) as $row) {
                                         echo "
                                                 <p><input type='checkbox'></p>
