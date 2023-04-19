@@ -104,7 +104,7 @@
                     </td>
                     <td>
                         
-                        <input type="text" name="BuscarNombre" class="Text__Search" id="" placeholder="Ingresa el valor">
+                        <input type="search" name="BuscarNombre" class="Text__Search" id="" placeholder="Ingresa el valor">
                         <input type="submit" name="BtnBuscar" class="Search__Btn" id="" value="Buscar">
                         
                     </td>
@@ -124,7 +124,7 @@
             </div>
             <div class="Winners__View__Table">
                                 <?php
-                                    while (!empty($_POST)) {
+                                    if (!empty($_POST)) {
                                         $BuscarNombre = $_POST['BuscarNombre'];
                                         $BtnBuscar = $_POST['BtnBuscar'];
                                         $ProyectoID = $_POST['ProyectoID'];
