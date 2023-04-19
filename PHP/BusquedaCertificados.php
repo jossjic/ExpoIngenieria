@@ -1,4 +1,7 @@
 <?php
+
+    require 'dataBase.php';
+
     $BuscarNombreError = null;
     $BtnBuscarError = null;
     $ProyectoIDError = null;
