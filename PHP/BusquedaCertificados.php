@@ -1,6 +1,7 @@
 <?php
-    require 'dataBase.php';
-
+    $BuscarNombreError = null;
+    $BtnBuscarError = null;
+    $ProyectoIDError = null;
 
 ?>
 
@@ -86,7 +87,7 @@
 
 
     
-        <form action="../PHP/BusquedaCertificados.php" method="post" class="Winners__Explorer">
+        <form method="post" class="Winners__Explorer">
             <table>
                 <tr>
                     <td>
@@ -120,19 +121,54 @@
             </div>
             <div class="Winners__View__Table">
                                 <?php
-                                    $pdo = Database::connect();
-                                    $sql = "SELECT * FROM PROYECTOV1";
-                                    foreach ($pdo->query($sql) as $row) {
-                                        echo "
-                                                <p><input type='checkbox'></p>
-                                                <p>" . $row['p_id'] . "</p>
-                                                <p>" . $row['p_nombre'] . "</p>
-                                                <p>" . $row['p_tipo'] . "</p>
-                                                <p>" . $row['p_estado'] . "</p>
-                                                <p>" . $row['p_fecha_modificacion'] . "</p>
-                                              ";
+                                    while (!empty($_POST)) {
+                                        $BuscarNombre = $_POST['BuscarNombre'];
+                                        $BtnBuscar = $_POST['BtnBuscar'];
+                                        $ProyectoID = $_POST['ProyectoID'];
+                                
+                                        $valid = true;
+                                
+                                        if (trim($ProyectoID) === trim('ID')) {
+                                            if ($valid) {
+                                                $pdo = Database::connect();
+                                                $sql = "SELECT * FROM PROYECTOV1 WHERE p_id = ?";
+                                                $q = $pdo->prepare($sql);
+                                                $q->execute(array($BuscarNombre));
+                                                foreach ($q as $row) {
+                                                    echo "
+                                                        <p><input type='checkbox'></p>
+                                                        <p>" . $row['p_id'] . "</p>
+                                                        <p>" . $row['p_nombre'] . "</p>
+                                                        <p>" . $row['p_tipo'] . "</p>
+                                                        <p>" . $row['p_estado'] . "</p>
+                                                        <p>" . $row['p_fecha_modificacion'] . "</p>
+                                                     ";
+                                                }
+                                                Database::disconnect();
+                                                
+                                            }
+                                        } elseif (trim($ProyectoID) === trim('Nombre')) {
+                                            if ($valid) {
+                                                $pdo = Database::connect();
+                                                $sql = "SELECT * FROM PROYECTOV1 WHERE p_nombre = ?";
+                                                $q = $pdo->prepare($sql);
+                                                $q->execute(array($BuscarNombre));
+                                                foreach ($q as $row) {
+                                                    echo "
+                                                        <p><input type='checkbox'></p>
+                                                        <p>" . $row['p_id'] . "</p>
+                                                        <p>" . $row['p_nombre'] . "</p>
+                                                        <p>" . $row['p_tipo'] . "</p>
+                                                        <p>" . $row['p_estado'] . "</p>
+                                                        <p>" . $row['p_fecha_modificacion'] . "</p>
+                                                     ";
+                                                }
+                                                Database::disconnect();
+                                                
+                                            }
+                                        }
+                                
                                     }
-                                    Database::disconnect();
                                 ?>
             </div>
 
