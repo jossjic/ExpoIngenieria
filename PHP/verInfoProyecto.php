@@ -47,27 +47,27 @@
             </nav>
         </header>
 
-            <main>
-            	<div class="container">
-        	    	<div class="project-container">
-        	    		<h1>AZKABÁN</h1>
-        	    		<br>
-        	    		<dl>
-        	    			<dt><strong>Descripción</strong></dt>
-        	    			<dd>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id venenatis eros. Nam porttitor dolor vel nulla fermentum laoreet eu vitae.</dd>
-        	    		</dl>
-        	    		<br>
-        	    		<dl>
-        	    			<dt><strong>Autores</strong></dt>
-        	    			<dd>Jeffrey Hutchinson</dd>
-        	    			<dd>Ricardo Hall</dd>
-        	    			<dd>Brett Wang</dd>
-        	    			<dd>Karina Allison</dd>
-        	    		</dl>
-        	    	</div>
+        <main>
+        	<div class="container">
+    	    	<div class="top-page">
+    	    		<h1>AZKABÁN</h1>
+    	    		<br>
+    	    		<dl>
+    	    			<dt><strong>Descripción</strong></dt>
+    	    			<dd>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id venenatis eros. Nam porttitor dolor vel nulla fermentum laoreet eu vitae.</dd>
+    	    		</dl>
+    	    		<br>
+    	    		<dl>
+    	    			<dt><strong>Autores</strong></dt>
+    	    			<dd>Jeffrey Hutchinson</dd>
+    	    			<dd>Ricardo Hall</dd>
+    	    			<dd>Brett Wang</dd>
+    	    			<dd>Karina Allison</dd>
+    	    		</dl>
+    	    	</div>
 
-        		</div>
-            </main>
+    		</div>
+        </main>
 
         <!-- <footer>
             <div id=footerPage>
