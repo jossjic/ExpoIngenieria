@@ -127,7 +127,7 @@
 
             <div class="Name__Read">
                 <?php
-                    echo "<h1>Eliminar proyecto: " . $data['p_nombre'] ."</h1>";
+                    echo "<h1>Eliminar proyecto:</h1>";
                 ?>
             </div>
             
