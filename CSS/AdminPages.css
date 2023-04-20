@@ -189,7 +189,8 @@ a{
     height: 100%;
 
     display: grid;
-    place-self: center;
+    align-items: center;
+    justify-self: end;
 
     font-size: small;
     color: white;
@@ -228,7 +229,8 @@ a{
     height: 100%;
 
     display: grid;
-    place-self: center;
+    align-items: center;
+    justify-self: start;
 
     font-size: small;
     color: white;
