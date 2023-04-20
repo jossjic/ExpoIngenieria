@@ -6,7 +6,7 @@
 		$id = $_REQUEST['id'];
 	}
 
-	if ( !empty($_POST)) {
+	if (!empty($_POST)) {
 		// keep track post values
 		$id = $_POST['id'];
 		// delete data
