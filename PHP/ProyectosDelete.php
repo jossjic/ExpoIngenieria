@@ -142,9 +142,7 @@
                 <div class="InfoRead__Atributes">
                     <input class="Btn__Red__Delete" type="submit" value="Si">
 
-                    <div class='Btn__Green'>
-                        <a href='../PHP/ProyectosView.php'>Ver</a>
-                    </div>
+                    <button onclick="window.location='../PHP/ProyectosView.php';" value="click here" />
                 </div>
 
             </form>
