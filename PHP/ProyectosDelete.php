@@ -148,6 +148,8 @@
                     </div>
                 </div>
 
+                <input type="hidden" name="id" value="<?php echo $id;?>"/>
+
             </form>
         </div>
     </main> 
