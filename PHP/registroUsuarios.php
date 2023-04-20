@@ -66,7 +66,7 @@
                 $q = $pdo->prepare($sql);
                 $q->execute(array($Nomina, $Nombre, $ApellidoPaterno, $ApellidoMaterno, $Correo, $Contraseña, $ed_id, "Jurado"));
                 Database::disconnect();
-                header("Location: ../HTML/InicioSesionJurado.html");
+                header("Location: ../HTML/LoginUsuarios.html");
                 exit(); // se debe incluir un exit() después de una redirección con header()
             }
         } elseif (trim($tipoUsuario) === trim('Profesor')) {
@@ -77,7 +77,7 @@
                 $q = $pdo->prepare($sql);
                 $q->execute(array($Nomina, $Nombre, $ApellidoPaterno, $ApellidoMaterno, $Correo, $Contraseña, $ed_id));
                 Database::disconnect();
-                header("Location: ../HTML/InicioSesionJurado.html");
+                header("Location: ../HTML/LoginUsuarios.html");
                 exit(); // se debe incluir un exit() después de una redirección con header()
             }
         } 
