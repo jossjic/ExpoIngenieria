@@ -142,7 +142,9 @@
                 <div class="InfoRead__Atributes">
                     <input class="Btn__Red__Delete" type="submit" value="Si">
 
-                    <button class="Btn__Green__Delete" onclick="window.location='../PHP/ProyectosView.php';" value="No"/>
+                    <div class='Btn__Green'>
+                        <a href='../PHP/ProyectosRead.php'>No</a>
+                    </div>
                 </div>
 
             </form>

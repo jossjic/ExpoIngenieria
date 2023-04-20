@@ -231,6 +231,7 @@ a{
     display: grid;
     align-items: center;
     justify-self: start;
+    place-items: center;
 
     font-size: small;
     color: white;
