@@ -177,6 +177,26 @@ a{
 
     display: grid;
     place-items: center;
+<<<<<<< HEAD
+=======
+
+    font-size: small;
+}
+
+.Btn__Red__Delete{
+    border: none;
+    border-radius: 5px;
+    background-color: red;
+    width: 10%;
+    height: 100%;
+
+    display: grid;
+    align-items: center;
+    justify-self: end;
+
+    font-size: small;
+    color: white;
+>>>>>>> bf36e1c8bed502d24c1d8cffd7c21d18e02ba1bc
 }
 
 .Btn__Blue{
@@ -187,17 +207,47 @@ a{
 
     display: grid;
     place-items: center;
+<<<<<<< HEAD
+=======
+
+    font-size: small;
+>>>>>>> bf36e1c8bed502d24c1d8cffd7c21d18e02ba1bc
 }
 
 .Btn__Green{
     
     border-radius: 5px;
     background-color: green;
+<<<<<<< HEAD
     width: 60%;
+=======
+    width: 100%;
+>>>>>>> bf36e1c8bed502d24c1d8cffd7c21d18e02ba1bc
     height: 80%;
 
     display: grid;
     place-items: center;
+<<<<<<< HEAD
+=======
+
+    font-size: small;
+}
+
+.Btn__Green__Delete{
+    border: none;
+    border-radius: 5px;
+    background-color: green;
+    width: 10%;
+    height: 100%;
+
+    display: grid;
+    align-items: center;
+    justify-self: start;
+    place-items: center;
+
+    font-size: small;
+    color: white;
+>>>>>>> bf36e1c8bed502d24c1d8cffd7c21d18e02ba1bc
 }
 
 .Info{
@@ -209,6 +259,10 @@ a{
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: 10% 70% 20%;
+<<<<<<< HEAD
+=======
+    
+>>>>>>> bf36e1c8bed502d24c1d8cffd7c21d18e02ba1bc
 
 }
 
@@ -223,7 +277,11 @@ a{
     background-color: #ECECEC;
 
     display: grid;
+<<<<<<< HEAD
     grid-template-columns: 3% 3% 12% 12% 12% 22% 36%;
+=======
+    grid-template-columns: 3% 3% 10% 10% 10% 20% 40% ;
+>>>>>>> bf36e1c8bed502d24c1d8cffd7c21d18e02ba1bc
     place-items: center;
 }
 
@@ -239,7 +297,11 @@ a{
     background-color: #ECECEC;
 
     display: grid;
+<<<<<<< HEAD
     grid-template-columns: 3% 3% 12% 12% 12% 22% 12% 12% 12%;
+=======
+    grid-template-columns: 3% 3% 10% 10% 10% 20% 10% 10% 10% 10% ;
+>>>>>>> bf36e1c8bed502d24c1d8cffd7c21d18e02ba1bc
     grid-template-rows: repeat(10,10%);
     justify-items: center;
     align-items: center;
@@ -259,4 +321,72 @@ a{
 .Info::-webkit-scrollbar-thumb{
     background-color: #aaa;
     border-radius: 5px;
+<<<<<<< HEAD
+=======
+}
+
+.Info__Read{
+    grid-row: 2/3;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: auto;
+    place-self: center;
+    background-color: #ECECEC;
+
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 10% 30% 10% 20% 20%;
+    grid-auto-flow: column;
+    justify-items: start;
+    align-items: center;
+
+}
+
+.InfoRead__Atributes{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-items: start;
+    align-items: center;
+    width: 100%;
+}
+
+.Info__Update{
+    grid-row: 2/3;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: auto;
+    place-self: center;
+    background-color: #ECECEC;
+
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 10% 30% 10% 20% 20%;
+    grid-auto-flow: column;
+    justify-items: center;
+    align-items: center;
+}
+
+.InfoUpdate__Atributes{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-items: center;
+    align-items: center;
+}
+
+.Danger__Alert{
+    background-color: #f2dede;
+    color: #b94a48;
+    border: #eed3d7 solid 2px;
+    text-align: center;
+
+    place-self: center;
+
+    width: 70%;
+    height: 100%;
+    grid-column: 1/3;
+>>>>>>> bf36e1c8bed502d24c1d8cffd7c21d18e02ba1bc
 }

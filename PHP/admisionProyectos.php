@@ -137,11 +137,19 @@
                                             echo '<tr>';
                                             echo     '<td>'.$row['p_id'].'</td>';
                                             echo     '<td>'.$row['p_nombre'].'</td>';
+<<<<<<< HEAD
                                             echo     '<td>'.$row['p_estado'].'</td>';
                                             echo     '<td>14 de octubre de 2022, 16:45 h</td>';
                                             echo     '<td>';
                                             echo         '<button type="button" class="btn btn-secondary" type="button" onclick="seeProject('.$row['p_id'].')">Ver más</button>';
                                             echo         '<button type="button" class="btn btn-success" type="button" onclick="acceptProject('.$row['p_id'].')">Aceptar</button>';
+=======
+                                            echo     '<td>'.$row['ca_nombre'].'</td>';
+                                            echo     '<td>14 de octubre de 2022, 16:45 h</td>';
+                                            echo     '<td>';
+                                            echo         '<button type="button" class="btn btn-secondary" type="button" onclick="seeProject('.$row['p_id'].')">Ver más</button>';
+                                            echo         ' <button type="button" class="btn btn-success" type="button" onclick="acceptProject('.$row['p_id'].')">Aceptar</button> ';
+>>>>>>> bf36e1c8bed502d24c1d8cffd7c21d18e02ba1bc
                                             echo         '<button type="button" class="btn btn-danger" type="button" onclick="denyProject('.$row['p_id'].')">Rechazar</button>';
                                             echo     '</td>';
                                             echo '</tr>';
