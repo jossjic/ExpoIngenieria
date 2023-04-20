@@ -135,7 +135,7 @@
 
                 <div class="InfoRead__Atributes">
                     <?php
-                        echo "<p class='Danger__Alert'></p>Estas seguro de elimanar el proyecto" . $data['p_nombre'] ."</p>";
+                        echo "<p class='Danger__Alert'>Estas seguro de elimanar el proyecto" . $data['p_nombre'] ."</p>";
                     ?>
                 </div>
 
