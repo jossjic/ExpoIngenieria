@@ -124,6 +124,12 @@
         </form>
 
         <div class="Info">
+
+            <div class="Name__Read">
+                <?php
+                    echo "<h1>" . $data['p_nombre'] ."</h1>";
+                ?>
+            </div>
             
             <div class="Info__Read">
 
@@ -150,6 +156,31 @@
                         echo "
                                 <p>" . $data['p_categoria'] ."</p>
                                 <p>" . $data['p_estado'] ."</p>
+                             ";
+                    ?>
+                </div>
+
+                <div class="InfoRead__Atributes">
+                    <?php
+                        echo "
+                                <p>" . $data['a_nombre'] ."</p>
+                                <p>" . $data['a_matricula'] ."</p>
+                             ";
+                    ?>
+                </div>
+                <div class="InfoRead__Atributes">
+                    <?php
+                        echo "
+                                <p>" . $data['a_nombre'] ."</p>
+                                <p>" . $data['a_matricula'] ."</p>
+                             ";
+                    ?>
+                </div>
+                <div class="InfoRead__Atributes">
+                    <?php
+                        echo "
+                                <p>" . $data['a_nombre'] ."</p>
+                                <p>" . $data['a_matricula'] ."</p>
                              ";
                     ?>
                 </div>
