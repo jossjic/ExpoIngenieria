@@ -62,9 +62,9 @@
         if (trim($tipoUsuario) === trim('Jurado')) {
             if (true) {
                 $pdo = Database::connect();
-                $sql = "INSERT INTO JURADOV1(j_id, j_nombre, j_apellido_paterno, j_apellido_materno, j_correo, j_contraseña, ed_id) VALUES(?, ?, ?, ?, ?, ?, ?)";
+                $sql = "INSERT INTO JURADOV1(j_id, j_nombre, j_apellido_paterno, j_apellido_materno, j_correo, j_contraseña, ed_id,tipo_jurado) VALUES(?, ?, ?, ?, ?, ?, ?)";
                 $q = $pdo->prepare($sql);
-                $q->execute(array($Nomina, $Nombre, $ApellidoPaterno, $ApellidoMaterno, $Correo, $Contraseña, $ed_id));
+                $q->execute(array($Nomina, $Nombre, $ApellidoPaterno, $ApellidoMaterno, $Correo, $Contraseña, $ed_id, 'Jurado'));
                 Database::disconnect();
                 header("Location: ../HTML/InicioSesionJurado.html");
                 exit(); // se debe incluir un exit() después de una redirección con header()
