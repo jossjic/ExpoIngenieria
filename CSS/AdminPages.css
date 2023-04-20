@@ -261,7 +261,7 @@ a{
     border-radius: 5px;
 }
 
-.InfoRead{
+.Info__Read{
     grid-row: 3/4;
 
     width: 100%;
