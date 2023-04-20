@@ -6,8 +6,6 @@
 		$id = $_REQUEST['id'];
 	}
 
-    echo "$id";
-
 	if ( $id==null) {
 		header("Location: ProyectosView.php");
 	} else {
@@ -125,33 +123,38 @@
               </table>
         </form>
 
-        <form method="post" class="Info">
-            <div class="Info__Header">
-                <p>&nbsp;</p>
-                <p>ID</p>
-                <p>Nombre</p>
-                <p>Categoria</p>
-                <p>Estado</p>
-                <p>Ultima Modificación</p>
-                <div>
-                    <p>Acciones</p>
+        <div class="Info">
+            
+            <div class="Info__Read">
+
+                <div class="">
+                    <?php
+                        echo "<p>" . $data['p_id'] ."</p>";
+                    ?>
+                </div>
+
+                <div class="">
+                    <?php
+                        echo "<p>" . $data['p_nombre'] ."</p>";
+                    ?>
+                </div>
+
+                <div class="">
+                    <?php
+                        echo "<p>" . $data['p_descripcion'] ."</p>";
+                    ?>
+                </div>
+
+                <div class="">
+                    <?php
+                        echo "
+                                <p>" . $data['p_categoria'] ."</p>
+                                <p>" . $data['p_estado'] ."</p>
+                             ";
+                    ?>
                 </div>
             </div>
-            <div class="Info__Table">
-                            <?php
-
-                                    echo "
-                                            <input type='checkbox' name='' id=''>
-                                            <p>" . $data['p_id'] ."</p>
-                                            <p>" . $data['p_nombre'] ."</p>
-                                            <p>" . $data['p_categoria'] ."</p>
-                                            <p>" . $data['p_estado'] ."</p>
-                                            <p>" . $data['p_fecha_modificacion'] ."</p>
-                            
-                                         ";
-                            ?>
-            </div>
-        </form>
+        </div>
     </main> 
 
 </body>
