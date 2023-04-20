@@ -239,7 +239,7 @@ a{
     background-color: #ECECEC;
 
     display: grid;
-    grid-template-columns: 3% 3% 12% 12% 12% 22% 12% 12% 12%;
+    grid-template-columns: 3% 3% 10 10% 10% 24% 10% 10% 10% 10% ;
     grid-template-rows: repeat(10,10%);
     justify-items: center;
     align-items: center;

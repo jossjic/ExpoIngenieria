@@ -109,7 +109,7 @@
               </table>
         </form>
 
-        <form method="post" class="Winners__View">
+        <form method="post" class="Info__Header">
             <div class="Winners__View__Header">
                 <p class="Winners__View__Column-1">&nbsp;</p>
                 <p class="Winners__View__Column-2">ID</p>
@@ -117,8 +117,11 @@
                 <p class="Winners__View__Column-4">Tipo</p>
                 <p class="Winners__View__Column-5">Estado</p>
                 <p class="Winners__View__Column-6">Ultima Modificación</p>
+                <div>
+                    <p>Acciones</p>
+                </div>
             </div>
-            <div class="Winners__View__Table">
+            <div class="Info__Table">
                                 <?php
                                     $pdo = Database::connect();
                                     $sql = "SELECT * FROM PROYECTOV1";
@@ -130,6 +133,18 @@
                                                 <p>" . $row['p_tipo'] . "</p>
                                                 <p>" . $row['p_estado'] . "</p>
                                                 <p>" . $row['p_fecha_modificacion'] . "</p>
+                                                <div class='Btn__Green'>
+                                                    <a href='../PHP/ProyectosRead.php?id=".trim($row['p_id'])."'>Ver</a>
+                                                </div>
+                                                <div class='Btn__Blue'>
+                                                    <a href='../PHP/ProyectosUpdate.php?id=".trim($row['p_id'])."'>Actualizar</a>
+                                                </div>
+                                                <div class='Btn__Red'>
+                                                    <a href='../PHP/ProyectosDelete.php?id=".trim($row['p_id'])."'>Eliminar</a>
+                                                </div>
+                                                <div class='Btn__Green'>
+                                                <a href='../PHP/Certificados.php?id=".trim($row['p_id'])."'>Reconocimientos</a>
+                                                </div>
                                               ";
                                     }
                                     Database::disconnect();
