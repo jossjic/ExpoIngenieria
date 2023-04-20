@@ -109,8 +109,8 @@
               </table>
         </form>
 
-        <form method="post" class="Info__Header">
-            <div class="Winners__View__Header">
+        <form method="post" class="Info">
+            <div class="Info__Header">
                 <p class="Winners__View__Column-1">&nbsp;</p>
                 <p class="Winners__View__Column-2">ID</p>
                 <p class="Winners__View__Column-3">Nombre</p>
