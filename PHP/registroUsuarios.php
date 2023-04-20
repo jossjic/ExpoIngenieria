@@ -62,19 +62,11 @@
         if (trim($tipoUsuario) === trim('Jurado')) {
             if (true) {
                 $pdo = Database::connect();
-<<<<<<< HEAD
-                $sql = "INSERT INTO JURADOV1(j_id, j_nombre, j_apellido_paterno, j_apellido_materno, j_correo, j_contraseña, ed_id) VALUES(?, ?, ?, ?, ?, ?, ?)";
-                $q = $pdo->prepare($sql);
-                $q->execute(array($Nomina, $Nombre, $ApellidoPaterno, $ApellidoMaterno, $Correo, $Contraseña, $ed_id));
-                Database::disconnect();
-                header("Location: ../HTML/InicioSesionJurado.html");
-=======
                 $sql = "INSERT INTO JURADOV1(j_id, j_nombre, j_apellido_paterno, j_apellido_materno, j_correo, j_contraseña, ed_id,tipo_jurado) VALUES(?, ?, ?, ?, ?, ?, ?,?)";
                 $q = $pdo->prepare($sql);
                 $q->execute(array($Nomina, $Nombre, $ApellidoPaterno, $ApellidoMaterno, $Correo, $Contraseña, $ed_id, "Jurado"));
                 Database::disconnect();
                 header("Location: ../HTML/LoginUsuarios.html");
->>>>>>> bf36e1c8bed502d24c1d8cffd7c21d18e02ba1bc
                 exit(); // se debe incluir un exit() después de una redirección con header()
             }
         } elseif (trim($tipoUsuario) === trim('Profesor')) {
@@ -85,11 +77,7 @@
                 $q = $pdo->prepare($sql);
                 $q->execute(array($Nomina, $Nombre, $ApellidoPaterno, $ApellidoMaterno, $Correo, $Contraseña, $ed_id));
                 Database::disconnect();
-<<<<<<< HEAD
-                header("Location: ../HTML/InicioSesionJurado.html");
-=======
                 header("Location: ../HTML/LoginUsuarios.html");
->>>>>>> bf36e1c8bed502d24c1d8cffd7c21d18e02ba1bc
                 exit(); // se debe incluir un exit() después de una redirección con header()
             }
         } 
