@@ -182,7 +182,7 @@ a{
 }
 
 .Btn__Red__Delete{
-    border-color: none;
+    border: none;
     border-radius: 5px;
     background-color: red;
     width: 10%;
@@ -221,7 +221,7 @@ a{
 }
 
 .Btn__Green__Delete{
-    border-color: none;
+    border: none;
     border-radius: 5px;
     background-color: green;
     width: 10%;
