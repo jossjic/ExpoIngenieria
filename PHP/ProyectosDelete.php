@@ -127,7 +127,7 @@
 
             <div class="Name__Read">
                 <?php
-                    echo "Eliminar proyecto: <h1>" . $data['p_nombre'] ."</h1>";
+                    echo "<h1>Eliminar proyecto: " . $data['p_nombre'] ."</h1>";
                 ?>
             </div>
             
@@ -139,12 +139,14 @@
                     ?>
                 </div>
 
-                <div class="Btn__Red">
-                    <input type="submit" value="Si">
-                </div>
+                <div>
+                    <div class="Btn__Red">
+                        <input type="submit" value="Si">
+                    </div>
 
-                <div class="Btn__Green">
-                    <input type="submit" value="No">
+                    <div class="Btn__Green">
+                        <input type="submit" value="No">
+                    </div>
                 </div>
 
             </form>
