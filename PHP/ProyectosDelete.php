@@ -1,21 +1,22 @@
 <?php
-	require 'dataBase.php';
+	require 'database.php';
 
 	$id = null;
 	if ( !empty($_GET['id'])) {
 		$id = $_REQUEST['id'];
 	}
 
-	if ( $id==null) {
-		header("Location: ProyectosView.php");
-	} else {
+	if ( !empty($_POST)) {
+		// keep track post values
+		$id = $_POST['id'];
+		// delete data
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "DELETE FROM PROYECTOV1 WHERE p_id = ?";
+		$sql = "DELETE FROM PROYECTOV1 WHERE id_p = ?";
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
-		$data = $q->fetch(PDO::FETCH_ASSOC);
 		Database::disconnect();
+		header("Location: ../PHP/ProyectosView.php");
 	}
 ?>
 
