@@ -84,7 +84,7 @@
             </div>
         </div>
 
-        <form method="post" class="Winners__Explorer">
+        <form action="../PHP/ProyectosBusqueda.php" method="post" class="Winners__Explorer">
             <table>
                 <tr>
                     <td>

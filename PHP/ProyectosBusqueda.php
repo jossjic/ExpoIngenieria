@@ -113,16 +113,16 @@
               </table>
         </form>
 
-        <form method="post" class="Winners__View">
+        <form method="post" class="Info">
             <div class="Winners__View__Header">
                 <p class="Winners__View__Column-1">&nbsp;</p>
                 <p class="Winners__View__Column-2">ID</p>
                 <p class="Winners__View__Column-3">Nombre</p>
-                <p class="Winners__View__Column-4">Tipo</p>
+                <p class="Winners__View__Column-4">Categoria</p>
                 <p class="Winners__View__Column-5">Estado</p>
                 <p class="Winners__View__Column-6">Ultima Modificación</p>
             </div>
-            <div class="Winners__View__Table">
+            <div class="Info__Table">
                                 <?php
                                     if (!empty($_POST)) {
                                         $BuscarNombre = $_POST['BuscarNombre'];
@@ -136,13 +136,13 @@
                                                 $pdo = Database::connect();
                                                 $sql = "SELECT * FROM PROYECTOV1 WHERE p_id = ?";
                                                 $q = $pdo->prepare($sql);
-                                                $q->execute(array($BuscarNombre));
+                                                $q  ->execute(array($BuscarNombre));
                                                 foreach ($q as $row) {
                                                     echo "
                                                         <p><input type='checkbox'></p>
                                                         <p>" . $row['p_id'] . "</p>
                                                         <p>" . $row['p_nombre'] . "</p>
-                                                        <p>" . $row['p_tipo'] . "</p>
+                                                        <p>" . $row['p_categoria'] . "</p>
                                                         <p>" . $row['p_estado'] . "</p>
                                                         <p>" . $row['p_fecha_modificacion'] . "</p>
                                                      ";

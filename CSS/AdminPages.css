@@ -286,3 +286,28 @@ a{
     justify-items: start;
     align-items: center;
 }
+
+.Info__Update{
+    grid-row: 2/3;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: auto;
+    place-self: center;
+    background-color: #ECECEC;
+
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 10% 30% 10% 20% 20%;
+    grid-auto-flow: column;
+    justify-items: center;
+    align-items: center;
+}
+
+.InfoUpdate__Atributes{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-items: center;
+    align-items: center;
+}
