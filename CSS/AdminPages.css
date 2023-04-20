@@ -320,9 +320,12 @@ a{
 }
 
 .Danger__Alert{
-    padding: 50% auto;
-    background-color: #f28894;
-    color: white;
-    border: red solid 2px;
+    background-color: #f2dede;
+    color: #b94a48;
+    border: #eed3d7 solid 2px;
+    text-align: center;
 
+    width: 100%;
+    height: 100%;
+    grid-column: 1/3;
 }

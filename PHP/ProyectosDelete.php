@@ -139,7 +139,7 @@
                     ?>
                 </div>
 
-                <div>
+                <div class="InfoRead__Atributes">
                     <div class="Btn__Red">
                         <input type="submit" value="Si">
                     </div>
