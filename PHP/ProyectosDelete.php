@@ -1,24 +1,42 @@
 <?php
-	require 'dataBase.php';
+require 'dataBase.php';
 
-	$id = 0;
-	if ( !empty($_GET['id'])) {
-		$id = $_REQUEST['id'];
-	}
+$id = isset($_GET['id']) && is_numeric($_GET['id']) ? $_GET['id'] : 0;
 
-	if (!empty($_POST)) {
-		// keep track post values
-		$id = $_POST['id'];
-		// delete data
-		$pdo = Database::connect();
-		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "DELETE FROM PROYECTOV1 WHERE id_p = ?";
-		$q = $pdo->prepare($sql);
-		$q->execute(array($id));
-		Database::disconnect();
-		header("Location: ../PHP/ProyectosView.php");
-	}
+if (!empty($_POST)) {
+    // keep track post values
+    $id = isset($_POST['id']) && is_numeric($_POST['id']) ? $_POST['id'] : 0;
+    
+    if ($id > 0) {
+        // delete data
+        try {
+            $pdo = Database::connect();
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = "DELETE FROM PROYECTOV1 WHERE id_p = :id";
+            $q = $pdo->prepare($sql);
+            $q->bindParam(':id', $id, PDO::PARAM_INT);
+            $q->execute();
+            Database::disconnect();
+            header("Location: ../PHP/ProyectosView.php");
+            exit;
+        } catch (PDOException $e) {
+            echo "Error al eliminar el registro: " . $e->getMessage();
+        }
+    }
+}
+
+// muestra el formulario de confirmación
+if ($id > 0) {
+    echo "<form method='POST'>";
+    echo "<p>¿Está seguro de que desea eliminar el registro $id?</p>";
+    echo "<input type='hidden' name='id' value='$id'>";
+    echo "<button type='submit'>Eliminar</button>";
+    echo "</form>";
+} else {
+    echo "ID inválido";
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
