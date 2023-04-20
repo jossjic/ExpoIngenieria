@@ -140,6 +140,9 @@
                                             <div class='Btn__Red'>
                                                 <a href='../PHP/ProyectosDelete.php?id=".trim($row['p_id'])."'>Eliminar</a>
                                             </div>
+                                            <div class='Btn__Green'>
+                                                    <a href='../PHP/Certificados.php?id=".trim($row['p_id'])."'>Reconocimientos</a>
+                                            </div>
                                         ";
 
                                 }
