@@ -320,7 +320,7 @@ a{
 }
 
 .Danger__Alert{
-    padding: 100%;
+    padding: 50% auto;
     background-color: #f28894;
     color: white;
     border: red solid 2px;
