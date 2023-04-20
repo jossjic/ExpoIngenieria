@@ -138,7 +138,10 @@
                     <?php
                         echo "<p class='Danger__Alert'>Estas seguro de elimanar el proyecto</p>";
                     ?>
+                    
                 </div>
+
+                <input type="hidden" name="id" value="<?php echo $id;?>"/>
 
                 <div class="InfoRead__Atributes">
                     <input class="Btn__Red__Delete" type="submit" value="Si">
@@ -147,8 +150,6 @@
                         <a href='../PHP/ProyectosRead.php'>No</a>
                     </div>
                 </div>
-
-                <input type="hidden" name="id" value="<?php echo $id;?>"/>
 
             </form>
         </div>
