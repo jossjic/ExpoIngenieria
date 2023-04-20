@@ -181,6 +181,18 @@ a{
     font-size: small;
 }
 
+.Btn__Red__Delete{
+    border-radius: 5px;
+    background-color: red;
+    width: 10%;
+    height: 100%;
+
+    display: grid;
+    place-items: center;
+
+    font-size: small;
+}
+
 .Btn__Blue{
     border-radius: 5px;
     background-color: #325DB8;
@@ -199,6 +211,18 @@ a{
     background-color: green;
     width: 100%;
     height: 80%;
+
+    display: grid;
+    place-items: center;
+
+    font-size: small;
+}
+
+.Btn__Green__Delete{
+    border-radius: 5px;
+    background-color: green;
+    width: 10%;
+    height: 100%;
 
     display: grid;
     place-items: center;
