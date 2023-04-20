@@ -132,7 +132,7 @@
                 ?>
             </div>
             
-            <form action="../PHP/ProyectosDelete.php" class="Info__Read">
+            <form action="../PHP/ProyectosDelete.php" method="post" class="Info__Read">
 
                 <div class="InfoRead__Atributes">
                     <?php
