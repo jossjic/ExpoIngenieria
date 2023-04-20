@@ -169,7 +169,7 @@ a{
     color: white;
 }
 
-.Btn__Red, input{
+.Btn__Red{
     border-radius: 5px;
     background-color: red;
     width: 80%;
@@ -181,7 +181,7 @@ a{
     font-size: small;
 }
 
-.Btn__Blue, input{
+.Btn__Blue{
     border-radius: 5px;
     background-color: #325DB8;
     width: 80%;
