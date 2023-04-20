@@ -63,11 +63,11 @@
 									  echo '</tr>';
 								}
 
-								$sql = 'SELECT * FROM V2_ALUMNO ORDER BY a_apellido_paterno';
+								$sql = 'SELECT * FROM V2_ALUMNO ORDER BY a_ap_pa';
 								foreach ($pdo->query($sql) as $row) {
 									echo '<tr>';
 								   echo '<td>'. $row['a_nombre'] . '</td>';
-								  echo '<td>'. $row['a_apellido_paterno'] . '</td>';
+								  echo '<td>'. $row['a_ap_pa'] . '</td>';
 			  					echo '<td>'. $row['a_correo'] . '</td>';
 								//echo '<td>';    echo ($row['ac'])?"SI":"NO"; echo'</td>';
 								echo '<td width=250>';
