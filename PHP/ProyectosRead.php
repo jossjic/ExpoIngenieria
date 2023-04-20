@@ -6,6 +6,8 @@
 		$id = $_REQUEST['id'];
 	}
 
+    echo "$id";
+
 	if ( $id==null) {
 		header("Location: ProyectosView.php");
 	} else {
