@@ -188,9 +188,10 @@ a{
     height: 100%;
 
     display: grid;
-    place-items: center;
+    place-self: center;
 
     font-size: small;
+    color: white;
 }
 
 .Btn__Blue{
@@ -225,9 +226,10 @@ a{
     height: 100%;
 
     display: grid;
-    place-items: center;
+    place-self: center;
 
     font-size: small;
+    color: white;
 }
 
 .Info{
