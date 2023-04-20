@@ -223,7 +223,7 @@ a{
     background-color: #ECECEC;
 
     display: grid;
-    grid-template-columns: 3% 3% 12% 12% 12% 22% 36%;
+    grid-template-columns: 3% 3% 10 10% 10% 24% 40% ;
     place-items: center;
 }
 
