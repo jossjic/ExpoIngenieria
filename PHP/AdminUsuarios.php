@@ -51,7 +51,7 @@
 	            </thead>
 	            <tbody>
 	              	<?php
-								   	include 'database.php';
+								   	include 'dataBase.php';
 								   	$pdo = Database::connect();
 								   	$sql = 'SELECT * FROM V2_DOCENTE ORDER BY d_apellido_paterno';
 				 				   	foreach ($pdo->query($sql) as $row) {
