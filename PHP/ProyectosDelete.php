@@ -135,12 +135,9 @@
             <form action="../PHP/ProyectosDelete.php" method="post" class="Info__Read">
                 
                 <input type="hidden" name="id" value="<?php echo $id;?>"/>
-                
+
                 <div class="InfoRead__Atributes">
-                    <?php
-                        echo "<p class='Danger__Alert'>Estas seguro de elimanar el proyecto</p>";
-                    ?>
-                    
+                    <p class='Danger__Alert'>Estas seguro de elimanar el proyecto</p>"
                 </div>
 
 
