@@ -1,6 +1,22 @@
 <?php
     require 'dataBase.php';
 
+    $id = null;
+	if ( !empty($_GET['id'])) {
+		$id = $_REQUEST['id'];
+	}
+
+	if ( $id==null) {
+		header("Location: ProyectosView.php");
+	} else {
+		$pdo = Database::connect();
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = "SELECT * FROM PROYECTOV1 WHERE p_id = ?";
+		$q = $pdo->prepare($sql);
+		$q->execute(array($id));
+		$data = $q->fetch(PDO::FETCH_ASSOC);
+		Database::disconnect();
+	}
 
 ?>
 
@@ -124,15 +140,15 @@
             <div class="Info__Table">
                                 <?php
                                     $pdo = Database::connect();
-                                    $sql = "SELECT * FROM PROYECTOV1";
+                                    $sql = "SELECT * FROM PROYECTOV1 WHERE";
                                     foreach ($pdo->query($sql) as $row) {
                                         echo "
                                                 <p><input type='checkbox'></p>
-                                                <p>" . $row['p_id'] . "</p>
-                                                <p>" . $row['p_nombre'] . "</p>
-                                                <p>" . $row['p_tipo'] . "</p>
-                                                <p>" . $row['p_estado'] . "</p>
-                                                <p>" . $row['p_fecha_modificacion'] . "</p>
+                                                <p>" . $data['p_id'] . "</p>
+                                                <p>" . $data['p_nombre'] . "</p>
+                                                <p>" . $data['p_tipo'] . "</p>
+                                                <p>" . $data['p_estado'] . "</p>
+                                                <p>" . $data['p_fecha_modificacion'] . "</p>
                                                 <div class='Btn__Green'>
                                                     <a href='../PHP/ProyectosRead.php?id=".trim($row['p_id'])."'>Ver</a>
                                                 </div>
@@ -143,7 +159,7 @@
                                                     <a href='../PHP/ProyectosDelete.php?id=".trim($row['p_id'])."'>Eliminar</a>
                                                 </div>
                                                 <div class='Btn__Green'>
-                                                <a href='../PHP/Certificados.php?id=".trim($row['p_id'])."'>Reconocimientos</a>
+                                                    <a href='../PHP/Certificados.php?id=".trim($row['p_id'])."'>Reconocimientos</a>
                                                 </div>
                                               ";
                                     }
