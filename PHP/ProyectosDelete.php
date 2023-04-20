@@ -131,18 +131,18 @@
                 ?>
             </div>
             
-            <form class="Info__Read">
+            <form action="../PHP/ProyectosDelete.php" class="Info__Read">
 
                 <div class="InfoRead__Atributes">
                     <?php
-                        echo "<p class='Danger__Alert'>Estas seguro de elimanar el proyecto" . $data['p_nombre'] ."</p>";
+                        echo "<p class='Danger__Alert'>Estas seguro de elimanar el proyecto</p>";
                     ?>
                 </div>
 
                 <div class="InfoRead__Atributes">
                     <input class="Btn__Red__Delete" type="submit" value="Si">
 
-                    <button class="Btn__Green__Delete" onclick="window.location='../PHP/ProyectosView.php';" value="click here" />
+                    <button class="Btn__Green__Delete" onclick="window.location='../PHP/ProyectosView.php';" value="No"/>
                 </div>
 
             </form>
