@@ -169,7 +169,7 @@ a{
     color: white;
 }
 
-.Btn__Red{
+.Btn__Red, input{
     border-radius: 5px;
     background-color: red;
     width: 80%;
@@ -181,7 +181,7 @@ a{
     font-size: small;
 }
 
-.Btn__Blue{
+.Btn__Blue, input{
     border-radius: 5px;
     background-color: #325DB8;
     width: 80%;
@@ -317,4 +317,12 @@ a{
     grid-template-columns: 50% 50%;
     justify-items: center;
     align-items: center;
+}
+
+.Danger__Alert{
+    padding: 100%;
+    background-color: #f28894;
+    color: white;
+    border: red solid 2px;
+
 }
