@@ -127,7 +127,7 @@
 
             <div class="Name__Read">
                 <?php
-                    echo "<h1>Eliminar proyecto:</h1>";
+                    echo "<h1>Eliminar proyecto</h1>";
                 ?>
             </div>
             
@@ -140,13 +140,9 @@
                 </div>
 
                 <div class="InfoRead__Atributes">
-                    <div class="Btn__Red">
-                        <input type="submit" value="Si">
-                    </div>
+                    <input class="Btn__Red" type="submit" value="Si">
 
-                    <div class="Btn__Green">
-                        <input type="submit" value="No">
-                    </div>
+                    <input class="Btn__Green" type="submit" value="No">
                 </div>
 
             </form>
