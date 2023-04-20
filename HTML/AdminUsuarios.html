@@ -6,13 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Usuarios</title>
 
-  <link rel="stylesheet" href="/CSS/HeaderFooterStructure.css">
-  <link rel="stylesheet" href="/CSS/AdminPages.css">
+  <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
+  <link rel="stylesheet" href="../CSS/AdminPages.css">
 </head>
 <body>
 
   <header>
-      <img class="Logo__EscNegCie" src="/media/logotec-ings.svg" alt="Logo__EscNegCie">
+      <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
       <ul>
           <li>
               <a href="#">Cerrar Sesion</a>
@@ -48,72 +48,69 @@
                 </table>
             </div>
 
-            <input class="Admin__Start__Right__Btn" type="button" value="Estadisticas Usuarios">
+            <div class="Estadisticas__Btn">
+                <a class="Admin__Start__Right__Btn" href="../PHP/EstadisticasUsuarios.php">Estadisticas Proyectos</a>
+            </div>
         </div>
 
-        <fieldset class="Users__Explorer">
+        <form method="post" class="Winners__Explorer">
             <table>
                 <tr>
-                    <td>Buscar</td>
                     <td>
-                        <select name="bus" id="bus">
-                            <option value="bus_1">Por ID</option>
-                            <option value="bus_2">Lorem ipsum 2</option>
-                            <option value="bus_3">Lorem ipsum 3</option>
-                            <option value="bus_4">Lorem ipsum 4</option>
+                        Buscar
+                    </td>
+                    <td>
+                        <select name="ProyectoID" id="ProyectoID">
+                            <option value="ID">ID</option>
+                            <option value="Nombre">Nombre</option>
+                            <option value="Edicion">Edicion</option>
+                            <option value="Tipo">Tipo</option>
                         </select>
                     </td>
                     <td>
-                        <input type="text" />
+                        
+                        <input type="search" name="BuscarNombre" class="Text__Search" id="" placeholder="Ingresa el valor">
+                        <input type="submit" name="BtnBuscar" class="Search__Btn" id="" value="Buscar">
+                        
                     </td>
-                </tr>
-
-                <tr>
-                    <td>Acción</td>
-                    <td>
-                    <select name="acc" id="acc">
-                        <option value="acc_1">Aceptar</option>
-                        <option value="acc_2">Lorem ipsum 2</option>
-                        <option value="acc_3">Lorem ipsum 3</option>
-                        <option value="acc_4">Lorem ipsum 4</option>
-                    </select>
-                    </td>
-                </tr>
-
-                
-                </table>
-
-                <table class="Header__Table">
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td><strong>ID</strong></td>
-                        <td><strong>Nombre</strong></td>
-                        <td><strong>Tipo</strong></td>
-                        <td><strong>Estado</strong></td>
-                        <td><strong>Última Modificación</strong></td>
-                      </tr>
-                </table>
-        </fieldset>
-
-        <fieldset class="Users__View" >
-
-            <table>
-                <tr>
-                    <td><input type="checkbox"></td>
-                    <td>26</td>
-                    <td>Gustavo Fuentes</td>
-                    <td>Juez</td>
-                    <td>Vetado</td>
-                    <td>14 de Octubre de 2022, 16:45 PM</td>
                     
                 </tr>
+<<<<<<< HEAD
                 
 
+=======
+>>>>>>> 790f595 (CRUD Styles for Admin Pages)
               </table>
+        </form>
+       
 
-        </fieldset>
+        <form method="post" class="Info">
+            <div class="Info__Header">
+                <p>&nbsp;</p>
+                <p>ID</p>
+                <p>Nombre</p>
+                <p>Tipo</p>
+                <p>Edicion</p>
+                <p>Acciones</p>
+            </div>
+            <div class="Info__Table">
+                <input type="checkbox" name="" id="">
+                <p>ID</p>
+                <p>Nombre</p>
+                <p>Categoria</p>
+                <p>Estado</p>
+                <div class="Btn__Green">
+                    <a href="#">Ver</a>
+                </div>
+                <div class="Btn__Blue">
+                    <a href="#">Actualizar</a>
+                </div>
+                <div class="Btn__Red">
+                    <a href="#">Eliminar</a>
+                </div>
 
-        <input class="Admin__Submit__Btn" value="Confirmar" type="button"> 
+            </div>
+        </form>
 
   </main>
 
