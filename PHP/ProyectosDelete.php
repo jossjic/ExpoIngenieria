@@ -142,7 +142,9 @@
                 <div class="InfoRead__Atributes">
                     <input class="Btn__Red__Delete" type="submit" value="Si">
 
-                    <input class="Btn__Green__Delete" type="submit" value="No">
+                    <div class='Btn__Green'>
+                        <a href='../PHP/ProyectosView.php'>Ver</a>
+                    </div>
                 </div>
 
             </form>
