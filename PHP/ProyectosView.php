@@ -132,15 +132,16 @@
                                             <p>" . $row['p_estado'] ."</p>
                                             <p>" . $row['p_fecha_modificacion'] ."</p>
                                             <div class='Btn__Green'>
-                                                <a href='../PHP/ProyectosRead.php?id='".trim($row['p_id'])."'>Ver</a>
+                                                <a href='../PHP/ProyectosRead.php?id=".trim($row['p_id'])."'>Ver</a>
                                             </div>
                                             <div class='Btn__Blue'>
-                                                <a href='../PHP/ProyectosUpdate.php?id='".trim($row['p_id'])."'>Actualizar</a>
+                                                <a href='../PHP/ProyectosUpdate.php?id=".trim($row['p_id'])."'>Actualizar</a>
                                             </div>
                                             <div class='Btn__Red'>
-                                                <a href='../PHP/ProyectosDelete.php?id='".trim($row['p_id'])."'>Eliminar</a>
+                                                <a href='../PHP/ProyectosDelete.php?id=".trim($row['p_id'])."'>Eliminar</a>
                                             </div>
-                                         ";
+                                        ";
+
                                 }
                                 Database::disconnect();
                             ?>
