@@ -127,25 +127,25 @@
             
             <div class="Info__Read">
 
-                <div class="">
+                <div class="InfoRead__Atributes">
                     <?php
                         echo "<p>" . $data['p_id'] ."</p>";
                     ?>
                 </div>
 
-                <div class="">
+                <div class="InfoRead__Atributes">
                     <?php
                         echo "<p>" . $data['p_nombre'] ."</p>";
                     ?>
                 </div>
 
-                <div class="">
+                <div class="InfoRead__Atributes">
                     <?php
                         echo "<p>" . $data['p_descripcion'] ."</p>";
                     ?>
                 </div>
 
-                <div class="">
+                <div class="InfoRead__Atributes">
                     <?php
                         echo "
                                 <p>" . $data['p_categoria'] ."</p>

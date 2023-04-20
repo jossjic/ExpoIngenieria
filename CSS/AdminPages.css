@@ -274,6 +274,7 @@ a{
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: 10% 10% 70% 10%;
+    grid-auto-flow: column;
     justify-items: start;
     align-items: center;
 
