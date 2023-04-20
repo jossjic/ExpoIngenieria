@@ -12,7 +12,7 @@
 		// delete data
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "DELETE FROM PROYECTOV1 WHERE id_p = ?";
+		$sql = "DELETE FROM PROYECTOV1 WHERE p_id = ?";
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
 		Database::disconnect();
