@@ -128,7 +128,7 @@
                                             <input type='checkbox' name='' id=''>
                                             <p>" . $row['p_id'] ."</p>
                                             <p>" . $row['p_nombre'] ."</p>
-                                            <p>" . $row['p_categoria'] ."</p>
+                                            <p>" . $row['ca_id'] ."</p>
                                             <p>" . $row['p_estado'] ."</p>
                                             <p>" . $row['p_fecha_modificacion'] ."</p>
                                             <div class='Btn__Green'>
