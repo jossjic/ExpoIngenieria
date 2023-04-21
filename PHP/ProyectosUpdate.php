@@ -155,19 +155,19 @@
               </table>
         </form>
 
-        <div class="Info__">
+        <div class="Info">
             <div class="">
                 <h1>Actualizar Proyecto</h1>
             </div>
             
             <form class="Info__Update">
                 
-                <div class="InfoRead__Atributes">
+                <div class="InfoUpdate__Atributes">
                     <label for="Nombre">Nombre</label>
                     <input type="text" name="Nombre" id="" placeholder="Nombre">
                 </div>
 
-                <div class="InfoRead__Atributes">
+                <div class="InfoUpdate__Atributes">
                     <label for="Categoria"></label>
                     <select name="Categoria" id="">
                             <?php
@@ -184,7 +184,7 @@
                     </select>
                 </div>
 
-                <div class="InfoRead__Atributes">
+                <div class="InfoUpdate__Atributes">
                     <label for="AvanceProyecto">Avance Proyecto</label>
                     <select name="AvanceProyecto" id="">
                             <?php
@@ -201,7 +201,7 @@
                     </select>
                 </div>
 
-                <div class="InfoRead__Atributes">
+                <div class="InfoUpdate__Atributes">
                     <label for="Estado">Estado</label>
                     <select name="Estado" id="">
                             <option value="Registrado">Registrado</option>
