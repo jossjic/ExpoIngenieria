@@ -132,7 +132,7 @@
             </div>
         </div>
 
-        <form method="post" class="Winners__Explorer" type="hidden">
+        <form method="post" class="Winners__Explorer">
             <table>
                 <tr>
                     <td>
@@ -160,7 +160,7 @@
                 <h1>Actualizar Proyecto</h1>
             </div>
             
-            <form class="Info__Update">
+            <form action="ProyectosUpdate.php?id=<?php echo $id?>" method="post" class="Info__Update">
                 
                 <div class="InfoUpdate__Atributes">
                     <label for="Nombre">Nombre</label>
