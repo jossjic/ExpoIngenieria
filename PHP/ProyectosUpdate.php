@@ -1,22 +1,18 @@
 <?php
 	require 'dataBase.php';
 
-	$id = null;
+    $id = null;
 	if ( !empty($_GET['id'])) {
 		$id = $_REQUEST['id'];
 	}
 
-	if ( $id==null) {
-		header("Location: ProyectosView.php");
-	} else {
-		$pdo = Database::connect();
-		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "SELECT * FROM PROYECTOV1 WHERE p_id = ?";
-		$q = $pdo->prepare($sql);
-		$q->execute(array($id));
-		$data = $q->fetch(PDO::FETCH_ASSOC);
-		Database::disconnect();
+    if ( $id==null ) {
+		header("Location: ../PHP/ProyectosView.php");
 	}
+
+    if (!empty($_POST)) {
+        
+    }
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +48,7 @@
 
     <main>
 
-        <div class="Admin__Start">
+        <div class="Admin__Start" type="hidden">
             <div class="Admin__Start__Left">
                 <h1>Administrador de Proyectos</h1>
                 <table>
@@ -100,7 +96,7 @@
             </div>
         </div>
 
-        <form method="post" class="Winners__Explorer">
+        <form method="post" class="Winners__Explorer" type="hidden">
             <table>
                 <tr>
                     <td>
@@ -123,26 +119,76 @@
               </table>
         </form>
 
-        <div class="Info">
-
+        <form class="Info">
             <div class="">
-                <?php
-                    echo "<h1>" . $data['p_nombre'] ."</h1>";
-                ?>
+                <h1>Actualizar Proyecto</h1>
             </div>
             
-            <div class="Info__Update">
+            <form class="Info__Update">
                 
                 <div class="InfoRead__Atributes">
-                    <input type="text" name="" id="" placeholder="Nombre">
+                    <label for="Nombre">Nombre</label>
+                    <input type="text" name="Nombre" id="" placeholder="Nombre">
                 </div>
 
-                <div>
-                    <input type="text" name="" id="" placeholder="Descripcion">
+                <div class="InfoRead__Atributes">
+                    <label for="Categoria"></label>
+                    <select name="Categoria" id="">
+                            <?php
+                                $pdo = Database::connect();
+                                $sql = "SELECT * FROM CATEGORIAV1";
+                                foreach ($pdo->query($sql) as $row) {
+                                    echo "
+                                            <option value='" . $row["ca_id"] . "'>'". $row["nombre"] ."'</option>
+                                        ";
+
+                                }
+                                Database::disconnect();
+                            ?>
+                    </select>
                 </div>
 
-            </div>
-        </div>
+                <div class="InfoRead__Atributes">
+                    <label for="Descripcion"></label>
+                    <input type="text" name="Descripcion" id="" placeholder="Descripcion">
+                </div>
+
+                <div class="InfoRead__Atributes">
+                    <label for="AvanceProyecto">Avance Proyecto</label>
+                    <select name="Categoria" id="">
+                            <?php
+                                $pdo = Database::connect();
+                                $sql = "SELECT * FROM CATEGORIAV1";
+                                foreach ($pdo->query($sql) as $row) {
+                                    echo "
+                                            <option value='" . $row["ca_id"] . "'>'". $row["nombre"] ."'</option>
+                                        ";
+
+                                }
+                                Database::disconnect();
+                            ?>
+                    </select>
+                </div>
+
+                <div class="InfoRead__Atributes">
+                    <label for="Estado">Estado</label>
+                    <select name="Categoria" id="">
+                            <option value="Registrado">Registrado</option>
+                            <option value="Rechazado">Rechazado</option>
+                            <option value="Aceptado">Aceptado</option>
+                    </select>
+                </div>
+
+                <div class="InfoRead__Atributes">
+                    <input class="Btn__Red__Delete" type="submit" value="Guardar">
+
+                    <div class='Btn__Green__Delete'>
+                        <a href='../PHP/ProyectosRead.php'>Cancelar</a>
+                    </div>
+                </div>
+
+            </form>
+        </form>
     </main> 
 
 </body>
