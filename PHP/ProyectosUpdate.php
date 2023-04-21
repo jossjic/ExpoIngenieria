@@ -10,9 +10,45 @@
 		header("Location: ../PHP/ProyectosView.php");
 	}
 
-    if (!empty($_POST)) {
-        
-    }
+    if ( !empty($_POST)) {
+		// keep track validation errors
+		$NombreError = null;
+        $CategoriaError = null;
+        $AvanceProyectoError = null;
+        $EstadoError = null;
+
+		// keep track post values
+		$Nombre = null;
+        $Categoria = null;
+        $AvanceProyecto = null;
+        $Estado = null;
+
+		/// validate input
+		$valid = true;
+
+		// update data
+		if ($valid) {
+			$pdo = Database::connect();
+			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$sql = "UPDATE PROYECTOV1 set p_nombre = ?, ca_id = ?, p_avance_proyecto = ? WHERE p_id = ?";
+			$q = $pdo->prepare($sql);
+			$q->execute(array($Nombre,$Categoria,$AvanceProyecto,$id));
+			Database::disconnect();
+			header("Location: ../PHP/ProyectosView.php");
+		}
+	}
+	else {
+		$pdo = Database::connect();
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = "SELECT * FROM PROYECTOV1 WHERE p_id = ?";
+		$q = $pdo->prepare($sql);
+		$q->execute(array($id));
+		$data = $q->fetch(PDO::FETCH_ASSOC);
+		$Nombre = $data['p_nombre'];
+        $Categoria = $data['ca_id'];
+        $AvanceProyecto = $data['p_avance_proyecto'];
+		Database::disconnect();
+	}
 ?>
 
 <!DOCTYPE html>
@@ -149,13 +185,8 @@
                 </div>
 
                 <div class="InfoRead__Atributes">
-                    <label for="Descripcion"></label>
-                    <input type="text" name="Descripcion" id="" placeholder="Descripcion">
-                </div>
-
-                <div class="InfoRead__Atributes">
                     <label for="AvanceProyecto">Avance Proyecto</label>
-                    <select name="Categoria" id="">
+                    <select name="AvanceProyecto" id="">
                             <?php
                                 $pdo = Database::connect();
                                 $sql = "SELECT * FROM CATEGORIAV1";
@@ -172,7 +203,7 @@
 
                 <div class="InfoRead__Atributes">
                     <label for="Estado">Estado</label>
-                    <select name="Categoria" id="">
+                    <select name="Estado" id="">
                             <option value="Registrado">Registrado</option>
                             <option value="Rechazado">Rechazado</option>
                             <option value="Aceptado">Aceptado</option>
