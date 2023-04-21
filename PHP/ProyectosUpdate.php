@@ -155,7 +155,7 @@
               </table>
         </form>
 
-        <form class="Info">
+        <div class="Info__">
             <div class="">
                 <h1>Actualizar Proyecto</h1>
             </div>
@@ -219,7 +219,7 @@
                 </div>
 
             </form>
-        </form>
+        </div>
     </main> 
 
 </body>
