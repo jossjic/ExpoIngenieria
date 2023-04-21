@@ -51,7 +51,7 @@
                 <br>
 	            <tbody>
 	              	<?php
-								   	include 'database.php';
+								   	include 'dataBase.php';
 								   	$pdo = Database::connect();
 								   	$sql = 'SELECT * FROM V2_EDICION ORDER BY ed_nombre';
 				 				   	foreach ($pdo->query($sql) as $row) {
