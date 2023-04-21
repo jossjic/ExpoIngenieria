@@ -18,10 +18,10 @@
         $EstadoError = null;
 
 		// keep track post values
-		$Nombre = null;
-        $Categoria = null;
-        $AvanceProyecto = null;
-        $Estado = null;
+		$Nombre = $_POST['Nombre'];
+        $Categoria = $_POST['Categoria'];
+        $AvanceProyecto = $_POST['AvanceProyecto'];
+        $Estado = $_POST['Estado'];
 
 		/// validate input
 		$valid = true;
