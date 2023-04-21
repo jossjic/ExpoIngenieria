@@ -329,7 +329,7 @@ a{
 .Info__Update{
     grid-row: 2/3;
 
-    width: 50%;
+    width: 1000%;
     height: 100%;
 
     overflow: auto;
@@ -345,6 +345,7 @@ a{
 }
 
 .InfoUpdate__Atributes{
+    width: 50%;
     display: grid;
     grid-template-columns: 50% 50%;
     justify-items: start;
