@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="../media/favicon.ico">
   <title>Admin Usuarios</title>
 
   <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
@@ -12,7 +11,7 @@
 </head>
 <body>
 
-<header>
+  <header>
       <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
       <ul>
           <li>
@@ -24,99 +23,132 @@
               <li><a href="#">Proyectos</a></li>
               <li><a href="#">Usuarios</a></li>
               <li><a href="#">Reconocimientos</a></li>
-              <li><a href="#">Estadísticas</a></li>
+              <li><a href="#">Eastadísticas</a></li>
           </ul>
       </nav>
   </header>
 
-	<body>
-	    <div class="container">
+  <main>
+        <div class="Admin__Start">
+            <div class="Admin__Start__Left">
+                <h1>Administrador de Usuarios</h1>
+                <table>
+                    <tr>
+                        <td>Total de Usuarios:</td>
+                        <td id="TotalUsuarios">6</td>
+                    </tr>
+                    <tr>
+                        <td>Jurados:</td>
+                        <td id="TotalJurados">4</td>
+                    </tr>
+                    <tr>
+                        <td>Profesores:</td>
+                        <td id="TotalProfesores">2</td>
+                    </tr>
+                </table>
+            </div>
 
-    		<div class="row">
-    			<h3>Admin Usuarios</h3>
-    		</div>
+            <div class="Estadisticas__Btn">
+                <a cglass="Admin__Start__Right__Btn" href="../PHP/EstadisticasUsuarios.php">Estadisticas Proyectos</a>
+            </div>
+        </div>
 
-				<div class="row">
-					<p>
-						<a href="../PHP/registroUsuarios.php" class="btn btn-success">Registrar Usuario</a>
-					</p>
+        <form method="post" class="Winners__Explorer">
+            <table>
+                <tr>
+                    <td>
+                        Buscar
+                    </td>
+                    <td>
+                        <select name="ProyectoID" id="ProyectoID">
+                            <option value="ID">ID</option>
+                            <option value="Nombre">Nombre</option>
+                            <option value="Edicion">Edicion</option>
+                            <option value="Tipo">Tipo</option>
+                        </select>
+                    </td>
+                    <td>
+                        
+                        <input type="search" name="BuscarNombre" class="Text__Search" id="" placeholder="Ingresa el valor">
+                        <input type="submit" name="BtnBuscar" class="Search__Btn" id="" value="Buscar">
+                        
+                    </td>
+                    
+                </tr>
+              </table>
+        </form>
+       
 
-					<table class="table table-striped table-bordered">
-	            <thead>
-	                <tr>
-	                	<th>Nombre	</th>
-	                	<th>Apellido				</th>
-                    <th>Correo				</th>
-	                </tr>
-	            </thead>
-	            <tbody>
-	              	<?php
+        <div class="Info">
+            <div class="Info__Header">
+                <p>&nbsp;</p>
+                <p>ID</p>
+                <p>Nombre</p>
+                <p>Apellido Paterno</p>
+                <p>Correo</p>
+                <p>Acciones</p>
+            </div>
+            <div class="Info__Table">
+                  
+                <?php
 								   	include 'dataBase.php';
 								   	$pdo = Database::connect();
 								   	$sql = 'SELECT * FROM V2_DOCENTE ORDER BY d_apellido_paterno';
 				 				   	foreach ($pdo->query($sql) as $row) {
-											echo '<tr>';
-			    					   	echo '<td>'. $row['d_nombre'] . '</td>';
-			    					  	echo '<td>'. $row['d_apellido_paterno'] . '</td>';
-                      					echo '<td>'. $row['d_correo'] . '</td>';
-			                            //echo '<td>';    echo ($row['ac'])?"SI":"NO"; echo'</td>';
-			                            echo '<td width=250>';
-			    					   	echo '<a class="btn" href="readAdminUsu.php?id='.$row['d_nomina'].'">Detalles</a>';
-			    					   	echo '&nbsp;';
-			    					  	echo '<a class="btn btn-success" href="updateAdminUsu.php?id='.$row['d_nomina'].'">Actualizar</a>';
-			    					   	echo '&nbsp;';
-			    					   	echo '<a class="btn btn-danger" href="deleteAdminUsu.php?id='.$row['d_nomina'].'">Eliminar</a>';
-			    					   	echo '</td>';
-										  echo '</tr>';
+                                        echo '<input type="checkbox" name="" id="">' ;
+
+                                        echo '<p>'. $row['d_nomina'] . '</p>';
+			    					   	echo '<p>'. $row['d_nombre'] . '</>';
+			    					  	echo '<p>'. $row['d_apellido_paterno'] . '</p>';
+                      					echo '<p>'. $row['d_correo'] . '</p>';
+
+			    					   	echo ' <div class="Btn__Green"> <a href="readAdminUsu.php?id='.$row['d_nomina'].'">Ver</a></div>';
+			    					  	echo ' <div class="Btn__Blue"> <a href="updateAdminUsu.php?id='.$row['d_nomina'].'">Actualizar</a></div>';
+			    					   	echo ' <div class="Btn__red" ><a href="deleteAdminUsu.php?id='.$row['d_nomina'].'">Eliminar</a></div>';
+                                        
 								    }
 
 									$sql = 'SELECT * FROM V2_JURADO ORDER BY j_apellido_paterno';
 									foreach ($pdo->query($sql) as $row) {
-										echo '<tr>';
-									   echo '<td>'. $row['j_nombre'] . '</td>';
-									  echo '<td>'. $row['j_apellido_paterno'] . '</td>';
-				  					echo '<td>'. $row['j_correo'] . '</td>';
-									//echo '<td>';    echo ($row['ac'])?"SI":"NO"; echo'</td>';
-									echo '<td width=250>';
-									   echo '<a class="btn" href="readAdminUsu.php?id='.$row['j_id'].'">Detalles</a>';
-									   echo '&nbsp;';
-									  echo '<a class="btn btn-success" href="updateAdminUsu.php?id='.$row['j_id'].'">Actualizar</a>';
-									   echo '&nbsp;';
-									   echo '<a class="btn btn-danger" href="deleteAdminUsu.php?id='.$row['j_id'].'">Eliminar</a>';
-									   echo '</td>';
-									  echo '</tr>';
+                                        echo '<input type="checkbox" name="" id="">' ;
+
+                                        echo '<p>'. $row['j_id'] . '</p>';
+									    echo '<p>'. $row['j_nombre'] . '</p>';
+									    echo '<p>'. $row['j_apellido_paterno'] . '</p>';
+				  					    echo '<p>'. $row['j_correo'] . '</p>';
+
+									    echo ' <div class="Btn__Green"> <a href="readAdminUsu.php?id='.$row['j_id'].'">Ver</a></div>';
+                                        echo ' <div class="Btn__Blue" > <a href="updateAdminUsu.php?id='.$row['j_id'].'">Actualizar</a></div>';
+                                        echo ' <div class="Btn__red" > <a href="deleteAdminUsu.php?id='.$row['j_id'].'">Eliminar</a></div>';
+                                        
 								}
 
 								$sql = 'SELECT * FROM V2_ALUMNO ORDER BY a_ap_pa';
 								foreach ($pdo->query($sql) as $row) {
-									echo '<tr>';
-								   echo '<td>'. $row['a_nombre'] . '</td>';
-								  echo '<td>'. $row['a_ap_pa'] . '</td>';
-			  					echo '<td>'. $row['a_correo'] . '</td>';
-								//echo '<td>';    echo ($row['ac'])?"SI":"NO"; echo'</td>';
-								echo '<td width=250>';
-								   echo '<a class="btn" href="readAdminUsu.php?id='.$row['a_matricula'].'">Detalles</a>';
-								   echo '&nbsp;';
-								  echo '<a class="btn btn-success" href="updateAdminUsu.php?id='.$row['a_matricula'].'">Actualizar</a>';
-								   echo '&nbsp;';
-								   echo '<a class="btn btn-danger" href="deleteAdminUsu.php?id='.$row['a_matricula'].'">Eliminar</a>';
-								   echo '</td>';
-								  echo '</tr>';
+                                    echo '<input type="checkbox" name="" id="">' ;
+
+                                    echo '<p>'. $row['a_matricula'] . '</p>';
+								    echo '<p>'. $row['a_nombre'] . '</p>';
+								    echo '<p>'. $row['a_ap_pa'] . '</p>';
+			  					    echo '<p>'. $row['a_correo'] . '</p>';
+
+								    echo ' <div class="Btn__Green"> <a href="readAdminUsu.php?id='.$row['a_matricula'].'">Ver</a></div>';
+								    echo ' <div class="Btn__Blue" > <a href="updateAdminUsu.php?id='.$row['a_matricula'].'">Actualizar</a></div>';
+								    echo ' <div class="Btn__red" > <a href="deleteAdminUsu.php?id='.$row['a_matricula'].'">Eliminar</a></div>';
+                                    
 							}
 
 
 								   	Database::disconnect();
 				  				?>
-			    		</tbody>
-		      </table>
 
-		    </div>
 
-	    </div> <!-- /container -->
-	</body>
 
-	
-	<footer>
-    <img class="Logo__Tec" src="../media/LogoTec.png" alt="Logo TEC">
-  </footer>
+            </div>
+        </div>
+
+  </main>
+
+  
+</body>
 </html>
