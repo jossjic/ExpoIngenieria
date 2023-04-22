@@ -67,10 +67,6 @@ main h2 a{
     border-spacing: 25px;
 }
 
-.Admin_Options td{
-    text-align: center;
-}
-
 .Btn{
     display: inline-block;
     border: none;
@@ -79,4 +75,8 @@ main h2 a{
     line-height: 300%;
     width: 150%;
     text-decoration: none;
+}
+
+.Admin_Options td{
+    text-align: center;
 }
