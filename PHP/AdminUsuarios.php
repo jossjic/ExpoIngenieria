@@ -82,6 +82,7 @@
         <div class="Info">
             <div class="Info__Header">
                 <p>&nbsp;</p>
+                <p></p>
                 <p>ID</p>
                 <p>Nombre</p>
                 <p>Apellido Paterno</p>
@@ -96,30 +97,34 @@
 								   	$sql = 'SELECT * FROM V2_DOCENTE ORDER BY d_apellido_paterno';
 				 				   	foreach ($pdo->query($sql) as $row) {
                                         echo '<input type="checkbox" name="" id="">' ;
+                                        echo '<p></p>';
 
                                         echo '<p>'. $row['d_nomina'] . '</p>';
 			    					   	echo '<p>'. $row['d_nombre'] . '</>';
 			    					  	echo '<p>'. $row['d_apellido_paterno'] . '</p>';
                       					echo '<p>'. $row['d_correo'] . '</p>';
+                                        echo '<p></p>';
 
 			    					   	echo ' <div class="Btn__Green"> <a href="readAdminUsu.php?id='.$row['d_nomina'].'">Ver</a></div>';
 			    					  	echo ' <div class="Btn__Blue"> <a href="updateAdminUsu.php?id='.$row['d_nomina'].'">Actualizar</a></div>';
-			    					   	echo ' <div class="Btn__red" ><a href="deleteAdminUsu.php?id='.$row['d_nomina'].'">Eliminar</a></div>';
+			    					   	echo ' <div class="Btn__Red" ><a href="deleteAdminUsu.php?id='.$row['d_nomina'].'">Eliminar</a></div>';
                                         
 								    }
 
 									$sql = 'SELECT * FROM V2_JURADO ORDER BY j_apellido_paterno';
 									foreach ($pdo->query($sql) as $row) {
                                         echo '<input type="checkbox" name="" id="">' ;
+                                        echo '<p></p>';
 
                                         echo '<p>'. $row['j_id'] . '</p>';
 									    echo '<p>'. $row['j_nombre'] . '</p>';
 									    echo '<p>'. $row['j_apellido_paterno'] . '</p>';
 				  					    echo '<p>'. $row['j_correo'] . '</p>';
+                                        echo '<p></p>';
 
 									    echo ' <div class="Btn__Green"> <a href="readAdminUsu.php?id='.$row['j_id'].'">Ver</a></div>';
                                         echo ' <div class="Btn__Blue" > <a href="updateAdminUsu.php?id='.$row['j_id'].'">Actualizar</a></div>';
-                                        echo ' <div class="Btn__red" > <a href="deleteAdminUsu.php?id='.$row['j_id'].'">Eliminar</a></div>';
+                                        echo ' <div class="Btn__Red" > <a href="deleteAdminUsu.php?id='.$row['j_id'].'">Eliminar</a></div>';
                                         
 								}
 
@@ -134,7 +139,7 @@
 
 								    echo ' <div class="Btn__Green"> <a href="readAdminUsu.php?id='.$row['a_matricula'].'">Ver</a></div>';
 								    echo ' <div class="Btn__Blue" > <a href="updateAdminUsu.php?id='.$row['a_matricula'].'">Actualizar</a></div>';
-								    echo ' <div class="Btn__red" > <a href="deleteAdminUsu.php?id='.$row['a_matricula'].'">Eliminar</a></div>';
+								    echo ' <div class="Btn__Red" > <a href="deleteAdminUsu.php?id='.$row['a_matricula'].'">Eliminar</a></div>';
                                     
 							}
 
