@@ -25,79 +25,80 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="icon" type="image/ico" href="../media/favicon.ico"/>
 
-        <title>READ EDICION</title>
+        <title>Ver Edicion</title>
 
         <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
-        <link rel="stylesheet" href="../CSS/galeria.css">
+        <link rel="stylesheet" href="../CSS/AdminPages.css">
+        <link rel="stylesheet" href="../CSS/FormsStructure.css">
+    
 	</head>
 
-    <header>
-        <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
-        <ul>
-        <li>
-            <a href="#">Layout Proyectos</a>
-        </li>
-        </ul>
-        <nav>
-        <ul>
-            <li><a href="#">Cerrar Sesión</a></li>
-        </ul>
-        </nav>
-    </header>
-    <br>
-    <br>
-	<body>
-    	<div class="container">
+    <body>
+        
+        <header>
+            <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
+            <ul>
+                <li>
+                    <a href="#">Layout Proyectos</a>
+                </li>
+            </ul>
+            <nav>
+                <ul>
+                    <li><a href="#">Cerrar Sesión</a></li>
+                </ul>
+            </nav>
+        </header>
 
-    		<div class="span10 offset1">
-    			<div class="row">
-		    		<h3>Detalles de Edicion</h3>
-		    	</div>
-                <br>
-	    		<div class="form-horizontal" >
+        <main>
 
-					<div class="control-group">
-						<label class="control-label">ID</label>
-					    <div class="controls">
-							<label class="checkbox">
-								<?php echo $data['ed_id'];?>
-							</label>
-					    </div>
-					</div>
+            <h1>Detalles de la Edicion</h1>
 
-					<div class="control-group">
-					    <label class="control-label">Nombre</label>
-					    <div class="controls">
-					      	<label class="checkbox">
-						     	<?php echo $data['ed_nombre'];?>
-						    </label>
-					    </div>
-					</div>
+            <form>
+                <table>
+                    <tr>
+                        <td>
+                            <label for="">ID</label>
+                        </td>
+                        <td>
+                            <?php echo $data['ed_id'];?>
+                        </td>
+                    </tr>
 
-					<div class="control-group">
-					    <label class="control-label">Fecha de inicio</label>
-					    <div class="controls">
-					      	<label class="checkbox">
-						     	<?php echo $data['ed_fecha_inicio'];?>
-						    </label>
-					    </div>
-					</div>
+                    <tr>
+                        <td>
+                            <label for="">Nombre</label>
+                        </td>
+                        <td>
+                            <?php echo $data['ed_nombre'];?>
+                        </td>
+                    </tr>
 
-					<div class="control-group">
-					    <label class="control-label">Fecha de fin</label>
-					    <div class="controls">
-					      	<label class="checkbox">
-						     	<?php echo $data['ed_fecha_fin'];?>
-						    </label>
-					    </div>
-					</div>
-                    <br>
-				    <div class="form-actions">
-						<a class="btn" href="EdicionView.php">Regresar</a>
-					</div>
+                    <tr>
+                        <td>
+                            <label for="">Fecha Inicio</label>
+                        </td>
+                        <td>
+                            <?php echo $data['ed_fecha_inicio'];?>
+                        </td>
+                    </tr>
 
-				</div>
-			</div>
-		</div> <!-- /container -->
-  	</body>
+                    <tr>
+                        <td>
+                            <label for="">Fecha Fin</label>
+                        </td>
+                        <td>
+                            <?php echo $data['ed_fecha_fin'];?>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="Btn__Blue" colspan="2"><a  href="EdicionView.php">Regresar</a></td>
+                        <td></td>
+                    </tr>
+                </table>
+
+            </div>
+        </main>
+
+    </body>
 </html>
