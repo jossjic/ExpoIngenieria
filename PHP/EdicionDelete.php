@@ -15,7 +15,7 @@
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
 		Database::disconnect();
-		header("Location: EdicionCRUD.php");
+		header("Location: EdicionView.php");
 	}
 ?>
 
@@ -54,12 +54,12 @@
 			    	<h3>Eliminar una edicion</h3>
 			    </div>
 
-			    <form class="form-horizontal" action="deleteEdicion.php" method="post">
+			    <form class="form-horizontal" action="EdicionDelete.php" method="post">
 		    		<input type="hidden" name="id" value="<?php echo $id;?>"/>
 					<p class="alert alert-error">Estas seguro que quieres eliminar esta edicion ?</p>
 					<div class="form-actions">
 						<button type="submit" class="btn btn-danger">Si</button>
-						<a class="btn" href="EdicionCRUD.php">No</a>
+						<a class="btn" href="EdicionView.php">No</a>
 					</div>
 				</form>
 			</div>

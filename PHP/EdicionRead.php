@@ -1,11 +1,11 @@
 <?php
-	require 'database.php';
+	require 'dataBase.php';
 	$id = null;
 	if ( !empty($_GET['id'])) {
 		$id = $_REQUEST['id'];
 	}
 	if ( $id==null) {
-		header("Location: index.php");
+		header("Location: EdicionView.php");
 	} else {
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -93,7 +93,7 @@
 					</div>
                     <br>
 				    <div class="form-actions">
-						<a class="btn" href="EdicionCRUD.php">Regresar</a>
+						<a class="btn" href="EdicionView.php">Regresar</a>
 					</div>
 
 				</div>
