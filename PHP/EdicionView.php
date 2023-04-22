@@ -100,26 +100,26 @@
 									$sql = "SELECT * FROM V2_EDICION ORDER BY ed_nombre";
 									foreach ($pdo->query($sql) as $row) {
 										echo "
-												<p>&nbsp;</p>
-												<p></p>
-												<p>" . $row['ed_id'] ."</p>
-												<p>" . $row['ed_nombre'] ."</p>
-												<p></p>
-												<p></p>
-												<div class='Btn__Green'>
-													<a href='../PHP/EdicionRead.php?id=".trim($row['ed_id'])."'>Ver</a>
-												</div>
-												<div class='Btn__Blue'>
-													<a href='../PHP/EdicionUpdate.php?id=".trim($row['ed_id'])."'>Actualizar</a>
-												</div>
-												<div class='Btn__Red'>
-													<a href='../PHP/EdicionDelete.php?id=".trim($row['ed_id'])."'>Eliminar</a>
-												</div>
-											";
-
+											<p>&nbsp;</p>
+											<p></p>
+											<p>" . $row['ed_id'] ."</p>
+											<p>" . $row['ed_nombre'] ."</p>
+											<p></p>
+											<p></p>
+											<div class='Btn__Green'>
+												<a href='../PHP/EdicionRead.php?id=".trim($row['ed_id'])."'>Ver</a>
+											</div>
+											<div class='Btn__Blue'>
+												<a href='../PHP/EdicionUpdate.php?id=".trim($row['ed_id'])."'>Actualizar</a>
+											</div>
+											<div class='Btn__Red'>
+												<a href='../PHP/EdicionDelete.php?id=".trim($row['ed_id'])."'>Eliminar</a>
+											</div>
+										";
 									}
 									Database::disconnect();
 								?>
+
 								
 				</div>
 			</form>
