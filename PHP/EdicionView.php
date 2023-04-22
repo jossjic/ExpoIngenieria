@@ -6,85 +6,123 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="icon" type="image/ico" href="../media/favicon.ico"/>
 
-        <title>CRUD EDICION</title>
+        <title>Ediciones</title>
 
         <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
-        <link rel="stylesheet" href="../CSS/galeria.css">
+        <link rel="stylesheet" href="../CSS/AdminPages.css">
 	</head>
 
 
-    <header>
-    <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
-    <ul>
-      <li>
-        <a href="#">Layout Proyectos</a>
-      </li>
-    </ul>
-    <nav>
-      <ul>
-        <li><a href="#">Cerrar Sesión</a></li>
-      </ul>
-    </nav>
-  </header>
-    <br>
-    <br>
-    <br>
-	<body>
-	    <div class="proyecto">
+    <body>
+		<header>
+			<img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
+			<ul>
+				<li>
+					<a href="#">Cerrar Sesion</a>
+				</li>
+			</ul>
+			<nav>
+				<ul>
+					<li><a href="#">Menu</a></li>
+					<li><a href="#">Usuarios</a></li>
+					<li><a href="#">Reconocimientos</a></li>
+					<li><a href="#">Eastadísticas</a></li>
+				</ul>
+			</nav>
+		</header>
 
-    		<div class="row">
-    			<h3>Edición Expo Ingienerias</h3>
-    		</div>
+		<main>
 
-				<div class="row">
-					<p>
-						<a href="EdicionCreate.php" class="btn btn-success">Agregar una edicion</a>
-					</p>
+			<div class="Admin__Start">
+				<div class="Admin__Start__Left">
+					<h1>Administrador de Ediciones</h1>
+					<table>
+						<tr>
+							<td>Ediciones Totales:</td>
+							<td id="TotalProyectos">
+								<?php
+									$pdo = Database::connect();
+									$sql = "SELECT * FROM EDICIONV1";
+									$q = $pdo->query($sql)->rowCount();
+									echo "$q";
+									Database::disconnect();
+								?>
+							</td>
+						</tr>
+					</table>
+				</div>
 
-				<table class="table table-striped table-bordered">
-	            <thead>
-	                <tr>
-	                	<th >ID	</th>
-	                	<th>NOMBRE				</th>
-	                  <!--<th>A/C 					</th> -->
-	                </tr>
-	            </thead>
-                <br>
-                <br>
-	            <tbody>
-	              	<?php
-								   	include 'dataBase.php';
-								   	$pdo = Database::connect();
-								   	$sql = 'SELECT * FROM V2_EDICION ORDER BY ed_nombre';
-				 				   	foreach ($pdo->query($sql) as $row) {
-											echo '<tr>';
-			    					   	echo '<td>'. $row['ed_id'] . '</td>';
-			    					  	echo '<td>'. $row['ed_nombre'] . '</td>';
-			                            //echo '<td>';    echo ($row['ac'])?"SI":"NO"; echo'</td>';
-			                            echo '<td width=250>';
-			    					   	echo '<a class="btn" href="EdicionRead.php?id='.$row['ed_id'].'">Detalles</a>';
-			    					   	echo '&nbsp;';
-			    					  	echo '<a class="btn btn-success" href="EdicionUpdate.php?id='.$row['ed_id'].'">Actualizar</a>';
-			    					   	echo '&nbsp;';
-			    					   	echo '<a class="btn btn-danger" href="EdicionDelete.php?id='.$row['ed_id'].'">Eliminar</a>';
-			    					   	echo '</td>';
-										  echo '</tr>';
-								    }
-								   	Database::disconnect();
-				  				?>
-			    		</tbody>
-		      </table>
+				<div class="Estadisticas__Btn">
+					<a class="Admin__Start__Right__Btn" href="../PHP/EdicionCreate.php">Crear Edicion</a>
+				</div>
+			</div>
 
-		    </div>
+			<form action="../PHP/ProyectosBusqueda.php" method="post" class="Winners__Explorer">
+				<table>
+					<tr>
+						<td>
+							Buscar
+						</td>
+						<td>
+							<select name="ProyectoID" id="ProyectoID">
+								<option value="ID">ID</option>
+								<option value="Nombre">Nombre</option>
+							</select>
+						</td>
+						<td>
+							
+							<input type="search" name="BuscarNombre" class="Text__Search" id="" placeholder="Ingresa el valor">
+							<input type="submit" name="BtnBuscar" class="Search__Btn" id="" value="Buscar">
+							
+						</td>
+						
+					</tr>
+				</table>
+			</form>
 
-	    </div> <!-- /container -->
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <footer>
-        <img class="Logo__Tec" src="../media/LogoTec.png" alt="Logo TEC">
-        </footer>
-	</body>
+			<form method="post" class="Info">
+				<div class="Info__Header">
+					<p>&nbsp;</p>
+					<p></p>
+					<p>ID</p>
+					<p>Nombre</p>
+					<p>Estado</p>
+					<p></p>
+					<div>
+						<p>Acciones</p>
+					</div>
+				</div>
+				<div class="Info__Table">
+								<?php
+									include 'dataBase.php';
+									$pdo = Database::connect();
+									$sql = 'SELECT * FROM V2_EDICION ORDER BY ed_nombre';
+									foreach ($pdo->query($sql) as $row) {
+										echo "
+												<p>&nbsp;</p>
+												<p></p>
+												<p>" . $row['ed_id'] ."</p>
+												<p>" . $row['ed_nombre'] ."</p>
+												<p>" . $row['ed_estado'] ."</p>
+												<p></p>
+												<div class='Btn__Green'>
+													<a href='../PHP/EdicionRead.php?id=".trim($row['ed_id'])."'>Ver</a>
+												</div>
+												<div class='Btn__Blue'>
+													<a href='../PHP/EdicionUpdate.php?id=".trim($row['ed_id'])."'>Actualizar</a>
+												</div>
+												<div class='Btn__Red'>
+													<a href='../PHP/EdicionDelete.php?id=".trim($row['ed_id'])."'>Eliminar</a>
+												</div>
+											";
+
+									}
+									Database::disconnect();
+								?>
+								
+				</div>
+			</form>
+		</main>
+	</body> 
+
 </html>
