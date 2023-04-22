@@ -8,7 +8,7 @@
 	}
 
 	if ( $id==null ) {
-		header("Location: index.php");
+		header("Location: EdicionView.php");
 	}
 
 	if ( !empty($_POST)) {
@@ -49,7 +49,7 @@
 			//$acq = ($ac=="S")?1:0;
 			$q->execute(array($ed_id,$ed_nombre,$ed_fecha_inicio,$ed_fecha_fin,$ed_id));
 			Database::disconnect();
-			header("Location: EdicionCRUD.php");
+			header("Location: EdicionView.php");
 		}
 	}
 	else {
@@ -100,7 +100,7 @@
 		    		<h3>Actualizar datos de una edicion</h3>
 		    	</div>
 
-	    			<form class="form-horizontal" action="updateEdicion.php?id=<?php echo $id?>" method="post">
+	    			<form class="form-horizontal" action="EdicionUpdate.php?id=<?php echo $id?>" method="post">
 
 					  <div class="control-group <?php echo !empty($ed_idError)?'error':'';?>">
 
@@ -149,7 +149,7 @@
 
 					  <div class="form-actions">
 						  <button type="submit" class="btn btn-success">Actualizar</button>
-						  <a class="btn" href="EdicionCRUD.php">Regresar</a>
+						  <a class="btn" href="EdicionView.php">Regresar</a>
 						</div>
 					</form>
 				</div>

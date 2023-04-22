@@ -38,7 +38,7 @@
 			$q = $pdo->prepare($sql);
 			$q->execute(array($ed_id,$ed_nombre,$ed_fecha_inicio,$ed_fecha_fin));
 			Database::disconnect();
-			header("Location: EdicionCRUD.php");
+			header("Location: EdicionView.php");
 		}
 	}
 ?>
@@ -77,7 +77,7 @@
 		   			<h3>Registro de Ediciones</h3>
 		   		</div>
 
-				<form class="form-horizontal" action="createEdicion.php" method="post">
+				<form class="form-horizontal" action="EdicionCreate.php" method="post">
 
 
 				<div class="control-group <?php echo !empty($ed_nombreError)?'error':'';?>">

@@ -36,7 +36,7 @@
 
 				<div class="row">
 					<p>
-						<a href="createEdicion.php" class="btn btn-success">Agregar una edicion</a>
+						<a href="EdicionCreate.php" class="btn btn-success">Agregar una edicion</a>
 					</p>
 
 				<table class="table table-striped table-bordered">
@@ -60,11 +60,11 @@
 			    					  	echo '<td>'. $row['ed_nombre'] . '</td>';
 			                            //echo '<td>';    echo ($row['ac'])?"SI":"NO"; echo'</td>';
 			                            echo '<td width=250>';
-			    					   	echo '<a class="btn" href="readEdicion.php?id='.$row['ed_id'].'">Detalles</a>';
+			    					   	echo '<a class="btn" href="EdicionRead.php?id='.$row['ed_id'].'">Detalles</a>';
 			    					   	echo '&nbsp;';
-			    					  	echo '<a class="btn btn-success" href="updateEdicion.php?id='.$row['ed_id'].'">Actualizar</a>';
+			    					  	echo '<a class="btn btn-success" href="EdicionUpdate.php?id='.$row['ed_id'].'">Actualizar</a>';
 			    					   	echo '&nbsp;';
-			    					   	echo '<a class="btn btn-danger" href="deleteEdicion.php?id='.$row['ed_id'].'">Eliminar</a>';
+			    					   	echo '<a class="btn btn-danger" href="EdicionDelete.php?id='.$row['ed_id'].'">Eliminar</a>';
 			    					   	echo '</td>';
 										  echo '</tr>';
 								    }
