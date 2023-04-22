@@ -95,7 +95,6 @@
 				</div>
 				<div class="Info__Table">
 								<?php
-									require 'dataBase.php';
 									$pdo = Database::connect();
 									$sql = "SELECT * FROM V2_EDICION ORDER BY ed_nombre";
 									foreach ($pdo->query($sql) as $row) {
@@ -124,6 +123,7 @@
 				</div>
 			</form>
 		</main>
+
 	</body> 
 
 </html>
