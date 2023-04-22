@@ -52,69 +52,82 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="icon" type="image/ico" href="../media/favicon.ico"/>
 
-        <title>CRUD EDICION</title>
+        <title>Crear Edicion</title>
 
         <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
-        <link rel="stylesheet" href="../CSS/galeria.css">
+        <link rel="stylesheet" href="../CSS/FormsStructure.css">
+
 	</head>
 
-    <header>
-        <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
-        <ul>
-        <li>
-            <a href="#">Layout Proyectos</a>
-        </li>
-        </ul>
-        <nav>
-        <ul>
-            <li><a href="#">Cerrar Sesión</a></li>
-        </ul>
-        </nav>
-    </header>
+    <body>
+        
+        <header>
+            <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
+            <ul>
+            <li>
+                <a href="#">Layout Proyectos</a>
+            </li>
+            </ul>
+            <nav>
+                <ul>
+                    <li><a href="#">Cerrar Sesión</a></li>
+                </ul>
+            </nav>
+        </header>
 
-	<body>
-	    <div class="container">
-	    	<div class="span10 offset1">
-	    		<div class="row">
-		   			<h3>Registro de Ediciones</h3>
-		   		</div>
+        <main>
 
-				<form class="form-horizontal" action="EdicionCreate.php" method="post">
+            <h1>Crear Edicion</h1>
+
+            <form class="form-horizontal" action="EdicionCreate.php" method="post">
 
 
-				<div class="control-group <?php echo !empty($ed_nombreError)?'error':'';?>">
-						<label class="control-label">Nombre</label>
-					    <div class="controls">
-					      	<input name="ed_nombre" type="text"  placeholder="Nombre Edicion" value="">
-					      	<?php if (($ed_nombreError != null)) ?>
-					      		<span class="help-inline"><?php echo $ed_nombreError;?></span>
-					    </div>
-					</div>
+                <table>
+                    <tr>
+                        <td>
+                            <label>Nombre</label>
+                        </td>
+                        <td>
+                            <input class="Text__Input" name="ed_nombre" type="text"  placeholder="Nombre Edicion" value="">
+                            <?php if (($ed_nombreError != null)) ?>
+                            <span class="help-inline"><?php echo $ed_nombreError;?></span>
+                        </td>
+                    </tr>
 
-                    <div class="control-group <?php echo !empty($ed_fecha_inicioError)?'error':'';?>">
-						<label class="control-label">Fecha de inicio</label>
-					    <div class="controls">
-					      	<input name="ed_fecha_inicio" type="date"  placeholder="Tu Nombre" value="">
-					      	<?php if (($ed_fecha_inicioError != null)) ?>
-					      		<span class="help-inline"><?php echo $ed_fecha_inicioError;?></span>
-					    </div>
-					</div>
+                    <tr>
+                        <td>
+                            <label>Fecha de inicio</label>
+                        </td>
+                        <td>
+                            <input class="Text__Input" name="ed_fecha_inicio" type="date"  placeholder="Tu Nombre" value="">
+                            <?php if (($ed_fecha_inicioError != null)) ?>
+                            <span class="help-inline"><?php echo $ed_fecha_inicioError;?></span>
+                        </td>
+                    </tr>
 
-                    <div class="control-group <?php echo !empty($ed_fecha_finError)?'error':'';?>">
-						<label class="control-label">Fecha de fin</label>
-					    <div class="controls">
-					      	<input name="ed_fecha_fin" type="date"  placeholder="Tu Apellido Paterno" value="">
-					      	<?php if (($ed_fecha_finError != null)) ?>
-					      		<span class="help-inline"><?php echo $ed_fecha_finError;?></span>
-					    </div>
-					</div>
+                    <tr>
+                        <td>
+                            <label>Fecha de fin</label>
+                        </td>
 
-					<div>
-						<input class="btn btn-primary btn-block" type="submit" value="Agregar edicion" id="submit" name="submit">
-					</div>
+                        <td>
+                            <input class="Text__Input" name="ed_fecha_fin" type="date"  placeholder="Tu Apellido Paterno" value="">
+                            <?php if (($ed_fecha_finError != null)) ?>
+                            <span class="help-inline"><?php echo $ed_fecha_finError;?></span>
+                        </td>
+                    </tr>
 
-				</form>
-			</div>
-	    </div> <!-- /container -->
-	</body>
+                    <tr>
+                        <td class="Td__Iniciar__Sesion" colspan="2">
+                            <input class="Btn__Iniciar__Sesion" type="submit" value="Agregar edicion" id="submit" name="submit">
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+            </form>
+
+        </main>
+
+    </body>
+
 </html>
