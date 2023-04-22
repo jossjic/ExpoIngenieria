@@ -97,7 +97,7 @@
 								<?php
 									require 'dataBase.php';
 									$pdo = Database::connect();
-									$sql = 'SELECT * FROM V2_EDICION ORDER BY ed_nombre';
+									$sql = "SELECT * FROM V2_EDICION ORDER BY ed_nombre";
 									foreach ($pdo->query($sql) as $row) {
 										echo "
 												<p>&nbsp;</p>
