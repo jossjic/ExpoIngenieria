@@ -14,7 +14,7 @@
 
         if ($valid) {
             $pdo = Database::connect();
-            $sql = "INSERT INTO PROYECTOV1(p_id,p_contraseña,ed_id) VALUES(?, ?, ?)";
+            $sql = "INSERT INTO PROYECTOV1(p_id,d_contraseña,ed_id) VALUES(?, ?, ?)";
             $q = $pdo->prepare($sql);
             $q->execute(array($Nombre,$Contraseña, $ed_id));
             Database::disconnect();
@@ -44,7 +44,7 @@
             <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" >
             <ul>
                 <li>
-                    <a href="../HTML/InicioSesionJurado.html">Regresar</a>
+                    <a href="../HTML/LoginUsuarios.html">Regresar</a>
                 </li>
             </ul>
         </header>
@@ -68,7 +68,7 @@
                     </tr>
 
                     <tr>
-                        <td><label for="ApellidoMaterno">Edicion A Participar</label></td>
+                        <td><label for="ed_id">Edicion A Participar</label></td>
                         <td>
                             <select name="ed_id" id="ed_i">
                             <?php
