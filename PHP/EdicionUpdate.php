@@ -71,92 +71,104 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+    <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="icon" type="image/ico" href="../media/favicon.ico"/>
 
-        <title>CRUD EDICION</title>
+        <title>Crear Edicion</title>
 
         <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
-        <link rel="stylesheet" href="../CSS/galeria.css">
+        <link rel="stylesheet" href="../CSS/FormsStructure.css">
+        <link rel="stylesheet" href="../CSS/AdminPages.css">
+
 	</head>
 
-    <header>
-        <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
-        <ul>
-        <li>
-            <a href="#">Layout Proyectos</a>
-        </li>
-        </ul>
-        <nav>
-        <ul>
-            <li><a href="#">Cerrar Sesión</a></li>
-        </ul>
-        </nav>
-    </header>
+    <body>
+        
+        <header>
+            <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
+            <ul>
+            <li>
+                <a href="#">Layout Proyectos</a>
+            </li>
+            </ul>
+            <nav>
+                <ul>
+                    <li><a href="#">Cerrar Sesión</a></li>
+                </ul>
+            </nav>
+        </header>
 
-	<body>
-    	<div class="container">
-    		<div class="span10 offset1">
-    			<div class="row">
-		    		<h3>Actualizar datos de una edicion</h3>
-		    	</div>
+        <main>
 
-	    			<form class="form-horizontal" action="EdicionUpdate.php?id=<?php echo $id?>" method="post">
+            <h1>Actualizar</h1>
 
-					  <div class="control-group <?php echo !empty($ed_idError)?'error':'';?>">
+            <form class="form-horizontal" action="EdicionUpdate.php?id=<?php echo $id?>" method="post">
 
-					    <label class="control-label">ID</label>
-					    <div class="controls">
-					      	<input name="ed_id" type="text" readonly placeholder="id" value="<?php echo !empty($ed_id )?$ed_id :''; ?>">
+
+                <table>
+
+                    <tr>
+                        <td>
+                            <label for="">ID</label>
+                        </td>
+
+                        <td>
+                            <input name="ed_id" type="text" readonly placeholder="ID" value="<?php echo !empty($ed_id )?$ed_id :''; ?>">
 					      	<?php if (!empty($ed_idError)): ?>
 					      		<span class="help-inline"><?php echo $ed_idError;?></span>
 					      	<?php endif; ?>
-					    </div>
-					  </div>
+                        </td>
+                    </tr>
 
-					  <div class="control-group <?php echo !empty($ed_nombreError)?'error':'';?>">
+                    <tr>
+                        <td>
+                            <label>Nombre</label>
+                        </td>
+                        <td>
+                            <input class="Text__Input" name="ed_nombre" type="text"  placeholder="Nombre Edicion" value="<?php echo !empty($ed_nombre)?$ed_nombre:'';?>">
+                            <?php if (($ed_nombreError != null)) ?>
+                            <span class="help-inline"><?php echo $ed_nombreError;?></span>
+                        </td>
+                    </tr>
 
-					    <label class="control-label">Nombre</label>
-					    <div class="controls">
-					      	<input name="ed_nombre" type="text" placeholder="nombre" value="<?php echo !empty($ed_nombre)?$ed_nombre:'';?>">
-					      	<?php if (!empty($ed_nombreError)): ?>
-					      		<span class="help-inline"><?php echo $ed_nombreError;?></span>
-					      	<?php endif;?>
-					    </div>
-					  </div>
+                    <tr>
+                        <td>
+                            <label>Fecha de inicio</label>
+                        </td>
+                        <td>
+                            <input class="Text__Input" name="ed_fecha_inicio" type="date"  placeholder="Fecha Inicio" value="<?php echo !empty($ed_fecha_inicio)?$ed_fecha_inicio:'';?>">
+                            <?php if (($ed_fecha_inicioError != null)) ?>
+                            <span class="help-inline"><?php echo $ed_fecha_inicioError;?></span>
+                        </td>
+                    </tr>
 
-                    <div class="control-group <?php echo !empty($ed_fecha_inicioError)?'error':'';?>">
+                    <tr>
+                        <td>
+                            <label>Fecha de fin</label>
+                        </td>
 
-					    <label class="control-label">Fecha Inicio</label>
-					    <div class="controls">
-					      	<input name="ed_fecha_inicio" type="date" placeholder="fecha inicio" value="<?php echo !empty($ed_fecha_inicio)?$ed_fecha_inicio:'';?>">
-					      	<?php if (!empty($ed_fecha_inicioError)): ?>
-					      		<span class="help-inline"><?php echo $ed_fecha_inicioError;?></span>
-					      	<?php endif;?>
-					    </div>
-					  </div>
+                        <td>
+                            <input class="Text__Input" name="ed_fecha_fin" type="date"  placeholder="Fecha Fin" value="<?php echo !empty($ed_fecha_fin)?$ed_fecha_fin:'';?>">
+                            <?php if (($ed_fecha_finError != null)) ?>
+                            <span class="help-inline"><?php echo $ed_fecha_finError;?></span>
+                        </td>
+                    </tr>
 
-                        <div class="control-group <?php echo !empty($ed_fecha_finError)?'error':'';?>">
+                    <tr>
+                        <td class="Td__Iniciar__Sesion">
+                            <input class="Btn__Iniciar__Sesion" type="submit" value="Actualizar Edicion" id="submit" name="submit">
+                        </td>
+                        <td>
+                            <a class="Btn__Blue" href="EdicionView.php">Regresar</a>
+                        </td>
+                    </tr>
+                </table>
+            </form>
 
-					    <label class="control-label">Fecha fin</label>
-					    <div class="controls">
-					      	<input name="ed_fecha_fin" type="date" placeholder="fecha fin" value="<?php echo !empty($ed_fecha_fin)?$ed_fecha_fin:'';?>">
-					      	<?php if (!empty($ed_fecha_finError)): ?>
-					      		<span class="help-inline"><?php echo $ed_fecha_finError;?></span>
-					      	<?php endif;?>
-					    </div>
-					  </div>
+        </main>
 
+    </body>
 
-					  <div class="form-actions">
-						  <button type="submit" class="btn btn-success">Actualizar</button>
-						  <a class="btn" href="EdicionView.php">Regresar</a>
-						</div>
-					</form>
-				</div>
-
-    </div> <!-- /container -->
-  </body>
 </html>
- 
