@@ -67,7 +67,11 @@ main h2 a{
     border-spacing: 25px;
 }
 
-.Btn{
+.Admin_Options td{
+    text-align: center;
+}
+
+.Btn__Ancla{
     display: inline-block;
     border: none;
     background-color: #0033A0;
@@ -75,8 +79,4 @@ main h2 a{
     line-height: 300%;
     width: 150%;
     text-decoration: none;
-}
-
-.Admin_Options td{
-    text-align: center;
 }
