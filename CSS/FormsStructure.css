@@ -60,7 +60,7 @@ main h2 a{
 }
 
 .Admin_Options{
-    align-self: normal;
+    place-self: center;
     grid-column: 2/3;
     grid-row: 2/3;
 
@@ -69,4 +69,15 @@ main h2 a{
 
 .Admin_Options td{
     text-align: center;
+}
+
+.Btn{
+    display: inline-block;
+    border: none;
+    background-color: #0033A0;
+    color: white;
+    line-height: 300%;
+    width: 150%;
+    font-size: small;
+    text-decoration: none;
 }
