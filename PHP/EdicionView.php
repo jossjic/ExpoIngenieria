@@ -1,3 +1,7 @@
+<?php 
+	require 'dataBase.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -41,7 +45,7 @@
 							<td>Ediciones Totales:</td>
 							<td id="TotalProyectos">
 								<?php
-									require 'dataBase.php';
+									
 									$pdo = Database::connect();
 									$sql = "SELECT * FROM EDICIONV1";
 									$q = $pdo->query($sql)->rowCount();
