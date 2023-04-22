@@ -113,7 +113,7 @@
 
             <h1>Registro de Usuarios</h1>
 
-            <form action="../PHP/registroUsuarios.php" method="POST">
+            <form action="../PHP/RegistroUsuarios.php" method="POST">
 
                 <table id="DefaultForm">
                     <tr>

@@ -53,7 +53,7 @@
 
             <h1>Registro de Usuarios</h1>
 
-            <form action="../PHP/registroUsuarios.php" method="POST">
+            <form action="../PHP/RegistroProyecto.php" method="POST">
 
                 <table id="DefaultForm">
 
@@ -90,7 +90,7 @@
                         <td colspan="2" class="Td__Registrar" ><input class="Btn__Registrar" type="submit" value="Registrar" id="submit" name="submit"></td>
                         <td></td>
                     </tr>
-                    
+
                 </table>
 
             </form>
