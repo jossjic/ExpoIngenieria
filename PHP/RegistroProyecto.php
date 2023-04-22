@@ -14,7 +14,7 @@
 
         if ($valid) {
             $pdo = Database::connect();
-            $sql = "INSERT INTO PROYECTOV1(p_id,d_contraseña,ed_id) VALUES(?, ?, ?)";
+            $sql = "INSERT INTO PROYECTOV1(p_nombre,d_contraseña,ed_id) VALUES(?, ?, ?)";
             $q = $pdo->prepare($sql);
             $q->execute(array($Nombre,$Contraseña, $ed_id));
             Database::disconnect();
