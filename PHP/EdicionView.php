@@ -104,7 +104,7 @@
 												<p></p>
 												<p>" . $row['ed_id'] ."</p>
 												<p>" . $row['ed_nombre'] ."</p>
-												<p>" . $row['ed_estado'] ."</p>
+												<p></p>
 												<p></p>
 												<div class='Btn__Green'>
 													<a href='../PHP/EdicionRead.php?id=".trim($row['ed_id'])."'>Ver</a>
