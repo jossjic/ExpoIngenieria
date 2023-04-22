@@ -45,7 +45,6 @@
 							<td>Ediciones Totales:</td>
 							<td id="TotalProyectos">
 								<?php
-									
 									$pdo = Database::connect();
 									$sql = "SELECT * FROM EDICIONV1";
 									$q = $pdo->query($sql)->rowCount();
@@ -107,6 +106,7 @@
 											<p></p>
 											<p>" . $row['ed_id'] ."</p>
 											<p>" . $row['ed_nombre'] ."</p>
+											<p>" . $row['ed_estado'] ."</p>
 											<p></p>
 											<p></p>
 											<div class='Btn__Green'>
