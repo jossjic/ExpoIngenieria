@@ -105,9 +105,9 @@
                       					echo '<p>'. $row['d_correo'] . '</p>';
                                         echo '<p></p>';
 
-			    					   	echo ' <div class="Btn__Green"> <a href="readAdminUsu.php?id='.$row['d_nomina'].'">Ver</a></div>';
-			    					  	echo ' <div class="Btn__Blue"> <a href="updateAdminUsu.php?id='.$row['d_nomina'].'">Actualizar</a></div>';
-			    					   	echo ' <div class="Btn__Red" ><a href="deleteAdminUsu.php?id='.$row['d_nomina'].'">Eliminar</a></div>';
+			    					   	echo ' <div class="Btn__Green"> <a href="UsuariosRead.php?id='.$row['d_nomina'].'">Ver</a></div>';
+			    					  	echo ' <div class="Btn__Blue"> <a href="UsuariosUpdate.php?id='.$row['d_nomina'].'">Actualizar</a></div>';
+			    					   	echo ' <div class="Btn__Red" ><a href="UsuariosDelete.php?id='.$row['d_nomina'].'">Eliminar</a></div>';
                                         
 								    }
 
@@ -122,9 +122,9 @@
 				  					    echo '<p>'. $row['j_correo'] . '</p>';
                                         echo '<p></p>';
 
-									    echo ' <div class="Btn__Green"> <a href="readAdminUsu.php?id='.$row['j_id'].'">Ver</a></div>';
-                                        echo ' <div class="Btn__Blue" > <a href="updateAdminUsu.php?id='.$row['j_id'].'">Actualizar</a></div>';
-                                        echo ' <div class="Btn__Red" > <a href="deleteAdminUsu.php?id='.$row['j_id'].'">Eliminar</a></div>';
+									    echo ' <div class="Btn__Green"> <a href="UsuariosRead.php?id='.$row['j_id'].'">Ver</a></div>';
+                                        echo ' <div class="Btn__Blue" > <a href="UsuariosUpdate.php?id='.$row['j_id'].'">Actualizar</a></div>';
+                                        echo ' <div class="Btn__Red" > <a href="UsuariosDelete.php?id='.$row['j_id'].'">Eliminar</a></div>';
                                         
 								}
 

@@ -1,0 +1,111 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.Cerrar__Sesion{
+    color: white;
+    grid-column: 3/4;
+    justify-self: center;
+}
+
+
+main{
+    background-color: #ececec;
+    width: 100%;
+    height: calc(100vh - 100px);
+    display: grid;
+    place-items: center;
+    grid-template-columns: repeat(8,12.5%);
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas: "Action__Btn Action__Btn Action__Btn Counter Counter Counter Counter Counter"
+                         "Action__Btn Action__Btn Action__Btn Counter Counter Counter Counter Counter"
+                         "Info Info Info Messages Messages Messages Messages Messages"
+                         "Info Info Info Messages Messages Messages Messages Messages"
+                         "Info Info Info Messages Messages Messages Messages Messages"
+                         "Info Info Info Messages Messages Messages Messages Messages"
+                         "Info Info Info Messages Messages Messages Messages Messages"
+                         "Info Info Info Messages Messages Messages Messages Messages";
+}
+
+.Action__Btn{
+    grid-area: Action__Btn;
+    width: 90%;
+    height: 80%;
+    border-radius: 10px;
+    background-color: #0033A0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+
+    display: grid;
+    place-items: center;
+}
+
+.Action__Btn a{
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    width: 100%;
+    line-height: 800%;
+    font-weight: 500;
+}
+
+.Counter{
+    grid-area: Counter;
+    width: 90%;
+    height: 80%;
+    border-radius: 10px;
+    background-color: #ffb642;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    display: grid;
+    place-items: center;
+}
+
+.Counter h1{
+    font-size: 3em;
+    font-weight: 600;
+}
+
+.Info{
+    grid-area: Info;
+    width: 90%;
+    height: 95%;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    display: grid;
+    place-items: center;
+}
+
+.Info p{
+    font-weight:500 ;
+}
+
+.Info h1{
+    font-size: 10em;
+    font-weight: 600;
+}
+
+
+.Messages{
+    grid-area: Messages;
+    width: 90%;
+    height: 95%;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    padding: 40px;
+    overflow: auto;
+}
+
+
+.Messages::-webkit-scrollbar{
+    width: 10px;
+    height: 10px;
+  }
+  
+.Messages::-webkit-scrollbar-thumb{
+    background-color: #aaa;
+    border-radius: 5px;
+}
+
