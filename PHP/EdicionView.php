@@ -21,16 +21,14 @@
 		<header>
 			<img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
 			<ul>
-				<li>
-					<a href="#">Cerrar Sesion</a>
-				</li>
-			</ul>
-			<nav>
-				<ul>
 					<li><a href="#">Menu</a></li>
 					<li><a href="#">Usuarios</a></li>
 					<li><a href="#">Reconocimientos</a></li>
 					<li><a href="#">Eastadísticas</a></li>
+			</ul>
+			<nav>
+				<ul>
+					<li><a href="#">Cerrar Sesion</a></li>
 				</ul>
 			</nav>
 		</header>
