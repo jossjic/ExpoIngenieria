@@ -105,6 +105,61 @@ main{
     font-weight: 600;
 }
 
+.Info__Other{
+    grid-area: Info;
+    width: 90%;
+    height: 95%;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    display: grid;
+    grid-template-rows: 20% 80%;
+    place-items: center;
+}
+
+.Info__Other .Info__Tittle{
+    font-size: 1em; 
+}
+
+.Info__Menu{
+    width: 90%;
+    height: 100%;
+    overflow: auto;
+    display: grid;
+    grid-template-rows: 30% 80%;
+    place-items: start;
+}
+
+.Info__Menu::-webkit-scrollbar{
+    width: 10px;
+    height: 10px;
+  }
+  
+.Info__Menu::-webkit-scrollbar-thumb{
+    background-color: #aaa;
+    border-radius: 5px;
+}
+
+.Proyect__Edit{
+    width: 30%;
+    height: 20%;
+    border-radius: 10px;
+    background-color: green;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+
+    display: grid;
+    place-items: center;
+    color: white;
+}
+
+.Proyect__Edit a{
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    width: 100%;
+    font-weight: 500;
+}
+
 
 .Messages__Menu{
     grid-area: Messages;
