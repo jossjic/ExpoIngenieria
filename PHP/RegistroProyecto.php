@@ -1,88 +1,141 @@
-<?php 
-    require_once 'dataBase.php';
+<?php
+    require_once "dataBase.php";
 
-    $NombreError = null;
-    $ContraseñaError = null;
-    $ed_idError = null;
+    session_name("EngineerXpoWeb");
+    session_start();
 
-    if (!empty($_POST)) {
-        $Nombre = $_POST['Nombre'];
-        $Contraseña = $_POST['Contraseña'];
-        $ed_id = $_POST['ed_id'];
+    if (isset($_SESSION['logged_in'])) {
+        header("Location: ../index.php");
+    }
+
+    // POST METHOD
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        
+        $project_name_code_error = null;
+        $project_pass_error = null;
+        $project_pass_confirm_error = null;
+        
+        $project_name_code = $_POST['project_name_code'];
+        $project_pass = $_POST['project_pass'];
+        $project_pass_confirm = $_POST['project_pass_confirm'];
 
         $valid = true;
 
+        // Empty project name code
+        if (empty($project_name_code)) {
+            $project_name_code_error = 'Por favor ingresa el nombre clave de tu proyecto';
+            $valid = false;
+        }
+
+        // Empty project password
+        if (empty($project_pass)) {
+            $project_pass_error = 'Por favor ingresa la contraseña de tu proyecto';
+            $valid = false;
+        }
+
+        // Empty project password confirmation
+        if (empty($project_pass_confirm)) {
+            $project_pass_confirm_error = 'Por favor ingresa la confimración de contraseña';
+            $valid = false;
+        // Project password confirmation does not match
+        } elseif ($project_pass != $project_pass_confirm) {
+            $project_pass_confirm_error = 'La confirmación de contraseña no coincide';
+            $valid = false;
+        }
+
+        // Verify project code name is unique
+        $pdo = Database::connect();
+        $sql = "SELECT * FROM PROYECTO WHERE p_nombre_clave = ?";
+        $q = $pdo->prepare($sql);
+        $q->execute(array($project_name_code));
+        Database::disconnect();
+
+        // Project code name already exists
+        if ($q->rowCount() == 1) {
+            $project_name_code_error = 'Este nombre clave ya está en uso. Por favor selecciona otro';
+            $valid = false;
+        }
+
         if ($valid) {
             $pdo = Database::connect();
-            $sql = "INSERT INTO PROYECTOV1(p_nombre,d_contraseña,ed_id) VALUES(?, ?, ?)";
+
+            // Create project
+            $sql = "INSERT INTO PROYECTO (p_nombre_clave, p_pass) VALUES (?, ?)";
             $q = $pdo->prepare($sql);
-            $q->execute(array($Nombre,$Contraseña, $ed_id));
+            $q->execute(array($project_name_code, $project_pass));
+            
+            // Get project data
+            $sql = "SELECT * FROM PROYECTO WHERE p_nombre_clave = ? AND p_pass = ?";
+            $q = $pdo->prepare($sql);
+            $q->execute(array($project_name_code, $project_pass));
             Database::disconnect();
-            header("Location: ../HTML/LoginProyecto.html");
-            exit(); // se debe incluir un exit() después de una redirección con header()
+            $project = $q->fetch(PDO::FETCH_ASSOC);
+            
+            // Create session variables
+            $_SESSION['logged_in'] = true;
+            $_SESSION['user_type'] = "project";
+            $_SESSION['id'] = $project['p_id'];
+            
+            // Redirect
+            header("Location: ../PHP/DashboardProyecto.php");
         }
     }
 
+    // GET METHOD
+    else {
+
+    }
 ?>
 
 <!DOCTYPE html>
-    <html lang="en">
+<html lang="es">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/ico" href="../media/favicon.ico"/>
-
         <title>Proyecto</title>
-
         <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
         <link rel="stylesheet" href="../CSS/FormsStructure.css">
     </head>
     <body>
-        
         <header>
             <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" >
             <ul>
-                <li>
-                    <a href="../HTML/LoginUsuarios.html">Regresar</a>
-                </li>
+                <li><a href="../HTML/LoginUsuarios.html">Regresar</a></li>
             </ul>
+            <nav>    
+            </nav>
         </header>
-
         <main>
-
-            
-
             <div class="Card-1">
-                
-                <a class="Btns Btn-1" href="../PHP/LoginProyecto.php">Inicio Sesion</a>
-                <a class="Btns Btn-2" href="../PHP/RegistroProyecto.php">Registro</a>
-                
+                <a class="Btns Btn-1" href="../PHP/LoginProyecto.php">Iniciar sesión</a>
+                <a class="Btns Btn-2" href="../PHP/RegistroProyecto.php">Registrarse</a>
                 <form class="Form__Card" action="../PHP/RegistroProyecto.php" method="POST">
-
+                    <center>
+                        <b>Crea un nombre clave y contraseña para tu proyecto</b>
+                        <br><br>
+                        <small>(Estas serán tus credenciales para iniciar sesión)</small>
+                    </center>
                     <table>
-    
                         <tr>
-                            <td><label for="Nombre">Nombre</label></td>
-                            <td><input type="text" name="Nombre" class="Text__Input" id="Nombre"></td>
+                            <td>Nombre clave</td>
+                            <td><input class="Text__Input" type="text" name="project_name_code" value="<?php echo !empty($project_name_code) ? $project_name_code : ''; ?>" autofocus required></td>
                         </tr>
-    
                         <tr>
-                            <td><label for="Contraseña">Contraseña</label></td>
-                            <td><input type="password" name="Contraseña" class="Text__Input" id="ApellidoPaterno"></td>
+                            <td>Contraseña</td>
+                            <td><input class="Text__Input" type="password" name="project_pass" value="<?php echo !empty($project_pass) ? $project_pass : ''; ?>" required></td>
                         </tr>
-    
                         <tr>
-                            <td colspan="2" class="Td__Registrar" ><input class="Btn__Registrar" type="submit" value="Registrar" id="submit" name="submit"></td>
-                            <td></td>
+                            <td>Confirmar contraseña</td>
+                            <td><input class="Text__Input" type="password" name="project_pass_confirm" value="<?php echo !empty($project_pass_confirm) ? $project_pass_confirm : ''; ?>" required></td>
                         </tr>
-    
+                        <tr>
+                            <td class="Td__Registrar" colspan="2"><input class="Btn__Registrar" type="submit" value="Registrar" name="submit"></td>
+                        </tr>
                     </table>
-    
                 </form>
-            </div>            
-
+            </div>
         </main>
-
     </body>
 </html>
