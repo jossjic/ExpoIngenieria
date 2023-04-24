@@ -8,7 +8,7 @@
         
         // Project user
         if ($_SESSION['user_type'] === "project") {
-            header("Location: ./HTML/DashboardProyecto.html");
+            header("Location: ./PHP/DashboardProyecto.php");
         }
 
         // Collaborator user
@@ -49,7 +49,7 @@
                 <div class="User-2">
                     <span>Tienes un proyecto o quieres registrarlo <br> Click Aqui!</span>
                     <div class="Proyectos">
-                        <a href="./HTML/LoginProyecto.html" rel="noopener noreferrer">Proyecto</a>
+                        <a href="./PHP/LoginProyecto.php" rel="noopener noreferrer">Proyecto</a>
                     </div>
                 </div>
             </div>
