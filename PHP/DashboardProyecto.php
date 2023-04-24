@@ -85,7 +85,7 @@
             </ul>
             <nav>
                 <ul>
-                    <li><a href="#">Cerrar Sesion</a></li>
+                    <li><a href="../PHP/logout.php">Cerrar Sesion</a></li>
                 </ul>
             </nav>
         </header>
