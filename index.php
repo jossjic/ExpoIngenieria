@@ -8,7 +8,7 @@
         
         // Project user
         if ($_SESSION['user_type'] === "project") {
-            header("Location: ./PHP/DashboardProyecto.php");
+            header("Location: ./HTML/DashboardProyecto.html");
         }
 
         // Collaborator user
@@ -26,7 +26,7 @@
 
     <title>Expo Ingenieria</title>
 
-    <link rel="stylesheet" href="./CSS/Page1.css">
+    <link rel="stylesheet" href="./CSS/PaginaInicio.css">
 </head>
 <body>
     <header>
@@ -35,15 +35,40 @@
     </header>
     <main>
 
-        <h2>Explora el futuro de la ingeniería</h2>
+        <section class="Presentacion__Main">
+            <h2>Explora el futuro de la ingeniería</h2>
 
-        <div class="Usuarios">
-            <a href="./HTML/LoginUsuarios.html" rel="noopener noreferrer">USUARIOS</a>
-        </div>
+            <div class="Btns">
+                <div class="User-1">
+                    <span>Eres colaborador o vas a registrarte <br> Click Aqui!</span>
+                    <div class="Usuarios">
+                        <a href="./HTML/LoginUsuarios.html" rel="noopener noreferrer">Colaborador</a>
+                    </div>
+                </div>
+    
+                <div class="User-2">
+                    <span>Tienes un proyecto o quieres registrarlo <br> Click Aqui!</span>
+                    <div class="Proyectos">
+                        <a href="./HTML/LoginProyecto.html" rel="noopener noreferrer">Proyecto</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <div class="Proyectos">
-            <a href="./PHP/LoginProyecto.php" rel="noopener noreferrer">PROYECTOS</a>
-        </div>
+        <section class="Objetivo__Main">
+            <!-- <div class="Something">
+                <h1>REGISTRA TU PROYECTO!</h1>
+            </div> -->
+            <div class="Explanation">
+                <h1>¿Que es ExpoIngenieria?</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus commodi et dolore nulla sit asperiores quod dolores esse. Consequuntur nostrum, dolore nesciunt iure consequatur voluptatum iste doloremque aut aperiam similique. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem pariatur dolore esse, aspernatur eos sunt ipsam impedit unde sed optio. Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, dolorum.</p>
+                <a class="Registrar__Proyecto" href="#">Registrar Proyecto</a>
+            </div>
+            
+            <div class="Video__Explanation">
+                <iframe width="100%" height="80%" src="https://www.youtube.com/embed/JlE4XlMmTJI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </section>
         
     </main>
     <footer>

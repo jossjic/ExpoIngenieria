@@ -10,10 +10,52 @@
 
     // GET METHOD
     $pdo = Database::connect();
-    $sql = "SELECT * FROM PROYECTO WHERE p_id = ?";
+
+    // Project
+    $sql = "SELECT * FROM PROYECTO NATURAL JOIN CATEGORIA WHERE p_id = ?";
     $q = $pdo->prepare($sql);
     $q->execute(array($_SESSION['id']));
     $project = $q->fetch(PDO::FETCH_ASSOC);
+    // Students
+    $sql = "SELECT * 
+            FROM ALUMNO 
+            WHERE p_id = ?
+            ORDER BY a_apellido";
+    $q = $pdo->prepare($sql);
+    $q->execute(array($_SESSION['id']));
+    $students = $q->fetchAll();
+    // Advertisements
+    $sql = "SELECT * 
+            FROM ANUNCIO 
+            WHERE an_grupo = ?
+            ORDER BY an_fecha";
+    $group = 1;
+    $q = $pdo->prepare($sql);
+    $q->execute(array($group));
+    $advertisements = $q->fetchAll();
+
+    Database::disconnect();
+
+    if (1 == 2) {
+
+        // guardar el url completo y que el regex se haga al renderizar
+
+        // Regex for Google Drive video
+        $str = 'https://drive.google.com/file/d/1zna5luHn-cdM1Cyqkoz8M0sQixjVCqbY/view?usp=sharing';
+        if (preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $str, $match) == 1) {
+            $video_id = $match[1];
+        }
+        $video_full_link = "https://drive.google.com/file/d/".$video_id."/preview";
+        echo $video_full_link;
+
+        // Regex for Google Drive image
+        $str = 'https://drive.google.com/file/d/1_YeOir5f72U8WrprQfbxhPWwt2VLGatb/view?usp=sharing';
+        if (preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $str, $match) == 1) {
+            $image_id = $match[1];
+        }
+        $image_full_link = "https://drive.google.com/uc?export=view&id=".$image_id;
+        echo $image_full_link;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +73,7 @@
         <header>
             <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logotipo de la Escuela de Ingeniería y Ciencias">
             <ul>
-                <li><a href="#">Inicio</a></li>
+                <li><a href="../PHP/DashboardProyecto.php">Inicio</a></li>
                 <li><a href="#">Layout de proyectos</a></li>
             </ul>
             <nav>
@@ -54,7 +96,7 @@
 
             <div class="Info__Other">
                 <div class="Info__Tittle">
-                    <h2>Nombre tú proyecto</h2>
+                    <h2><?php echo $project['p_nombre']; ?></h2>
 
                     <div class="Proyect__Edit">
                         <a href="#">Editar</a>
@@ -62,19 +104,48 @@
                 </div>
 
                 <div class="Info__Menu">
-
-
-                    <div>
-                        <h1>Descripcion</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita facere repellat fugit asperiores cupiditate, nulla accusantium rerum eum nobis molestias tempore aperiam nam quaerat aspernatur aut minima et fugiat cum?</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, mollitia, quo error enim commodi ipsa perspiciatis nostrum eum deserunt qui, exercitationem beatae eaque voluptatibus eos? Consequuntur eius explicabo magnam possimus.</p>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati non rerum cum rem minima corporis, soluta veniam qui vero similique ducimus. Voluptates, voluptas officia molestias alias similique laboriosam aspernatur culpa!</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente est alias dolores id, maxime amet nobis veritatis, temporibus magni neque reprehenderit. Voluptate magni placeat quos ducimus earum nostrum repudiandae vitae!</p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti culpa debitis ab voluptatum aspernatur, ea harum praesentium eos, quis a voluptatem commodi sit, quaerat distinctio eius rerum veritatis cumque! Quod.
-                        Culpa quo possimus consectetur quisquam suscipit. Rerum vel commodi, sequi, quo sapiente accusamus magnam harum corporis quidem facilis exercitationem ullam deserunt est, reiciendis velit tempore! Quos, consequuntur itaque. Optio, deserunt.
-                        Perferendis hic explicabo sit quo amet exercitationem nostrum quibusdam, ab aspernatur unde ad quam dicta et distinctio ipsa quidem temporibus ut at soluta tempora, ipsam beatae accusamus dolor illum! Fugit.
-                        Eos, suscipit, perferendis unde excepturi architecto tempora consequuntur dicta quos eligendi deleniti voluptatem repellat, pariatur magni exercitationem! Facilis, aperiam labore! Magni minima doloremque neque aperiam dignissimos explicabo dolor harum odio!
-                    </div>
+                    <dl>
+                        <dt><strong>Integrantes</strong></dt>
+                        <?php
+                            foreach ($students as $row) {
+                                echo '<dd>'.$row['a_nombre'].' '.$row['a_apellido'].'</dd>';
+                            }
+                        ?>
+                    </dl>
+                    <dl>
+                        <dt><strong>Descripción</strong></dt>
+                        <dd><?php echo $project['p_descripcion']; ?></dd>
+                    </dl>
+                    <dl>
+                        <dt><strong>Nivel de desarrollo</strong></dt>
+                        <dd><?php echo $project['p_avance_proyecto']; ?></dd>
+                    </dl>
+                    <dl>
+                        <dt><strong>Área estratégica</strong></dt>
+                        <dd><?php echo $project['ca_nombre']; ?></dd>
+                    </dl>
+                    <dl>
+                        <dt><strong>Video</strong></dt>
+                        <?php
+                            preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $project['p_video'], $match);
+                            $video_id = $match[1];
+                            $video_full_link = "https://drive.google.com/file/d/".$video_id."/preview";
+                                echo '<dd><iframe width="100%" src="'.$video_full_link.'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></dd>';
+                        ?>
+                    </dl>
+                    <dl>
+                        <dt><strong>Póster</strong></dt>
+                        <?php
+                            preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $project['p_poster'], $match);
+                            $image_id = $match[1];
+                            $image_full_link = "https://drive.google.com/uc?export=view&id=".$image_id;
+                            echo '<dd><img src="'.$image_full_link.'" width="100%"><hr></dd>';
+                        ?>
+                    </dl>
+                    <dl>
+                        <dt><strong>Última modificación</strong></dt>
+                        <dd><?php echo $project['p_ult_modif']; ?></dd>
+                    </dl>
 
                 </div>
             </div>
@@ -84,31 +155,11 @@
                     <h1>Avisos</h1>
                 </div>
                 <div class="Messages">
-                    <div>
-                        <h1>Titulo</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, enim voluptas obcaecati voluptatum debitis provident nulla nesciunt, quam, repellendus a ad? Nihil impedit eius adipisci in voluptates, dolorum nemo soluta.</p>
-                        <br>
-                    </div>
-                    <div>
-                        <h1>Titulo</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, enim voluptas obcaecati voluptatum debitis provident nulla nesciunt, quam, repellendus a ad? Nihil impedit eius adipisci in voluptates, dolorum nemo soluta.</p>
-                        <br>
-                    </div>
-                    <div>
-                        <h1>Titulo</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, enim voluptas obcaecati voluptatum debitis provident nulla nesciunt, quam, repellendus a ad? Nihil impedit eius adipisci in voluptates, dolorum nemo soluta.</p>
-                        <br>
-                    </div>
-                    <div>
-                        <h1>Titulo</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, enim voluptas obcaecati voluptatum debitis provident nulla nesciunt, quam, repellendus a ad? Nihil impedit eius adipisci in voluptates, dolorum nemo soluta.</p>
-                        <br>
-                    </div>
-                    <div>
-                        <h1>Titulo</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, enim voluptas obcaecati voluptatum debitis provident nulla nesciunt, quam, repellendus a ad? Nihil impedit eius adipisci in voluptates, dolorum nemo soluta.</p>
-                        <br>
-                    </div>
+                    <?php
+                        foreach ($advertisements as $row) {
+                            echo '<div><h1>'.$row['an_titulo'].'</h1><p>'.$row['an_contenido'].'</p><br></div>';
+                        }
+                    ?>
                 </div>
             </div>
         </main>
