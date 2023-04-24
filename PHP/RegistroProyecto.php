@@ -33,7 +33,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/ico" href="../media/favicon.ico"/>
 
-        <title>Registro Usuarios</title>
+        <title>Proyecto</title>
 
         <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
         <link rel="stylesheet" href="../CSS/FormsStructure.css">
@@ -44,14 +44,14 @@
             <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" >
             <ul>
                 <li>
-                    <a href="../index.php">Regresar</a>
+                    <a href="../HTML/LoginUsuarios.html">Regresar</a>
                 </li>
             </ul>
         </header>
 
         <main>
 
-            <h1>Proyecto</h1>
+            <h1>Bienvenido <br><br> Registra tu proyecto </h1>
 
             <div class="Card-1">
                 
