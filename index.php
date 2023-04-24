@@ -8,7 +8,7 @@
         
         // Project user
         if ($_SESSION['user_type'] === "project") {
-            header("Location: ./PHP/DashboardProyecto.php");
+            header("Location: ./HTML/DashboardProyecto.html");
         }
 
         // Collaborator user
