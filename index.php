@@ -26,7 +26,7 @@
 
     <title>Expo Ingenieria</title>
 
-    <link rel="stylesheet" href="./CSS/Page1.css">
+    <link rel="stylesheet" href="./CSS/PaginaInicio.css">
 </head>
 <body>
     <header>
