@@ -1,3 +1,20 @@
+<?php
+    require_once "./PHP/dataBase.php";
+
+    session_name("EngineerXpoWeb");
+    session_start();
+
+    if (isset($_SESSION['logged_in'])) {
+        
+        // Project user
+        if ($_SESSION['user_type'] === "project") {
+            header("Location: ./HTML/DashboardProyecto.html");
+        }
+
+        // Collaborator user
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     
