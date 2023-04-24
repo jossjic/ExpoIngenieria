@@ -73,7 +73,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/ico" href="../media/favicon.ico"/>
 
-        <title>Iniciar sesión</title>
+        <title>Proyecto</title>
         <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
         <link rel="stylesheet" href="../CSS/FormsStructure.css">
     </head>
@@ -87,24 +87,30 @@
             </nav>
         </header>
         <main>
+
             <h1>¡Bienvenido!<br><br>Ingresa las credenciales de tu proyecto</h1>
-            <form action="" method="post">
-                <table>
-                    <tr>
-                        <td>Nombre clave</td>
-                        <td><input class="Text__Input" type="text" name="project_name_code" autofocus required></td>
-                    </tr>
-                    <tr>
-                        <td>Contraseña</td>
-                        <td><input class="Text__Input" type="password" name="project_pass" required></td>
-                    </tr>
-                    <tr>
-                        <td class="Td__Iniciar__Sesion" colspan=2><input class="Btn__Iniciar__Sesion" type="submit" value="Iniciar Sesion" id="submit" name="submit"></td>
-                        <td></td>
-                    </tr>
-                </table>
-            </form>
-            <h2>¿No has registrado tu proyecto?<br><a href="../PHP/RegistroProyecto.php">¡Regístralo aqui!</a></h2>
+
+            <div class="Card-1">
+                <a href="../PHP/LoginProyecto.php" class="Btns Btn-1">Inicio Sesion</a>
+                <a href="../PHP/RegistroProyecto.php" class="Btns Btn-2">Registro</a>
+                <form class="Form__Card" action="" method="post">
+                    <table>
+                        <tr>
+                            <td>Nombre</td>
+                            <td><input class="Text__Input" type="text" name="project_name" autofocus required></td>
+                        </tr>
+                        <tr>
+                            <td>Contraseña</td>
+                            <td><input class="Text__Input" type="password" name="project_pass" required></td>
+                        </tr>
+                        <tr>
+                            <td class="Td__Iniciar__Sesion" colspan=2><input class="Btn__Iniciar__Sesion" type="submit" value="Iniciar Sesion" id="submit" name="submit"></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            
         </main>
         <footer>
             <img class="Logo__Tec" src="../media/LogoTec.png" alt="Logo TEC">
