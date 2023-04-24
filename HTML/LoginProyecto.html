@@ -7,35 +7,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/ico" href="../media/favicon.ico"/>
 
-  <title>Inicio de Sesion</title>
+  <title>Iniciar sesión</title>
   <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
   <link rel="stylesheet" href="../CSS/FormsStructure.css">
 </head>
 
 <body>
   <header>
-    <img class="Logo__EscNegCie" src = "../media/logotec-ings.svg" >
-      
-    <ul>
-      <li><a href="../HTML/PaginaInicio.html">Inicio</a></li>
-      <li><a href="../PHP/RegistroProyecto.php">Registrar proyecto</a></li>
-    </ul>
+      <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logotipo de la Escuela de Ingeniería y Ciencias">
+      <ul>
+          <li><a href="#">Inicio</a></li>
+      </ul>
+      <nav>
+      </nav>
   </header>
   
   <main>
     
-      <h1>¿Tienes un proyecto? <br> Inicia Sesion Aqui!</h1>
+      <h1>¡Bienvenido!<br><br>Ingresa las credenciales de tu proyecto</h1>
       
       <form action="../PHP/LoginProyecto.php" method="post">
         <table>
           <tr>
             <td>Nombre</td>
-            <td><input class="Text__Input" type="text" name="Nombre"></td>
+            <td><input class="Text__Input" type="text" name="Nombre" autofocus required></td>
           </tr>
           
           <tr>
             <td>Contraseña</td>
-            <td><input class="Text__Input" type="password" name="Contraseña" ></td>
+            <td><input class="Text__Input" type="password" name="Contraseña" required></td>
           </tr>
           
           <tr>
@@ -45,7 +45,7 @@
         </table>
       </form>
 
-      <h2>¿No has registrado tu proyecto?<br><a href="../PHP/RegistroProyecto.php">Registralo Aqui!</a></h2>
+      <h2>¿No has registrado tu proyecto?<br><a href="../PHP/RegistroProyecto.php">¡Regístralo aqui!</a></h2>
   </main>
 
   <footer>

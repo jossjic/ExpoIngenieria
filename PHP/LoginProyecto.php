@@ -1,27 +1,40 @@
 <?php
-    require "dataBase.php";
+    require_once "dataBase.php";
+
+    // Combinar con el HTML
+    // Checar si el usuario ya está autenticado redirigirlo a su panel correspondiente
+
 
     $NombreError = null;
     $ContraseñaError = null;
 
-    if (!empty($_POST)) {
-        $Nombre = $_POST['Nombre'];
-        $Contraseña = $_POST['Contraseña'];
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $project_name = $_POST['Nombre'];
+        $project_pass = $_POST['Contraseña'];
 
         $valid = true;
 
         if ($valid) {
             $pdo = Database::connect();
-            $sql = "SELECT * FROM PROYECTOV1 WHERE p_nombre = ? AND d_contraseña = ?";
+            $sql = "SELECT * FROM PROYECTO WHERE p_nombre = ? AND p_pass = ?";
             $q = $pdo->prepare($sql);
-            $q->execute(array($Nombre, $Contraseña));
-
+            $q->execute(array($project_name, $project_pass));
             
             if ($q->rowCount() == 1) {
-                echo "Bienvenido : $Nombre";
+                
+                session_name("EngineerXpoWeb");
+                session_start();
+
+                $project = $q->fetch(PDO::FETCH_ASSOC);
+                
+                $_SESSION['user_type'] = "project";
+                $_SESSION['id'] = $project['p_id'];
+                $_SESSION['name'] = $project['p_nombre'];
+
+                header("Location: ../HTML/DashboardProyecto.html");
 
             } else if ($q->rowCount() == 0) {
-                echo "No ingresó, Usuario no existe: $Nombre . $Contraseña";
+                echo "No ingresó, Usuario no existe: $project_name . $project_pass";
             }
 
             Database::disconnect();
