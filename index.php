@@ -42,7 +42,7 @@
         </div>
 
         <div class="Proyectos">
-            <a href="./HTML/LoginProyecto.html" rel="noopener noreferrer">PROYECTOS</a>
+            <a href="./PHP/LoginProyecto.php" rel="noopener noreferrer">PROYECTOS</a>
         </div>
         
     </main>
