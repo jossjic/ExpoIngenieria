@@ -46,7 +46,7 @@
                 $_SESSION['id'] = $project['p_id'];
                 $_SESSION['name'] = $project['p_nombre'];
 
-                header("Location: ../HTML/DashboardProyecto.html");
+                header("Location: ../PHP/DashboardProyecto.php");
 
             } else if ($q->rowCount() == 0) {
                 $p1Error = 'El nombre o contraseña que ingresaste no están asociados a un proyecto.';
