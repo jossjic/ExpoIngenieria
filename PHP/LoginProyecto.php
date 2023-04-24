@@ -1,18 +1,34 @@
 <?php
     require_once "dataBase.php";
 
-    // Combinar con el HTML
-    // Checar si el usuario ya está autenticado redirigirlo a su panel correspondiente
+    session_name("EngineerXpoWeb");
+    session_start();
+
+    if (isset($_SESSION['logged_in'])) {
+        header("Location: ../index.php");
+    }
 
 
-    $NombreError = null;
-    $ContraseñaError = null;
-
+    // POST METHOD
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $project_name = $_POST['Nombre'];
-        $project_pass = $_POST['Contraseña'];
+        
+        $project_name_error = null;
+        $project_pass_error = null;
+        
+        $project_name = $_POST['project_name'];
+        $project_pass = $_POST['project_pass'];
 
         $valid = true;
+
+        if (empty($project_name)) {
+            $project_name_error = 'Por favor ingresa el nombre de tu proyecto';
+            $valid = false;
+        }
+
+        if (empty($project_pass)) {
+            $project_pass_error = 'Por favor ingresa la contraseña de tu proyecto';
+            $valid = false;
+        }
 
         if ($valid) {
             $pdo = Database::connect();
@@ -21,12 +37,11 @@
             $q->execute(array($project_name, $project_pass));
             
             if ($q->rowCount() == 1) {
-                
-                session_name("EngineerXpoWeb");
-                session_start();
 
                 $project = $q->fetch(PDO::FETCH_ASSOC);
                 
+                $_SESSION['logged_in'] = true;
+
                 $_SESSION['user_type'] = "project";
                 $_SESSION['id'] = $project['p_id'];
                 $_SESSION['name'] = $project['p_nombre'];
@@ -34,7 +49,8 @@
                 header("Location: ../HTML/DashboardProyecto.html");
 
             } else if ($q->rowCount() == 0) {
-                echo "No ingresó, Usuario no existe: $project_name . $project_pass";
+                $p1Error = 'El nombre o contraseña que ingresaste no están asociados a un proyecto.';
+                $valid = false;
             }
 
             Database::disconnect();
@@ -42,4 +58,56 @@
             exit(); // se debe incluir un exit() después de una redirección con header()
         }
     }
+
+    // GET METHOD
+    else {
+
+    }
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/ico" href="../media/favicon.ico"/>
+
+        <title>Iniciar sesión</title>
+        <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
+        <link rel="stylesheet" href="../CSS/FormsStructure.css">
+    </head>
+    <body>
+        <header>
+            <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logotipo de la Escuela de Ingeniería y Ciencias">
+            <ul>
+                <li><a href="../index.php">Inicio</a></li>
+            </ul>
+            <nav>    
+            </nav>
+        </header>
+        <main>
+            <h1>¡Bienvenido!<br><br>Ingresa las credenciales de tu proyecto</h1>
+            <form action="" method="post">
+                <table>
+                    <tr>
+                        <td>Nombre</td>
+                        <td><input class="Text__Input" type="text" name="project_name" autofocus required></td>
+                    </tr>
+                    <tr>
+                        <td>Contraseña</td>
+                        <td><input class="Text__Input" type="password" name="project_pass" required></td>
+                    </tr>
+                    <tr>
+                        <td class="Td__Iniciar__Sesion" colspan=2><input class="Btn__Iniciar__Sesion" type="submit" value="Iniciar Sesion" id="submit" name="submit"></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </form>
+            <h2>¿No has registrado tu proyecto?<br><a href="../PHP/RegistroProyecto.php">¡Regístralo aqui!</a></h2>
+        </main>
+        <footer>
+            <img class="Logo__Tec" src="../media/LogoTec.png" alt="Logo TEC">
+        </footer>
+    </body>
+</html>
