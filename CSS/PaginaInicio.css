@@ -137,7 +137,7 @@ main h2{
     grid-column: 1/2;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    width: 90%;
+    width: 85%;
 
 }
 
