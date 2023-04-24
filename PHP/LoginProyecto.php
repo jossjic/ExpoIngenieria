@@ -12,16 +12,16 @@
     // POST METHOD
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
-        $project_name_error = null;
+        $project_name_code_error = null;
         $project_pass_error = null;
         
-        $project_name = $_POST['project_name'];
+        $project_name_code = $_POST['project_name_code'];
         $project_pass = $_POST['project_pass'];
 
         $valid = true;
 
-        if (empty($project_name)) {
-            $project_name_error = 'Por favor ingresa el nombre de tu proyecto';
+        if (empty($project_name_code)) {
+            $project_name_code_error = 'Por favor ingresa el nombre clave de tu proyecto';
             $valid = false;
         }
 
@@ -32,9 +32,9 @@
 
         if ($valid) {
             $pdo = Database::connect();
-            $sql = "SELECT * FROM PROYECTO WHERE p_nombre = ? AND p_pass = ?";
+            $sql = "SELECT * FROM PROYECTO WHERE p_nombre_clave = ? AND p_pass = ?";
             $q = $pdo->prepare($sql);
-            $q->execute(array($project_name, $project_pass));
+            $q->execute(array($project_name_code, $project_pass));
             
             if ($q->rowCount() == 1) {
 
@@ -91,8 +91,8 @@
             <form action="" method="post">
                 <table>
                     <tr>
-                        <td>Nombre</td>
-                        <td><input class="Text__Input" type="text" name="project_name" autofocus required></td>
+                        <td>Nombre clave</td>
+                        <td><input class="Text__Input" type="text" name="project_name_code" autofocus required></td>
                     </tr>
                     <tr>
                         <td>Contraseña</td>
