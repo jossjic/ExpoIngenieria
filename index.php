@@ -38,12 +38,20 @@
         <section class="Presentacion__Main">
             <h2>Explora el futuro de la ingeniería</h2>
 
-            <div class="Usuarios">
-                <a href="./HTML/LoginUsuarios.html" rel="noopener noreferrer">Eres Docente - Click Aqui!</a>
-            </div>
-
-            <div class="Proyectos">
-                <a href="./HTML/LoginProyecto.html" rel="noopener noreferrer">Tienes un Proyecto o Quieres Registrarlo - Click Aqui!</a>
+            <div class="Btns">
+                <div class="User-1">
+                    <span>Eres colaborador o vas a registrarte <br> Click Aqui!</span>
+                    <div class="Usuarios">
+                        <a href="./HTML/LoginUsuarios.html" rel="noopener noreferrer">Colaborador</a>
+                    </div>
+                </div>
+    
+                <div class="User-2">
+                    <span>Tienes un proyecto o quieres registrarlo <br> Click Aqui!</span>
+                    <div class="Proyectos">
+                        <a href="./HTML/LoginProyecto.html" rel="noopener noreferrer">Proyecto</a>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -53,7 +61,7 @@
             </div> -->
             <div class="Explanation">
                 <h1>¿Que es ExpoIngenieria?</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus commodi et dolore nulla sit asperiores quod dolores esse. Consequuntur nostrum, dolore nesciunt iure consequatur voluptatum iste doloremque aut aperiam similique.</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus commodi et dolore nulla sit asperiores quod dolores esse. Consequuntur nostrum, dolore nesciunt iure consequatur voluptatum iste doloremque aut aperiam similique. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem pariatur dolore esse, aspernatur eos sunt ipsam impedit unde sed optio. Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, dolorum.</p>
                 <a class="Registrar__Proyecto" href="#">Registrar Proyecto</a>
             </div>
             
