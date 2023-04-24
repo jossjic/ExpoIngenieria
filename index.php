@@ -39,11 +39,11 @@
             <h2>Explora el futuro de la ingeniería</h2>
 
             <div class="Usuarios">
-                <a href="./HTML/LoginUsuarios.html" rel="noopener noreferrer">Inicia Sesion</a>
+                <a href="./HTML/LoginUsuarios.html" rel="noopener noreferrer">Eres Docente - Click Aqui!</a>
             </div>
 
             <div class="Proyectos">
-                <a href="./HTML/LoginProyecto.html" rel="noopener noreferrer">Registrate</a>
+                <a href="./HTML/LoginProyecto.html" rel="noopener noreferrer">Tienes un Proyecto o Quieres Registrarlo - Click Aqui!</a>
             </div>
         </section>
 
