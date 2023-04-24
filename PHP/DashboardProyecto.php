@@ -8,61 +8,12 @@
         header("Location: ../index.php");
     }
 
-
-    // POST METHOD
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        
-        $project_name_error = null;
-        $project_pass_error = null;
-        
-        $project_name = $_POST['project_name'];
-        $project_pass = $_POST['project_pass'];
-
-        $valid = true;
-
-        if (empty($project_name)) {
-            $project_name_error = 'Por favor ingresa el nombre de tu proyecto';
-            $valid = false;
-        }
-
-        if (empty($project_pass)) {
-            $project_pass_error = 'Por favor ingresa la contraseña de tu proyecto';
-            $valid = false;
-        }
-
-        if ($valid) {
-            $pdo = Database::connect();
-            $sql = "SELECT * FROM PROYECTO WHERE p_nombre = ? AND p_pass = ?";
-            $q = $pdo->prepare($sql);
-            $q->execute(array($project_name, $project_pass));
-            
-            if ($q->rowCount() == 1) {
-
-                $project = $q->fetch(PDO::FETCH_ASSOC);
-                
-                $_SESSION['logged_in'] = true;
-
-                $_SESSION['user_type'] = "project";
-                $_SESSION['id'] = $project['p_id'];
-                $_SESSION['name'] = $project['p_nombre'];
-
-                header("Location: ../HTML/DashboardProyecto.html");
-
-            } else if ($q->rowCount() == 0) {
-                $p1Error = 'El nombre o contraseña que ingresaste no están asociados a un proyecto.';
-                $valid = false;
-            }
-
-            Database::disconnect();
-            //header("Location: ../HTML/InicioSesionJurado.html");
-            exit(); // se debe incluir un exit() después de una redirección con header()
-        }
-    }
-
     // GET METHOD
-    else {
-
-    }
+    $pdo = Database::connect();
+    $sql = "SELECT * FROM PROYECTO WHERE p_id = ?";
+    $q = $pdo->prepare($sql);
+    $q->execute(array($_SESSION['id']));
+    $project = $q->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -92,8 +43,8 @@
 
         <main class="Proyect__View">
             <div class="Action__Btn">
-                <h1>Estado de tú proyecto</h1>
-                <h3>Calificado</h3>
+                <h1>Estado de tu proyecto</h1>
+                <h3><?php echo $project['p_estado']; ?></h3>
             </div>
 
             <div class="Counter">
