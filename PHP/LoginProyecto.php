@@ -88,7 +88,6 @@
         </header>
         <main>
 
-            <h1>¡Bienvenido!<br><br>Ingresa las credenciales de tu proyecto</h1>
 
             <div class="Card-1">
                 <a href="../PHP/LoginProyecto.php" class="Btns Btn-1">Inicio Sesion</a>

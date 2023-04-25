@@ -51,7 +51,7 @@
 
         <main>
 
-            <h1>Bienvenido <br><br> Registra tu proyecto </h1>
+            
 
             <div class="Card-1">
                 
@@ -60,7 +60,7 @@
                 
                 <form class="Form__Card" action="../PHP/RegistroProyecto.php" method="POST">
 
-                    <table id="">
+                    <table>
     
                         <tr>
                             <td><label for="Nombre">Nombre</label></td>
@@ -70,25 +70,6 @@
                         <tr>
                             <td><label for="Contraseña">Contraseña</label></td>
                             <td><input type="password" name="Contraseña" class="Text__Input" id="ApellidoPaterno"></td>
-                        </tr>
-    
-                        <tr>
-                            <td><label for="ed_id">Edicion A Participar</label></td>
-                            <td>
-                                <select name="ed_id" id="ed_i">
-                                <?php
-                                                            $pdo = Database::connect();
-                                                            $query = 'SELECT * FROM EDICIONV1';
-                                                            foreach ($pdo->query($query) as $row) {
-                                                                if ($row['ed_id']==$ed_id)
-                                                                    echo "<option selected value='" . $row['ed_id'] . "'>" . $row['nombre'] . "</option>";
-                                                                else
-                                                                    echo "<option value='" . $row['ed_id'] . "'>" . $row['nombre'] . "</option>";
-                                                            }
-                                                            Database::disconnect();
-                                                        ?>
-                                </select>
-                            </td>
                         </tr>
     
                         <tr>
