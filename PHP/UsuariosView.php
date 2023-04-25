@@ -94,15 +94,15 @@
                 <?php
 								   	include 'dataBase.php';
 								   	$pdo = Database::connect();
-								   	$sql = 'SELECT * FROM V2_DOCENTE ORDER BY d_apellido_paterno';
+								   	$sql = 'SELECT * FROM V3_COLABORADOR ORDER BY co_apellido';
 				 				   	foreach ($pdo->query($sql) as $row) {
                                         echo '<input type="checkbox" name="" id="">' ;
                                         echo '<p></p>';
 
-                                        echo '<p>'. $row['d_nomina'] . '</p>';
-			    					   	echo '<p>'. $row['d_nombre'] . '</>';
-			    					  	echo '<p>'. $row['d_apellido_paterno'] . '</p>';
-                      					echo '<p>'. $row['d_correo'] . '</p>';
+                                        echo '<p>'. $row['co_nomina'] . '</p>';
+			    					   	echo '<p>'. $row['co_nombre'] . '</>';
+			    					  	echo '<p>'. $row['co_apellido_paterno'] . '</p>';
+                      					echo '<p>'. $row['co_correo'] . '</p>';
                                         echo '<p></p>';
 
 			    					   	echo ' <div class="Btn__Green"> <a href="UsuariosRead.php?id='.$row['d_nomina'].'">Ver</a></div>';
@@ -111,22 +111,6 @@
                                         
 								    }
 
-									$sql = 'SELECT * FROM V2_JURADO ORDER BY j_apellido_paterno';
-									foreach ($pdo->query($sql) as $row) {
-                                        echo '<input type="checkbox" name="" id="">' ;
-                                        echo '<p></p>';
-
-                                        echo '<p>'. $row['j_id'] . '</p>';
-									    echo '<p>'. $row['j_nombre'] . '</p>';
-									    echo '<p>'. $row['j_apellido_paterno'] . '</p>';
-				  					    echo '<p>'. $row['j_correo'] . '</p>';
-                                        echo '<p></p>';
-
-									    echo ' <div class="Btn__Green"> <a href="UsuariosRead.php?id='.$row['j_id'].'">Ver</a></div>';
-                                        echo ' <div class="Btn__Blue" > <a href="UsuariosUpdate.php?id='.$row['j_id'].'">Actualizar</a></div>';
-                                        echo ' <div class="Btn__Red" > <a href="UsuariosDelete.php?id='.$row['j_id'].'">Eliminar</a></div>';
-                                        
-								}
 
 								$sql = 'SELECT * FROM V2_ALUMNO ORDER BY a_ap_pa';
 								foreach ($pdo->query($sql) as $row) {
