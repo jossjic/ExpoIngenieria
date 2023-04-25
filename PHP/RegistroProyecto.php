@@ -84,9 +84,5 @@
 
         </main>
 
-        <footer>
-            <img class="Logo__Tec" src="../media/LogoTec.png" alt="Logo Tec">
-        </footer>
-
     </body>
 </html>
