@@ -6,11 +6,11 @@
 
     if (isset($_SESSION['logged_in'])) {
         header("Location: ../index.php");
+        exit();
     }
 
     // POST METHOD
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {        
         $project_name_code_error = null;
         $project_pass_error = null;
         $project_pass_confirm_error = null;
@@ -35,10 +35,12 @@
 
         // Empty project password confirmation
         if (empty($project_pass_confirm)) {
-            $project_pass_confirm_error = 'Por favor ingresa la confimración de contraseña';
+            $project_pass_confirm_error = 'Por favor ingresa la confirmación de contraseña';
             $valid = false;
+        }
+
         // Project password confirmation does not match
-        } elseif ($project_pass != $project_pass_confirm) {
+        elseif ($project_pass != $project_pass_confirm) {
             $project_pass_confirm_error = 'La confirmación de contraseña no coincide';
             $valid = false;
         }
@@ -52,10 +54,11 @@
 
         // Project code name already exists
         if ($q->rowCount() == 1) {
-            $project_name_code_error = 'Este nombre clave ya está en uso. Por favor selecciona otro';
+            $project_name_code_error = 'Este nombre clave ya está en uso. Por favor ingresa otro';
             $valid = false;
         }
 
+        // Valid data
         if ($valid) {
             $pdo = Database::connect();
 
@@ -78,6 +81,7 @@
             
             // Redirect
             header("Location: ../PHP/DashboardProyecto.php");
+            exit();
         }
     }
 
@@ -94,26 +98,27 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/ico" href="../media/favicon.ico"/>
-        <title>Proyecto</title>
+        <title>Registro de proyecto | Expo ingenierías</title>
         <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
         <link rel="stylesheet" href="../CSS/FormsStructure.css">
     </head>
     <body>
         <header>
-            <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" >
+            <a href="../index.php"><img class="Logo__Expo" src="../media/logo-expo.svg" alt="Logotipo de Expo ingenierías"></a>
             <ul>
-                <li><a href="../HTML/LoginUsuarios.html">Regresar</a></li>
+                <li><a href="../index.php">Inicio</a></li>
             </ul>
-            <nav>    
+            <nav>
+                <ul></ul>
             </nav>
         </header>
         <main>
             <div class="Card-1">
                 <a class="Btns Btn-1" href="../PHP/LoginProyecto.php">Iniciar sesión</a>
                 <a class="Btns Btn-2" href="../PHP/RegistroProyecto.php">Registrarse</a>
-                <form class="Form__Card" action="../PHP/RegistroProyecto.php" method="POST">
+                <form class="Form__Card-1" action="" method="POST">
                     <center>
-                        <b>Crea un nombre clave y contraseña para tu proyecto</b>
+                        <b>Crea un nombre clave y una contraseña para tu proyecto</b>
                         <br><br>
                         <small>(Estas serán tus credenciales para iniciar sesión)</small>
                     </center>
