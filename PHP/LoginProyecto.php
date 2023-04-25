@@ -6,8 +6,8 @@
 
     if (isset($_SESSION['logged_in'])) {
         header("Location: ../index.php");
+        exit();
     }
-
 
     // POST METHOD
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -55,6 +55,7 @@
 
             // Redirect
             header("Location: ../PHP/DashboardProyecto.php");
+            exit();
         }
     }
 
@@ -71,24 +72,25 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/ico" href="../media/favicon.ico"/>
-        <title>Proyecto</title>
+        <title>Inicio de sesión de proyecto | Expo ingenierías</title>
         <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
         <link rel="stylesheet" href="../CSS/FormsStructure.css">
     </head>
     <body>
         <header>
-            <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logotipo de la Escuela de Ingeniería y Ciencias">
+            <a href="../index.php"><img class="Logo__Expo" src="../media/logo-expo.svg" alt="Logotipo de Expo ingenierías"></a>
             <ul>
                 <li><a href="../index.php">Inicio</a></li>
             </ul>
-            <nav>    
+            <nav>
+                <ul></ul>
             </nav>
         </header>
         <main>
             <div class="Card-1">
                 <a class="Btns Btn-1" href="../PHP/LoginProyecto.php">Iniciar sesión</a>
                 <a class="Btns Btn-2" href="../PHP/RegistroProyecto.php">Registrarse</a>
-                <form class="Form__Card" action="" method="post">
+                <form class="Form__Card-1" action="" method="post">
                     <center><b>¡Bienvenido!<br><br>Ingresa las credenciales de tu proyecto</b></center>
                     <table>
                         <tr>
@@ -100,7 +102,7 @@
                             <td><input class="Text__Input" type="password" name="project_pass" value="<?php echo !empty($project_pass) ? $project_pass : ''; ?>" required></td>
                         </tr>
                         <tr>
-                            <td class="Td__Iniciar__Sesion" colspan=2><input class="Btn__Iniciar__Sesion" type="submit" value="Iniciar sesión" name="submit"></td>
+                            <td class="Td__Iniciar__Sesion" colspan="2"><input class="Btn__Iniciar__Sesion" type="submit" value="Iniciar sesión" name="submit"></td>
                         </tr>
                     </table>
                 </form>
