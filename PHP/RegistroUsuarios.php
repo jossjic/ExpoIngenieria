@@ -93,7 +93,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/ico" href="../media/favicon.ico"/>
 
-        <title>Registro Usuarios</title>
+        <title>Colaboradores</title>
 
         <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
         <link rel="stylesheet" href="../CSS/FormsStructure.css">
@@ -111,84 +111,64 @@
 
         <main>
 
-            <h1>Registro de Usuarios</h1>
+            
 
-            <form action="../PHP/RegistroUsuarios.php" method="POST">
+            <div class="Card-1">
 
-                <table id="DefaultForm">
-                    <tr>
-                        <td><label for="Nombre">Nombre</label></td>
-                        <td><input type="text" name="Nombre" class="Text__Input" id="Nombre"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="ApellidoPaterno">Apellido Paterno</label></td>
-                        <td><input type="text" name="ApellidoPaterno" class="Text__Input" id="ApellidoPaterno"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="ApellidoMaterno">Apellido Materno</label></td>
-                        <td><input type="text" name="ApellidoMaterno" class="Text__Input" id="ApellidoMaterno"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="Correo">Correo</label></td>
-                        <td><input type="text" name="Correo" class="Text__Input" id="Correo"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="Contraseña">Contraseña</label></td>
-                        <td><input type="text" name="Contraseña" class="Text__Input" id="Contraseña"></td>
-                    </tr>
+              <a href="../PHP/LoginUsuarios.php" class="Btns Btn-1">Inicio Sesion</a>
+              <a href="../PHP/RegistroUsuarios.php" class="Btns Btn-2">Registro</a>
 
-                    <tr>
-                        <td>
-                            <label for="tipoUsuario">¿Que tipo de usuario vas a ser?</label>
-                        </td>
-                        <td>
-                            <select name="tipoUsuario" id="tipoUsuario">
-                                <option selected value="Jurado">Jurado</option>
-                                <option value="Profesor">Profesor</option>
-                            </select>
-                        </td>
-                    </tr>
+                    <form class="Form__Card-1" action="../PHP/RegistroUsuarios.php" method="POST">
 
-                    <tr>
-                        <td>
-                            <label>Edicion</label>
-                        </td>
-                        <td>
-                            <select name="ed_id" id="ed_i">
-                            <?php
-														$pdo = Database::connect();
-														$query = 'SELECT * FROM EDICIONV1';
-														foreach ($pdo->query($query) as $row) {
-															if ($row['ed_id']==$ed_id)
-																echo "<option selected value='" . $row['ed_id'] . "'>" . $row['nombre'] . "</option>";
-															else
-																echo "<option value='" . $row['ed_id'] . "'>" . $row['nombre'] . "</option>";
-														}
-														Database::disconnect();
-													?>
-                            </select>
-                        </td>
-                    </tr>
+                        <table id="DefaultForm">
+                            <tr>
+                                <td><label for="Nombre">Nombre</label></td>
+                                <td><input type="text" name="Nombre" class="Text__Input" id="Nombre"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="ApellidoPaterno">Apellidos</label></td>
+                                <td><input type="text" name="ApellidoPaterno" class="Text__Input" id="ApellidoPaterno"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="Correo">Correo</label></td>
+                                <td><input type="text" name="Correo" class="Text__Input" id="Correo"></td>
+                            </tr>
+                            <tr>
+                                <td><label for="Contraseña">Contraseña</label></td>
+                                <td><input type="text" name="Contraseña" class="Text__Input" id="Contraseña"></td>
+                            </tr>
 
-                    <tr id="ProfesorForm">
-                        <td><label for="Nomina">Nomina</label></td>
-                        <td><input type="text" name="Nomina" class="Text__Input" id="Nomina"></td>
-                    </tr>
+                            <tr>
+                                <td><label for="Nomina">Nomina</label></td>
+                                <td><input type="text" name="Nomina" class="Text__Input" id="Nomina"></td>
+                            </tr>
 
-                    <tr>
-                        <td colspan="2" class="Td__Registrar" ><input class="Btn__Registrar" type="submit" value="Registrar" id="submit" name="submit"></td>
-                        <td></td>
-                      </tr>
-                </table>
+							<tr>
+                                <td><label for="Contraseña">Nomina</label></td>
+                                <td><input type="text" name="Contraseña" class="Text__Input" id="Nomina"></td>
+                            </tr>
 
-            </form>
+                            <tr >
+                              <td><label for="">Eres Jurado</label></td>
+                              <td>
+								<select name="Jurado" class="Text__Input">
+									<option value="1">Si</option>
+									<option value="2">No</option>
+								</select>
+                              </td>
+                          </tr>
+
+                            <tr>
+                                <td colspan="2" class="Td__Registrar" ><input class="Btn__Registrar" type="submit" value="Registrar" id="submit" name="submit"></td>
+                                <td></td>
+                            </tr>
+                        </table>
+
+                    </form>
+            </div>
             
 
         </main>
-
-        <footer>
-            <img class="Logo__Tec" src="../media/LogoTec.png" alt="Logo Tec">
-        </footer>
 
     </body>
 </html>
