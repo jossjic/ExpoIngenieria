@@ -1,7 +1,7 @@
---Creacion de Tablas--
+-- Creacion de Tablas--
 CREATE TABLE `EDICION` (
   `ed_id` INT NOT NULL AUTO_INCREMENT,
-  `ed_nombre` VARCHAR(30),
+  `ed_nombre` VARCHAR(100),
   `ed_fecha_inicio` DATETIME,
   `ed_fecha_fin` DATETIME,
   PRIMARY KEY (`ed_id`)
@@ -9,24 +9,24 @@ CREATE TABLE `EDICION` (
 
 CREATE TABLE `CATEGORIA` (
   `ca_id` INT  NOT NULL AUTO_INCREMENT,
-  `ca_nombre` VARCHAR(30),
+  `ca_nombre` VARCHAR(100),
   PRIMARY KEY (`ca_id`)
 );
 
 CREATE TABLE `NIVEL` (
   `n_id` INT  NOT NULL AUTO_INCREMENT,
-  `n_nombre` VARCHAR(30),
+  `n_nombre` VARCHAR(100),
   PRIMARY KEY (`n_id`)
 );
 
 CREATE TABLE `PROYECTO` (
   `p_id` INT NOT NULL AUTO_INCREMENT,
-  `p_nombre_clave` VARCHAR(30) UNIQUE,
-  `p_nombre` VARCHAR(30),
+  `p_nombre_clave` VARCHAR(100) UNIQUE,
+  `p_nombre` VARCHAR(100),
   `p_descripcion` TEXT,
   `n_id` INT,
-  `p_estado` VARCHAR(30),
-  `p_pass` VARCHAR(30),
+  `p_estado` VARCHAR(100),
+  `p_pass` VARCHAR(100),
   `p_video` VARCHAR(100),
   `p_poster` VARCHAR(100),
   `p_ult_modif` DATETIME,
@@ -48,9 +48,9 @@ ON UPDATE CASCADE
 CREATE TABLE `COLABORADOR` (
   `co_correo` VARCHAR(100) NOT NULL,
   `co_nomina` VARCHAR(9),
-  `co_nombre` VARCHAR(30),
-  `co_apellido` VARCHAR(40),
-  `co_pass` VARCHAR(30),
+  `co_nombre` VARCHAR(100),
+  `co_apellido` VARCHAR(100),
+  `co_pass` VARCHAR(100),
   `co_es_jurado` BOOLEAN,
   PRIMARY KEY (`co_correo`)
 );
@@ -66,11 +66,11 @@ ON UPDATE CASCADE,
 ON UPDATE CASCADE
 );
 
-CREATE TABLE `ADMIN` (
+CREATE TABLE ADMIN (
   `adm_correo` VARCHAR(100) NOT NULL,
-  `adm_nombre` VARCHAR(30),
-  `adm_apellido` VARCHAR(40),
-  `adm_pass` VARCHAR(30),
+  `adm_nombre` VARCHAR(100),
+  `adm_apellido` VARCHAR(100),
+  `adm_pass` VARCHAR(100),
   `adm_master` BOOLEAN,
   PRIMARY KEY (`adm_correo`)
 );
@@ -83,7 +83,7 @@ CREATE TABLE `ANUNCIO` (
   `an_fecha` DATETIME,
   `adm_correo` VARCHAR(100),
   PRIMARY KEY (`an_id`),
-  FOREIGN KEY (`adm_correo`) REFERENCES `ADMIN`(`adm_correo`)
+  FOREIGN KEY (`adm_correo`) REFERENCES ADMIN(`adm_correo`)
 	ON DELETE CASCADE
 ON UPDATE CASCADE
 );
@@ -106,17 +106,17 @@ ON UPDATE CASCADE,
 ON UPDATE CASCADE
 );
 
-CREATE TABLE `ALUMNO` (
+CREATE TABLE ALUMNO (
   `a_matricula` VARCHAR(9) NOT NULL,
-  `a_nombre` VARCHAR(30),
-  `a_apellido` VARCHAR(40),
+  `a_nombre` VARCHAR(100),
+  `a_apellido` VARCHAR(100),
   `a_correo` VARCHAR(100),
   PRIMARY KEY (`a_matricula`)
 );
 
 CREATE TABLE `ETAPA` (
   `et_id` INT NOT NULL AUTO_INCREMENT,
-  `et_nombre` VARCHAR(30),
+  `et_nombre` VARCHAR(100),
   `et_fecha_inicio` DATETIME,
   `et_fecha_fin` DATETIME,
   `ed_id` INT,
@@ -140,7 +140,7 @@ ON UPDATE CASCADE
 CREATE TABLE `PROYECTO_ALUMNO` (
   `a_matricula` VARCHAR(9),
   `p_id` INT,
-  FOREIGN KEY (`a_matricula`) REFERENCES `ALUMNO`(`a_matricula`)
+  FOREIGN KEY (`a_matricula`) REFERENCES ALUMNO(`a_matricula`)
 	ON DELETE CASCADE
 ON UPDATE CASCADE,
   FOREIGN KEY (`p_id`) REFERENCES `PROYECTO`(`p_id`)
@@ -148,18 +148,18 @@ ON UPDATE CASCADE,
 ON UPDATE CASCADE
 );
 
---Creacion de Tablas--
+-- Creacion de Tablas--
 
---Inserción de Datos--
+-- Inserción de Datos--
 
 
 
-INSERT INTO `admin`(`adm_correo`, `adm_nombre`, `adm_apellido`, `adm_pass`, `adm_master`) VALUES ('rafaadm@tec.mx','José Rafael','Aguilar Mejía','eladminmaster1234','1');
-INSERT INTO `admin`(`adm_correo`, `adm_nombre`, `adm_apellido`, `adm_pass`, `adm_master`) VALUES ('a01736671@tec.mx','José JuanADM','Irene Ceravntes','jossprueba1234','0');
-INSERT INTO `admin`(`adm_correo`, `adm_nombre`, `adm_apellido`, `adm_pass`, `adm_master`) VALUES ('adm@expo.mx','Admin','H3BFQEWWREF','1234','0');
+INSERT INTO ADMIN(`adm_correo`, `adm_nombre`, `adm_apellido`, `adm_pass`, `adm_master`) VALUES ('rafaadm@tec.mx','José Rafael','Aguilar Mejía','eladminmaster1234',1);
+INSERT INTO ADMIN(`adm_correo`, `adm_nombre`, `adm_apellido`, `adm_pass`, `adm_master`) VALUES ('a01736671@tec.mx','José JuanADM','Irene Ceravntes','jossprueba1234',true);
+INSERT INTO ADMIN(`adm_correo`, `adm_nombre`, `adm_apellido`, `adm_pass`, `adm_master`) VALUES ('adm@expo.mx','Admin','H3BFQEWWREF','1234',true);
 
-INSERT INTO `alumno`(`a_matricula`, `a_nombre`, `a_apellido`, `a_correo`) VALUES ('A01736671','José JuanAL','Irene Cervantes','jossjic_03@hotmail.com');
-INSERT INTO `alumno`(`a_matricula`, `a_nombre`, `a_apellido`, `a_correo`) VALUES ('A29131433','Rigoberto','Arngo Graza','rigogod@opera.com');
+INSERT INTO ALUMNO(`a_matricula`, `a_nombre`, `a_apellido`, `a_correo`) VALUES ('A01736671','José JuanAL','Irene Cervantes','jossjic_03@hotmail.com');
+INSERT INTO ALUMNO(`a_matricula`, `a_nombre`, `a_apellido`, `a_correo`) VALUES ('A29131433','Rigoberto','Arngo Graza','rigogod@opera.com');
 INSERT INTO ALUMNO (a_matricula, a_nombre, a_apellido, a_correo) VALUES ('A00123456', 'Juan', 'Pérez', 'juan.perez@example.com');
 INSERT INTO ALUMNO (a_matricula, a_nombre, a_apellido, a_correo) VALUES ('A00987654', 'María', 'González', 'maria.gonzalez@example.com');
 INSERT INTO ALUMNO (a_matricula, a_nombre, a_apellido, a_correo) VALUES ('A00543210', 'Pedro', 'Sánchez', 'pedro.sanchez@example.com');
@@ -245,4 +245,4 @@ INSERT INTO EDICION_COLABORADOR (ed_id, co_correo) VALUES (2, 'luisa@example.com
 INSERT INTO EDICION_COLABORADOR (ed_id, co_correo) VALUES (3, 'jose@example.com');
 
 
---Inserción de Datos--
+-- Inserción de Datos--
