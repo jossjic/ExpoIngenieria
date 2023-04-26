@@ -6,6 +6,7 @@
 
     if (!isset($_SESSION['logged_in'])) {
         header("Location: ../index.php");
+        exit();
     }
 
     // GET METHOD
@@ -64,16 +65,15 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dashboard proyecto| EngineerXpoWeb</title>
-
+        <title>Dashboard proyecto | Expo ingenierías</title>
         <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
         <link rel="stylesheet" href="../CSS/Dashboards.css">
     </head>
     <body>
         <header>
-            <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logotipo de la Escuela de Ingeniería y Ciencias">
+            <a href="../index.php"><img class="Logo__Expo" src="../media/logo-expo.svg" alt="Logotipo de Expo ingenierías"></a>
             <ul>
-                <li><a href="../PHP/DashboardProyecto.php">Inicio</a></li>
+                <li><a href="../index.php">Inicio</a></li>
                 <li><a href="#">Layout de proyectos</a></li>
             </ul>
             <nav>
@@ -82,18 +82,15 @@
                 </ul>
             </nav>
         </header>
-
         <main class="Proyect__View">
             <div class="Action__Btn">
                 <h1>Estado de tu proyecto</h1>
                 <h3><?php echo $project['p_estado']; ?></h3>
             </div>
-
             <div class="Counter">
                 <p>ExpoIngenieria comienza en:</p>
                 <h1>10:24:45:60</h1>
             </div>
-
             <div class="Info__Other">
                 <div class="Info__Tittle">
                     <h2><?php echo $project['p_nombre']; ?></h2>
@@ -102,7 +99,6 @@
                         <a href="#">Editar</a>
                     </div>
                 </div>
-
                 <div class="Info__Menu">
                     <dl>
                         <dt><strong>Integrantes</strong></dt>

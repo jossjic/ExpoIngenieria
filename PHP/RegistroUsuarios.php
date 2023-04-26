@@ -1,194 +1,178 @@
 <?php
+    require_once "dataBase.php";
 
-    require 'dataBase.php';
+    session_name("EngineerXpoWeb");
+    session_start();
 
-    $NominaError = null;
-    $NombreError = null;
-    $ApellidoPaternoError = null;
-    $ApellidoMaternoError = null;
-    $CorreoError = null;
-    $ContraseñaError = null;
-    $tipoUsuarioError = null;
-    $ed_idError = null;
-
-    if (!empty($_POST)) {
-        $Nomina = $_POST['Nomina'];
-        $Nombre = $_POST['Nombre'];
-        $ApellidoPaterno = $_POST['ApellidoPaterno'];
-        $ApellidoMaterno = $_POST['ApellidoMaterno'];
-        $Correo = $_POST['Correo'];
-        $Contraseña = $_POST['Contraseña'];
-        $tipoUsuario = $_POST['tipoUsuario'];
-        $ed_id = $_POST['ed_id'];
-
-        // validate input
-        $valid = true;
-
-        if (empty($Nomina)) {
-            $NominaError = 'Por favor ingresa tu Nómina';
-            $valid = false;
-        }
-        if (empty($Nombre)) {
-            $NombreError = 'Por favor ingresa tu Nombre';
-            $valid = false;
-        }
-        if (empty($ApellidoPaterno)) {
-            $ApellidoPaternoError = 'Por favor ingresa tu Apellido Paterno';
-            $valid = false;
-        }
-        if (empty($ApellidoMaterno)) {
-            $ApellidoMaternoError = 'Por favor ingresa tu Apellido Materno';
-            $valid = false;
-        }
-        if (empty($Correo)) {
-            $CorreoError = 'Por favor ingresa un Correo Electrónico';
-            $valid = false;
-        }
-        if (empty($Contraseña)) {
-            $ContraseñaError = 'Por favor ingresa una Contraseña';
-            $valid = false;
-        }
-        if (empty($tipoUsuario)) {
-            $tipoUsuarioError = 'Por favor escoje que tipo de usuario eres';
-            $valid = false;
-        }
-        if (empty($ed_id)) {
-            $ed_idError = 'Por favor selecciona una Edición';
-            $valid = false;
-        }
-
-
-        // insert data
-        if (trim($tipoUsuario) === trim('Jurado')) {
-            if (true) {
-                $pdo = Database::connect();
-                $sql = "INSERT INTO JURADOV1(j_id, j_nombre, j_apellido_paterno, j_apellido_materno, j_correo, j_contraseña, ed_id,tipo_jurado) VALUES(?, ?, ?, ?, ?, ?, ?,?)";
-                $q = $pdo->prepare($sql);
-                $q->execute(array($Nomina, $Nombre, $ApellidoPaterno, $ApellidoMaterno, $Correo, $Contraseña, $ed_id, "Jurado"));
-                Database::disconnect();
-                header("Location: ../HTML/LoginUsuarios.html");
-                exit(); // se debe incluir un exit() después de una redirección con header()
-            }
-        } elseif (trim($tipoUsuario) === trim('Profesor')) {
-            echo($tipoUsuario);
-            if (true) {
-                $pdo = Database::connect();
-                $sql = "INSERT INTO DOCENTEV1(d_nomina, d_nombre, d_apellido_paterno, d_apellido_materno, d_correo, d_contraseña, ed_id) VALUES(?, ?, ?, ?, ?, ?, ?)";
-                $q = $pdo->prepare($sql);
-                $q->execute(array($Nomina, $Nombre, $ApellidoPaterno, $ApellidoMaterno, $Correo, $Contraseña, $ed_id));
-                Database::disconnect();
-                header("Location: ../HTML/LoginUsuarios.html");
-                exit(); // se debe incluir un exit() después de una redirección con header()
-            }
-        } 
+    if (isset($_SESSION['logged_in'])) {
+        header("Location: ../index.php");
+        exit();
     }
 
+    // POST METHOD
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $collaborator_name_error = null;
+        $collaborator_lastname_error = null;
+        $collaborator_email_error = null;
+        $collaborator_payroll_error = null;
+        $collaborator_pass_error = null;
+        $collaborator_pass_confirm_error = null;
+
+        $collaborator_name = $_POST['collaborator_name'];
+        $collaborator_lastname = $_POST['collaborator_lastname'];
+        $collaborator_email = $_POST['collaborator_email'];
+        $collaborator_payroll = $_POST['collaborator_payroll'];
+        $collaborator_pass = $_POST['collaborator_pass'];
+        $collaborator_pass_confirm = $_POST['collaborator_pass_confirm'];
+
+        $valid = true;
+
+        // Empty collaborator name
+        if (empty($collaborator_name)) {
+            $collaborator_name_error = 'Por favor ingresa tu nombre';
+            $valid = false;
+        }
+
+        // Empty collaborator lastname
+        if (empty($collaborator_lastname)) {
+            $collaborator_lastname_error = 'Por favor ingresa tu apellido';
+            $valid = false;
+        }
+
+        // Empty collaborator email
+        if (empty($collaborator_email)) {
+            $collaborator_email_error = 'Por favor ingresa tu correo electrónico';
+            $valid = false;
+        }
+
+        // Empty collaborator payroll
+        if (empty($collaborator_payroll)) {
+            $collaborator_payroll_error = 'Por favor ingresa tu número de nómina';
+            $valid = false;
+        }
+
+        // Empty collaborator password
+        if (empty($collaborator_pass)) {
+            $collaborator_pass_error = 'Por favor ingresa tu contraseña';
+            $valid = false;
+        }
+
+        // Empty collaborator password confirmation
+        if (empty($collaborator_pass_confirm)) {
+            $collaborator_pass_confirm_error = 'Por favor ingresa la confirmación de contraseña';
+            $valid = false;
+        }
+        
+        // Collaborator password confirmation does not match
+        elseif ($collaborator_pass != $collaborator_pass_confirm) {
+            $collaborator_pass_confirm_error = 'La confirmación de contraseña no coincide';
+            $valid = false;
+        }
+
+        // Verify collaborator email is unique
+        $pdo = Database::connect();
+        $sql = "SELECT * FROM COLABORADOR WHERE co_correo = ?";
+        $q = $pdo->prepare($sql);
+        $q->execute(array($collaborator_email));
+        Database::disconnect();
+
+        // Collaborator email already exists
+        if ($q->rowCount() == 1) {
+            $collaborator_email_error = 'Este correo ya está en uso. Por favor ingresa otro';
+            $valid = false;
+        }
+
+        // Valid data
+        if ($valid) {
+            $pdo = Database::connect();
+
+            // Create collaborator
+            $sql = "INSERT INTO COLABORADOR (co_correo, co_nomina, co_nombre, co_apellido, co_pass, co_es_jurado) VALUES (?, ?, ?, ?, ?, ?)";
+            $q = $pdo->prepare($sql);
+            $is_judge = true;
+            $q->execute(array($collaborator_email, $collaborator_payroll, $collaborator_name, $collaborator_lastname, $collaborator_pass, $is_judge));
+
+            // Get project data
+            $sql = "SELECT * FROM COLABORADOR WHERE co_correo = ? AND co_pass = ?";
+            $q = $pdo->prepare($sql);
+            $q->execute(array($collaborator_email, $collaborator_pass));
+            Database::disconnect();
+            $collaborator = $q->fetch(PDO::FETCH_ASSOC);
+            
+            // Create session variables
+            $_SESSION['logged_in'] = true;
+            $_SESSION['user_type'] = "collaborator";
+            $_SESSION['id'] = $collaborator['co_correo'];
+            
+            // Redirect
+            header("Location: ../PHP/DashboardColaboradores.php");
+            exit();
+        }
+    }
+
+    // GET METHOD
+    else {
+
+    }
 ?>
 
 <!DOCTYPE html>
-    <html lang="en">
+<html lang="es">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/ico" href="../media/favicon.ico"/>
-
-        <title>Registro Usuarios</title>
-
+        <title>Registro de colaborador | Expo ingenierías</title>
         <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
         <link rel="stylesheet" href="../CSS/FormsStructure.css">
     </head>
     <body>
-        
         <header>
-            <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" >
+            <a href="../index.php"><img class="Logo__Expo" src="../media/logo-expo.svg" alt="Logotipo de Expo ingenierías"></a>
             <ul>
-                <li>
-                    <a href="../HTML/InicioSesionJurado.html">Regresar</a>
-                </li>
+                <li><a href="../index.php">Inicio</a></li>
             </ul>
+            <nav>
+                <ul></ul>
+            </nav>
         </header>
-
         <main>
-
-            <h1>Registro de Usuarios</h1>
-
-            <form action="../PHP/RegistroUsuarios.php" method="POST">
-
-                <table id="DefaultForm">
-                    <tr>
-                        <td><label for="Nombre">Nombre</label></td>
-                        <td><input type="text" name="Nombre" class="Text__Input" id="Nombre"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="ApellidoPaterno">Apellido Paterno</label></td>
-                        <td><input type="text" name="ApellidoPaterno" class="Text__Input" id="ApellidoPaterno"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="ApellidoMaterno">Apellido Materno</label></td>
-                        <td><input type="text" name="ApellidoMaterno" class="Text__Input" id="ApellidoMaterno"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="Correo">Correo</label></td>
-                        <td><input type="text" name="Correo" class="Text__Input" id="Correo"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="Contraseña">Contraseña</label></td>
-                        <td><input type="text" name="Contraseña" class="Text__Input" id="Contraseña"></td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label for="tipoUsuario">¿Que tipo de usuario vas a ser?</label>
-                        </td>
-                        <td>
-                            <select name="tipoUsuario" id="tipoUsuario">
-                                <option selected value="Jurado">Jurado</option>
-                                <option value="Profesor">Profesor</option>
-                            </select>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label>Edicion</label>
-                        </td>
-                        <td>
-                            <select name="ed_id" id="ed_i">
-                            <?php
-														$pdo = Database::connect();
-														$query = 'SELECT * FROM EDICIONV1';
-														foreach ($pdo->query($query) as $row) {
-															if ($row['ed_id']==$ed_id)
-																echo "<option selected value='" . $row['ed_id'] . "'>" . $row['nombre'] . "</option>";
-															else
-																echo "<option value='" . $row['ed_id'] . "'>" . $row['nombre'] . "</option>";
-														}
-														Database::disconnect();
-													?>
-                            </select>
-                        </td>
-                    </tr>
-
-                    <tr id="ProfesorForm">
-                        <td><label for="Nomina">Nomina</label></td>
-                        <td><input type="text" name="Nomina" class="Text__Input" id="Nomina"></td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="2" class="Td__Registrar" ><input class="Btn__Registrar" type="submit" value="Registrar" id="submit" name="submit"></td>
-                        <td></td>
-                      </tr>
-                </table>
-
-            </form>
-            
-
+            <div class="Card-1">
+                <a class="Btns Btn-1" href="../PHP/LoginUsuarios.php">Iniciar sesión</a>
+                <a class="Btns Btn-2" href="../PHP/RegistroUsuarios.php">Registrarse</a>
+                <form class="Form__Card-1" action="" method="POST">
+                    <center><b>Registra tus datos</b></center>
+                    <table id="DefaultForm">
+                        <tr>
+                            <td>Nombre</td>
+                            <td><input class="Text__Input" type="text" name="collaborator_name" value="<?php echo !empty($collaborator_name) ? $collaborator_name : ''; ?>" autofocus required></td>
+                        </tr>
+                        <tr>
+                            <td>Apellidos</td>
+                            <td><input class="Text__Input" type="text" name="collaborator_lastname" value="<?php echo !empty($collaborator_lastname) ? $collaborator_lastname : ''; ?>" required></td>
+                        </tr>
+                        <tr>
+                            <td>Correo</td>
+                            <td><input class="Text__Input" type="email" name="collaborator_email" value="<?php echo !empty($collaborator_email) ? $collaborator_email : ''; ?>" required></td>
+                        </tr>
+                        <tr>
+                            <td>Nomina</td>
+                            <td><input class="Text__Input" type="text" name="collaborator_payroll" value="<?php echo !empty($collaborator_payroll) ? $collaborator_payroll : ''; ?>" required></td>
+                        </tr>
+                        <tr>
+                            <td>Contraseña</td>
+                            <td><input class="Text__Input" type="password" name="collaborator_pass" value="<?php echo !empty($collaborator_pass) ? $collaborator_pass : ''; ?>" required></td>
+                        </tr>
+                            <td>Confirmar contraseña</td>
+                            <td><input class="Text__Input" type="password" name="collaborator_pass_confirm" value="<?php echo !empty($collaborator_pass_confirm) ? $collaborator_confirm : ''; ?>" required></td>
+                        </tr>
+                        <tr>
+                            <td class="Td__Registrar" colspan="2"><input class="Btn__Registrar" type="submit" value="Registrar" name="submit"></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
         </main>
-
-        <footer>
-            <img class="Logo__Tec" src="../media/LogoTec.png" alt="Logo Tec">
-        </footer>
-
     </body>
 </html>

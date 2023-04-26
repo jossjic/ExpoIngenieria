@@ -24,6 +24,12 @@ header{
     justify-self: center;
 }
 
+.Logo__Expo{
+    grid-column: 1/2;
+    width: 200px;
+    justify-self: center;
+}
+
 header ul{
     grid-column: 2/3;
     justify-self: start;

@@ -80,3 +80,61 @@ main h2 a{
     width: 150%;
     text-decoration: none;
 }
+
+.Card-1{
+    align-self: normal;
+    grid-column: 2/3;
+    grid-row: 2/3;
+    display: grid;
+    place-items: center;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 20% 80%;
+    width: 500px;
+    height: 500px;
+
+    background-color: #ececec;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.Btns{
+    width: 100%;
+    color: white;
+    background-color: #06519d;
+    grid-row: 1/2;
+    border-radius: 10px 0;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: medium;
+}
+
+.Btns:hover{
+    background-color: #0033A0;
+}
+
+.Btn-1{
+    border-radius: 10px 0 0 10px;
+}
+
+.Btn-2{
+    border-radius: 0 10px 10px 0;
+}
+
+.Form__Card{
+    grid-column: 1/3;
+    grid-row: 2/3;
+    height: 350px;
+    display: grid;
+    place-items: center;
+}
+
+.Form__Card-1{
+    grid-column: 1/3;
+    grid-row: 2/3;
+    height: 100%;
+    display: grid;
+    place-items: center;
+}

@@ -8,10 +8,15 @@
         
         // Project user
         if ($_SESSION['user_type'] === "project") {
-            header("Location: ./HTML/DashboardProyecto.html");
+            header("Location: ./PHP/DashboardProyecto.php");
+            exit();
         }
 
         // Collaborator user
+        elseif ($_SESSION['user_type'] === "collaborator") {
+            header("Location: ./PHP/DashboardColaboradores.php");
+            exit();
+        }
     }
 ?>
 
@@ -24,7 +29,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/ico" href="./media/favicon.ico"/>
 
-    <title>Expo Ingenieria</title>
+    <title>Bienvenida | Expo ingenierías</title>
 
     <link rel="stylesheet" href="./CSS/PaginaInicio.css">
 </head>
@@ -40,16 +45,16 @@
 
             <div class="Btns">
                 <div class="User-1">
-                    <span>Eres colaborador o vas a registrarte <br> Click Aqui!</span>
+                    <span>¿Eres docente o jurado?</span>
                     <div class="Usuarios">
-                        <a href="./HTML/LoginUsuarios.html" rel="noopener noreferrer">Colaborador</a>
+                        <a href="./PHP/LoginUsuarios.php" rel="noopener noreferrer">Colaborador</a>
                     </div>
                 </div>
     
                 <div class="User-2">
-                    <span>Tienes un proyecto o quieres registrarlo <br> Click Aqui!</span>
+                    <span>¿Tienes un proyecto o quieres registrarlo?</span>
                     <div class="Proyectos">
-                        <a href="./HTML/LoginProyecto.html" rel="noopener noreferrer">Proyecto</a>
+                        <a href="./PHP/LoginProyecto.php" rel="noopener noreferrer">Proyecto</a>
                     </div>
                 </div>
             </div>
