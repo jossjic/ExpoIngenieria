@@ -1,3 +1,6 @@
+<?php
+    require 'dataBase.php'
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +14,7 @@
 
   <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
   <link rel="stylesheet" href="../CSS/AdminPages.css">
+
 </head>
 <body>
 
@@ -23,14 +27,201 @@
       </ul>
       <nav>
           <ul>
-              <li><a href="#">Proyectos</a></li>
-              <li><a href="#">Usuarios</a></li>
-              <li><a href="#">Reconocimientos</a></li>
-              <li><a href="#">Estadísticas</a></li>
+              <li><a href="../PHP/ProyectosView.php">Proyectos</a></li>
+              <li><a href="../PHP/UsuariosView.php">Usuarios</a></li>
+              <li><a href="../PHP/ReconocimientosView.php">Reconocimientos</a></li>
+              <li><a href="../PHP/EstadisticasView.php">Estadísticas</a></li>
           </ul>
       </nav>
   </header>
 
+<main>
+  <?php
+  $pdo = Database::connect();
+  $correo=$_GET['correo'];
+  $type=$_GET['type'];
+
+  if($type=='co'){
+    $sql = "SELECT * FROM COLABORADOR WHERE co_correo='$correo';";
+    $res = $pdo->query($sql);
+    $info = $res->fetch(PDO::FETCH_ASSOC);
+
+    if ($info['co_nomina']!=NULL){
+      if($info['co_es_jurado']){
+        echo '<h1>Detalles del Profesor</h1>
+        <br>
+        <div>
+        <table>
+          <tr>
+            <td>Nombre: </td>
+            <td>'.$info['co_nombre'].'</td>
+          </tr>
+          <tr>
+            <td>Apellido: </td>
+            <td>'.$info['co_apellido'].'</td>
+          </tr>
+          <tr>
+            <td>Correo: </td>
+            <td>'.$info['co_correo'].'</td>
+          </tr>
+          <tr>
+            <td>Nomina: </td>
+            <td>'.$info['co_nomina'].'</td>
+          </tr>
+          <tr>
+            <td>Jurado: </td>
+            <td>✔</td>
+          </tr>
+        </table>
+        <div class="Btn__Blue"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
+        ';
+
+      }
+      else{
+        echo '<h1>Detalles del Profesor</h1>
+        <br>
+        <table>
+          <tr>
+            <td>Nombre: </td>
+            <td>'.$info['co_nombre'].'</td>
+          </tr>
+          <tr>
+            <td>Apellido: </td>
+            <td>'.$info['co_apellido'].'</td>
+          </tr>
+          <tr>
+            <td>Correo: </td>
+            <td>'.$info['co_correo'].'</td>
+          </tr>
+          <tr>
+            <td>Nomina: </td>
+            <td>'.$info['co_nomina'].'</td>
+          </tr>
+          <tr>
+            <td>Jurado: </td>
+            <td>❌</td>
+          </tr>
+        </table>
+        <div class="Btn__Blue"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
+        ';
+      }
+    }
+
+    else{
+      if($info['co_es_jurado']){
+        echo '<h1>Detalles del Externo</h1>
+        <br>
+        <table>
+          <tr>
+            <td>Nombre: </td>
+            <td>'.$info['co_nombre'].'</td>
+          </tr>
+          <tr>
+            <td>Apellido: </td>
+            <td>'.$info['co_apellido'].'</td>
+          </tr>
+          <tr>
+            <td>Correo: </td>
+            <td>'.$info['co_correo'].'</td>
+          </tr>
+          <tr>
+            <td>Jurado: </td>
+            <td>✔</td>
+          </tr>
+        </table>
+        <div class="Btn__Blue"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
+        ';
+      }
+      else{
+        echo '<h1>Detalles del Externo</h1>
+        <br>
+        <table>
+          <tr>
+            <td>Nombre: </td>
+            <td>'.$info['co_nombre'].'</td>
+          </tr>
+          <tr>
+            <td>Apellido: </td>
+            <td>'.$info['co_apellido'].'</td>
+          </tr>
+          <tr>
+            <td>Correo: </td>
+            <td>'.$info['co_correo'].'</td>
+          </tr>
+          <tr>
+            <td>Jurado: </td>
+            <td>❌</td>
+          </tr>
+        </table>
+        <div class="Btn__Blue"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
+        ';
+      }
+    }
+  }
+
+  elseif ($type=='al') {
+    $sql = "SELECT * FROM ALUMNO WHERE a_correo='$correo';";
+    $res = $pdo->query($sql);
+    $info = $res->fetch(PDO::FETCH_ASSOC);
+    echo '<h1>Detalles del Alumno</h1>
+        <br>
+        <table>
+          <tr>
+            <td>Nombre: </td>
+            <td>'.$info['a_nombre'].'</td>
+          </tr>
+          <tr>
+            <td>Apellido: </td>
+            <td>'.$info['a_apellido'].'</td>
+          </tr>
+          <tr>
+            <td>Correo: </td>
+            <td>'.$info['a_correo'].'</td>
+          </tr>
+          <tr>
+            <td>Matricula: </td>
+            <td>'.$info['a_matricula'].'</td>
+          </tr>
+        </table>
+        <div class="Btn__Blue"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
+        ';
+  }
+
+  elseif ($type=='adm') {
+    $sql = "SELECT * FROM ADMIN WHERE adm_correo='$correo';";
+    $res = $pdo->query($sql);
+    $info = $res->fetch(PDO::FETCH_ASSOC);
+    echo '<h1>Detalles del Administrador</h1>
+        <br>
+        <table>
+          <tr>
+            <td>Nombre: </td>
+            <td>'.$info['adm_nombre'].'</td>
+          </tr>
+          <tr>
+            <td>Apellido: </td>
+            <td>'.$info['adm_apellido'].'</td>
+          </tr>
+          <tr>
+            <td>Correo: </td>
+            <td>'.$info['adm_correo'].'</td>
+          </tr>
+        </table>
+        <div class="Btn__Blue"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
+        ';
+  }
+
+  else{
+    echo '<h1>Hubo un error en la consulta de tipo de usuario</h1>
+    <br>
+    <div class="Btn__Blue"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
+    ';
+  }
+
+  Database::disconnect();
+  ?>
+  
+</main>
 	
 
 	

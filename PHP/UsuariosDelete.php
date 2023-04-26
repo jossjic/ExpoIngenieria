@@ -1,25 +1,43 @@
 <?php
 	require 'database.php';
-	$id = 0;
-	if ( !empty($_GET['id'])) {
-		$id = $_REQUEST['id'];
+	$correo = 0;
+	if ( !empty($_GET['correo'])) {
+		$correo = $_REQUEST['correo'];
 	}
 
 	if ( !empty($_POST)) {
 		// keep track post values
-		$id = $_POST['id'];
+		$correo = $_POST['correo'];
+		$type = $_POST['type'];
 		// delete data
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "DELETE FROM V2_DOCENTE WHERE d_nomina = ?";
-		$q = $pdo->prepare($sql);
-		$q->execute(array($id));
+		if ($type=='co'){
+			$sql = "DELETE FROM COLABORADOR WHERE co_correo = ?";
+			$q = $pdo->prepare($sql);
+			$q->execute(array($correo));
+		}
+		else if ($type=='al'){
+			$sql = "DELETE FROM ALUMNO WHERE a_correo = ?";
+			$q = $pdo->prepare($sql);
+			$q->execute(array($correo));
+		}
+		else if ($type=='adm'){
+			$sql = "DELETE FROM ADMIN WHERE adm_correo = ?";
+			$q = $pdo->prepare($sql);
+			$q->execute(array($correo));
+		}
+		else{
+			echo "Error en tipo de usuario";
+		}
 		Database::disconnect();
-		header("Location: AdminUsuarios.php");
+		header("Location: UsuariosView.php");
 	}
 
 
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,10 +62,10 @@
       </ul>
       <nav>
           <ul>
-              <li><a href="#">Proyectos</a></li>
-              <li><a href="#">Usuarios</a></li>
-              <li><a href="#">Reconocimientos</a></li>
-              <li><a href="#">Estadísticas</a></li>
+		  <li><a href="../PHP/ProyectosView.php">Proyectos</a></li>
+              <li><a href="../PHP/UsuariosView.php">Usuarios</a></li>
+              <li><a href="../PHP/ReconocimientosView.php">Reconocimientos</a></li>
+              <li><a href="../PHP/EstadisticasView.php">Estadísticas</a></li>
           </ul>
       </nav>
   </header>
@@ -57,15 +75,15 @@
 	    <div class="container">
 	    	<div class="span10 offset1">
 	    		<div class="row">
-			    	<h3>Eliminar un docente</h3>
+			    	<h3>Eliminar Usuario</h3>
 			    </div>
 
-			    <form class="form-horizontal" action="delete.php" method="post">
-		    		<input type="hidden" name="id" value="<?php echo $id;?>"/>
+			    <form class="form-horizontal" action="UsuariosDelete.php" method="post">
+		    		<input type="hidden" name="correo" value="<?php echo $correo;?>"/>
 					<p class="alert alert-error">Estas seguro que quieres eliminar a este usuario?</p>
 					<div class="form-actions">
 						<button type="submit" class="btn btn-danger">Si</button>
-						<a class="btn" href="AdminUsuarios.php">No</a>
+						<a class="btn" href="UsuariosView.php">No</a>
 					</div>
 				</form>
 			</div>

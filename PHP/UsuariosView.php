@@ -1,3 +1,6 @@
+<?php
+    require 'dataBase.php'
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +26,7 @@
               <li><a href="#">Proyectos</a></li>
               <li><a href="#">Usuarios</a></li>
               <li><a href="#">Reconocimientos</a></li>
-              <li><a href="#">Eastadísticas</a></li>
+              <li><a href="#">Estadísticas</a></li>
           </ul>
       </nav>
   </header>
@@ -35,21 +38,74 @@
                 <table>
                     <tr>
                         <td>Total de Usuarios:</td>
-                        <td id="TotalUsuarios">6</td>
+                        <td id="TotalUsuarios">
+                        <?php
+                                $pdo = Database::connect();
+                                $sql = "SELECT * FROM COLABORADOR";
+                                $q1 = $pdo->query($sql)->rowCount();
+                                $sql = "SELECT * FROM ALUMNO";
+                                $q2 = $pdo->query($sql)->rowCount();
+                                $sql = "SELECT * FROM ADMIN";
+                                $q3 = $pdo->query($sql)->rowCount();
+                                $a=$q1+$q2+$q3;
+                                echo "$a";
+                                Database::disconnect();
+                            ?>
+                        </td>
                     </tr>
                     <tr>
                         <td>Jurados:</td>
-                        <td id="TotalJurados">4</td>
+                        <td id="TotalJurados">
+                        <?php
+                                $pdo = Database::connect();
+                                $sql = "SELECT * FROM COLABORADOR WHERE co_es_jurado = true";
+                                $q = $pdo->query($sql)->rowCount();
+                                echo "$q";
+                                Database::disconnect();
+                            ?>
+                        </td>
                     </tr>
                     <tr>
                         <td>Profesores:</td>
-                        <td id="TotalProfesores">2</td>
+                        <td id="TotalProfesores">
+                        <?php
+                                $pdo = Database::connect();
+                                $sql = "SELECT * FROM COLABORADOR WHERE co_nomina IS NOT NULL";
+                                $q = $pdo->query($sql)->rowCount();
+                                echo "$q";
+                                Database::disconnect();
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Alumnos:</td>
+                        <td id="TotalProfesores">
+                        <?php
+                                $pdo = Database::connect();
+                                $sql = "SELECT * FROM ALUMNO";
+                                $q = $pdo->query($sql)->rowCount();
+                                echo "$q";
+                                Database::disconnect();
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Admins:</td>
+                        <td id="TotalProfesores">
+                        <?php
+                                $pdo = Database::connect();
+                                $sql = "SELECT * FROM ADMIN";
+                                $q = $pdo->query($sql)->rowCount();
+                                echo "$q";
+                                Database::disconnect();
+                            ?>
+                        </td>
                     </tr>
                 </table>
             </div>
 
             <div class="Estadisticas__Btn">
-                <a cglass="Admin__Start__Right__Btn" href="../PHP/EstadisticasUsuarios.php">Estadisticas Proyectos</a>
+                <a cglass="Admin__Start__Right__Btn" href="../PHP/EstadisticasUsuarios.php">Estadisticas Usuarios</a>
             </div>
         </div>
 
@@ -83,58 +139,84 @@
             <div class="Info__Header">
                 <p>&nbsp;</p>
                 <p></p>
-                <p>ID</p>
+                <p>Nomina/Matrícula</p>
                 <p>Nombre</p>
-                <p>Apellido Paterno</p>
+                <p>Apellido</p>
                 <p>Correo</p>
+                <p>Es Jurado</p>
                 <p>Acciones</p>
-            </div>
-            <div class="Info__Table">
+             </div>
+                <div class="Info__Table">
                   
                 <?php
-								   	include 'dataBase.php';
 								   	$pdo = Database::connect();
-								   	$sql = 'SELECT * FROM V3_COLABORADOR ORDER BY co_apellido';
+								   	$sql = 'SELECT * FROM COLABORADOR ORDER BY co_apellido';
 				 				   	foreach ($pdo->query($sql) as $row) {
                                         echo '<input type="checkbox" name="" id="">' ;
                                         echo '<p></p>';
 
                                         echo '<p>'. $row['co_nomina'] . '</p>';
 			    					   	echo '<p>'. $row['co_nombre'] . '</>';
-			    					  	echo '<p>'. $row['co_apellido_paterno'] . '</p>';
+			    					  	echo '<p>'. $row['co_apellido'] . '</p>';
                       					echo '<p>'. $row['co_correo'] . '</p>';
+                                        echo '<p>'. $row['co_es_jurado'] . '</p>';
                                         echo '<p></p>';
 
-			    					   	echo ' <div class="Btn__Green"> <a href="UsuariosRead.php?id='.$row['d_nomina'].'">Ver</a></div>';
-			    					  	echo ' <div class="Btn__Blue"> <a href="UsuariosUpdate.php?id='.$row['d_nomina'].'">Actualizar</a></div>';
-			    					   	echo ' <div class="Btn__Red" ><a href="UsuariosDelete.php?id='.$row['d_nomina'].'">Eliminar</a></div>';
+			    					   	echo ' <div class="Btn__Green" > <a href="UsuariosRead.php?correo='.$row['co_correo'].'&type=co">Ver</a></div>';
+			    					  	echo ' <div class="Btn__Blue"> <a href="UsuariosUpdate.php?correo='.$row['co_correo'].'&type=co">Actualizar</a></div>';
+			    					   	echo ' <div class="Btn__Red" ><a href="UsuariosDelete.php?correo='.$row['co_correo'].'&type=co">Eliminar</a></div>';
                                         
 								    }
+								   	
+				  				?>
+                                 <?php
 
+								   
+								   	$sql = 'SELECT * FROM ALUMNO ORDER BY a_apellido';
+				 				   	foreach ($pdo->query($sql) as $row) {
+                                        echo '<input type="checkbox" name="" id="">' ;
+                                        echo '<p></p>';
 
-								$sql = 'SELECT * FROM V2_ALUMNO ORDER BY a_ap_pa';
-								foreach ($pdo->query($sql) as $row) {
-                                    echo '<input type="checkbox" name="" id="">' ;
+                                        echo '<p>'. $row['a_matricula'] . '</p>';
+			    					   	echo '<p>'. $row['a_nombre'] . '</>';
+			    					  	echo '<p>'. $row['a_apellido'] . '</p>';
+                      					echo '<p>'. $row['a_correo'] . '</p>';
+                                        echo '<p>N/A</p>';
+                                        echo '<p></p>';
 
-                                    echo '<p>'. $row['a_matricula'] . '</p>';
-								    echo '<p>'. $row['a_nombre'] . '</p>';
-								    echo '<p>'. $row['a_ap_pa'] . '</p>';
-			  					    echo '<p>'. $row['a_correo'] . '</p>';
-
-								    echo ' <div class="Btn__Green"> <a href="readAdminUsu.php?id='.$row['a_matricula'].'">Ver</a></div>';
-								    echo ' <div class="Btn__Blue" > <a href="updateAdminUsu.php?id='.$row['a_matricula'].'">Actualizar</a></div>';
-								    echo ' <div class="Btn__Red" > <a href="deleteAdminUsu.php?id='.$row['a_matricula'].'">Eliminar</a></div>';
-                                    
-							}
-
-
+			    					   	echo ' <div class="Btn__Green"> <a href="UsuariosRead.php?correo='.$row['a_correo'].'&type=al">Ver</a></div>';
+			    					  	echo ' <div class="Btn__Blue"> <a href="UsuariosUpdate.php?correo='.$row['a_correo'].'&type=al">Actualizar</a></div>';
+			    					   	echo ' <div class="Btn__Red" ><a href="UsuariosDelete.php?correo='.$row['a_correo'].'&type=al">Eliminar</a></div>';
+                                        
+								    }
 								   	Database::disconnect();
 				  				?>
+                                <?php
 
+								   
+								   	$sql = 'SELECT * FROM ADMIN ORDER BY adm_apellido';
+				 				   	foreach ($pdo->query($sql) as $row) {
+                                        echo '<input type="checkbox" name="" id="">' ;
+                                        echo '<p></p>';
+                                        echo '<p>N/A</p>';
+			    					   	echo '<p>'. $row['adm_nombre'] . '</>';
+			    					  	echo '<p>'. $row['adm_apellido'] . '</p>';
+                      					echo '<p>'. $row['adm_correo'] . '</p>';
+                                        echo '<p>N/A</p>';
+                                        echo '<p></p>';
 
-
+			    					   	echo ' <div class="Btn__Green"> <a href="UsuariosRead.php?correo='.$row['adm_correo'].'&type=adm">Ver</a></div>';
+			    					  	echo ' <div class="Btn__Blue"> <a href="UsuariosUpdate.php?correo='.$row['adm_correo'].'&type=adm">Actualizar</a></div>';
+			    					   	echo ' <div class="Btn__Red" ><a href="UsuariosDelete.php?correo='.$row['adm_correo'].'&type=adm">Eliminar</a></div>';
+                                        
+								    }
+								   	Database::disconnect();
+				  				?>
+            
             </div>
         </div>
+                                        
+     
 
   </main>
 
