@@ -23,10 +23,10 @@
       </ul>
       <nav>
           <ul>
-              <li><a href="#">Proyectos</a></li>
-              <li><a href="#">Usuarios</a></li>
-              <li><a href="#">Reconocimientos</a></li>
-              <li><a href="#">Estadísticas</a></li>
+          <li><a href="../PHP/ProyectosView.php">Proyectos</a></li>
+              <li><a href="../PHP/UsuariosView.php">Usuarios</a></li>
+              <li><a href="../PHP/ReconocimientosView.php">Reconocimientos</a></li>
+              <li><a href="../PHP/EstadisticasView.php">Estadísticas</a></li>
           </ul>
       </nav>
   </header>
