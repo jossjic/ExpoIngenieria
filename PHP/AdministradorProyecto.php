@@ -274,17 +274,25 @@
 			</div>
 		</div>
 
-		<!-- Ventana emergente para ingresar el estudiante -->
+		<!-- Ventana emergente para ingresar un docente -->
 		<div id="docente-data-modal" class="modal-docente">
 			<div class="modal-content">
 				<span class="close close-docente">&times;</span>
 				<h2>Agregar Profesor</h2>
-				<form action="" id="teacher_form">
+				<form action="../PHP/AgregarProfesor.php" id="teacher_form" method="POST">
 					<label for="teacher_email">Correo Electrónico:</label>
 					<select name="teacher_email" id="teacher_email">
-						<!--PHP CODE-->
+						<?php 
+							$pdo = Database::connect();
+							$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+							$sql = "SELECT * FROM COLABORADOR";
+							$q = $pdo->prepare($sql);
+							$q->execute();
+							$data = $q->fetch(PDO::FETCH_ASSOC);
+							Database::disconnect();
+						?>
 					</select>
-					<br /><br />
+					<br/><br />
 					<input type="submit" value="Guardar" />
 				</form>
 			</div>
