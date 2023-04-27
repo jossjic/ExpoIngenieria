@@ -141,7 +141,7 @@
                             preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $project['p_poster'], $match);
                             $image_id = $match[1];
                             $image_full_link = "https://drive.google.com/file/d/".$image_id."/preview";
-                            echo '<dd><iframe width="100%" src="'.$video_full_link.'" allow="autoplay"></iframe></dd>';
+                            echo '<dd><iframe width="100%" src="'.$image_full_link.'" allow="autoplay"></iframe></dd>';
                         ?>
                     </dl>
                     <dl>
