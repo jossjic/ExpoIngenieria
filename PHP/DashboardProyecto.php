@@ -13,15 +13,21 @@
     $pdo = Database::connect();
 
     // Project
-    $sql = "SELECT * FROM PROYECTO NATURAL JOIN CATEGORIA WHERE p_id = ?";
+    $sql = "SELECT *
+            FROM PROYECTO
+            NATURAL JOIN EDICION
+            NATURAL JOIN CATEGORIA
+            NATURAL JOIN NIVEL
+            WHERE p_id = ?";
     $q = $pdo->prepare($sql);
     $q->execute(array($_SESSION['id']));
     $project = $q->fetch(PDO::FETCH_ASSOC);
     // Students
-    $sql = "SELECT * 
-            FROM ALUMNO 
-            WHERE p_id = ?
-            ORDER BY a_apellido";
+    $sql = "SELECT ALUMNO.*
+            FROM ALUMNO
+            NATURAL JOIN PROYECTO_ALUMNO
+            WHERE PROYECTO_ALUMNO.p_id = ?
+            ";
     $q = $pdo->prepare($sql);
     $q->execute(array($_SESSION['id']));
     $students = $q->fetchAll();
