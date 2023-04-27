@@ -109,7 +109,8 @@
 				<span class="close close-video">&times;</span>
 				<h2>Ingresa el enlace del video</h2>
 				<p>1. Asegurate de que el video lo compartas desde Google Drive <br>
-				   2. Cuando pegues el link del video compartido desde google drive debe tener el siguiente pattern: https://drive.google.com/file/d/.../view/usp=sharing</p>
+				   2. Cuando pegues el link del video compartido desde google drive debe tener el siguiente pattern:  <br>
+				   https://drive.google.com/file/d/.../view?usp=sharing</p>
 				<form action="../PHP/EnlaceVideo.php" method="post" >
 					<input
 						type="url"
@@ -129,7 +130,10 @@
 		<div id="poster-link-modal" class="modal-poster">
 			<div class="modal-content">
 				<span class="close close-poster">&times;</span>
-				<h2>Ingresa el enlace del video</h2>
+				<h2>Ingresa el enlace del poster en formato PDF</h2>
+				<p>1. Asegurate de que el poster lo compartas desde Google Drive <br>
+				   2. Cuando pegues el link del poster compartido desde google drive debe tener el siguiente pattern:  <br>
+				   https://drive.google.com/file/d/.../view?usp=sharing</p>
 				<form action="../PHP/EnlacePoster.php" method="post">
 					<input
 						type="url"
