@@ -114,7 +114,7 @@
 						name="url"
 						id="url-video"
 						placeholder="https://example.com"
-						pattern="https://.*"
+						pattern="^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing$"
 						size="50"
 						required
 					/>
@@ -134,7 +134,7 @@
 						name="url"
 						id="url-poster"
 						placeholder="https://example.com"
-						pattern="https://.*"
+						pattern="^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing$"
 						size="50"
 						required
 					/>
