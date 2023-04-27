@@ -16,10 +16,6 @@ main{
     place-items: center;
 }
 
-table{
-    
-    padding-top: 20%;
-}
 
 .Admin__Start{
     grid-column: 2/3;

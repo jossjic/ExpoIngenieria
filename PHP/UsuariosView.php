@@ -137,13 +137,13 @@
 
         <div class="Info">
             <div class="Info__Header">
-                <p>&nbsp;</p>
-                <p></p>
+               <p>&nbsp;</p>
+                <!-- <p></p> -->
                 <p>Nomina/Matrícula</p>
+                <p>Tipo</p>
                 <p>Nombre</p>
                 <p>Apellido</p>
                 <p>Correo</p>
-                <p>Es Jurado</p>
                 <p>Acciones</p>
              </div>
                 <div class="Info__Table">
@@ -152,14 +152,26 @@
 								   	$pdo = Database::connect();
 								   	$sql = 'SELECT * FROM COLABORADOR ORDER BY co_apellido';
 				 				   	foreach ($pdo->query($sql) as $row) {
-                                        echo '<input type="checkbox" name="" id="">' ;
+                                        /*echo '<input type="checkbox" name="" id="">' ;*/
                                         echo '<p></p>';
 
-                                        echo '<p>'. $row['co_nomina'] . '</p>';
-			    					   	echo '<p>'. $row['co_nombre'] . '</>';
-			    					  	echo '<p>'. $row['co_apellido'] . '</p>';
-                      					echo '<p>'. $row['co_correo'] . '</p>';
-                                        echo '<p>'. $row['co_es_jurado'] . '</p>';
+                                    
+                                        if ($row['co_es_jurado'] == 1 && $row['co_nomina']!=NULL) {
+                                            echo '<p>'. $row['co_nomina'] . '</p>';
+                                            echo '<p>Jurado Profesor</p>';}
+                                        else if ($row['co_es_jurado']==0 && $row['co_nomina']!=NULL) {
+                                            echo '<p>'. $row['co_nomina'] . '</p>';
+                                            echo '<p>Profesor</p>';}
+                                        else if ($row['co_es_jurado']==1 && $row['co_nomina']==NULL) {
+                                            echo '<p>N/A</p>';
+                                            echo '<p>Jurado Externo</p>';}
+                                        else {
+                                            echo '<p>N/A</p>';
+                                            echo '<p>Externo</p>';}
+                                            echo '<p>'. $row['co_nombre'] . '</>';
+                                            echo '<p>'. $row['co_apellido'] . '</p>';
+                                            echo '<p>'. $row['co_correo'] . '</p>';
+                                
                                         echo '<p></p>';
 
 			    					   	echo ' <div class="Btn__Green" > <a href="UsuariosRead.php?correo='.$row['co_correo'].'&type=co">Ver</a></div>';
@@ -174,14 +186,14 @@
 								   
 								   	$sql = 'SELECT * FROM ALUMNO ORDER BY a_apellido';
 				 				   	foreach ($pdo->query($sql) as $row) {
-                                        echo '<input type="checkbox" name="" id="">' ;
+                                       /* echo '<input type="checkbox" name="" id="">' ;*/
                                         echo '<p></p>';
 
                                         echo '<p>'. $row['a_matricula'] . '</p>';
+                                        echo '<p>Alumno</p>';
 			    					   	echo '<p>'. $row['a_nombre'] . '</>';
 			    					  	echo '<p>'. $row['a_apellido'] . '</p>';
                       					echo '<p>'. $row['a_correo'] . '</p>';
-                                        echo '<p>N/A</p>';
                                         echo '<p></p>';
 
 			    					   	echo ' <div class="Btn__Green"> <a href="UsuariosRead.php?correo='.$row['a_correo'].'&type=al">Ver</a></div>';
@@ -196,13 +208,13 @@
 								   
 								   	$sql = 'SELECT * FROM ADMIN ORDER BY adm_apellido';
 				 				   	foreach ($pdo->query($sql) as $row) {
-                                        echo '<input type="checkbox" name="" id="">' ;
+                                       /* echo '<input type="checkbox" name="" id="">' ;*/
                                         echo '<p></p>';
                                         echo '<p>N/A</p>';
+                                        echo '<p>Administrador</p>';
 			    					   	echo '<p>'. $row['adm_nombre'] . '</>';
 			    					  	echo '<p>'. $row['adm_apellido'] . '</p>';
                       					echo '<p>'. $row['adm_correo'] . '</p>';
-                                        echo '<p>N/A</p>';
                                         echo '<p></p>';
 
 			    					   	echo ' <div class="Btn__Green"> <a href="UsuariosRead.php?correo='.$row['adm_correo'].'&type=adm">Ver</a></div>';

@@ -13,7 +13,7 @@
   <title>Admin Usuarios Detalles</title>
 
   <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
-  <link rel="stylesheet" href="../CSS/AdminPages.css">
+  <!-- <link rel="stylesheet" href="../CSS/AdminPages.css"> -->
 
 </head>
 <body>
@@ -48,9 +48,16 @@
 
     if ($info['co_nomina']!=NULL){
       if($info['co_es_jurado']){
+        $sql =  "SELECT ed.ed_id, ed.ed_nombre FROM EDICION_COLABORADOR NATURAL JOIN EDICION as ed WHERE co_correo='$correo';";
+        $queryed = $pdo->query($sql);
+       $infoed = $queryed->fetchAll(PDO::FETCH_OBJ);
+
+       $sql =  "SELECT p.p_id, p.p_nombre_clave, p.p_estado FROM PROYECTO_COLABORADOR NATURAL JOIN PROYECTO as p WHERE co_correo='juan@example.com';";
+        $queryp = $pdo->query($sql);
+       $infop = $queryp->fetchAll(PDO::FETCH_OBJ);
         echo '<h1>Detalles del Profesor</h1>
         <br>
-        <div>
+        
         <table>
           <tr>
             <td>Nombre: </td>
@@ -73,7 +80,63 @@
             <td>✔</td>
           </tr>
         </table>
-        <div class="Btn__Blue"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
+        <br>
+        ';
+
+        echo '<h2>Ediciones</h2>
+        <br>
+        ';
+        if($queryed -> rowCount() > 0){
+          foreach($infoed as $row){
+            echo '
+            <table>
+              <tr>
+                <td>ID: </td>
+                <td>'.$row->ed_id.'</td>
+              </tr>
+              <tr>
+                <td>Nombre: </td>
+                <td>'.$row->ed_nombre.'</td>
+              </tr>
+              </table>
+              <br>
+            ';
+          }
+        }
+        else{
+          echo '<p ERROR: No hay ediciones asociadas a este usuario</p>';
+        }
+
+        echo '<h2>Proyectos</h2>
+        <br>
+        ';
+        if($queryp -> rowCount() > 0){
+          foreach($infop as $row){
+            echo '
+            
+            <table>
+              <tr>
+                <td>ID: </td>
+                <td>'.$row->p_id.'</td>
+              </tr>
+              <tr>
+                <td>Nombre Clave: </td>
+                <td>'.$row->p_nombre_clave.'</td>
+              </tr>
+              <tr>
+                <td>Estado: </td>
+                <td>'.$row->p_estado.'</td>
+              </tr>
+              </table>
+              <br>
+            ';
+          }
+        }
+        else{
+          echo '<p>No hay proyectos asociados a este usuario</p>';
+        }
+
+        echo '<div class="Btn__Blue"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
         ';
 
       }
