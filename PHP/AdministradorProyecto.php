@@ -118,7 +118,7 @@
 						size="50"
 						required
 					/>
-					<button type="submit">Guardar</button>
+					<input type="submit" value="Guardar">
 				</form>
 			</div>
 		</div>

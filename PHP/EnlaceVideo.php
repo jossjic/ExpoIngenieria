@@ -14,10 +14,10 @@
 			$sql = "UPDATE PROYECTO SET p_video = ? WHERE p_id =  ? ";
 			$q = $pdo->prepare($sql);
 			$q->execute(array($URL,$_SESSION['id']));
-			$data = $q->fetch(PDO::FETCH_ASSOC);
 			Database::disconnect();
 			header("Location: ../PHP/DashboardProyecto.php");
 			exit();
+
 		}
 	}
 
