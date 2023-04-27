@@ -102,7 +102,7 @@
                     <h2><?php echo $project['p_nombre']; ?></h2>
 
                     <div class="Proyect__Edit">
-                        <a href="#">Editar</a>
+                        <a href="../PHP/AdministradorProyecto.php">Editar</a>
                     </div>
                 </div>
                 <div class="Info__Menu">
