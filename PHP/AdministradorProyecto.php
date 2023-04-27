@@ -115,6 +115,9 @@
 						id="url-video"
 						placeholder="https://example.com"
 						pattern="^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing$"
+						title="1. Asegurate de que el video lo compartas desde Google Drive
+							   2. Cuando pegues el link del video compartido desde google drive debe
+							      tener el siguiente pattern: https://drive.google.com/file/d/.../view/usp=sharing"
 						size="50"
 						required
 					/>
