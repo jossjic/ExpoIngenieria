@@ -290,7 +290,7 @@
 							$q->execute();
 							$data = $q->fetchAll(PDO::FETCH_ASSOC);
 							foreach ($data as $row) {
-								echo "<option value='" .$row['co_id']. "'> ".$row['co_correo']." </option>";
+								echo "<option value='" .$row['co_nomina']. "'> ".$row['co_correo']." </option>";
 							}
 							Database::disconnect();
 						?>
