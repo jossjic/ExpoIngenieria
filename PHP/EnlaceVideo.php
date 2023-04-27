@@ -8,6 +8,7 @@
 	$URL_Error = null;
 
 	echo "$URL";
+	echo $_SESSION['id'];
 
 	if (!empty($_POST)){
 		if ($valid) {
@@ -19,7 +20,6 @@
 			Database::disconnect();
 			header("Location: ../PHP/DashboardProyecto.php");
 			exit();
-
 		}
 	}
 
