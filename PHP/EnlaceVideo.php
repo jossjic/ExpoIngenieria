@@ -7,6 +7,8 @@
 	$URL = $_POST['url'];
 	$URL_Error = null;
 
+	echo "$URL";
+
 	if (!empty($_POST)){
 		if ($valid) {
 			$pdo = Database::connect();
