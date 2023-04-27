@@ -12,6 +12,8 @@
         $q = $pdo->prepare($sql);
         $q->execute(array($_SESSION['id'], $teacher_email));
         Database::disconnect(); 
+        header("Location: ../PHP/AdministradorProyecto.php");
+        exit();
     }  
 
 
