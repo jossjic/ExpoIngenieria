@@ -52,9 +52,13 @@
         $queryed = $pdo->query($sql);
        $infoed = $queryed->fetchAll(PDO::FETCH_OBJ);
 
-       $sql =  "SELECT p.p_id, p.p_nombre_clave, p.p_estado FROM PROYECTO_COLABORADOR NATURAL JOIN PROYECTO as p WHERE co_correo='juan@example.com';";
-        $queryp = $pdo->query($sql);
-       $infop = $queryp->fetchAll(PDO::FETCH_OBJ);
+       $sql =  "SELECT p.p_id, p.p_nombre_clave, p.p_estado FROM PROYECTO_DOCENTE NATURAL JOIN PROYECTO as p WHERE co_correo='$correo';";
+        $querypa = $pdo->query($sql);
+       $infopa = $querypa->fetchAll(PDO::FETCH_OBJ);
+
+       $sql =  "SELECT p.p_id, p.p_nombre_clave, p.p_estado FROM PROYECTO_JURADO NATURAL JOIN PROYECTO as p WHERE co_correo='$correo';";
+        $querypc = $pdo->query($sql);
+       $infopc = $querypc->fetchAll(PDO::FETCH_OBJ);
         echo '<h1>Detalles del Profesor</h1>
         <br>
         
@@ -104,14 +108,14 @@
           }
         }
         else{
-          echo '<p ERROR: No hay ediciones asociadas a este usuario</p>';
+          echo '<p ERROR: No hay ediciones asociadas a este usuario</p><br>';
         }
 
-        echo '<h2>Proyectos</h2>
+        echo '<h2>Proyectos Asignados</h2>
         <br>
         ';
-        if($queryp -> rowCount() > 0){
-          foreach($infop as $row){
+        if($querypa -> rowCount() > 0){
+          foreach($infopa as $row){
             echo '
             
             <table>
@@ -133,7 +137,36 @@
           }
         }
         else{
-          echo '<p>No hay proyectos asociados a este usuario</p>';
+          echo '<p>No hay proyectos asociados a este usuario</p><br>';
+        }
+
+            echo '<h2>Proyectos para Calificar</h2>
+        <br>
+        ';
+        if($querypc -> rowCount() > 0){
+          foreach($infopc as $row){
+            echo '
+            
+            <table>
+              <tr>
+                <td>ID: </td>
+                <td>'.$row->p_id.'</td>
+              </tr>
+              <tr>
+                <td>Nombre Clave: </td>
+                <td>'.$row->p_nombre_clave.'</td>
+              </tr>
+              <tr>
+                <td>Estado: </td>
+                <td>'.$row->p_estado.'</td>
+              </tr>
+              </table>
+              <br>
+            ';
+          }
+        }
+        else{
+          echo '<p>No hay proyectos asociados a este usuario</p><br>';
         }
 
         echo '<div class="Btn__Blue"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
@@ -141,6 +174,13 @@
 
       }
       else{
+        $sql =  "SELECT ed.ed_id, ed.ed_nombre FROM EDICION_COLABORADOR NATURAL JOIN EDICION as ed WHERE co_correo='$correo';";
+        $queryed = $pdo->query($sql);
+       $infoed = $queryed->fetchAll(PDO::FETCH_OBJ);
+
+       $sql =  "SELECT p.p_id, p.p_nombre_clave, p.p_estado FROM PROYECTO_DOCENTE NATURAL JOIN PROYECTO as p WHERE co_correo='$correo';";
+        $querypa = $pdo->query($sql);
+       $infopa = $querypa->fetchAll(PDO::FETCH_OBJ);
         echo '<h1>Detalles del Profesor</h1>
         <br>
         <table>
@@ -165,13 +205,77 @@
             <td>❌</td>
           </tr>
         </table>
-        <div class="Btn__Blue"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
+        <br>';
+        echo '<h2>Ediciones</h2>
+        <br>
+        ';
+        if($queryed -> rowCount() > 0){
+          foreach($infoed as $row){
+            echo '
+            <table>
+              <tr>
+                <td>ID: </td>
+                <td>'.$row->ed_id.'</td>
+              </tr>
+              <tr>
+                <td>Nombre: </td>
+                <td>'.$row->ed_nombre.'</td>
+              </tr>
+              </table>
+              <br>
+            ';
+          }
+        }
+        else{
+          echo '<p ERROR: No hay ediciones asociadas a este usuario</p><br>';
+        }
+
+        echo '<h2>Proyectos Asignados</h2>
+        <br>
+        ';
+        if($querypa -> rowCount() > 0){
+          foreach($infopa as $row){
+            echo '
+            
+            <table>
+              <tr>
+                <td>ID: </td>
+                <td>'.$row->p_id.'</td>
+              </tr>
+              <tr>
+                <td>Nombre Clave: </td>
+                <td>'.$row->p_nombre_clave.'</td>
+              </tr>
+              <tr>
+                <td>Estado: </td>
+                <td>'.$row->p_estado.'</td>
+              </tr>
+              </table>
+              <br>
+            ';
+          }
+        }
+        else{
+          echo '<p>No hay proyectos asociados a este usuario</p><br>';
+        }
+
+
+        echo '<div class="Btn__Blue"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
         ';
       }
     }
 
     else{
       if($info['co_es_jurado']){
+        $sql =  "SELECT ed.ed_id, ed.ed_nombre FROM EDICION_COLABORADOR NATURAL JOIN EDICION as ed WHERE co_correo='$correo';";
+        $queryed = $pdo->query($sql);
+       $infoed = $queryed->fetchAll(PDO::FETCH_OBJ);
+
+       $sql =  "SELECT p.p_id, p.p_nombre_clave, p.p_estado FROM PROYECTO_JURADO NATURAL JOIN PROYECTO as p WHERE co_correo='$correo';";
+        $querypc = $pdo->query($sql);
+       $infopc = $querypc->fetchAll(PDO::FETCH_OBJ);
+
+
         echo '<h1>Detalles del Externo</h1>
         <br>
         <table>
@@ -192,10 +296,66 @@
             <td>✔</td>
           </tr>
         </table>
-        <div class="Btn__Blue"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
+        <br>';
+        echo '<h2>Ediciones</h2>
+        <br>
+        ';
+        if($queryed -> rowCount() > 0){
+          foreach($infoed as $row){
+            echo '
+            <table>
+              <tr>
+                <td>ID: </td>
+                <td>'.$row->ed_id.'</td>
+              </tr>
+              <tr>
+                <td>Nombre: </td>
+                <td>'.$row->ed_nombre.'</td>
+              </tr>
+              </table>
+              <br>
+            ';
+          }
+        }
+        else{
+          echo '<p ERROR: No hay ediciones asociadas a este usuario</p><br>';
+        }
+        
+        echo '<h2>Proyectos para Calificar</h2>
+        <br>
+        ';
+        if($querypc -> rowCount() > 0){
+          foreach($infopc as $row){
+            echo '
+            
+            <table>
+              <tr>
+                <td>ID: </td>
+                <td>'.$row->p_id.'</td>
+              </tr>
+              <tr>
+                <td>Nombre Clave: </td>
+                <td>'.$row->p_nombre_clave.'</td>
+              </tr>
+              <tr>
+                <td>Estado: </td>
+                <td>'.$row->p_estado.'</td>
+              </tr>
+              </table>
+              <br>
+            ';
+          }
+        }
+        else{
+          echo '<p>No hay proyectos asociados a este usuario</p><br>';
+        }
+        echo '<div class="Btn__Blue"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
         ';
       }
       else{
+        $sql =  "SELECT ed.ed_id, ed.ed_nombre FROM EDICION_COLABORADOR NATURAL JOIN EDICION as ed WHERE co_correo='$correo';";
+        $queryed = $pdo->query($sql);
+       $infoed = $queryed->fetchAll(PDO::FETCH_OBJ);
         echo '<h1>Detalles del Externo</h1>
         <br>
         <table>
@@ -216,7 +376,30 @@
             <td>❌</td>
           </tr>
         </table>
-        <div class="Btn__Blue"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
+        <br>';
+
+        echo '<h2>Ediciones</h2> <br>';
+        if($queryed -> rowCount() > 0){
+          foreach($infoed as $row){
+            echo '
+            <table>
+              <tr>
+                <td>ID: </td>
+                <td>'.$row->ed_id.'</td>
+              </tr>
+              <tr>
+                <td>Nombre: </td>
+                <td>'.$row->ed_nombre.'</td>
+              </tr>
+              </table>
+              <br>
+            ';
+          }
+        }
+        else{
+          echo '<p ERROR: No hay ediciones asociadas a este usuario</p><br>';
+        }
+        echo '<div class="Btn__Blue"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
         ';
       }
     }
@@ -226,6 +409,10 @@
     $sql = "SELECT * FROM ALUMNO WHERE a_correo='$correo';";
     $res = $pdo->query($sql);
     $info = $res->fetch(PDO::FETCH_ASSOC);
+
+    $sql =  "SELECT p.p_id, p.p_nombre_clave, p.p_estado FROM PROYECTO_ALUMNO NATURAL JOIN PROYECTO as p WHERE a_correo='$correo';";
+    $querypc = $pdo->query($sql);
+   $infopc = $querypc->fetchAll(PDO::FETCH_OBJ);
     echo '<h1>Detalles del Alumno</h1>
         <br>
         <table>
@@ -246,7 +433,35 @@
             <td>'.$info['a_matricula'].'</td>
           </tr>
         </table>
-        <div class="Btn__Blue"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
+        <br>
+        ';
+        if($querypa -> rowCount() > 0){
+          foreach($infopa as $row){
+            echo '
+            
+            <table>
+              <tr>
+                <td>ID: </td>
+                <td>'.$row->p_id.'</td>
+              </tr>
+              <tr>
+                <td>Nombre Clave: </td>
+                <td>'.$row->p_nombre_clave.'</td>
+              </tr>
+              <tr>
+                <td>Estado: </td>
+                <td>'.$row->p_estado.'</td>
+              </tr>
+              </table>
+              <br>
+            ';
+          }
+        }
+        else{
+          echo '<p>No hay proyectos asociados a este usuario</p><br>';
+        }
+
+        echo '<div class="Btn__Blue"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
         ';
   }
 

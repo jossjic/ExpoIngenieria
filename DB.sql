@@ -55,7 +55,7 @@ CREATE TABLE `COLABORADOR` (
   PRIMARY KEY (`co_correo`)
 );
 
-CREATE TABLE `PROYECTO_COLABORADOR` (
+CREATE TABLE `PROYECTO_DOCENTE` (
   `p_id` INT,
   `co_correo` VARCHAR(100),
   FOREIGN KEY (`co_correo`) REFERENCES `COLABORADOR`(`co_correo`)
@@ -63,6 +63,17 @@ CREATE TABLE `PROYECTO_COLABORADOR` (
 ON UPDATE CASCADE,
   FOREIGN KEY (`p_id`) REFERENCES `PROYECTO`(`p_id`)
 	ON DELETE CASCADE
+ON UPDATE CASCADE
+);
+
+CREATE TABLE `PROYECTO_JURADO` (
+  `p_id` INT,
+  `co_correo` VARCHAR(100),
+  FOREIGN KEY (`p_id`) REFERENCES `PROYECTO`(`p_id`)
+  ON DELETE CASCADE
+ON UPDATE CASCADE,
+  FOREIGN KEY (`co_correo`) REFERENCES `COLABORADOR`(`co_correo`)
+  	ON DELETE CASCADE
 ON UPDATE CASCADE
 );
 
@@ -106,12 +117,12 @@ ON UPDATE CASCADE,
 ON UPDATE CASCADE
 );
 
-CREATE TABLE ALUMNO (
-  `a_matricula` VARCHAR(9) NOT NULL,
+CREATE TABLE `ALUMNO` (
+  `a_matricula` VARCHAR(9) ,
   `a_nombre` VARCHAR(100),
   `a_apellido` VARCHAR(100),
-  `a_correo` VARCHAR(100),
-  PRIMARY KEY (`a_matricula`)
+  `a_correo` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`a_correo`)
 );
 
 CREATE TABLE `ETAPA` (
@@ -138,13 +149,13 @@ ON UPDATE CASCADE
 );
 
 CREATE TABLE `PROYECTO_ALUMNO` (
-  `a_matricula` VARCHAR(9),
+  `a_correo` VARCHAR(100),
   `p_id` INT,
-  FOREIGN KEY (`a_matricula`) REFERENCES ALUMNO(`a_matricula`)
-	ON DELETE CASCADE
+  FOREIGN KEY (`a_correo`) REFERENCES `ALUMNO`(`a_correo`)
+  	ON DELETE CASCADE
 ON UPDATE CASCADE,
   FOREIGN KEY (`p_id`) REFERENCES `PROYECTO`(`p_id`)
-	ON DELETE CASCADE
+  	ON DELETE CASCADE
 ON UPDATE CASCADE
 );
 
@@ -223,14 +234,14 @@ INSERT INTO `EVALUACION` (`co_correo`, `p_id`, `ev_criterio_1`, `ev_criterio_2`,
 ('luisa@example.com', 4, 1, 1, 2, 2, 2, 'Requiere mejoras importantes en todos los criterios', 1),
 ('luisa@example.com', 5, 4, 3, 4, 3, 4, 'Excelente trabajo en general, pero es necesario mejorar en el criterio 2', 0);
 
-INSERT INTO PROYECTO_ALUMNO (a_matricula, p_id) VALUES ('A29131433', 1);
-INSERT INTO PROYECTO_ALUMNO (a_matricula, p_id) VALUES ('A00234567', 1);
-INSERT INTO PROYECTO_ALUMNO (a_matricula, p_id) VALUES ('A00345678', 2);
-INSERT INTO PROYECTO_ALUMNO (a_matricula, p_id) VALUES ('A00234567', 3);
-INSERT INTO PROYECTO_ALUMNO (a_matricula, p_id) VALUES ('A29131433', 4);
-INSERT INTO PROYECTO_ALUMNO (a_matricula, p_id) VALUES ('A00234567', 5);
+INSERT INTO PROYECTO_ALUMNO (a_correo, p_id) VALUES ('jossjic_03@hotmail.com', 1);
+INSERT INTO PROYECTO_ALUMNO (a_correo, p_id) VALUES ('jossjic_03@hotmail.com', 1);
+INSERT INTO PROYECTO_ALUMNO (a_correo, p_id) VALUES ('juan.perez@example.com', 2);
+INSERT INTO PROYECTO_ALUMNO (a_correo, p_id) VALUES ('ana.rodriguez@example.com', 3);
+INSERT INTO PROYECTO_ALUMNO (a_correo, p_id) VALUES ('maria.gonzalez@example.com', 4);
+INSERT INTO PROYECTO_ALUMNO (a_correo, p_id) VALUES ('pedro.sanchez@example.com', 5);
 
-INSERT INTO `PROYECTO_COLABORADOR` (`p_id`, `co_correo`)
+INSERT INTO `PROYECTO_DOCENTE` (`p_id`, `co_correo`)
 VALUES 
 (1, 'carlos@example.com'),
 (2, 'juan@example.com'),
@@ -238,11 +249,20 @@ VALUES
 (4, 'juan@example.com'),
 (5, 'juan@example.com');
 
+INSERT INTO `PROYECTO_JURADO` (`p_id`, `co_correo`)
+VALUES 
+(2, 'carlos@example.com'),
+(1, 'juan@example.com'),
+(4, 'carlos@example.com'),
+(3, 'juan@example.com');
+
+
 INSERT INTO EDICION_COLABORADOR (ed_id, co_correo) VALUES (1, 'juan@example.com');
 INSERT INTO EDICION_COLABORADOR (ed_id, co_correo) VALUES (1, 'ana@example.com');
 INSERT INTO EDICION_COLABORADOR (ed_id, co_correo) VALUES (2, 'carlos@example.com');
 INSERT INTO EDICION_COLABORADOR (ed_id, co_correo) VALUES (2, 'luisa@example.com');
 INSERT INTO EDICION_COLABORADOR (ed_id, co_correo) VALUES (3, 'jose@example.com');
+
 
 
 -- Inserción de Datos--
