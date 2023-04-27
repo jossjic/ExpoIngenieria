@@ -289,6 +289,9 @@
 							$q = $pdo->prepare($sql);
 							$q->execute();
 							$data = $q->fetch(PDO::FETCH_ASSOC);
+							foreach ($data as $row) {
+								echo "<option value='" .$row['co_id']. "'> ".$row['co_correo']." </option>";
+							}
 							Database::disconnect();
 						?>
 					</select>
