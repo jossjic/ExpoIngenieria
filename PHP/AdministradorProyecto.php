@@ -88,8 +88,8 @@
 					<?php
                             preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $data['p_poster'], $match);
                             $image_id = $match[1];
-                            $image_full_link = "https://drive.google.com/uc?export=view&id=".$image_id;
-                            echo '<dd><img src="'.$image_full_link.'" width="100%"><hr></dd>';
+                            $image_full_link = "https://drive.google.com/file/d/".$image_id."/preview";
+                            echo '<dd><iframe width="100%" src="'.$image_full_link.'" allow="autoplay"></iframe></dd>';
                     ?>
 				></iframe>
 
