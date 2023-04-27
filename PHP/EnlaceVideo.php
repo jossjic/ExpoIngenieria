@@ -10,6 +10,8 @@
 	echo "$URL";
 	echo $_SESSION['id'];
 
+	$valid = true;
+
 	if (!empty($_POST)){
 		if ($valid) {
 			$pdo = Database::connect();
