@@ -16,9 +16,9 @@
 		if ($valid) {
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "UPDATE PROYECTO SET p_video = ? WHERE p_id =  ? ";
+			$sql = "UPDATE PROYECTO SET p_video = ?, p_ult_modif = SELECT NOW() WHERE p_id =  ? ";
 			$q = $pdo->prepare($sql);
-			$q->execute(array($URL,$_SESSION['id']));
+			$q->execute(array($URL,$_SESSION['id'],));
 			Database::disconnect();
 			header("Location: ../PHP/AdministradorProyecto.php");
 			exit();
