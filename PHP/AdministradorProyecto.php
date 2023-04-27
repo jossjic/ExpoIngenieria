@@ -128,7 +128,7 @@
 			<div class="modal-content">
 				<span class="close close-poster">&times;</span>
 				<h2>Ingresa el enlace del video</h2>
-				<form <?php echo "action='../PHP/EnlacePoster.php?id=" . $_SESSION['id'] . "'"; ?> method="post">
+				<form action="../PHP/EnlacePoster.php" method="post">
 					<input
 						type="url"
 						name="url"
@@ -138,7 +138,7 @@
 						size="50"
 						required
 					/>
-					<button type="submit">Guardar</button>
+					<input type="submit" value="Guardar">
 				</form>
 			</div>
 		</div>
