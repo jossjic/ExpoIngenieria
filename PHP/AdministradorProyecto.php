@@ -108,7 +108,7 @@
 			<div class="modal-content">
 				<span class="close close-video">&times;</span>
 				<h2>Ingresa el enlace del video</h2>
-				<form <?php echo "action='../PHP/EnlaceVideo.php?id=" . $_SESSION['id'] . "'"; ?> method="post" >
+				<form action="../PHP/EnlaceVideo.php" method="post" >
 					<input
 						type="url"
 						name="url"

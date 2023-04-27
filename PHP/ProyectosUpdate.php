@@ -35,6 +35,7 @@
 			$q->execute(array($Nombre,$Categoria,$AvanceProyecto,$id));
 			Database::disconnect();
 			header("Location: ../PHP/ProyectosView.php");
+            exit();
 		}
 	}
 	else {
