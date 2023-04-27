@@ -7,9 +7,6 @@
 	$URL = $_POST['url'];
 	$URL_Error = null;
 
-	echo "$URL";
-	echo $_SESSION['id'];
-
 	$valid = true;
 
 	if (!empty($_POST)){
