@@ -138,6 +138,7 @@ main h2{
     display: grid;
     grid-template-columns: 1fr 1fr;
     width: 85%;
+    place-items: center;
 
 }
 
@@ -178,7 +179,7 @@ main h2{
     grid-row: 2/3; */
     background-color: #FF6D28;
     justify-self: start;
-    margin: 0 0 0 40px;
+    margin: 0 0 0 0;
 }
 
 a{
