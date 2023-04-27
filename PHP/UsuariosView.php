@@ -67,7 +67,7 @@
                     </tr>
                     <tr>
                         <td>Profesores:</td>
-                        <td id="TotalProfesores">
+                        <td id="TotalProfes">
                         <?php
                                 $pdo = Database::connect();
                                 $sql = "SELECT * FROM COLABORADOR WHERE co_nomina IS NOT NULL";
@@ -79,7 +79,7 @@
                     </tr>
                     <tr>
                         <td>Alumnos:</td>
-                        <td id="TotalProfesores">
+                        <td id="TotalAlumnos">
                         <?php
                                 $pdo = Database::connect();
                                 $sql = "SELECT * FROM ALUMNO";
@@ -91,7 +91,7 @@
                     </tr>
                     <tr>
                         <td>Admins:</td>
-                        <td id="TotalProfesores">
+                        <td id="TotalAdmins">
                         <?php
                                 $pdo = Database::connect();
                                 $sql = "SELECT * FROM ADMIN";
