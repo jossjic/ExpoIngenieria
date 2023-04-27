@@ -1,6 +1,8 @@
 <?php
 	
 	require_once 'dataBase.php';
+	session_name("EngineerXpoWeb");
+    session_start();
 
 	$id = null;
 
@@ -26,6 +28,8 @@
 			$q->execute(array($URL,$id));
 			$data = $q->fetch(PDO::FETCH_ASSOC);
 			Database::disconnect();
+			header("Location: ../PHP/DashboardProyecto.php");
+			exit();
 		}
 	}
 
