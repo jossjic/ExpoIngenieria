@@ -238,20 +238,7 @@
 					<h3>Alumnos</h3>
 					<div class="students_div_menu">
 						<div class="students_div_menu_eachone">
-								<?php 
-									$pdo = Database::connect();
-									$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-									$sql = "SELECT * FROM PROYECTO_ALUMNO NATURAL JOIN ALUMNO WHERE p_id = ?";
-									$q = $pdo->prepare($sql);
-									$q->execute(array($_SESSION['id']));
-									$dataAlumno = $q->fetchAll(PDO::FETCH_ASSOC);
-									foreach ($dataAlumno as $row) {
-										echo " <span class='nombrecompleto'>".$row['a_nombre']. " ".$row['a_apellido']."</span>
-											   <span class='matricula'>".$row['a_matricula']."</span>
-											   <span class='correo'>".$row['a_correo']."</span>
-											";
-									}
-								?>
+								
 						</div>
 					</div>
 				</div>
@@ -259,19 +246,7 @@
 					<h3>Profesores</h3>
 					<div class="teachers_div_menu">
 						<div class="teachers_div_menu_eachone">
-								<?php 
-									$pdo = Database::connect();
-									$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-									$sql = "SELECT * FROM PROYECTO_DOCENTE NATURAL JOIN COLABORADOR WHERE p_id = ?";
-									$q = $pdo->prepare($sql);
-									$q->execute(array($_SESSION['id']));
-									$dataAlumno = $q->fetchAll(PDO::FETCH_ASSOC);
-									foreach ($dataProfesor as $row) {
-										echo " <span class='nombrecompleto'>".$row['co_nombre']. " ".$row['co_apellido']."</span>
-											   <span class='correo'>".$row['co_correo']."</span>
-											";
-									}
-								?>
+								
 						</div>
 					</div>
 				</div>
