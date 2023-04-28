@@ -25,7 +25,7 @@
             $stmt->execute([$student_matricula, $_SESSION['id']]);
             $numRows = $stmt->rowCount();
     
-            if ($numRows == 1) {
+            if ($numRows >= 1) {
                 // The student already exists in the project, redirect to AdministradorProyecto.php
                 header("Location: ../PHP/AdministradorProyecto.php");
                 exit();
