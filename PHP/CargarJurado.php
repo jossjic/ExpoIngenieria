@@ -18,7 +18,7 @@
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
                 // Verificar si el colaborador existe
-                $co_correo = $data[0];
+                $co_correo = trim($data[0]);
                 $sql = "SELECT COUNT(*) FROM COLABORADOR WHERE co_correo = ?";
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute([$co_correo]);
@@ -26,25 +26,25 @@
             
                 if (!$exists) {
                     // Insertar en la tabla COLABORADOR
-                    $co_nomina = $data[1];
-                    $co_nombre = $data[2];
-                    $co_apellido = $data[3];
-                    $co_pass = $data[4];
-                    $co_es_jurado = ($data[5] === "1") ? 1 : 0;
+                    $co_nomina = trim($data[1]);
+                    $co_nombre = trim($data[2]);
+                    $co_apellido = trim($data[3]);
+                    $co_pass = trim($data[4]);
+                    $co_es_jurado = (trim($data[5]) === "1") ? 1 : 0;
                     
                     $sql = "INSERT INTO COLABORADOR (co_correo, co_nomina, co_nombre, co_apellido, co_pass, co_es_jurado) VALUES (?, ?, ?, ?, ?, ?)";
                     $stmt = $pdo->prepare($sql);
                     $stmt->execute([$co_correo, $co_nomina, $co_nombre, $co_apellido, $co_pass, $co_es_jurado]);
 
                     // Obtener el ID de la edición
-                    $ed_nombre = $data[6];
+                    $ed_nombre = trim($data[6]);
                     $sql = "SELECT ed_id FROM EDICION WHERE ed_nombre = ?";
                     $stmt = $pdo->prepare($sql);
                     $stmt->execute([$ed_nombre]);
                     $ed_id = $stmt->fetchColumn();
                 
                     // Insertar en la tabla EDICION_COLABORADOR
-                    $sql = "INSERT INTO EDICION_COLABORADOR(co_corre,ed_id) VALUES (?, ?)";
+                    $sql = "INSERT INTO EDICION_COLABORADOR(co_correo,ed_id) VALUES (?, ?)";
                     $stmt = $pdo->prepare($sql);
                     $stmt->execute([$co_correo,$ed_id]);
 
