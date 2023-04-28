@@ -198,7 +198,7 @@
 						<td>
 							<select name="level" id="level">
 								<?php 
-									foreach ($categorias as $row) {
+									foreach ($nivel as $row) {
 										echo "<option value='".$row['n_id']."'>".$row['n_nombre']."</option>";
 									}
 								?>
