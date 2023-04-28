@@ -60,7 +60,7 @@
 								FROM COLABORADOR 
 								INNER JOIN EDICION_COLABORADOR ON COLABORADOR.co_correo = EDICION_COLABORADOR.co_correo 
 								INNER JOIN EDICION ON EDICION_COLABORADOR.ed_id = EDICION.ed_id 
-								WHERE co_es_jurado = true";
+								WHERE co_es_jurado = 1";
 						$stmt = $pdo->prepare($sql);
 						$stmt->execute();
 						$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
