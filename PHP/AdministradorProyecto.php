@@ -259,7 +259,7 @@
 					<h3>Profesores</h3>
 					<div class="teachers_div_menu">
 						<div class="teachers_div_menu_eachone">
-								<!-- <?php 
+								<!-- <?php  /*
 									$pdo = Database::connect();
 									$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 									$sql = "SELECT * FROM PROYECTO_DOCENTE NATURAL JOIN COLABORADOR WHERE p_id = ?";
@@ -270,7 +270,7 @@
 										echo " <span class='nombrecompleto'>".$row['co_nombre']. " ".$row['co_apellido']."</span>
 											   <span class='correo'>".$row['co_correo']."</span>
 											";
-									}
+									}*/
 								?> -->
 						</div>
 					</div>
