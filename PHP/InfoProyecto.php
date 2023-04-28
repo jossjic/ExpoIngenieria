@@ -20,7 +20,12 @@
 	
 				// Preparamos la consulta para insertar el proyecto
 				$stmt = $pdo->prepare("INSERT INTO PROYECTO(p_nombre, p_descripcion, ca_id, n_id) VALUES (:nombre, :descripcion, :categoria, :avance)");
-	
+                
+                echo $nombre_proyecto;
+                echo $descripcion_proyecto;
+                echo $categoria_proyecto;
+                echo $avance_proyecto;
+
 				// Asignamos los valores a los parámetros de la consulta
 				$stmt->bindParam(':nombre', $nombre_proyecto);
 				$stmt->bindParam(':descripcion', $descripcion_proyecto);
@@ -29,7 +34,7 @@
 	
 				// Ejecutamos la consulta
 				$stmt->execute();
-                echo $stmt;
+                
 				// Mostramos un mensaje de éxito
 				echo 'El proyecto se ha guardado correctamente.';
 			} catch (PDOException $e) {
