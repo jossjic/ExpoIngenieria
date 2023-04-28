@@ -1,3 +1,10 @@
+// Seleccionar el formulario y los campos a validar
+const form = document.getElementById("student_form");
+const nameInput = document.getElementById("student_name");
+const lastnameInput = document.getElementById("student_lastname");
+const matriculaInput = document.getElementById("student_matricula");
+const emailInput = document.getElementById("student_email");
+
 // Función para validar el formulario
 function validateForm(event) {
 	event.preventDefault(); // Detener el envío del formulario

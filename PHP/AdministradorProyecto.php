@@ -311,8 +311,8 @@
 						id="student_email"
 						name="student_email"
 					/>
-					<br /><br />
-					<input type="submit" value="Guardar" />
+					<br><br>
+					<input type="submit" value="Guardar" onclick="validateForm()" />
 				</form>
 			</div>
 		</div>
