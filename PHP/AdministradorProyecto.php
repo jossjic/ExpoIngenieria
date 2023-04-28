@@ -192,7 +192,11 @@
 							<select name="category" id="category">
 								<?php 
 									foreach ($categorias as $row) {
-										echo "<option value='".$row['ca_id']."'>".$row['ca_nombre']."</option>";
+										if ($row['ca_id'] == $data['ca_id']) {
+											echo "<option value='".$row['ca_id']."' selected>".$row['ca_nombre']."</option>";
+										} else {
+											echo "<option value='".$row['ca_id']."'>".$row['ca_nombre']."</option>";
+										}
 									}
 								?>
 							</select>
@@ -201,7 +205,12 @@
 							<select name="level" id="level">
 								<?php 
 									foreach ($nivel as $row) {
-										echo "<option value='".$row['n_id']."'>".$row['n_nombre']."</option>";
+										if ($row['n_id'] == $data['n_id']) {
+											echo "<option value='".$row['n_id']."' selected>".$row['n_nombre']."</option>";
+										} else {
+											echo "<option value='".$row['n_id']."'>".$row['n_nombre']."</option>";
+										}
+										
 									}
 								?>
 							</select>
