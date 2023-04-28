@@ -71,7 +71,6 @@
             }
                     
             fclose($file);
-    
             echo "Archivo cargado exitosamente.";
         } else {
             echo "El archivo debe ser un CSV.";

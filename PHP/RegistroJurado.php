@@ -1,3 +1,7 @@
+<?php 
+	require_once 'dataBase.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -18,7 +22,7 @@
 			/>
 			<ul>
 				<li>
-					<a href="../PHP/CargarJurado.php" rel="noopener noreferrer">Inicio</a>
+					<a href="" rel="noopener noreferrer">Inicio</a>
 				</li>
 			</ul>
 		</header>
@@ -46,13 +50,34 @@
 							<th>Nombre</th>
 							<th>Apellido</th>
 							<th>Edad</th>
+							<th>Edicion</th>
 						</tr>
 					</thead>
 					<tbody>
-						
+						<?php
+						$pdo = Database::connect();
+						$sql = "SELECT co_nombre, co_apellido, co_edad, ed_nombre 
+								FROM COLABORADOR 
+								INNER JOIN EDICION_COLABORADOR ON COLABORADOR.co_correo = EDICION_COLABORADOR.co_correo 
+								INNER JOIN EDICION ON EDICION_COLABORADOR.ed_id = EDICION.ed_id 
+								WHERE co_es_jurado = true";
+						$stmt = $pdo->prepare($sql);
+						$stmt->execute();
+						$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+						foreach ($result as $row) {
+							echo "<tr>";
+							echo "<td>" . $row['co_nombre'] . "</td>";
+							echo "<td>" . $row['co_apellido'] . "</td>";
+							echo "<td>" . $row['co_edad'] . "</td>";
+							echo "<td>" . $row['ed_nombre'] . "</td>";
+							echo "</tr>";
+						}
+					?>
 					</tbody>
 				</table>
 			</div>
+
 		</main>
 	</body>
 </html>
