@@ -182,14 +182,11 @@
 						</td>
 						<td>
 							<select name="category" id="category">
-
 								<?php 
-									
+									foreach ($categorias as $row) {
+										echo "<option value='".$row['ca_id']."'>".$row['ca_nombre']."</option>";
+									}
 								?>
-								<option value="cyber">Cyber</option>
-								<option value="nexus">Nexus</option>
-								<option value="bio">Bio</option>
-								<option value="nano">Nano</option>
 							</select>
 						</td>
 						<td>
