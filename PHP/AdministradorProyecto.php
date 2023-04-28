@@ -25,6 +25,12 @@
     	$q = $pdo->prepare($sql);
     	$q->execute();
     	$categorias = $q->fetchAll(PDO::FETCH_ASSOC);
+
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    	$sql = "SELECT * FROM NIVEL";
+    	$q = $pdo->prepare($sql);
+    	$q->execute();
+    	$nivel = $q->fetchAll(PDO::FETCH_ASSOC);
 		Database::disconnect();
 	}
 
@@ -190,10 +196,12 @@
 							</select>
 						</td>
 						<td>
-							<select name="status" id="status">
-								<option value="not-started">No iniciado</option>
-								<option value="in-progress">En progreso</option>
-								<option value="completed">Completado</option>
+							<select name="level" id="level">
+								<?php 
+									foreach ($categorias as $row) {
+										echo "<option value='".$row['n_id']."'>".$row['n_nombre']."</option>";
+									}
+								?>
 							</select>
 						</td>
 						<td>
