@@ -30,7 +30,7 @@
                     $co_nombre = trim($data[2]);
                     $co_apellido = trim($data[3]);
                     $co_pass = trim($data[4]);
-                    $co_es_jurado = (trim($data[5]) === "1") ? 1 : 0;
+                    $co_es_jurado = (trim($data[5]) === "1") ? true : false;
                     
                     $sql = "INSERT INTO COLABORADOR (co_correo, co_nomina, co_nombre, co_apellido, co_pass, co_es_jurado) VALUES (?, ?, ?, ?, ?, ?)";
                     $stmt = $pdo->prepare($sql);
