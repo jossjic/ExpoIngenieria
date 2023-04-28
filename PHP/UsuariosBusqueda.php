@@ -1,7 +1,5 @@
 <?php
     require 'dataBase.php';
-     $BuscarNombreError = null;
-    $ProyectoIDError = null;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -156,7 +154,7 @@
                                     $UserID = $_POST['UserID'];
                                     $inp = $_POST['inp'];
 
-                                    if($inp==""){
+                                    if(trim($inp)==""){
                                         
 								   	$pdo = Database::connect();
 								   	$sql = 'SELECT * FROM COLABORADOR ORDER BY co_apellido';
@@ -316,7 +314,7 @@
                                 
                                 if(trim($UserID) == 'Tipo') {
                                     $pdo = Database::connect();
-                                    if(trim($inp) == 'Jurado Profesor'||trim($inp) =='jurado profesor'||trim($inp) =='Jurado profesor'||trim($inp) =='jurado Profesor'||trim($inp) =='JURADO PROFESOR'){
+                                    if(strtolower(trim($inp)) == 'jurado profesor'){
                                         $sql = "SELECT * FROM COLABORADOR ORDER BY co_apellido";
 
 
@@ -338,7 +336,7 @@
                                         
                                     }
 
-                                    elseif(trim($inp) == 'Profesor'||trim($inp) =='profesor'||trim($inp) =='PROFESOR'){
+                                    elseif(strtolower(trim($inp)) == 'profesor'){
                                         $sql = "SELECT * FROM COLABORADOR ORDER BY co_apellido";
                                         foreach ($pdo->query($sql) as $row) {
                                             /*echo '<input type="checkbox" name="" id="">' ;*/
@@ -357,7 +355,7 @@
                                         }
                                     }
 
-                                    elseif(trim($inp) == 'Alumno'||trim($inp) =='alumno'||trim($inp) =='ALUMNO'){
+                                    elseif(strtolower(trim($inp)) == 'alumno'){
 
                                         $sql = "SELECT * FROM ALUMNO ORDER BY a_apellido";
                                         foreach ($pdo->query($sql) as $row) {
@@ -378,7 +376,7 @@
                                     }
                                     }
 
-                                    elseif(trim($inp) == 'Administrador'||trim($inp) =='administrador'||trim($inp) =='Admin'||trim($inp) =='admin'||trim($inp) =='ADMIN') {
+                                    elseif(strtolower(trim($inp)) == 'administrador'||strtolower((trim($inp)) =='admin')) {
                                         $sql = 'SELECT * FROM ADMIN ORDER BY adm_apellido';
                                         foreach ($pdo->query($sql) as $row) {
                                             echo '<p></p>';

@@ -1,8 +1,10 @@
 <?php
-	require 'database.php';
+	require 'dataBase.php';
 	$correo = 0;
-	if ( !empty($_GET['correo'])) {
+	$type = 0;
+	if ( !empty($_GET['correo'])&& !empty($_GET['type'])) {
 		$correo = $_REQUEST['correo'];
+		$type = $_REQUEST['type'];
 	}
 
 	if ( !empty($_POST)) {
@@ -16,22 +18,51 @@
 			$sql = "DELETE FROM COLABORADOR WHERE co_correo = ?";
 			$q = $pdo->prepare($sql);
 			$q->execute(array($correo));
+			$sql = "SELECT * FROM COLABORADOR WHERE co_correo = ?";
+			$q = $pdo->prepare($sql);
+			$q->execute(array($correo));
+			if($q->rowCount()<=0){
+				$verif=true;
+			}
+			else{
+				$verif=false;
+			}
+
 		}
 		else if ($type=='al'){
 			$sql = "DELETE FROM ALUMNO WHERE a_correo = ?";
 			$q = $pdo->prepare($sql);
 			$q->execute(array($correo));
+			$sql = "SELECT * FROM ALUMNO WHERE a_correo = ?";
+			$q = $pdo->prepare($sql);
+			$q->execute(array($correo));
+			if($q->rowCount()<=0){
+				$verif=true;
+			}
+			else{
+				$verif=false;
+			}
 		}
 		else if ($type=='adm'){
 			$sql = "DELETE FROM ADMIN WHERE adm_correo = ?";
 			$q = $pdo->prepare($sql);
 			$q->execute(array($correo));
+			$sql = "SELECT * FROM ADMIN WHERE adm_correo = ?";
+			$q = $pdo->prepare($sql);
+			$q->execute(array($correo));
+			if($q->rowCount()<=0){
+				$verif=true;
+			}
+			else{
+				$verif=false;
+			}
 		}
 		else{
 			echo "Error en tipo de usuario";
+			$verif=false;
 		}
 		Database::disconnect();
-		header("Location: UsuariosView.php");
+		header("Location: UsuariosView.php?verif=$verif");
 	}
 
 
@@ -80,10 +111,11 @@
 
 			    <form class="form-horizontal" action="UsuariosDelete.php" method="post">
 		    		<input type="hidden" name="correo" value="<?php echo $correo;?>"/>
+					<input type="hidden" name="type" value="<?php echo $type;?>"/>
 					<p class="alert alert-error">Estas seguro que quieres eliminar a este usuario?</p>
 					<div class="form-actions">
-						<button type="submit" class="btn btn-danger">Si</button>
-						<a class="btn" href="UsuariosView.php">No</a>
+						<div class="Btn_red"><button type="submit">Si</button></div>
+						<div class="Btn_blue"><a href="UsuariosView.php">No</a></div>
 					</div>
 				</form>
 			</div>

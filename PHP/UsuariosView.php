@@ -134,7 +134,22 @@
                 </tr>
               </table>
         </form>
-       
+       <?php
+            if(isset($_GET['verif'])){
+                $verif = $_GET['verif'];
+            }
+       ?>
+        <script>
+            if(<?php echo $verif;?>){
+                alert("El usuario ha sido eliminado exitosamente")
+            }
+            else if (!<?php echo $verif;?>){
+                alert("Hubo un error al eliminar el usuario")
+            }
+            else {
+                //ola
+            }
+        </script>
 
         <div class="Info">
             <div class="Info__Header">
