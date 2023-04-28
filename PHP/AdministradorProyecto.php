@@ -297,22 +297,23 @@
 				<form action="../PHP/AgregarAlumno.php" method="POST" id="student_form">
 					<br><br>
 					<label for="student_name">Nombre</label>
-					<input type="text" id="student_name" name="student_name" />
+					<input type="text" id="student_name" name="student_name" required/>
 					<br><br>
 					<label for="student_lastname">Apellidos</label>
-					<input type="text" id="student_lastname" name="student_lastname" />
+					<input type="text" id="student_lastname" name="student_lastname" required/>
 					<br><br>
 					<label for="student_matricula">Matricula</label>
-					<input type="text" id="student_matricula" name="student_matricula" />
+					<input type="text" id="student_matricula" name="student_matricula" required />
 					<br><br>
 					<label for="student_email">Correo Electrónico:</label>
 					<input
 						type="email"
 						id="student_email"
 						name="student_email"
+						required
 					/>
 					<br><br>
-					<input type="submit" value="Guardar" onclick="validateForm()" />
+					<input type="submit" value="Guardar"/>
 				</form>
 			</div>
 		</div>
