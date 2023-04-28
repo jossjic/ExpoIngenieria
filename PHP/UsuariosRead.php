@@ -411,8 +411,8 @@
     $info = $res->fetch(PDO::FETCH_ASSOC);
 
     $sql =  "SELECT p.p_id, p.p_nombre_clave, p.p_estado FROM PROYECTO_ALUMNO NATURAL JOIN PROYECTO as p WHERE a_correo='$correo';";
-    $querypc = $pdo->query($sql);
-   $infopc = $querypc->fetchAll(PDO::FETCH_OBJ);
+    $querypa = $pdo->query($sql);
+   $infopa = $querypa->fetchAll(PDO::FETCH_OBJ);
     echo '<h1>Detalles del Alumno</h1>
         <br>
         <table>
@@ -435,6 +435,8 @@
         </table>
         <br>
         ';
+
+        echo '<h2>Proyectos</h2><br>';
         if($querypa -> rowCount() > 0){
           foreach($infopa as $row){
             echo '

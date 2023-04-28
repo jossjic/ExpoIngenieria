@@ -15,7 +15,7 @@
 <body>
 
   <header>
-      <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
+      <img class="Logo__EscNegCie" src="../media/logo-expo.svg" alt="Logo__EscNegCie">
       <ul>
           <li>
               <a href="#">Cerrar Sesion</a>
@@ -126,7 +126,7 @@
                     </td>
                     <td>
                         
-                        <input type="search" name="BuscarNombre" class="Text__Search" id="" placeholder="Ingresa el valor">
+                        <input type="search" name="inp" class="Text__Search" id="" placeholder="Ingresa el valor">
                         <input type="submit" name="BtnBuscar" class="Search__Btn" id="" value="Buscar">
                         
                     </td>
