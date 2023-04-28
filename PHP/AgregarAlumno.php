@@ -1,5 +1,6 @@
 <?php 
     require_once 'dataBase.php';
+
     session_name("EngineerXpoWeb");
     session_start();
 
@@ -36,7 +37,7 @@
     
             $sql = "INSERT INTO PROYECTO_ALUMNO (a_correo, p_id) VALUES (?, ?)";
             $stmt = $pdo->prepare($sql);
-            $stmt->execute([$student_email, $_SESSION['id']]);
+            $stmt->execute([$student_matricula, $_SESSION['id']]);
         }
     
         Database::disconnect();
