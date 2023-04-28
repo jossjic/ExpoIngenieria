@@ -1,137 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/ico" href="../media/favicon.ico"/>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Registro Jurado</title>
 
-        <title>Proyecto</title>
-        <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
-        <link rel="stylesheet" href="../CSS/FormsStructure.css">
-    </head>
-    <body>
-        <header>
-            <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logotipo de la Escuela de Ingeniería y Ciencias">
-            <ul>
-                <li><a href="../index.php">Inicio</a></li>
-            </ul>
-            <nav>    
-            </nav>
-        </header>
-        <main>
+		<link rel="stylesheet" href="../CSS/UploadJurado.css" />
+		<link rel="stylesheet" href="../CSS/HeaderFooterStructure.css" />
+	</head>
+	<body>
+		<header>
+			<img
+				class="Logo__EscNegCie"
+				src="/media/logotec-ings.svg"
+				alt="Logo Escuela de Negocios"
+			/>
+			<ul>
+				<li>
+					<a href="../" rel="noopener noreferrer">Inicio</a>
+				</li>
+			</ul>
+		</header>
 
-            <h1>¡Bienvenido!<br><br>Ingresa las credenciales de tu proyecto</h1>
-
-            <div class="Card-1">
-                <a href="../PHP/LoginProyecto.php" class="Btns Btn-1">Inicio Sesion</a>
-                <a href="../PHP/RegistroProyecto.php" class="Btns Btn-2">Registro</a>
-                <form class="Form__Card" action="" method="post">
-                    <table>
-                        <tr>
-                            <td>Nombre</td>
-                            <td><input class="Text__Input" type="text" name="project_name" autofocus required></td>
-                        </tr>
-                        <tr>
-                            <td>Contraseña</td>
-                            <td><input class="Text__Input" type="password" name="project_pass" required></td>
-                        </tr>
-                        <tr>
-                            <td class="Td__Iniciar__Sesion" colspan=2><input class="Btn__Iniciar__Sesion" type="submit" value="Iniciar Sesion" id="submit" name="submit"></td>
-                            <td></td>
-                        </tr>
-                    </table>
-                </form>
-            </div>
-            
-        </main>
-        <footer>
-            <img class="Logo__Tec" src="../media/LogoTec.png" alt="Logo TEC">
-        </footer>
-    </body>
-</html>
-
-<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/ico" href="../media/favicon.ico"/>
-
-        <title>Proyecto</title>
-
-        <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
-        <link rel="stylesheet" href="../CSS/FormsStructure.css">
-    </head>
-    <body>
-        
-        <header>
-            <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" >
-            <ul>
-                <li>
-                    <a href="../HTML/LoginUsuarios.html">Regresar</a>
-                </li>
-            </ul>
-        </header>
-
-        <main>
-
-            <h1>Bienvenido <br><br> Registra tu proyecto </h1>
-
-            <div class="Card-1">
-                
-                <a class="Btns Btn-1" href="../PHP/LoginProyecto.php">Inicio Sesion</a>
-                <a class="Btns Btn-2" href="../PHP/RegistroProyecto.php">Registro</a>
-                
-                <form class="Form__Card" action="../PHP/RegistroProyecto.php" method="POST">
-
-                    <table id="">
-    
-                        <tr>
-                            <td><label for="Nombre">Nombre</label></td>
-                            <td><input type="text" name="Nombre" class="Text__Input" id="Nombre"></td>
-                        </tr>
-    
-                        <tr>
-                            <td><label for="Contraseña">Contraseña</label></td>
-                            <td><input type="password" name="Contraseña" class="Text__Input" id="ApellidoPaterno"></td>
-                        </tr>
-    
-                        <tr>
-                            <td><label for="ed_id">Edicion A Participar</label></td>
-                            <td>
-                                <select name="ed_id" id="ed_i">
-                                <?php
-                                                            $pdo = Database::connect();
-                                                            $query = 'SELECT * FROM EDICIONV1';
-                                                            foreach ($pdo->query($query) as $row) {
-                                                                if ($row['ed_id']==$ed_id)
-                                                                    echo "<option selected value='" . $row['ed_id'] . "'>" . $row['nombre'] . "</option>";
-                                                                else
-                                                                    echo "<option value='" . $row['ed_id'] . "'>" . $row['nombre'] . "</option>";
-                                                            }
-                                                            Database::disconnect();
-                                                        ?>
-                                </select>
-                            </td>
-                        </tr>
-    
-                        <tr>
-                            <td colspan="2" class="Td__Registrar" ><input class="Btn__Registrar" type="submit" value="Registrar" id="submit" name="submit"></td>
-                            <td></td>
-                        </tr>
-    
-                    </table>
-    
-                </form>
-            </div>            
-
-        </main>
-
-        <footer>
-            <img class="Logo__Tec" src="../media/LogoTec.png" alt="Logo Tec">
-        </footer>
-
-    </body>
+		<main>
+			<div class="upload">
+				<h2>Subir archivo CSV</h2>
+				<form
+					method="post"
+					action="CargarJurado.php"
+					enctype="multipart/form-data"
+				>
+					<input type="file" name="file" />
+					<button type="submit">Subir</button>
+				</form>
+				<br />
+				<br />
+				<button>Asignar Jurado Aleatoriamente</button>
+			</div>
+			<div class="container">
+				<h1>Jurado</h1>
+				<table>
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Apellido</th>
+							<th>Edad</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>John</td>
+							<td>Doe</td>
+							<td>30</td>
+						</tr>
+						<tr>
+							<td>Jane</td>
+							<td>Doe</td>
+							<td>28</td>
+						</tr>
+						<tr>
+							<td>Jane</td>
+							<td>Doe</td>
+							<td>28</td>
+						</tr>
+						<tr>
+							<td>Jane</td>
+							<td>Doe</td>
+							<td>28</td>
+						</tr>
+						<tr>
+							<td>Jane</td>
+							<td>Doe</td>
+							<td>28</td>
+						</tr>
+						<tr>
+							<td>Jane</td>
+							<td>Doe</td>
+							<td>28</td>
+						</tr>
+						<tr>
+							<td>Jane</td>
+							<td>Doe</td>
+							<td>28</td>
+						</tr>
+						<tr>
+							<td>Jane</td>
+							<td>Doe</td>
+							<td>28</td>
+						</tr>
+						<tr>
+							<td>Jane</td>
+							<td>Doe</td>
+							<td>28</td>
+						</tr>
+						<tr>
+							<td>Jane</td>
+							<td>Doe</td>
+							<td>28</td>
+						</tr>
+						<tr>
+							<td>Jane</td>
+							<td>Doe</td>
+							<td>28</td>
+						</tr>
+						<tr>
+							<td>Jane</td>
+							<td>Doe</td>
+							<td>28</td>
+						</tr>
+						<tr>
+							<td>Jane</td>
+							<td>Doe</td>
+							<td>28</td>
+						</tr>
+						<tr>
+							<td>Jane</td>
+							<td>Doe</td>
+							<td>28</td>
+						</tr>
+						<tr>
+							<td>Jane</td>
+							<td>Doe</td>
+							<td>28</td>
+						</tr>
+						<tr>
+							<td>Jane</td>
+							<td>Doe</td>
+							<td>28</td>
+						</tr>
+						<tr>
+							<td>Jane</td>
+							<td>Doe</td>
+							<td>28</td>
+						</tr>
+						<tr>
+							<td>Jane</td>
+							<td>Doe</td>
+							<td>28</td>
+						</tr>
+						<tr>
+							<td>Jane</td>
+							<td>Doe</td>
+							<td>28</td>
+						</tr>
+						<tr>
+							<td>Jane</td>
+							<td>Doe</td>
+							<td>28</td>
+						</tr>
+						<tr>
+							<td>Jane</td>
+							<td>Doe</td>
+							<td>28</td>
+						</tr>
+						<tr>
+							<td>Jane</td>
+							<td>Doe</td>
+							<td>28</td>
+						</tr>
+						<tr>
+							<td>Jane</td>
+							<td>Doe</td>
+							<td>28</td>
+						</tr>
+						<tr>
+							<td>Jane</td>
+							<td>Doe</td>
+							<td>28</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</main>
+	</body>
 </html>

@@ -1,0 +1,90 @@
+body {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Inter", sans-serif;
+}
+
+main {
+	width: 100%;
+	height: calc(100vh - 100px);
+	display: grid;
+	grid-template-columns: 75% 25%;
+	grid-template-rows: 1fr;
+	place-items: center;
+}
+
+.container {
+	width: 90%;
+	height: 70vh; /* Cambiar por unidad de medida */
+	margin: 0 auto;
+	padding: 50px;
+	grid-column: 1/2;
+	grid-row: 1/2;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
+}
+
+thead th {
+	background-color: #ddd;
+	border: 1px solid #ccc;
+	text-align: center;
+	padding: 10px;
+}
+
+tbody td {
+	border: 1px solid #ccc;
+	text-align: center;
+	padding: 10px;
+}
+
+.upload {
+	height: 50vh;
+	width: 25vw;
+	background-color: #f2f2f2;
+	padding: 50px;
+	position: fixed;
+	top: 100px;
+	right: 20px;
+}
+
+h2 {
+	margin-top: 0;
+}
+
+form {
+	margin-top: 20px;
+}
+
+input[type="file"] {
+	display: block;
+	margin-bottom: 10px;
+}
+
+button[type="submit"],
+button {
+	background-color: #4caf50;
+	color: #fff;
+	border: none;
+	padding: 10px 20px;
+	cursor: pointer;
+}
+
+button[type="submit"]:hover,
+button:hover {
+	background-color: #3e8e41;
+}
+
+body::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+	background-color: #aaa;
+	border-radius: 5px;
+}
