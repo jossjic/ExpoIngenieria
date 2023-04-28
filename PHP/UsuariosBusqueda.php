@@ -156,6 +156,83 @@
                                     $UserID = $_POST['UserID'];
                                     $inp = $_POST['inp'];
 
+                                    if($inp==""){
+                                        
+								   	$pdo = Database::connect();
+								   	$sql = 'SELECT * FROM COLABORADOR ORDER BY co_apellido';
+				 				   	foreach ($pdo->query($sql) as $row) {
+                                        /*echo '<input type="checkbox" name="" id="">' ;*/
+                                        echo '<p></p>';
+
+                                    
+                                        if ($row['co_es_jurado'] == 1 && $row['co_nomina']!=NULL) {
+                                            echo '<p>'. $row['co_nomina'] . '</p>';
+                                            echo '<p>Jurado Profesor</p>';}
+                                        else if ($row['co_es_jurado']==0 && $row['co_nomina']!=NULL) {
+                                            echo '<p>'. $row['co_nomina'] . '</p>';
+                                            echo '<p>Profesor</p>';}
+                                        else if ($row['co_es_jurado']==1 && $row['co_nomina']==NULL) {
+                                            echo '<p>N/A</p>';
+                                            echo '<p>Jurado Externo</p>';}
+                                        else {
+                                            echo '<p>N/A</p>';
+                                            echo '<p>Externo</p>';}
+                                            echo '<p>'. $row['co_nombre'] . '</>';
+                                            echo '<p>'. $row['co_apellido'] . '</p>';
+                                            echo '<p>'. $row['co_correo'] . '</p>';
+                                
+                                        echo '<p></p>';
+
+			    					   	echo ' <div class="Btn__Green" > <a href="UsuariosRead.php?correo='.$row['co_correo'].'&type=co">Ver</a></div>';
+			    					  	echo ' <div class="Btn__Blue"> <a href="UsuariosUpdate.php?correo='.$row['co_correo'].'&type=co">Actualizar</a></div>';
+			    					   	echo ' <div class="Btn__Red" ><a href="UsuariosDelete.php?correo='.$row['co_correo'].'&type=co">Eliminar</a></div>';
+                                        
+								    }
+								   	
+				  				
+                                 
+
+								   
+								   	$sql = 'SELECT * FROM ALUMNO ORDER BY a_apellido';
+				 				   	foreach ($pdo->query($sql) as $row) {
+                                       /* echo '<input type="checkbox" name="" id="">' ;*/
+                                        echo '<p></p>';
+
+                                        echo '<p>'. $row['a_matricula'] . '</p>';
+                                        echo '<p>Alumno</p>';
+			    					   	echo '<p>'. $row['a_nombre'] . '</>';
+			    					  	echo '<p>'. $row['a_apellido'] . '</p>';
+                      					echo '<p>'. $row['a_correo'] . '</p>';
+                                        echo '<p></p>';
+
+			    					   	echo ' <div class="Btn__Green"> <a href="UsuariosRead.php?correo='.$row['a_correo'].'&type=al">Ver</a></div>';
+			    					  	echo ' <div class="Btn__Blue"> <a href="UsuariosUpdate.php?correo='.$row['a_correo'].'&type=al">Actualizar</a></div>';
+			    					   	echo ' <div class="Btn__Red" ><a href="UsuariosDelete.php?correo='.$row['a_correo'].'&type=al">Eliminar</a></div>';
+                                        
+								    }
+								   	
+				  		
+								   
+								   	$sql = 'SELECT * FROM ADMIN ORDER BY adm_apellido';
+				 				   	foreach ($pdo->query($sql) as $row) {
+                                       /* echo '<input type="checkbox" name="" id="">' ;*/
+                                        echo '<p></p>';
+                                        echo '<p>N/A</p>';
+                                        echo '<p>Administrador</p>';
+			    					   	echo '<p>'. $row['adm_nombre'] . '</>';
+			    					  	echo '<p>'. $row['adm_apellido'] . '</p>';
+                      					echo '<p>'. $row['adm_correo'] . '</p>';
+                                        echo '<p></p>';
+
+			    					   	echo ' <div class="Btn__Green"> <a href="UsuariosRead.php?correo='.$row['adm_correo'].'&type=adm">Ver</a></div>';
+			    					  	echo ' <div class="Btn__Blue"> <a href="UsuariosUpdate.php?correo='.$row['adm_correo'].'&type=adm">Actualizar</a></div>';
+			    					   	echo ' <div class="Btn__Red" ><a href="UsuariosDelete.php?correo='.$row['adm_correo'].'&type=adm">Eliminar</a></div>';
+                                        
+								    }
+								   	Database::disconnect();
+				  				
+                                    }
+
                                     if(trim($UserID) == 'Nomina/Matrícula') {
                                         $pdo = Database::connect();
                                         $sql = "SELECT * FROM COLABORADOR WHERE co_nomina=?";
@@ -231,12 +308,12 @@
 								    }
                                      }
 
+
                                         
 
-                                        Database::disconnect();
                                     }
                                    
-                                }
+                                
                                 if(trim($UserID) == 'Tipo') {
                                     $pdo = Database::connect();
                                     if(trim($inp) == 'Jurado Profesor'||trim($inp) =='jurado profesor'||trim($inp) =='Jurado profesor'||trim($inp) =='jurado Profesor'||trim($inp) =='JURADO PROFESOR'){
@@ -323,9 +400,69 @@
                                     }
 
 
-                                     if(trim($inp) == 'N/A') {
-                                        $sql = 'SELECT * FROM ADMIN ORDER BY adm_apellido';
-				 				   	foreach ($pdo->query($sql) as $row) {
+                                    
+                                    }
+
+                                    if(trim($UserID) == 'Nombre') {
+                                        $pdo = Database::connect();
+                                        $sql = "SELECT * FROM COLABORADOR WHERE co_nombre=?";
+                                        $q = $pdo->prepare($sql);
+                                        $q->execute(array(trim($inp)));
+
+                                         foreach ($q as $row) {
+                                         /*echo '<input type="checkbox" name="" id="">' ;*/
+                                         echo '<p></p>';
+ 
+                                     
+                                         if ($row['co_es_jurado'] == 1 && $row['co_nomina']!=NULL) {
+                                             echo '<p>'. $row['co_nomina'] . '</p>';
+                                             echo '<p>Jurado Profesor</p>';}
+                                         else if ($row['co_es_jurado']==0 && $row['co_nomina']!=NULL) {
+                                             echo '<p>'. $row['co_nomina'] . '</p>';
+                                             echo '<p>Profesor</p>';}
+                                         else if ($row['co_es_jurado']==1 && $row['co_nomina']==NULL) {
+                                             echo '<p>N/A</p>';
+                                             echo '<p>Jurado Externo</p>';}
+                                         else {
+                                             echo '<p>N/A</p>';
+                                             echo '<p>Externo</p>';}
+                                             echo '<p>'. $row['co_nombre'] . '</>';
+                                             echo '<p>'. $row['co_apellido'] . '</p>';
+                                             echo '<p>'. $row['co_correo'] . '</p>';
+                                 
+                                         echo '<p></p>';
+ 
+                                            echo ' <div class="Btn__Green" > <a href="UsuariosRead.php?correo='.$row['co_correo'].'&type=co">Ver</a></div>';
+                                           echo ' <div class="Btn__Blue"> <a href="UsuariosUpdate.php?correo='.$row['co_correo'].'&type=co">Actualizar</a></div>';
+                                            echo ' <div class="Btn__Red" ><a href="UsuariosDelete.php?correo='.$row['co_correo'].'&type=co">Eliminar</a></div>';
+                                         
+                                     }
+                                        
+                                    
+
+                                        $sql = "SELECT * FROM ALUMNO WHERE a_nombre=?";
+                                        $q = $pdo->prepare($sql);
+                                        $q->execute(array(trim($inp)));
+                                         foreach ($q as $row) {
+                                        /* echo '<input type="checkbox" name="" id="">' ;*/
+                                         echo '<p></p>';
+ 
+                                         echo '<p>'. $row['a_matricula'] . '</p>';
+                                         echo '<p>Alumno</p>';
+                                            echo '<p>'. $row['a_nombre'] . '</>';
+                                           echo '<p>'. $row['a_apellido'] . '</p>';
+                                           echo '<p>'. $row['a_correo'] . '</p>';
+                                         echo '<p></p>';
+ 
+                                            echo ' <div class="Btn__Green"> <a href="UsuariosRead.php?correo='.$row['a_correo'].'&type=al">Ver</a></div>';
+                                           echo ' <div class="Btn__Blue"> <a href="UsuariosUpdate.php?correo='.$row['a_correo'].'&type=al">Actualizar</a></div>';
+                                            echo ' <div class="Btn__Red" ><a href="UsuariosDelete.php?correo='.$row['a_correo'].'&type=al">Eliminar</a></div>';
+                                         
+                                     }
+                                        $sql = "SELECT * FROM ADMIN WHERE adm_nombre=?";
+                                        $q = $pdo->prepare($sql);
+                                        $q->execute(array(trim($inp)));
+				 				   	foreach ($q as $row) {
                                        /* echo '<input type="checkbox" name="" id="">' ;*/
                                         echo '<p></p>';
                                         echo '<p>N/A</p>';
@@ -340,12 +477,170 @@
 			    					   	echo ' <div class="Btn__Red" ><a href="UsuariosDelete.php?correo='.$row['adm_correo'].'&type=adm">Eliminar</a></div>';
                                         
 								    }
-                                     }
+                                     
 
+
+
+                                    }
+                                    if(trim($UserID) == 'Apellido') {
                                         
+                                        $pdo = Database::connect();
+                                        $sql = "SELECT * FROM COLABORADOR WHERE co_apellido=?";
+                                        $q = $pdo->prepare($sql);
+                                        $q->execute(array(trim($inp)));
+
+                                         foreach ($q as $row) {
+                                         /*echo '<input type="checkbox" name="" id="">' ;*/
+                                         echo '<p></p>';
+ 
+                                     
+                                         if ($row['co_es_jurado'] == 1 && $row['co_nomina']!=NULL) {
+                                             echo '<p>'. $row['co_nomina'] . '</p>';
+                                             echo '<p>Jurado Profesor</p>';}
+                                         else if ($row['co_es_jurado']==0 && $row['co_nomina']!=NULL) {
+                                             echo '<p>'. $row['co_nomina'] . '</p>';
+                                             echo '<p>Profesor</p>';}
+                                         else if ($row['co_es_jurado']==1 && $row['co_nomina']==NULL) {
+                                             echo '<p>N/A</p>';
+                                             echo '<p>Jurado Externo</p>';}
+                                         else {
+                                             echo '<p>N/A</p>';
+                                             echo '<p>Externo</p>';}
+                                             echo '<p>'. $row['co_nombre'] . '</>';
+                                             echo '<p>'. $row['co_apellido'] . '</p>';
+                                             echo '<p>'. $row['co_correo'] . '</p>';
+                                 
+                                         echo '<p></p>';
+ 
+                                            echo ' <div class="Btn__Green" > <a href="UsuariosRead.php?correo='.$row['co_correo'].'&type=co">Ver</a></div>';
+                                           echo ' <div class="Btn__Blue"> <a href="UsuariosUpdate.php?correo='.$row['co_correo'].'&type=co">Actualizar</a></div>';
+                                            echo ' <div class="Btn__Red" ><a href="UsuariosDelete.php?correo='.$row['co_correo'].'&type=co">Eliminar</a></div>';
+                                         
+                                     }
+                                        
+                                    
+
+                                        $sql = "SELECT * FROM ALUMNO WHERE a_apellido=?";
+                                        $q = $pdo->prepare($sql);
+                                        $q->execute(array(trim($inp)));
+                                         foreach ($q as $row) {
+                                        /* echo '<input type="checkbox" name="" id="">' ;*/
+                                         echo '<p></p>';
+ 
+                                         echo '<p>'. $row['a_matricula'] . '</p>';
+                                         echo '<p>Alumno</p>';
+                                            echo '<p>'. $row['a_nombre'] . '</>';
+                                           echo '<p>'. $row['a_apellido'] . '</p>';
+                                           echo '<p>'. $row['a_correo'] . '</p>';
+                                         echo '<p></p>';
+ 
+                                            echo ' <div class="Btn__Green"> <a href="UsuariosRead.php?correo='.$row['a_correo'].'&type=al">Ver</a></div>';
+                                           echo ' <div class="Btn__Blue"> <a href="UsuariosUpdate.php?correo='.$row['a_correo'].'&type=al">Actualizar</a></div>';
+                                            echo ' <div class="Btn__Red" ><a href="UsuariosDelete.php?correo='.$row['a_correo'].'&type=al">Eliminar</a></div>';
+                                         
+                                     }
+                                        $sql = "SELECT * FROM ADMIN WHERE adm_apellido=?";
+                                        $q = $pdo->prepare($sql);
+                                        $q->execute(array(trim($inp)));
+				 				   	foreach ($q as $row) {
+                                       /* echo '<input type="checkbox" name="" id="">' ;*/
+                                        echo '<p></p>';
+                                        echo '<p>N/A</p>';
+                                        echo '<p>Administrador</p>';
+			    					   	echo '<p>'. $row['adm_nombre'] . '</>';
+			    					  	echo '<p>'. $row['adm_apellido'] . '</p>';
+                      					echo '<p>'. $row['adm_correo'] . '</p>';
+                                        echo '<p></p>';
+
+			    					   	echo ' <div class="Btn__Green"> <a href="UsuariosRead.php?correo='.$row['adm_correo'].'&type=adm">Ver</a></div>';
+			    					  	echo ' <div class="Btn__Blue"> <a href="UsuariosUpdate.php?correo='.$row['adm_correo'].'&type=adm">Actualizar</a></div>';
+			    					   	echo ' <div class="Btn__Red" ><a href="UsuariosDelete.php?correo='.$row['adm_correo'].'&type=adm">Eliminar</a></div>';
+                                        
+								    }
+                                    }
+                                    if(trim($UserID) == 'Correo') {
+                                        
+                                        $pdo = Database::connect();
+                                        $sql = "SELECT * FROM COLABORADOR WHERE co_correo=?";
+                                        $q = $pdo->prepare($sql);
+                                        $q->execute(array(trim($inp)));
+
+                                         foreach ($q as $row) {
+                                         /*echo '<input type="checkbox" name="" id="">' ;*/
+                                         echo '<p></p>';
+ 
+                                     
+                                         if ($row['co_es_jurado'] == 1 && $row['co_nomina']!=NULL) {
+                                             echo '<p>'. $row['co_nomina'] . '</p>';
+                                             echo '<p>Jurado Profesor</p>';}
+                                         else if ($row['co_es_jurado']==0 && $row['co_nomina']!=NULL) {
+                                             echo '<p>'. $row['co_nomina'] . '</p>';
+                                             echo '<p>Profesor</p>';}
+                                         else if ($row['co_es_jurado']==1 && $row['co_nomina']==NULL) {
+                                             echo '<p>N/A</p>';
+                                             echo '<p>Jurado Externo</p>';}
+                                         else {
+                                             echo '<p>N/A</p>';
+                                             echo '<p>Externo</p>';}
+                                             echo '<p>'. $row['co_nombre'] . '</>';
+                                             echo '<p>'. $row['co_apellido'] . '</p>';
+                                             echo '<p>'. $row['co_correo'] . '</p>';
+                                 
+                                         echo '<p></p>';
+ 
+                                            echo ' <div class="Btn__Green" > <a href="UsuariosRead.php?correo='.$row['co_correo'].'&type=co">Ver</a></div>';
+                                           echo ' <div class="Btn__Blue"> <a href="UsuariosUpdate.php?correo='.$row['co_correo'].'&type=co">Actualizar</a></div>';
+                                            echo ' <div class="Btn__Red" ><a href="UsuariosDelete.php?correo='.$row['co_correo'].'&type=co">Eliminar</a></div>';
+                                         
+                                     }
+                                        
+                                    
+
+                                        $sql = "SELECT * FROM ALUMNO WHERE a_correo=?";
+                                        $q = $pdo->prepare($sql);
+                                        $q->execute(array(trim($inp)));
+                                         foreach ($q as $row) {
+                                        /* echo '<input type="checkbox" name="" id="">' ;*/
+                                         echo '<p></p>';
+ 
+                                         echo '<p>'. $row['a_matricula'] . '</p>';
+                                         echo '<p>Alumno</p>';
+                                            echo '<p>'. $row['a_nombre'] . '</>';
+                                           echo '<p>'. $row['a_apellido'] . '</p>';
+                                           echo '<p>'. $row['a_correo'] . '</p>';
+                                         echo '<p></p>';
+ 
+                                            echo ' <div class="Btn__Green"> <a href="UsuariosRead.php?correo='.$row['a_correo'].'&type=al">Ver</a></div>';
+                                           echo ' <div class="Btn__Blue"> <a href="UsuariosUpdate.php?correo='.$row['a_correo'].'&type=al">Actualizar</a></div>';
+                                            echo ' <div class="Btn__Red" ><a href="UsuariosDelete.php?correo='.$row['a_correo'].'&type=al">Eliminar</a></div>';
+                                         
+                                     }
+                                        $sql = "SELECT * FROM ADMIN WHERE adm_correo=?";
+                                        $q = $pdo->prepare($sql);
+                                        $q->execute(array(trim($inp)));
+				 				   	foreach ($q as $row) {
+                                       /* echo '<input type="checkbox" name="" id="">' ;*/
+                                        echo '<p></p>';
+                                        echo '<p>N/A</p>';
+                                        echo '<p>Administrador</p>';
+			    					   	echo '<p>'. $row['adm_nombre'] . '</>';
+			    					  	echo '<p>'. $row['adm_apellido'] . '</p>';
+                      					echo '<p>'. $row['adm_correo'] . '</p>';
+                                        echo '<p></p>';
+
+			    					   	echo ' <div class="Btn__Green"> <a href="UsuariosRead.php?correo='.$row['adm_correo'].'&type=adm">Ver</a></div>';
+			    					  	echo ' <div class="Btn__Blue"> <a href="UsuariosUpdate.php?correo='.$row['adm_correo'].'&type=adm">Actualizar</a></div>';
+			    					   	echo ' <div class="Btn__Red" ><a href="UsuariosDelete.php?correo='.$row['adm_correo'].'&type=adm">Eliminar</a></div>';
+                                        
+								    }
+                                    }
+
 
                                         Database::disconnect();
                                     }
+                                
+
+                                    
                                 
 				  				
                                         ?>
