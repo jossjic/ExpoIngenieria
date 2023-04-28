@@ -28,12 +28,6 @@
 	
 				// Preparamos la consulta para insertar el proyecto
 				$stmt = $pdo->prepare("UPDATE PROYECTO SET p_nombre = :nombre, p_descripcion = :descripcion, ca_id = :categoria, n_id = :avance WHERE p_id = :id");
-                
-                echo $nombre_proyecto;
-                echo $descripcion_proyecto;
-                echo $categoria_proyecto;
-                echo $avance_proyecto;
-                echo $_SESSION['id'];
 
 				// Asignamos los valores a los parámetros de la consulta
 				$stmt->bindParam(':nombre', $nombre_proyecto);
@@ -44,9 +38,11 @@
 	
 				// Ejecutamos la consulta
 				$stmt->execute();
-                
+            
 				// Mostramos un mensaje de éxito
 				echo 'El proyecto se ha guardado correctamente.';
+                header("Location: ../PHP/AdministradorProyecto.php");
+                exit();
                 
 			} catch (PDOException $e) {
 				// Mostramos un mensaje de error en caso de que ocurra un error al conectarnos a la base de datos
