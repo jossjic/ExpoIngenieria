@@ -49,18 +49,14 @@
 						<tr>
 							<th>Nombre</th>
 							<th>Apellido</th>
-							<th>Edad</th>
+							<th>Correo</th>
 							<th>Edicion</th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php
 						$pdo = Database::connect();
-						$sql = "SELECT co_nombre, co_apellido, co_edad, ed_nombre 
-								FROM COLABORADOR 
-								INNER JOIN EDICION_COLABORADOR ON COLABORADOR.co_correo = EDICION_COLABORADOR.co_correo 
-								INNER JOIN EDICION ON EDICION_COLABORADOR.ed_id = EDICION.ed_id 
-								WHERE co_es_jurado = 1";
+						$sql = "SELECT co_nombre, co_apellido, co_correo, ed_nombre FROM COLABORADOR NATURAL JOIN EDICION_COLABORADOR NATURAL JOIN EDICION WHERE co_es_jurado = true";
 						$stmt = $pdo->prepare($sql);
 						$stmt->execute();
 						$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -69,7 +65,7 @@
 							echo "<tr>";
 							echo "<td>" . $row['co_nombre'] . "</td>";
 							echo "<td>" . $row['co_apellido'] . "</td>";
-							echo "<td>" . $row['co_edad'] . "</td>";
+							echo "<td>" . $row['co_correo'] . "</td>";
 							echo "<td>" . $row['ed_nombre'] . "</td>";
 							echo "</tr>";
 						}
