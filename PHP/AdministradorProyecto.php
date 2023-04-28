@@ -50,6 +50,9 @@
 
 		<link rel="stylesheet" href="../CSS/HeaderFooterStructure.css" />
 		<link rel="stylesheet" href="../CSS/Page5.css" />
+
+		<script src="../JS/AdministradorProyectos.js"></script>
+		<script src="../JS/ValidarAlumnoInfo.js"></script>
 	</head>
 	<body>
 		<header>
@@ -345,6 +348,5 @@
 			<img class="Logo__Tec" src="../media/LogoTec.png" alt="Logo TEC" />
 		</footer>
 
-		<script src="../JS/AdministradorProyectos.js"></script>
 	</body>
 </html>
