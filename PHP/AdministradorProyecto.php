@@ -19,6 +19,12 @@
 		$q = $pdo->prepare($sql);
 		$q->execute(array($_SESSION['id']));
 		$data = $q->fetch(PDO::FETCH_ASSOC);
+
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    	$sql = "SELECT * FROM CATEGORIA";
+    	$q = $pdo->prepare($sql);
+    	$q->execute();
+    	$categorias = $q->fetchAll(PDO::FETCH_ASSOC);
 		Database::disconnect();
 	}
 
@@ -176,6 +182,10 @@
 						</td>
 						<td>
 							<select name="category" id="category">
+
+								<?php 
+									
+								?>
 								<option value="cyber">Cyber</option>
 								<option value="nexus">Nexus</option>
 								<option value="bio">Bio</option>
