@@ -55,7 +55,7 @@
 				<li><a href="../PHP/DashboardProyecto.php">Dashboard</a></li>
 				<li><a href="#">Galeria de Proyectos</a></li>
 			</ul>
-			<a class="Otros" href="#">Cerrar Sesion</a>
+			<a class="Otros" href="../PHP/logout.php">Cerrar Sesion</a>
 		</header>
 
 		<aside>
