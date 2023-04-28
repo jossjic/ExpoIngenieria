@@ -50,8 +50,6 @@
 
 		<link rel="stylesheet" href="../CSS/HeaderFooterStructure.css" />
 		<link rel="stylesheet" href="../CSS/Page5.css" />
-
-		<script src="../JS/AdministradorProyectos.js"></script>
 	</head>
 	<body>
 		<header>
@@ -347,6 +345,7 @@
 		<footer>
 			<img class="Logo__Tec" src="../media/LogoTec.png" alt="Logo TEC" />
 		</footer>
-
+		
+		<script src="../JS/AdministradorProyectos.js"></script>
 	</body>
 </html>
