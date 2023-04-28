@@ -19,7 +19,7 @@
 				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	
 				// Preparamos la consulta para insertar el proyecto
-				$stmt = $pdo->prepare("INSERT INTO proyectos (p_nombre, p_descripcion, ca_id, n_id) VALUES (:nombre, :descripcion, :categoria, :avance)");
+				$stmt = $pdo->prepare("INSERT INTO PROYECTO(p_nombre, p_descripcion, ca_id, n_id) VALUES (:nombre, :descripcion, :categoria, :avance)");
 	
 				// Asignamos los valores a los parámetros de la consulta
 				$stmt->bindParam(':nombre', $nombre_proyecto);
