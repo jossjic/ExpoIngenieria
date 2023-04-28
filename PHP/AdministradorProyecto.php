@@ -52,7 +52,6 @@
 		<link rel="stylesheet" href="../CSS/Page5.css" />
 
 		<script src="../JS/AdministradorProyectos.js"></script>
-		<script src="../JS/ValidarAlumnoInfo.js"></script>
 	</head>
 	<body>
 		<header>
