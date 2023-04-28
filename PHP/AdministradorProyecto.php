@@ -228,11 +228,20 @@
 					<h3>Alumnos</h3>
 					<div class="students_div_menu">
 						<div class="students_div_menu_eachone">
-							<span class="nombrecompleto">
-								Juanito Perez Dominguez
-							</span>
-							<span class="matricula"> A0000000 </span>
-							<span class="correo"> A0000000@tec.mx </span>
+								<?php 
+									$pdo = Database::connect();
+									$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+									$sql = "SELECT * FROM PROYECTO_ALUMNO NATURAL JOIN ALUMNO WHERE p_id = ?";
+									$q = $pdo->prepare($sql);
+									$q->execute(array($_SESSION['id']));
+									$dataAlumno = $q->fetchAll(PDO::FETCH_ASSOC);
+									foreach ($dataAlumno as $row) {
+										echo " <span class='nombrecompleto'>".$row['a_nombre']. " ".$row['a_apellido']."</span>
+											   <span class='matricula'>".$row['a_matricula']."</span>
+											   <span class='correo'>".$row['a_correo']."</span>
+											";
+									}
+								?>
 						</div>
 					</div>
 				</div>
@@ -240,10 +249,19 @@
 					<h3>Profesores</h3>
 					<div class="teachers_div_menu">
 						<div class="teachers_div_menu_eachone">
-							<span class="nombrecompleto">
-								Juanito Perez Dominguez
-							</span>
-							<span class="correo"> A0000000@tec.mx </span>
+								<?php 
+									$pdo = Database::connect();
+									$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+									$sql = "SELECT * FROM PROYECTO_DOCENTE NATURAL JOIN COLABORADOR WHERE p_id = ?";
+									$q = $pdo->prepare($sql);
+									$q->execute(array($_SESSION['id']));
+									$dataAlumno = $q->fetchAll(PDO::FETCH_ASSOC);
+									foreach ($dataProfesor as $row) {
+										echo " <span class='nombrecompleto'>".$row['co_nombre']. " ".$row['co_apellido']."</span>
+											   <span class='correo'>".$row['co_correo']."</span>
+											";
+									}
+								?>
 						</div>
 					</div>
 				</div>
@@ -255,13 +273,17 @@
 			<div class="modal-content">
 				<span class="close close-estudiante">&times;</span>
 				<h2>Agregar Alumno</h2>
-				<form action="" id="student_form">
-					<label for="student_id">Matrícula:</label>
-					<input type="text" id="student_id" name="student_id" />
-					<br /><br />
-					<label for="student_name">Nombre Completo:</label>
+				<form action="../PHP/AgregarAlumno.php" method="POST" id="student_form">
+					<br><br>
+					<label for="student_name">Nombre</label>
 					<input type="text" id="student_name" name="student_name" />
-					<br /><br />
+					<br><br>
+					<label for="student_lastname">Apellidos</label>
+					<input type="text" id="student_lastname" name="student_lastname" />
+					<br><br>
+					<label for="student_matricula">Matricula</label>
+					<input type="text" id="student_matricula" name="student_matricula" />
+					<br><br>
 					<label for="student_email">Correo Electrónico:</label>
 					<input
 						type="email"
@@ -288,8 +310,8 @@
 							$sql = "SELECT * FROM COLABORADOR";
 							$q = $pdo->prepare($sql);
 							$q->execute();
-							$data = $q->fetchAll(PDO::FETCH_ASSOC);
-							foreach ($data as $row) {
+							$dataProyecto = $q->fetchAll(PDO::FETCH_ASSOC);
+							foreach ($dataProyecto as $row) {
 								echo "<option value='" .$row['co_correo']. "'> ".$row['co_nombre']. " " .$row['co_apellido']. "-" .$row['co_correo']. " </option>";
 							}
 							Database::disconnect();
