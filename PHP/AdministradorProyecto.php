@@ -204,7 +204,7 @@
 		</div>
 
 		<main>
-			<form class="First__Form" action="../InfoProyecto.php" method="post">
+			<form class="First__Form" action="../PHP/Administrador" method="post">
 				<table style="text-align: center">
 					<tr>
 						<th>
