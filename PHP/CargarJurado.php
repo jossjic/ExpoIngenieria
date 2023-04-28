@@ -61,6 +61,8 @@
                         $stmt->execute([$co_correo,$ed_id]);
                     }
                 }
+
+                Database::disconnect();
             }
                     
             fclose($file);
