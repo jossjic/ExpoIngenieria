@@ -223,7 +223,7 @@
 						id="project_description"
 						cols="30"
 						rows="10"
-						<?php $data['p_descripcion'] ?>
+						<?php echo	$data['p_descripcion'] ?>
 					></textarea>
 				</div>
 			</form>
