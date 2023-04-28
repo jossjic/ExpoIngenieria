@@ -73,6 +73,7 @@
 							echo "<td>" . $row['ed_nombre'] . "</td>";
 							echo "</tr>";
 						}
+						Database::disconnect();
 					?>
 					</tbody>
 				</table>
