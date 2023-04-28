@@ -34,6 +34,8 @@
 		Database::disconnect();
 	}
 
+
+
 ?>
 
 
@@ -184,6 +186,7 @@
 								type="text"
 								name="project_name"
 								id="project_name"
+								<?php echo "value='".$data['p_nombre']."'" ?>
 							/>
 						</td>
 						<td>
@@ -220,6 +223,7 @@
 						id="project_description"
 						cols="30"
 						rows="10"
+						<?php echo "value='".$data['p_descripcion']."'" ?>
 					></textarea>
 				</div>
 			</form>
