@@ -29,11 +29,9 @@
 	
 				// Ejecutamos la consulta
 				$stmt->execute();
-	
+                echo $stmt;
 				// Mostramos un mensaje de éxito
 				echo 'El proyecto se ha guardado correctamente.';
-				header("Location: ../PHP/AdministradorProyecto.php");
-				exit();
 			} catch (PDOException $e) {
 				// Mostramos un mensaje de error en caso de que ocurra un error al conectarnos a la base de datos
 				echo 'Error al conectarnos a la base de datos: ' . $e->getMessage();
