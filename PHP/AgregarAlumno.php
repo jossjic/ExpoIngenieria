@@ -18,32 +18,43 @@
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-        // Check if the email already exists in the ALUMNO table
-        $sql = "SELECT a_correo FROM ALUMNO WHERE a_correo = ?";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$student_email]);
-        $numRows = $stmt->rowCount();
+        try {
+            // Check if the email already exists in the ALUMNO table
+            $sql = "SELECT a_correo FROM ALUMNO WHERE a_correo = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$student_email]);
+            $numRows = $stmt->rowCount();
     
-        if ($numRows == 1) {
-            // The email already exists, insert it in PROYECTO_ALUMNO with the project ID
-            $sql = "INSERT INTO PROYECTO_ALUMNO (a_correo, p_id) VALUES (?, ?)";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([$student_email, $_SESSION['id']]);
-        } else {
-            // The email doesn't exist, insert the student data in ALUMNO and then in PROYECTO_ALUMNO
-            $sql = "INSERT INTO ALUMNO (a_matricula, a_nombre, a_apellido, a_correo) VALUES (?, ?, ?, ?)";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([$student_matricula, $student_name, $student_lastname, $student_email]);
+            if ($numRows == 1) {
+                // The email already exists, insert it in PROYECTO_ALUMNO with the project ID
+                $sql = "INSERT INTO PROYECTO_ALUMNO (a_matricula, p_id) VALUES (?, ?)";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([$student_matricula, $_SESSION['id']]);
+            } else {
+                // The email doesn't exist, insert the student data in ALUMNO and then in PROYECTO_ALUMNO
+                $sql = "INSERT INTO ALUMNO (a_matricula, a_nombre, a_apellido, a_correo) VALUES (?, ?, ?, ?)";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([$student_matricula, $student_name, $student_lastname, $student_email]);
     
-            $sql = "INSERT INTO PROYECTO_ALUMNO (a_correo, p_id) VALUES (?, ?)";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([$student_matricula, $_SESSION['id']]);
+                $sql = "INSERT INTO PROYECTO_ALUMNO (a_matricula, p_id) VALUES (?, ?)";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([$student_matricula, $_SESSION['id']]);
+            }
+    
+            Database::disconnect();
+            header("Location: ../PHP/AdministradorProyecto.php");
+            exit();
+    
+        } catch (PDOException $e) {
+            // If an error occurs, rollback the transaction and show the error message
+            $pdo->rollBack();
+            echo "Error: " . $e->getMessage();
         }
     
-        Database::disconnect();
-        header("Location: ../PHP/AdministradorProyecto.php");
-        exit();
+    } else {
+        echo "Error: No se han proporcionado todos los datos necesarios.";
     }
+    
      
 
 
