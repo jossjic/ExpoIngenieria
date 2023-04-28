@@ -27,7 +27,7 @@
 				$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	
 				// Preparamos la consulta para insertar el proyecto
-				$stmt = $pdo->prepare("INSERT INTO PROYECTO(p_nombre, p_descripcion, ca_id, n_id) VALUES (:nombre, :descripcion, :categoria, :avance) WHERE p_id = :id");
+				$stmt = $pdo->prepare("UPDATE PROYECTO SET p_nombre = :nombre, p_descripcion = :descripcion, ca_id = :categoria, n_id = :avance WHERE p_id = :id");
                 
                 echo $nombre_proyecto;
                 echo $descripcion_proyecto;
