@@ -35,7 +35,7 @@
                         VALUES ('$ed_id', '$co_correo')";
                 $conn->query($sql);*/
 
-                echo $co_correo. " " .$co_nomina. " " .$co_nombre. " " .$co_apellido. " " .$co_pass. " " .$co_es_jurado. " " .$ed_nombre;
+                echo $co_correo. " " .$co_nomina. " " .$co_nombre. " " .$co_apellido. " " .$co_pass. " " .$co_es_jurado. " " .$ed_nombre ."\n";
             }
             fclose($file);
     
