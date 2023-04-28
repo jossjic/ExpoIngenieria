@@ -13,12 +13,12 @@
 		<header>
 			<img
 				class="Logo__EscNegCie"
-				src="/media/logotec-ings.svg"
+				src="../media/logotec-ings.svg"
 				alt="Logo Escuela de Negocios"
 			/>
 			<ul>
 				<li>
-					<a href="../" rel="noopener noreferrer">Inicio</a>
+					<a href="../PHP/CargarJurado.php" rel="noopener noreferrer">Inicio</a>
 				</li>
 			</ul>
 		</header>
