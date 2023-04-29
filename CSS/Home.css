@@ -99,7 +99,7 @@ header {
 
 .Explanation p {
 	align-self: start;
-	padding: 50px;
+	padding: 0 50px;
 	width: 85%;
 	font-size: 1em;
 }
