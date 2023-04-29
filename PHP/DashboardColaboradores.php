@@ -1,3 +1,15 @@
+<?php 
+    require_once 'dataBase.php';
+
+    session_name("EngineerXpoWeb");
+    session_start();
+
+    if (!isset($_SESSION['logged_in'])) {
+        header("Location: ../index.php");
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>

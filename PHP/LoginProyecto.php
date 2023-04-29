@@ -97,10 +97,28 @@
                             <td>Nombre clave</td>
                             <td><input class="Text__Input" type="text" name="project_name_code" value="<?php echo !empty($project_name_code) ? $project_name_code : ''; ?>" autofocus required></td>
                         </tr>
+                        <?php if (!empty($project_name_code_error)): ?>
+                        <tr>
+                            <td></td>
+                            <td><span style="color:red;"><?php echo $project_name_code_error; ?></span></td>
+                        </tr>
+                        <?php endif; ?>
                         <tr>
                             <td>Contraseña</td>
                             <td><input class="Text__Input" type="password" name="project_pass" value="<?php echo !empty($project_pass) ? $project_pass : ''; ?>" required></td>
                         </tr>
+                        <?php if (!empty($project_pass_error)): ?>
+                        <tr>
+                            <td></td>
+                            <td><span style="color:red;"><?php echo $project_pass_error; ?></span></td>
+                        </tr>
+                        <?php endif; ?>
+                        <?php if (!empty($login_error)): ?>
+                        <tr>
+                            <td></td>
+                            <td><span style="color:red;"><?php echo $login_error; ?></span></td>
+                        </tr>
+                        <?php endif; ?>
                         <tr>
                             <td class="Td__Iniciar__Sesion" colspan="2"><input class="Btn__Iniciar__Sesion" type="submit" value="Iniciar sesión" name="submit"></td>
                         </tr>
@@ -110,3 +128,4 @@
         </main>
     </body>
 </html>
+
