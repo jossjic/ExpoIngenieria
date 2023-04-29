@@ -36,10 +36,19 @@
             FROM ANUNCIO 
             WHERE an_grupo = ?
             ORDER BY an_fecha";
-    $group = 1;
+    $group = 1; //Proyectos
     $q = $pdo->prepare($sql);
     $q->execute(array($group));
     $advertisements = $q->fetchAll();
+
+    //Fecha Fin Expo Campaña
+    $sql = "SELECT ed_fecha_fin 
+            FROM PROYECTO 
+            NATURAL JOIN EDICION
+            WHERE p_id = ?";
+    $q = $pdo->prepare($sql);
+    $q->execute(array($_SESSION['id']));
+    $fecha = $q->fetch(PDO::FETCH_ASSOC);
 
     Database::disconnect();
 
@@ -91,15 +100,21 @@
         <main class="Proyect__View">
             <div class="Action__Btn">
                 <h1>Estado de tu proyecto</h1>
-                <h3><?php echo $project['p_estado']; ?></h3>
+                <h3>
+                    <?php echo $project['p_estado']; ?>
+                </h3>
             </div>
             <div class="Counter">
                 <p>ExpoIngenieria comienza en:</p>
-                <h1>10:24:45:60</h1>
+                <h1>
+                    <?php echo $fecha['ed_fecha_fin'] ?>
+                </h1>
             </div>
             <div class="Info__Other">
                 <div class="Info__Tittle">
-                    <h2><?php echo $project['p_nombre']; ?></h2>
+                    <h2>
+                        <?php echo $project['p_nombre']; ?>
+                    </h2>
 
                     <div class="Proyect__Edit">
                         <a href="../PHP/AdministradorProyecto.php">Editar</a>

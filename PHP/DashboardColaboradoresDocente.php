@@ -34,7 +34,7 @@
             FROM ANUNCIO 
             WHERE an_grupo = ?
             ORDER BY an_fecha";
-    $group = 3; //
+    $group = 3; //Docentes
     $q = $pdo->prepare($sql);
     $q->execute(array($group));
     $anuncios = $q->fetchAll();
