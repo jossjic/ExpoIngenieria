@@ -78,7 +78,7 @@
                 <ul>
                     <?php 
                         if ($tipoUsuario == true && $nomina != null) {
-                            echo "<li><a href='../PHP/DashboardColaboradoresDocente'>Cambiar Vista a Docente</a></li>";
+                            echo "<li><a href='../PHP/DashboardColaboradoresDocente.php'>Cambiar Vista a Docente</a></li>";
                             $_SESSION['user_type'] = "collaborator-teacher";
                         }
                     ?>

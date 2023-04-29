@@ -80,7 +80,7 @@
                 <ul>
                     <?php 
                         if ($tipoUsuario == true && $nomina != null) {
-                            echo "<li><a href='../PHP/DashboardColaboradoresJuez'>Cambiar Vista a Jurado</a></li>";
+                            echo "<li><a href='../PHP/DashboardColaboradoresJuez.php'>Cambiar Vista a Jurado</a></li>";
                             $_SESSION['user_type'] = "collaborator-judge";
                         }
                     ?>
