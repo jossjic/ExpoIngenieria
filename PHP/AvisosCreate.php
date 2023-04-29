@@ -131,7 +131,7 @@
                     </tr>
 
                     <tr>
-                        <td class="Td__Iniciar__Sesion">
+                        <td>
                             <input class="Btn__Iniciar__Sesion" type="submit" value="Publicar Anuncio" id="submit" name="submit">
                         </td>
                         <td>
