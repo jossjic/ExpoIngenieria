@@ -45,7 +45,7 @@
         Database::disconnect();
 
         // Credentials are incorrect
-        if ($q->rowCount() == 0 || $admin->rowCount() == 0) {
+        if ($q->rowCount() == 0 && $admin->rowCount() == 0) {
             $login_error = 'El nombre o contraseña que ingresaste no están asociados a una cuenta';
             $valid = false;
         } 
@@ -88,10 +88,6 @@
         }
     }
 
-    // GET METHOD
-    else {
-
-    }
 ?>
 
 <!DOCTYPE html>
