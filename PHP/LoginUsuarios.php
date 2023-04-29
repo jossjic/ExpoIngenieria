@@ -53,16 +53,19 @@
                 $_SESSION['logged_in'] = true;
                 $_SESSION['user_type'] = "collaborator-judge";
                 $_SESSION['id'] = $collaborator['co_correo'];
+                // Redirect
+                header("Location: ../PHP/DashboardColaboradoresJuez.php");
+                exit();
             } elseif ($collaborator['co_es_jurado'] == false) {
                 $_SESSION['logged_in'] = true;
                 $_SESSION['user_type'] = "collaborator-teacher";
                 $_SESSION['id'] = $collaborator['co_correo'];
+                // Redirect
+                header("Location: ../PHP/DashboardColaboradoresDocente.php");
+                exit();
             }
             
 
-            // Redirect
-            header("Location: ../PHP/DashboardColaboradores.php");
-            exit();
         }
     }
 
