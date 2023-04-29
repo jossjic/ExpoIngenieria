@@ -1,6 +1,13 @@
 <?php
+        require_once 'dataBase.php';
 
-	require 'dataBase.php';
+        session_name("EngineerXpoWeb");
+        session_start();
+
+        if (!isset($_SESSION['logged_in'])) {
+            header("Location: ../index.php");
+            exit();
+        }
 
 		$TituloError = null;
 		$ContenidoError = null;

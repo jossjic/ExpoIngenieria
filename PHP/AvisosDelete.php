@@ -1,5 +1,14 @@
 <?php
-	require 'dataBase.php';
+	require_once 'dataBase.php';
+
+    session_name("EngineerXpoWeb");
+    session_start();
+
+    if (!isset($_SESSION['logged_in'])) {
+        header("Location: ../index.php");
+        exit();
+    }
+    
 	$id = 0;
 	if ( !empty($_GET['id'])) {
 		$id = $_REQUEST['id'];
