@@ -118,7 +118,7 @@
                     </tr>
 
                     <tr>
-                        <td class="Btn__Blue" colspan="2"><a  href="AvisosView.php">Regresar</a></td>
+                        <td class="Btn-Ancla"><a  href="AvisosView.php">Regresar</a></td>
                         <td></td>
                     </tr>
                 </table>
