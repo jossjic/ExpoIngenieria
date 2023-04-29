@@ -31,7 +31,7 @@
 
     <title>Bienvenida | Expo ingenierías</title>
 
-    <link rel="stylesheet" href="./CSS/PaginaInicio.css">
+    <link rel="stylesheet" href="./CSS/Home.css">
 </head>
 <body>
     <header>
