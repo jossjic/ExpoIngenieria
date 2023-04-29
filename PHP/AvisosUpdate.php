@@ -24,16 +24,12 @@
         $TituloError = null;
 		$ContenidoError = null;
 		$GrupoError = null;
-        $FechaError = null;
-        $Adm_UsuError = null;
         
 
 		// keep track post valuesv 
         $Titulo = $_POST['Titulo'];
 		$Contenido = $_POST['Contenido'];
 		$Grupo  = $_POST['Grupo'];
-        $Fecha = $_POST['Fecha'];
-        $Adm_Usu = $_POST['Usuario'];
         
 
 		/// validate input
@@ -51,22 +47,14 @@
 			$GrupoError = 'Porfavor ingresa el grupo';
 			$valid = false;
 		}
-        if (empty($Fecha)) {
-			$FechaError = 'Porfavor ingresa la fecha en que se publicara el anuncio';
-			$valid = false;
-		}
-        if (empty($Adm_Usu)) {
-			$Adm_UsuError = 'Porfavor ingresa el usuario que eres';
-			$valid = false;
-		}
 
 		// update data
 		if ($valid) {
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "UPDATE ANUNCIO SET an_titulo = ?, an_contenido = ?, an_grupo = ?, an_fecha = ?, adm_usu = ? = WHERE an_id = ?";
+			$sql = "UPDATE ANUNCIO SET an_titulo = ?, an_contenido = ?, an_grupo = ? = WHERE an_id = ?";
 			$q = $pdo->prepare($sql);
-			$q->execute(array($Titulo,$Contenido,$Grupo,$Fecha,$Adm_Usu,$id));
+			$q->execute(array($Titulo,$Contenido,$Grupo,$id));
 			Database::disconnect();
 			header("Location: AnuncioView.php");
 		}
@@ -81,8 +69,6 @@
 		$Titulo 	= $data['an_titulo'];
         $Contenido 	= $data['an_contenido'];
 		$Grupo = $data['an_grupo'];
-		$Fecha = $data['an_fecha'];
-        $Adm_Usu = $data['adm_usu'];
 		Database::disconnect();
 	}
 ?>
