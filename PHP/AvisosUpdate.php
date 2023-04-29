@@ -56,7 +56,7 @@
 			$q = $pdo->prepare($sql);
 			$q->execute(array($Titulo,$Contenido,$Grupo,$id));
 			Database::disconnect();
-			header("Location: AnuncioView.php");
+			header("Location: AvisosView.php");
 		}
 	}
 	else {
