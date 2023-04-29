@@ -18,7 +18,8 @@
             NATURAL JOIN EDICION
             WHERE co_correo = ?";
     $q = $pdo->prepare($sql);
-    $fecha->execute(array($_SESSION['id']));
+    $q->execute(array($_SESSION['id']));
+    $fecha = $q->fetch(PDO::FETCH_ASSOC);
 
     //Proyectos por revisar
     $sql = "SELECT *
@@ -92,9 +93,7 @@
 
             <div class="Info">
                 <p>Proyectos por revisar</p>
-                <h1>
-                    <?php echo $proyectosCalificar;?>
-                </h1>
+                <h1><?php echo $proyectosCalificar;?></h1>
             </div>
 
             <div class="Messages__Menu">
