@@ -22,6 +22,11 @@
             header("Location: ./PHP/DashboardColaboradoresJuez.php");
             exit();
         }
+
+        elseif ($_SESSION['user_type'] === "ADMIN") {
+            header("Location: ./PHP/AdminInicio.php");
+            exit();
+        }
     }
 ?>
 
