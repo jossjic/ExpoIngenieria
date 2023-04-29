@@ -31,40 +31,62 @@
             $valid = false;
         }
 
+
         // Verify credentials
         $pdo = Database::connect();
         $sql = "SELECT * FROM COLABORADOR WHERE co_correo = ? AND co_pass = ?";
         $q = $pdo->prepare($sql);
         $q->execute(array($collaborator_email, $collaborator_pass));
+
+        $sql = "SELECT * FROM ADMIN WHERE co_correo = ? AND co_pass = ?";
+        $admin = $pdo->prepare($sql);
+        $admin->execute(array($collaborator_email, $collaborator_pass)); 
+        $isAdmin = $admin->rowCount() == 1;
         Database::disconnect();
 
         // Credentials are incorrect
         if ($q->rowCount() == 0) {
             $login_error = 'El nombre o contraseña que ingresaste no están asociados a una cuenta';
             $valid = false;
+        } else if ($admin->rowCount() == 0){
+            $login_error = 'El nombre o contraseña que ingresaste no están asociados a una cuenta';
+            $valid = false;
         }
 
-        if ($valid) {
-            // Get collaborator data
-            $collaborator = $q->fetch(PDO::FETCH_ASSOC);
-
-            // Create session variables
-            if ($collaborator['co_es_jurado'] == true){
+        if ($isAdmin){
+            if($valid){
+                $collaborator = $admin->fetch(PDO::FETCH_ASSOC);
                 $_SESSION['logged_in'] = true;
-                $_SESSION['user_type'] = "collaborator-judge";
+                $_SESSION['user_type'] = "ADMIN";
                 $_SESSION['id'] = $collaborator['co_correo'];
                 // Redirect
-                header("Location: ../PHP/DashboardColaboradoresJuez.php");
-                exit();
-            } elseif ($collaborator['co_es_jurado'] == false) {
-                $_SESSION['logged_in'] = true;
-                $_SESSION['user_type'] = "collaborator-teacher";
-                $_SESSION['id'] = $collaborator['co_correo'];
-                // Redirect
-                header("Location: ../PHP/DashboardColaboradoresDocente.php");
+                header("Location: ../PHP/AdminInicio.php");
                 exit();
             }
-            
+        } else {
+
+            if ($valid) {
+                // Get collaborator data
+                $collaborator = $q->fetch(PDO::FETCH_ASSOC);
+    
+                // Create session variables
+                if ($collaborator['co_es_jurado'] == true){
+                    $_SESSION['logged_in'] = true;
+                    $_SESSION['user_type'] = "collaborator-judge";
+                    $_SESSION['id'] = $collaborator['co_correo'];
+                    // Redirect
+                    header("Location: ../PHP/DashboardColaboradoresJuez.php");
+                    exit();
+                } elseif ($collaborator['co_es_jurado'] == false) {
+                    $_SESSION['logged_in'] = true;
+                    $_SESSION['user_type'] = "collaborator-teacher";
+                    $_SESSION['id'] = $collaborator['co_correo'];
+                    // Redirect
+                    header("Location: ../PHP/DashboardColaboradoresDocente.php");
+                    exit();
+                }
+                
+            }
 
         }
     }
