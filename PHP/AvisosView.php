@@ -1,5 +1,4 @@
 <?php 
-	require 'dataBase.php';
 
 	require_once 'dataBase.php';
 
