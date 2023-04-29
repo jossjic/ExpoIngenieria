@@ -70,12 +70,13 @@
             </ul>
             <nav>
                 <ul>
-                    <li><a href="../PHP/logout.php">Cerrar Sesion</a></li>
                     <?php 
                         if ($tipoUsuario == true) {
                             echo "<li><a href='../PHP/DashboardColaboradoresJuez'>Cambiar Vista Jurado</a></li>";
+                            $_SESSION['user_type'] = "collaborator-judge";
                         }
                     ?>
+                    <li><a href="../PHP/logout.php">Cerrar Sesion</a></li>
                 </ul>
             </nav>
         </header>
