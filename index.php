@@ -65,8 +65,8 @@
                 <h1>REGISTRA TU PROYECTO!</h1>
             </div> -->
             <div class="Explanation">
-                <h1>¿Que es ExpoIngenieria?</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus commodi et dolore nulla sit asperiores quod dolores esse. Consequuntur nostrum, dolore nesciunt iure consequatur voluptatum iste doloremque aut aperiam similique. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem pariatur dolore esse, aspernatur eos sunt ipsam impedit unde sed optio. Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, dolorum.</p>
+                <h1>En la Escuela de Ingeniería y Ciencias del Tec de Monterrey estamos convencidos de que el ingenio humano es lo que transforma al mundo.</h1>
+                <p>En este evento podrás conocer muestras y exhibiciones de los proyectos más ingeniosos, innovadores y peculiares de estudiantes actuales de todas nuestras carreras de Ingeniería y Ciencias. También podrás participar en diversas actividades interactivas como las que se describen a continuación.</p>
                 <a class="Registrar__Proyecto" href="#">Registrar Proyecto</a>
             </div>
             
