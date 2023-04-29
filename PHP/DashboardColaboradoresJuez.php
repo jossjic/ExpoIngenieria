@@ -8,6 +8,10 @@
         header("Location: ../index.php");
         exit();
     }
+
+    $pdo = Database::connect();
+
+    
 ?>
 
 <!DOCTYPE html>

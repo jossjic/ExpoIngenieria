@@ -49,9 +49,16 @@
             $collaborator = $q->fetch(PDO::FETCH_ASSOC);
 
             // Create session variables
-            $_SESSION['logged_in'] = true;
-            $_SESSION['user_type'] = "collaborator";
-            $_SESSION['id'] = $collaborator['co_correo'];
+            if ($collaborator['co_es_jurado'] == true){
+                $_SESSION['logged_in'] = true;
+                $_SESSION['user_type'] = "collaborator-judge";
+                $_SESSION['id'] = $collaborator['co_correo'];
+            } elseif ($collaborator['co_es_jurado'] == false) {
+                $_SESSION['logged_in'] = true;
+                $_SESSION['user_type'] = "collaborator-teacher";
+                $_SESSION['id'] = $collaborator['co_correo'];
+            }
+            
 
             // Redirect
             header("Location: ../PHP/DashboardColaboradores.php");
