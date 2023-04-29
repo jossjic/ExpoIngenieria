@@ -69,7 +69,7 @@
 					<td>
 						<a
 							class="Btn__Ancla"
-							href="../PHP/AdministradoresView.php"
+							href="../PHP/CategoriasView.php"
 							>Categorias</a
 						>
 					</td>
@@ -78,7 +78,7 @@
 					<td>
 						<a
 							class="Btn__Ancla"
-							href="../PHP/AdministradoresView.php"
+							href="../PHP/NivelView.php"
 							>Nivel</a
 						>
 					</td>
@@ -87,7 +87,7 @@
 					<td>
 						<a
 							class="Btn__Ancla"
-							href="../PHP/AdministradoresView.php"
+							href="../PHP/AvisosView.php"
 							>Avisos</a
 						>
 					</td>
@@ -96,7 +96,7 @@
 					<td>
 						<a
 							class="Btn__Ancla"
-							href="../PHP/AdministradoresView.php"
+							href="../PHP/EvaluacionesView.php"
 							>Evaluaciones</a
 						>
 					</td>

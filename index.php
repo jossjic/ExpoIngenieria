@@ -8,13 +8,18 @@
         
         // Project user
         if ($_SESSION['user_type'] === "project") {
-            header("Location: ./PHP/DashboardProyecto.php");
+            header("Location: ./PHP/Proyecto/DashboardProyecto.php");
             exit();
         }
 
         // Collaborator user
-        elseif ($_SESSION['user_type'] === "collaborator") {
-            header("Location: ./PHP/DashboardColaboradores.php");
+        elseif ($_SESSION['user_type'] === "collaborator-teacher") {
+            header("Location: ./PHP/Docente/DashboardColaboradoresDocente.php");
+            exit();
+        }
+
+        elseif ($_SESSION['user_type'] === "collaborator-judge") {
+            header("Location: ./PHP/Jurado/DashboardColaboradoresJuez.php");
             exit();
         }
     }
