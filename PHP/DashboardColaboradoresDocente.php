@@ -45,7 +45,7 @@
             WHERE co_correo = ?";
     $q = $pdo->prepare($sql);
     $q->execute(array($_SESSION['id']));
-    $tipoUsuario = $q->fetchAll();
+    $tipoUsuario = $q->fetch(PDO::FETCH_ASSOC);
 
     //Nomina (Jurado/Profesor)
     $sql = "SELECT co_nomina 
@@ -53,7 +53,7 @@
             WHERE co_correo = ?";
     $q = $pdo->prepare($sql);
     $q->execute(array($_SESSION['id']));
-    $nomina = $q->fetchAll();
+    $nomina = $q->fetch(PDO::FETCH_ASSOC);
 
 
     Database::disconnect();    
