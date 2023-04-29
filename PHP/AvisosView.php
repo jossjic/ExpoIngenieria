@@ -37,12 +37,12 @@
 				<li><a href="../PHP/AdminInicio.php">Menu</a></li>
 				<li><a href="../PHP/AvisosView.php">Avisos</a></li>
 				<li><a href="../PHP/EdicionView.php">Ediciones</a></li>
-				<li><a href="#">Nivel</a></li>
-				<li><a href="#">Categorias</a></li>
-				<li><a href="#">Usuarios</a></li>
-				<li><a href="#">Proyectos</a></li>
-				<li><a href="#">Administradores</a></li>
-				<li><a href="#">Evaluaciones</a></li>
+				<li><a href="../PHP/NivelView.php">Nivel</a></li>
+				<li><a href="../PHP/CategoriasView.php">Categorias</a></li>
+				<li><a href="../PHP/UsuariosView.php">Usuarios</a></li>
+				<li><a href="../PHP/ProyectosView.php">Proyectos</a></li>
+				<li><a href="../PHP/AdministradoresView.php">Administradores</a></li>
+				<li><a href="../PHP/EvaluacionesView.php">Evaluaciones</a></li>
 				<li style="font-weight: 600; font-size: 1.2em">
 					<a href="../PHP/logout.php">Cerrar Sesion</a>
 				</li>
@@ -56,7 +56,7 @@
 					<h1>Administrador de Anuncios</h1>
 					<table>
 						<tr>
-							<td>Avisos Totales</td>
+							<td>Avisos Totales: </td>
 							<td id="TotalProyectos">
 								<?php
 									$pdo = Database::connect();
@@ -121,7 +121,7 @@
 											<p>&nbsp;</p>
                                             <p></p>
                                             <p>".$row['an_id']."</p>
-                                            <p>".$row['an_nombre']."</p>
+                                            <p>".$row['an_titulo']."</p>
                                             <p>".$row['an_grupo']."</p>
                                             <p>".$row['an_fecha']."</p>
                                             <div class='Btn__Green'>
