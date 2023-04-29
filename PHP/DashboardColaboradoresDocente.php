@@ -87,18 +87,7 @@
             <div class="Counter">
                 <p>ExpoIngenieria comienza en:</p>
                 <h1>
-                    <?php 
-                        $fecha = strtotime($fecha);
-                        $fechaInicio = time();
-                        $diferencia = $fechaInicio - $fecha;
-
-                        $dias = floor($diferencia / (60 * 60 * 24));
-                        $horas = floor(($diferencia % (60 * 60 * 24)) / (60 * 60));
-                        $minutos = floor(($diferencia % (60 * 60)) / 60);
-                        $segundos = round($diferencia % 60);
-
-                        echo $dias.":".$horas.":".$minutos.":".$segundos;
-                    ?>
+                    
                 </h1>
             </div>
 
