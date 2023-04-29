@@ -63,7 +63,7 @@
 									$pdo = Database::connect();
 									$sql = "SELECT * FROM ANUNCIOS";
 									$q = $pdo->query($sql)->rowCount();
-									echo "$q";
+									echo $q;
 									Database::disconnect();
 								?>
 							</td>
