@@ -35,9 +35,9 @@
 					alt="Logotipo de Expo ingenierías"
 			/></a>
 			<ul style="grid-column: 2/4">
-				<li><a href="#">Menu</a></li>
-				<li><a href="#">Avisos</a></li>
-				<li><a href="#">Ediciones</a></li>
+				<li><a href="../PHP/AdminInicio.php">Menu</a></li>
+				<li><a href="../PHP/AvisosView.php">Avisos</a></li>
+				<li><a href="../PHP/EdicionView.php">Ediciones</a></li>
 				<li><a href="#">Nivel</a></li>
 				<li><a href="#">Categorias</a></li>
 				<li><a href="#">Usuarios</a></li>
@@ -45,7 +45,7 @@
 				<li><a href="#">Administradores</a></li>
 				<li><a href="#">Evaluaciones</a></li>
 				<li style="font-weight: 600; font-size: 1.2em">
-					<a href="#">Cerrar Sesion</a>
+					<a href="../PHP/logout.php">Cerrar Sesion</a>
 				</li>
 			</ul>
 		</header>
