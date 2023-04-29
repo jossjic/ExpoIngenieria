@@ -133,7 +133,9 @@
                         <td class="Td__Iniciar__Sesion" colspan="2">
                             <input class="Btn__Iniciar__Sesion" type="submit" value="Publicar Anuncio" id="submit" name="submit">
                         </td>
-                        <td></td>
+                        <td>
+                            <a class="Btn__Blue" href="AvisosView.php">Regresar</a>
+                        </td>
                     </tr>
 
                 </table>
