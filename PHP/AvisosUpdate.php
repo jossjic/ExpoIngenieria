@@ -172,7 +172,7 @@
                             <input class="Btn__Iniciar__Sesion" type="submit" value="Actualizar Anuncio" id="submit" name="submit">
                         </td>
                         <td>
-                            <a class="Btn__Blue" href="AvisosView.php">Regresar</a>
+                            <a class="Btn-Ancla" href="AvisosView.php">Regresar</a>
                         </td>
                     </tr>
                 </table>
