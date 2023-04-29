@@ -39,7 +39,7 @@
 		if ($valid) {
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "INSERT INTO ANUNCIO(an_titulo, an_contenido, an_grupo, an_fecha = NOW(), adm_correo) VALUES(?, ?, ?, ?)";
+			$sql = "INSERT INTO ANUNCIO(an_titulo, an_contenido, an_grupo, an_fecha, adm_correo) VALUES(?, ?, ?, NOW(), ?)";
 			$q = $pdo->prepare($sql);
 			$q->execute(array($Titulo,$Contenido,$Grupo,$_SESSION['id']));
 			Database::disconnect();
