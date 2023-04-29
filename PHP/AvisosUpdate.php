@@ -52,7 +52,7 @@
 		if ($valid) {
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "UPDATE ANUNCIO SET an_titulo = ?, an_contenido = ?, an_grupo = ? = WHERE an_id = ?";
+			$sql = "UPDATE ANUNCIO SET an_titulo = ?, an_contenido = ?, an_grupo = ? WHERE an_id = ?";
 			$q = $pdo->prepare($sql);
 			$q->execute(array($Titulo,$Contenido,$Grupo,$id));
 			Database::disconnect();
