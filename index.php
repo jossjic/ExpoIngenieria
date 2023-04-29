@@ -71,7 +71,7 @@
             </div>
             
             <div class="Video__Explanation">
-                <iframe width="100%" height="80%" src="https://youtu.be/E1fUpr9EA-Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe width="100%" height="80%" src="https://www.youtube.com/watch?v=E1fUpr9EA-Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
         </section>
         
