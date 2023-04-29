@@ -45,20 +45,17 @@
         Database::disconnect();
 
         // Credentials are incorrect
-        if ($q->rowCount() == 0) {
+        if ($q->rowCount() == 0 || $admin->rowCount() == 0) {
             $login_error = 'El nombre o contraseña que ingresaste no están asociados a una cuenta';
             $valid = false;
-        } else if ($admin->rowCount() == 0){
-            $login_error = 'El nombre o contraseña que ingresaste no están asociados a una cuenta';
-            $valid = false;
-        }
+        } 
 
         if ($isAdmin){
             if($valid){
                 $collaborator = $admin->fetch(PDO::FETCH_ASSOC);
                 $_SESSION['logged_in'] = true;
                 $_SESSION['user_type'] = "ADMIN";
-                $_SESSION['id'] = $collaborator['co_correo'];
+                $_SESSION['id'] = $collaborator['adm_correo'];
                 // Redirect
                 header("Location: ../PHP/AdminInicio.php");
                 exit();
