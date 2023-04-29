@@ -130,7 +130,7 @@
                     </tr>
 
                     <tr>
-                        <td class="Td__Iniciar__Sesion" colspan="2">
+                        <td class="Td__Iniciar__Sesion">
                             <input class="Btn__Iniciar__Sesion" type="submit" value="Publicar Anuncio" id="submit" name="submit">
                         </td>
                         <td>
