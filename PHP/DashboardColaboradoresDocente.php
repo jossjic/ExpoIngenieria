@@ -87,13 +87,15 @@
             <div class="Counter">
                 <p>ExpoIngenieria comienza en:</p>
                 <h1>
-                    <?php echo $fecha ?>
+                    <?php echo $fecha['ed_fecha_fin'] ?>
                 </h1>
             </div>
 
             <div class="Info">
                 <p>Proyectos por revisar</p>
-                <h1><?php echo $proyectosCalificar;?></h1>
+                <h1>
+                    <?php echo $proyectosCalificar;?>
+                </h1>
             </div>
 
             <div class="Messages__Menu">
