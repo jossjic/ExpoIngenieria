@@ -8,18 +8,18 @@
         
         // Project user
         if ($_SESSION['user_type'] === "project") {
-            header("Location: ./PHP/Proyecto/DashboardProyecto.php");
+            header("Location: ./PHP/DashboardProyecto.php");
             exit();
         }
 
         // Collaborator user
         elseif ($_SESSION['user_type'] === "collaborator-teacher") {
-            header("Location: ./PHP/Docente/DashboardColaboradoresDocente.php");
+            header("Location: ./PHP/DashboardColaboradoresDocente.php");
             exit();
         }
 
         elseif ($_SESSION['user_type'] === "collaborator-judge") {
-            header("Location: ./PHP/Jurado/DashboardColaboradoresJuez.php");
+            header("Location: ./PHP/DashboardColaboradoresJuez.php");
             exit();
         }
     }
@@ -52,14 +52,14 @@
                 <div class="User-1">
                     <span>¿Eres docente o jurado?</span>
                     <div class="Usuarios">
-                        <a href="./PHP/Login/LoginUsuarios.php" rel="noopener noreferrer">Colaborador</a>
+                        <a href="./PHP/LoginUsuarios.php" rel="noopener noreferrer">Colaborador</a>
                     </div>
                 </div>
     
                 <div class="User-2">
                     <span>¿Tienes un proyecto o quieres registrarlo?</span>
                     <div class="Proyectos">
-                        <a href="./PHP/Login/LoginProyecto.php" rel="noopener noreferrer">Proyecto</a>
+                        <a href="./PHP/LoginProyecto.php" rel="noopener noreferrer">Proyecto</a>
                     </div>
                 </div>
             </div>
@@ -72,7 +72,7 @@
             <div class="Explanation">
                 <h1>En la Escuela de Ingeniería y Ciencias del Tec de Monterrey estamos convencidos de que el ingenio humano es lo que transforma al mundo.</h1>
                 <p>En este evento podrás conocer muestras y exhibiciones de los proyectos más ingeniosos, innovadores y peculiares de estudiantes actuales de todas nuestras carreras de Ingeniería y Ciencias. También podrás participar en diversas actividades interactivas como las que se describen a continuación.</p>
-                <a class="Registrar__Proyecto" href="./PHP/SignUp/RegistroProyecto.php">Registrar Proyecto</a>
+                <a class="Registrar__Proyecto" href="./PHP/RegistroProyecto.php">Registrar Proyecto</a>
             </div>
             
             <div class="Video__Explanation">
