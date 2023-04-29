@@ -124,7 +124,7 @@
                             <label>Grupo</label>
                         </td>
                         <td>
-                            <input class="Text__Input" name="Grupo" type="text"  placeholder="Grupo" value="" required>
+                            <input class="Text__Input" name="Grupo" type="text"  placeholder="Grupo" value="" pattern="[0-9]" required>
                             <?php if (($GrupoError != null)) ?>
                             <span class="help-inline"><?php echo $GrupoError;?></span>
                         </td>
