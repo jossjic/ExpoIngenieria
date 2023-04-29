@@ -24,7 +24,7 @@
         $TituloError = null;
 		$ContenidoError = null;
 		$GrupoError = null;
-        
+    
 
 		// keep track post valuesv 
         $Titulo = $_POST['Titulo'];
@@ -36,7 +36,7 @@
 		$valid = true;
 
 		if (empty($Titulo)) {
-			$TItuloError = 'Porfavor ingresa el titulo';
+			$TituloError = 'Porfavor ingresa el titulo';
 			$valid = false; 
 		}
 		if (empty($Contenido)) {
