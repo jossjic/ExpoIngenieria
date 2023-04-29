@@ -27,7 +27,7 @@
             WHERE co_correo = ?";
     $q = $pdo->prepare($sql);
     $q->execute(array($_SESSION['id']));
-    $proyectosCalificar = $q->fetch(PDO::FETCH_ASSOC);
+    $proyectosCalificar = $q->rowCount();
 
     //Avisos
     $sql = "SELECT * 
@@ -93,7 +93,7 @@
 
             <div class="Info">
                 <p>Proyectos por revisar</p>
-                <h1><?php echo $proyectosCalificar->rowCount();?></h1>
+                <h1><?php echo $proyectosCalificar;?></h1>
             </div>
 
             <div class="Messages__Menu">
