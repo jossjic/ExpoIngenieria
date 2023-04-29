@@ -26,6 +26,11 @@
 	<body>
 		<header>
 			<img class="Logo__EscNegCie" src="../media/logotec-ings.svg" />
+            <nav>
+                <ul>
+                    <li><a href="../PHP/logout.php">Cerrar Sesion</a></li>
+                </ul>
+            </nav>
 		</header>
 
 		<main>
