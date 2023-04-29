@@ -1,0 +1,10 @@
+.Btn-Ancla {
+	display: inline-block;
+	border: none;
+	background-color: #0033a0;
+	color: white;
+	line-height: 275%;
+	width: 150%;
+	text-decoration: none;
+	text-align: center;
+}
