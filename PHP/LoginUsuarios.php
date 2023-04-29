@@ -98,6 +98,7 @@
                             <td>
                                 <input class="Text__Input" type="email" name="collaborator_email" value="<?php echo !empty($collaborator_email) ? $collaborator_email : ''; ?>" autofocus required>
                                 <?php if (!empty($collaborator_email_error)): ?>
+                                    <br>
                                     <span class="Error__Message"><?php echo $collaborator_email_error; ?></span>
                                 <?php endif; ?>
                             </td>
@@ -107,6 +108,7 @@
                             <td>
                                 <input class="Text__Input" type="password" name="collaborator_pass" value="<?php echo !empty($collaborator_pass) ? $collaborator_pass : ''; ?>" required>
                                 <?php if (!empty($collaborator_pass_error)): ?>
+                                    <br>
                                     <span class="Error__Message"><?php echo $collaborator_pass_error; ?></span>
                                 <?php endif; ?>
                             </td>
