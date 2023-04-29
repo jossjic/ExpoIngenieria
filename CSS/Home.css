@@ -98,7 +98,8 @@ header {
 }
 
 .Explanation p {
-	align-self: center;
+	align-self: start;
+	padding: 50px;
 	width: 85%;
 	font-size: 1em;
 }
