@@ -112,10 +112,12 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="Td__Iniciar__Sesion" colspan="2"><input class="Btn__Iniciar__Sesion" type="submit" value="Iniciar sesión" name="submit"></td>
-                            <?php if (!empty($login_error)): ?>
-                                <span><?php echo $login_error; ?></span>
-                            <?php endif; ?>
+                            <td class="Td__Iniciar__Sesion" colspan="2">
+                                <input class="Btn__Iniciar__Sesion" type="submit" value="Iniciar sesión" name="submit">
+                                <?php if (!empty($login_error)): ?>
+                                    <span><?php echo $login_error; ?></span>
+                                <?php endif; ?>
+                            </td>
                         </tr>
                     </table>
                 </form>
