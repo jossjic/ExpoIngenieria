@@ -93,12 +93,16 @@
 
             <div class="Counter">
                 <p>ExpoIngenieria comienza en:</p>
-                <h1>10:24:45:60</h1>
+                <h1>
+                    <?php echo $fecha['ed_fecha_fin'] ?>
+                </h1>
             </div>
 
             <div class="Info">
                 <p>Proyectos por revisar</p>
-                <h1>30</h1>
+                <h1>
+                    <?php echo $proyectosCalificar;?>
+                </h1>
             </div>
 
             <div class="Messages__Menu">
@@ -106,31 +110,11 @@
                     <h1>Avisos</h1>
                 </div>
                 <div class="Messages">
-                    <div>
-                        <h1>Titulo</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, enim voluptas obcaecati voluptatum debitis provident nulla nesciunt, quam, repellendus a ad? Nihil impedit eius adipisci in voluptates, dolorum nemo soluta.</p>
-                        <br>
-                    </div>
-                    <div>
-                        <h1>Titulo</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, enim voluptas obcaecati voluptatum debitis provident nulla nesciunt, quam, repellendus a ad? Nihil impedit eius adipisci in voluptates, dolorum nemo soluta.</p>
-                        <br>
-                    </div>
-                    <div>
-                        <h1>Titulo</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, enim voluptas obcaecati voluptatum debitis provident nulla nesciunt, quam, repellendus a ad? Nihil impedit eius adipisci in voluptates, dolorum nemo soluta.</p>
-                        <br>
-                    </div>
-                    <div>
-                        <h1>Titulo</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, enim voluptas obcaecati voluptatum debitis provident nulla nesciunt, quam, repellendus a ad? Nihil impedit eius adipisci in voluptates, dolorum nemo soluta.</p>
-                        <br>
-                    </div>
-                    <div>
-                        <h1>Titulo</h1>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, enim voluptas obcaecati voluptatum debitis provident nulla nesciunt, quam, repellendus a ad? Nihil impedit eius adipisci in voluptates, dolorum nemo soluta.</p>
-                        <br>
-                    </div>
+                    <?php
+                        foreach ($anuncios as $row) {
+                            echo '<div><h1>'.$row['an_titulo'].'</h1><p>'.$row['an_contenido'].'</p><br></div>';
+                        }
+                    ?>
                 </div>
             </div>
         </main>
