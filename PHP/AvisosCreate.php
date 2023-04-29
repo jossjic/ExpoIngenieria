@@ -61,6 +61,7 @@
 
         <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
         <link rel="stylesheet" href="../CSS/FormsStructure.css">
+        <link rel="stylesheet" href="../CSS/Extra.css">
 
 	</head>
 
