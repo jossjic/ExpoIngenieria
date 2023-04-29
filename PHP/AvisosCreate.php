@@ -12,22 +12,18 @@
 		$TituloError = null;
 		$ContenidoError = null;
 		$GrupoError = null;
-        $FechaError = null;
-        $Adm_UsuError = null;
 
 	if ( !empty($_POST)) {
 
         $Titulo = $_POST['Titulo'];
 		$Contenido = $_POST['Contenido'];
 		$Grupo  = $_POST['Grupo'];
-        $Fecha = $_POST['Fecha'];
-        $Adm_Usu = $_POST['Usuario'];
 
 		// validate input
 		$valid = true;
 
 		if (empty($Titulo)) {
-			$TItuloError = 'Porfavor ingresa el titulo';
+			$TituloError = 'Porfavor ingresa el titulo';
 			$valid = false; 
 		}
 		if (empty($Contenido)) {
@@ -38,22 +34,14 @@
 			$GrupoError = 'Porfavor ingresa el grupo';
 			$valid = false;
 		}
-        if (empty($Fecha)) {
-			$FechaError = 'Porfavor ingresa la fecha en que se publicara el anuncio';
-			$valid = false;
-		}
-        if (empty($Adm_Usu)) {
-			$Adm_UsuError = 'Porfavor ingresa el usuario que eres';
-			$valid = false;
-		}
 
 		// insert data
 		if ($valid) {
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "INSERT INTO ANUNCIO(an_titulo, an_contenido, an_grupo, an_fecha, adm_usu) VALUES(?, ?, ?, ?, ?)";
+			$sql = "INSERT INTO ANUNCIO(an_titulo, an_contenido, an_grupo, an_fecha = NOW(), adm_correo) VALUES(?, ?, ?, ?, ?)";
 			$q = $pdo->prepare($sql);
-			$q->execute(array($Usuario,$Correo,$Nombre,$Contraseña));
+			$q->execute(array($Titulo,$Contenido,$Grupo,$_SESSION['id']));
 			Database::disconnect();
 			header("Location: AvisosView.php");
 		}
@@ -79,31 +67,26 @@
     <body>
         
         <header>
-			<img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
-
-            <ul>
-
-                <li>
-                    <a href="#">Menu</a>
-                </li>
-				<li>
-                    <a href="#">Usuarios</a>
-                </li>
-				<li>
-                    <a href="#">Reconocimientos</a>
-                </li>
-				<li>
-                    <a href="#">Eastadísticas</a>
-                </li>
-				
+			<a href="../index.php"
+				><img
+					class="Logo__Expo"
+					src="../media/logo-expo.svg"
+					alt="Logotipo de Expo ingenierías"
+			/></a>
+			<ul style="grid-column: 2/4">
+				<li><a href="../PHP/AdminInicio.php">Menu</a></li>
+				<li><a href="../PHP/AvisosView.php">Avisos</a></li>
+				<li><a href="../PHP/EdicionView.php">Ediciones</a></li>
+				<li><a href="../PHP/NivelView.php">Nivel</a></li>
+				<li><a href="../PHP/CategoriasView.php">Categorias</a></li>
+				<li><a href="../PHP/UsuariosView.php">Usuarios</a></li>
+				<li><a href="../PHP/ProyectosView.php">Proyectos</a></li>
+				<li><a href="../PHP/AdministradoresView.php">Administradores</a></li>
+				<li><a href="../PHP/EvaluacionesView.php">Evaluaciones</a></li>
+				<li style="font-weight: 600; font-size: 1.2em">
+					<a href="../PHP/logout.php">Cerrar Sesion</a>
+				</li>
 			</ul>
-
-            <nav>
-				<ul>
-					<li><a href="#">Cerrar Sesion</a></li>
-				</ul>
-			</nav>
-
 		</header>
 
         <main>
@@ -143,18 +126,6 @@
                             <input class="Text__Input" name="Grupo" type="text"  placeholder="Grupo" value="">
                             <?php if (($GrupoError != null)) ?>
                             <span class="help-inline"><?php echo $GrupoError;?></span>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label>Fecha</label>
-                        </td>
-
-                        <td>
-                            <input class="Text__Input" name="Fecha" type="date"  value="">
-                            <?php if (($FechaError != null)) ?>
-                            <span class="help-inline"><?php echo $FechaError;?></span>
                         </td>
                     </tr>
 
