@@ -118,7 +118,7 @@
 
             <h1>Actualizar Anuncio</h1>
 
-            <form class="form-horizontal" action="AvisosUpdate.php" method="post">
+            <form class="form-horizontal" action="AvisosUpdate.php?id=<?php echo $id?>" method="post">
 
 
                 <table>
