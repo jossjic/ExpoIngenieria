@@ -120,10 +120,10 @@
 										echo "
 											<p>&nbsp;</p>
                                             <p></p>
-                                            <p>ID</p>
-                                            <p>Titulo</p>
-                                            <p>Grupo</p>
-                                            <p>Fecha</p>
+                                            <p>".$row['an_id']."</p>
+                                            <p>".$row['an_nombre']."</p>
+                                            <p>".$row['an_grupo']."</p>
+                                            <p>".$row['an_fecha']."</p>
                                             <div class='Btn__Green'>
                                                 <a href='../PHP/AvisosRead.php?id=".trim($row['an_id'])."'>Ver</a>
                                             </div>
