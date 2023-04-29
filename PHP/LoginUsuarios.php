@@ -95,14 +95,30 @@
                     <table>
                         <tr>
                             <td>Correo</td>
-                            <td><input class="Text__Input" type="email" name="collaborator_email" value="<?php echo !empty($collaborator_email) ? $collaborator_email : ''; ?>" autofocus required></td>
+                            <td>
+                                <input class="Text__Input" type="email" name="collaborator_email" value="<?php echo !empty($collaborator_email) ? $collaborator_email : ''; ?>" autofocus required>
+                                <?php if (!empty($collaborator_email_error)): ?>
+                                    <span class="Error__Message"><?php echo $collaborator_email_error; ?></span>
+                                <?php endif; ?>
+                            </td>
                         </tr>
                         <tr>
                             <td>Contraseña  </td>
-                            <td><input class="Text__Input" type="password" name="collaborator_pass" value="<?php echo !empty($collaborator_pass) ? $collaborator_pass : ''; ?>" required></td>
+                            <td>
+                                <input class="Text__Input" type="password" name="collaborator_pass" value="<?php echo !empty($collaborator_pass) ? $collaborator_pass : ''; ?>" required>
+                                <?php if (!empty($collaborator_pass_error)): ?>
+                                    <span class="Error__Message"><?php echo $collaborator_pass_error; ?></span>
+                                <?php endif; ?>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="Td__Iniciar__Sesion" colspan="2"><input class="Btn__Iniciar__Sesion" type="submit" value="Iniciar sesión" name="submit"></td>
+                            <td class="Td__Iniciar__Sesion" colspan="2">
+                                <input class="Btn__Iniciar__Sesion" type="submit" value="Iniciar sesión" name="submit">
+                                <?php if (!empty($login_error)): ?>
+                                    <br>
+                                    <span class="Error__Message"><?php echo $login_error; ?></span>
+                                <?php endif; ?>
+                            </td>
                         </tr>
                     </table>
                 </form>
