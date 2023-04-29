@@ -60,7 +60,7 @@
 							<td id="TotalProyectos">
 								<?php
 									$pdo = Database::connect();
-									$sql = "SELECT * FROM ANUNCIOS";
+									$sql = "SELECT * FROM ANUNCIO";
 									$q = $pdo->query($sql)->rowCount();
 									echo $q;
 									Database::disconnect();
