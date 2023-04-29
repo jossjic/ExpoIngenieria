@@ -101,7 +101,7 @@
                             <label>Titulo</label>
                         </td>
                         <td>
-                            <input class="Text__Input" name="Titulo" type="text"  placeholder="Titulo" value="">
+                            <input class="Text__Input" name="Titulo" type="text"  placeholder="Titulo" value="" required>
                             <?php if (($TituloError != null)) ?>
                             <span class="help-inline"><?php echo $TituloError;?></span>
                         </td>
@@ -112,7 +112,7 @@
                             <label>Contenido</label>
                         </td>
                         <td>
-                            <input class="Text__Input" name="Contenido" type="text"  placeholder="!HOLA¡" value="">
+                            <input class="Text__Input" name="Contenido" type="text"  placeholder="!HOLA¡" value="" required>
                             <?php if (($ContenidoError != null)) ?>
                             <span class="help-inline"><?php echo $ContenidoError;?></span>
                         </td>
@@ -123,7 +123,7 @@
                             <label>Grupo</label>
                         </td>
                         <td>
-                            <input class="Text__Input" name="Grupo" type="text"  placeholder="Grupo" value="">
+                            <input class="Text__Input" name="Grupo" type="text"  placeholder="Grupo" value="" required>
                             <?php if (($GrupoError != null)) ?>
                             <span class="help-inline"><?php echo $GrupoError;?></span>
                         </td>
