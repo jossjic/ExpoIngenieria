@@ -98,6 +98,7 @@
                             <td>
                                 <input class="Text__Input" type="text" name="project_name_code" value="<?php echo !empty($project_name_code) ? $project_name_code : ''; ?>" autofocus required>
                                 <?php if (!empty($project_name_code_error)): ?>
+                                    <br>
                                     <span><?php echo $project_name_code_error; ?></span>
                                 <?php endif; ?>
                             </td>
@@ -107,6 +108,7 @@
                             <td>
                                 <input class="Text__Input" type="password" name="project_pass" value="<?php echo !empty($project_pass) ? $project_pass : ''; ?>" required>
                                 <?php if (!empty($project_pass_error)): ?>
+                                    <br>
                                     <span"><?php echo $project_pass_error; ?></span>
                                 <?php endif; ?>
                             </td>
@@ -115,6 +117,7 @@
                             <td class="Td__Iniciar__Sesion" colspan="2">
                                 <input class="Btn__Iniciar__Sesion" type="submit" value="Iniciar sesión" name="submit">
                                 <?php if (!empty($login_error)): ?>
+                                    <br>
                                     <span><?php echo $login_error; ?></span>
                                 <?php endif; ?>
                             </td>
