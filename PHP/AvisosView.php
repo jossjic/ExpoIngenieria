@@ -133,6 +133,7 @@
                                             <div class='Btn__Red'>
                                                 <a href='../PHP/AvisosDelete.php?id=".trim($row['an_id'])."'>Eliminar</a>
                                             </div>
+											<p></p>
 										";
 									}
 									Database::disconnect();
