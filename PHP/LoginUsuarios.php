@@ -38,7 +38,7 @@
         $q = $pdo->prepare($sql);
         $q->execute(array($collaborator_email, $collaborator_pass));
 
-        $sql = "SELECT * FROM ADMIN WHERE co_correo = ? AND co_pass = ?";
+        $sql = "SELECT * FROM ADMIN WHERE adm_correo = ? AND adm_pass = ?";
         $admin = $pdo->prepare($sql);
         $admin->execute(array($collaborator_email, $collaborator_pass)); 
         $isAdmin = $admin->rowCount() == 1;
