@@ -22,7 +22,7 @@
     $fecha = $q->fetch(PDO::FETCH_ASSOC);
 
     //Proyectos por revisar
-    $sql = "SELECT COUNT(*) 
+    $sql = "SELECT *
             FROM PROYECTO_DOCENTE 
             WHERE co_correo = ?";
     $q = $pdo->prepare($sql);
@@ -93,7 +93,7 @@
 
             <div class="Info">
                 <p>Proyectos por revisar</p>
-                <h1><?php echo $proyectosCalificar;?></h1>
+                <h1><?php echo $proyectosCalificar->rowCount();?></h1>
             </div>
 
             <div class="Messages__Menu">
