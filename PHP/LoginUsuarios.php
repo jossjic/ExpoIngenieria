@@ -54,7 +54,7 @@
                 $_SESSION['user_type'] = "collaborator-judge";
                 $_SESSION['id'] = $collaborator['co_correo'];
                 // Redirect
-                header("Location: ../PHP/DashboardColaboradoresJurado.php");
+                header("Location: ../PHP/DashboardColaboradoresJuez.php");
                 exit();
             } elseif ($collaborator['co_es_jurado'] == false) {
                 $_SESSION['logged_in'] = true;
