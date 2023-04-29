@@ -47,6 +47,14 @@
     $q->execute(array($_SESSION['id']));
     $tipoUsuario = $q->fetchAll();
 
+    //Nomina (Jurado/Profesor)
+    $sql = "SELECT co_nomina 
+            FROM COLABORADOR 
+            WHERE co_correo = ?";
+    $q = $pdo->prepare($sql);
+    $q->execute(array($_SESSION['id']));
+    $nomina = $q->fetchAll();
+
 
     Database::disconnect();    
 ?>
@@ -71,8 +79,8 @@
             <nav>
                 <ul>
                     <?php 
-                        if ($tipoUsuario == true) {
-                            echo "<li><a href='../PHP/DashboardColaboradoresJuez'>Cambiar Vista Jurado</a></li>";
+                        if ($tipoUsuario == true && $nomina != null) {
+                            echo "<li><a href='../PHP/DashboardColaboradoresJuez'>Cambiar Vista a Jurado</a></li>";
                             $_SESSION['user_type'] = "collaborator-judge";
                         }
                     ?>

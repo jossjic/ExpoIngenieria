@@ -11,6 +11,49 @@
 
     $pdo = Database::connect();
 
+    //Fecha Fin Expo Campaña
+    $sql = "SELECT ed_fecha_fin 
+            FROM COLABORADOR 
+            NATURAL JOIN EDICION_COLABORADOR 
+            NATURAL JOIN EDICION
+            WHERE co_correo = ?";
+    $q = $pdo->prepare($sql);
+    $q->execute(array($_SESSION['id']));
+    $fecha = $q->fetch(PDO::FETCH_ASSOC);
+
+    //Proyectos por revisar
+    $sql = "SELECT *
+            FROM PROYECTO_JURADO 
+            WHERE co_correo = ?";
+    $q = $pdo->prepare($sql);
+    $q->execute(array($_SESSION['id']));
+    $proyectosCalificar = $q->rowCount();
+
+    //Avisos
+    $sql = "SELECT * 
+            FROM ANUNCIO 
+            WHERE an_grupo = ?
+            ORDER BY an_fecha";
+    $group = 2; //Jurados
+    $q = $pdo->prepare($sql);
+    $q->execute(array($group));
+    $anuncios = $q->fetchAll();
+
+    //Tipo de usuario (Jurado/Profesor)
+    $sql = "SELECT co_es_jurado 
+            FROM COLABORADOR 
+            WHERE co_correo = ?";
+    $q = $pdo->prepare($sql);
+    $q->execute(array($_SESSION['id']));
+    $tipoUsuario = $q->fetchAll();
+
+    //Nomina (Jurado/Profesor)
+    $sql = "SELECT co_nomina 
+            FROM COLABORADOR 
+            WHERE co_correo = ?";
+    $q = $pdo->prepare($sql);
+    $q->execute(array($_SESSION['id']));
+    $nomina = $q->fetchAll();
     
 ?>
 
@@ -29,11 +72,16 @@
         <header>
             <a href="../index.php"><img class="Logo__Expo" src="../media/logo-expo.svg" alt="Logotipo de Expo ingenierías"></a>
             <ul>
-                <li><a href="../index.php">Inicio</a></li>
                 <li><a href="#">Layout de proyectos</a></li>
             </ul>
             <nav>
                 <ul>
+                    <?php 
+                        if ($tipoUsuario == true && $nomina != null) {
+                            echo "<li><a href='../PHP/DashboardColaboradoresDocente'>Cambiar Vista a Docente</a></li>";
+                            $_SESSION['user_type'] = "collaborator-teacher";
+                        }
+                    ?>
                     <li><a href="../PHP/logout.php">Cerrar Sesion</a></li>
                 </ul>
             </nav>
