@@ -100,7 +100,7 @@
                         <?php if (!empty($project_name_code_error)): ?>
                         <tr>
                             <td></td>
-                            <td><span style="color:red;"><?php echo $project_name_code_error; ?></span></td>
+                            <td><span "><?php echo $project_name_code_error; ?></span></td>
                         </tr>
                         <?php endif; ?>
                         <tr>
@@ -110,13 +110,13 @@
                         <?php if (!empty($project_pass_error)): ?>
                         <tr>
                             <td></td>
-                            <td><span style="color:red;"><?php echo $project_pass_error; ?></span></td>
+                            <td><span"><?php echo $project_pass_error; ?></span></td>
                         </tr>
                         <?php endif; ?>
                         <?php if (!empty($login_error)): ?>
                         <tr>
                             <td></td>
-                            <td><span style="color:red;"><?php echo $login_error; ?></span></td>
+                            <td><span "><?php echo $login_error; ?></span></td>
                         </tr>
                         <?php endif; ?>
                         <tr>
