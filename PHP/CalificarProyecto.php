@@ -224,17 +224,17 @@
 	</head>
 	<body>
 		<header>
-		    <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logotipo de la Escuela de Ingeniería y Ciencias">
-		    <ul>
-		        <li><a href="#">Inicio</a></li>
-		        <li><a href="#">Layout de proyectos</a></li>
-		    </ul>
-		    <nav>
-		        <ul>
-		            <li><a href="#">Cerrar Sesion</a></li>
-		        </ul>
-		    </nav>
-		</header>
+            <a href="../index.php"><img class="Logo__Expo" src="../media/logo-expo.svg" alt="Logotipo de Expo ingenierías"></a>
+            <ul>
+				<li><a href="../PHP/DashboardColaboradoresJurado.php">Dashboard</a></li>
+                <li><a href="../PHP/Mapa.php">Mapa de proyectos</a></li>
+            </ul>
+            <nav>
+                <ul>
+                    <li><a href="../PHP/logout.php">Cerrar Sesion</a></li>
+                </ul>
+            </nav>
+        </header>
 
 	    <main>
 	    	<div class="container first-cal">
