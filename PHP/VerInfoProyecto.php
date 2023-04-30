@@ -119,20 +119,20 @@
 
 						// Imprime la información del proyecto
 						echo "<h2>$project_name</h2>";
-						echo "<h3>Categoría: $category</h3>";
-						echo "<h3>Nivel: $level</h3>";
+						echo "<h3>Categoría: </h3> <p>$category</p>";
+						echo "<h3>Nivel: </h3><p>$level</p>";
 						echo "<h3>Profesores:</h3>";
-						echo "<ul>";
+						echo "<ol>";
 						foreach ($teachers as $teacher) {
 							echo "<li>".$teacher['co_nombre']." ".$teacher['co_apellido']." ".$teacher['co_correo']."</li>";
 						}
-						echo "</ul>";
+						echo "</ol>";
 						echo "<h3>Alumnos:</h3>";
-						echo "<ul>";
+						echo "<ol>";
 						foreach ($students as $student) {
 							echo "<li>".$student['a_nombre']." ".$student['a_apellido']." ".$student['a_correo']."</li>";
 						}
-						echo "</ul>";
+						echo "</ol>";
 					?>
                     <a href="../PHP/AdmisionProyectos.php" class="btn btn-primary mx-2" style="background-color: #0033A0;">Regresar</a>
 				</div>
