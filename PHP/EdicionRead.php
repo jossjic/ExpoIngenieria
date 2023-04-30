@@ -110,7 +110,7 @@
                     </tr>
 
                     <tr>
-                        <td class="Btn__Blue" colspan="2"><a  href="EdicionView.php">Regresar</a></td>
+                        <td><a class="Btn-Ancla" href="EdicionView.php">Regresar</a></td>
                         <td></td>
                     </tr>
                 </table>
