@@ -1,17 +1,26 @@
 <?php
-	require 'dataBase.php';
+	require_once 'dataBase.php';
+
+    session_name("EngineerXpoWeb");
+    session_start();
+
+    if (!isset($_SESSION['logged_in'])) {
+        header("Location: ../index.php");
+        exit();
+    }
+	
 	$id = null;
 	if ( !empty($_GET['id'])) {
 		$id = $_REQUEST['id'];
 	}
 	if ( $id==null) {
-		header("Location: admisionProyectos.php");
+		header("Location: AdmisionProyectos.php");
 	} else {
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$sql = 'SELECT * 
-		        FROM V2_PROYECTO 
-		        NATURAL JOIN V2_CATEGORIA 
+		        FROM PROYECTO 
+		        NATURAL JOIN CATEGORIA 
 		        WHERE p_id = ?';
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
@@ -71,11 +80,6 @@
     		</div>
         </main>
 
-        <!-- <footer>
-            <div id=footerPage>
-                <img src = "../media/tecc.png" width = "350" height="115">
-            </div>
-        </footer> -->
     </body>
 
 
