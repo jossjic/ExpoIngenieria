@@ -94,7 +94,7 @@
                             FROM PROYECTO 
                             NATURAL JOIN CATEGORIA
                             NATURAL JOIN PROYECTO_DOCENTE
-                            WHERE p_estado = "Registrado" AND co_correo = '.$_SESSION['id'].'
+                            WHERE p_estado = "Registrado" AND co_correo = \''.$_SESSION['id'].'\'
                             ORDER BY p_nombre';
 
                     $projects = $pdo->query($sql);
@@ -160,7 +160,7 @@
                             FROM PROYECTO 
                             NATURAL JOIN CATEGORIA
                             NATURAL JOIN PROYECTO_DOCENTE
-                            WHERE p_estado = "Aceptado" AND co_correo = '.$_SESSION['id'].'
+                            WHERE p_estado = "Aceptado" AND co_correo = \''.$_SESSION['id'].'\'
                             ORDER BY p_nombre';
 
                     $projects = $pdo->query($sql);
@@ -225,7 +225,7 @@
                             FROM PROYECTO 
                             NATURAL JOIN CATEGORIA
                             NATURAL JOIN PROYECTO_DOCENTE
-                            WHERE p_estado = "Rechazado" AND co_correo = '.$_SESSION['id'].'
+                            WHERE p_estado = "Rechazado" AND co_correo = \''.$_SESSION['id'].'\'
                             ORDER BY p_nombre';
 
                     $projects = $pdo->query($sql);
