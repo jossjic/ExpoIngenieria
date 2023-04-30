@@ -44,7 +44,7 @@
             exit();
         }
     } 
-    else if($q['adm_master'] == 0) {
+    else if($q['adm_master'] == 0 || $count == 1) {
         header("Location: AdministradoresView.php");
         exit();
     }
