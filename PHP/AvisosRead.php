@@ -61,7 +61,7 @@
 				<li><a href="../PHP/ProyectosView.php">Proyectos</a></li>
 				<li><a href="../PHP/AdministradoresView.php">Administradores</a></li>
 				<li><a href="../PHP/EvaluacionesView.php">Evaluaciones</a></li>
-				<li style="font-weight: 600; font-size: 1.2em">
+				<li style="font-weight: 600;">
 					<a href="../PHP/logout.php">Cerrar Sesion</a>
 				</li>
 			</ul>
