@@ -40,6 +40,7 @@
 
         <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
         <link rel="stylesheet" href="../CSS/FormsStructure.css">
+		<link rel="stylesheet" href="../CSS/Extra.css">
 	</head>
 
 	<body>
@@ -87,15 +88,15 @@
                     </tr>
 
                     <tr>
-                        <td class="Td__Iniciar__Sesion">
+                        <td>
                             <input class="Btn__Iniciar__Sesion" type="submit" value="Si" id="submit" name="submit">
                         </td>
                     </tr>
-					
+
 					<tr>
-						<td class="Td__Iniciar__Sesion">
-                            <a class="Btn__Blue" href="AvisosView.php">Regresar</a>
-                        </td>
+						<td>
+                            <a class="Btn-Ancla" href="AvisosView.php">Regresar</a>
+						</td>
 					</tr>
                 </table>
 
