@@ -53,7 +53,7 @@
             if (trim($isMaster) == "Si") {
                 $pdo = Database::connect();
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $sql = "INSERT INTO ADMIN(adm_nombre,adm_apellido,adm_correo,adm_pass,adm_master) VALUES(?, ?, ?, ?)";
+                $sql = "INSERT INTO ADMIN(adm_nombre,adm_apellido,adm_correo,adm_pass,adm_master) VALUES(?, ?, ?, ?,?)";
                 $q = $pdo->prepare($sql);
                 $q->execute(array($Nombre,$Apellido,$Correo,$Contraseña,1));
                 Database::disconnect();
@@ -62,7 +62,7 @@
             else if (trim($isMaster) == "No") {
                 $pdo = Database::connect();
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $sql = "INSERT INTO ADMIN(adm_nombre,adm_apellido,adm_correo,adm_pass,adm_master) VALUES(?, ?, ?, ?)";
+                $sql = "INSERT INTO ADMIN(adm_nombre,adm_apellido,adm_correo,adm_pass,adm_master) VALUES(?, ?, ?, ?,?)";
                 $q = $pdo->prepare($sql);
                 $q->execute(array($Nombre,$Apellido,$Correo,$Contraseña,0));
                 Database::disconnect();
