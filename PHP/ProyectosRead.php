@@ -153,7 +153,7 @@
                 </tr>
 
                 <tr>
-                    <td><a class="Btn-Ancla" href="AvisosView.php">Regresar</a></td>
+                    <td><a class="Btn-Ancla" href="ProyectosView.php">Regresar</a></td>
                     <td></td>
                 </tr>
 
