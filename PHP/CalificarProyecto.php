@@ -138,6 +138,17 @@
 		$q->execute(array($id));
 		$project = $q->fetch(PDO::FETCH_ASSOC);
 
+		//Datos Alumnos
+		$pdo = Database::connect();
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = 'SELECT * 
+		        FROM PROYECTO_ALUMNO 
+		        NATURAL JOIN ALUMNO 
+		        WHERE p_id = ?';
+		$q = $pdo->prepare($sql);
+		$q->execute(array($id));
+		$alumno = $q->fetch(PDO::FETCH_ASSOC);
+
 		// Obtener datos de la evaluación
 		// del docente sobre proyecto
 		$user_id = $_SESSION['id']; // Cambiar para el id del usuario en la sesión
@@ -236,7 +247,6 @@
 						$description = $project['p_descripcion'];
 						$edition = $project['ed_nombre'];
 						$status = $project['p_estado'];
-						$teachers = $docente;
 						$students = $alumno;
 
 						// Imprime la información del proyecto
@@ -246,24 +256,19 @@
 						echo "<h3>Categoría: </h3> <p>$category</p>";
 						echo "<h3>Nivel: </h3><p>$level</p>";
 						echo "<h3>Descripcion: </h3> <p>$description</p>";
-						echo "<h3>Profesores:</h3>";
-						echo "<ol>";
-						foreach ($teachers as $teacher) {
-							echo "<li>".$teacher['co_nombre']." ".$teacher['co_apellido']." ".$teacher['co_correo']."</li>";
-						}
-						echo "</ol>";
 						echo "<h3>Alumnos:</h3>";
 						echo "<ol>";
 						foreach ($students as $student) {
-							echo "<li>".$student['a_nombre']." ".$student['a_apellido']." ".$student['a_correo']."</li>";
+							echo "<li>".$student['a_nombre']." ".$student['a_apellido']."</li>";
 						}
 						echo "</ol>";
 					?>
-                    <a href="../PHP/AdmisionProyectos.php" class="btn btn-primary mx-2" style="background-color: #0033A0;">Regresar</a>
+                    <a href="../PHP/ProyectosACalificar.php" class="btn btn-primary mx-2" style="background-color: #0033A0;">Regresar</a>
 				</div>
-			</div>
+				
+			</div class="container">
 
-				<form class="container" action="CalificarProyecto.php?id=<?php echo $id?>" method="post">
+				<form class="row" action="CalificarProyecto.php?id=<?php echo $id?>" method="post">
 					<input type="hidden" name="id" value="<?php echo $id;?>"/>
 					<fieldset class="rubric-container">
 						<legend><strong>Rúbrica de evaluación</strong></legend>
