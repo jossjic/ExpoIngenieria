@@ -152,7 +152,7 @@
 						}
 						echo "</ol>";
 					?>
-                    <a href="../PHP/AdmisionProyectos.php" class="btn btn-primary mx-2" style="background-color: #0033A0;">Regresar</a>
+                    <a href="../PHP/ProyectosView.php" class="btn btn-primary mx-2" style="background-color: #0033A0;">Regresar</a>
 				</div>
 			</div>
     	</main> 
