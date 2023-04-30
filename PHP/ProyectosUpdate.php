@@ -145,7 +145,21 @@
                             <label>Categoria</label>
                         </td>
                         <td>
-                            <input class="Text__Input" name="Categoria" type="text"  placeholder="" value="<?php echo !empty($Categoria)?$Categoria:'';?>" required>
+                            <select name="Categoria" class="Text__Input" required>
+                                <?php 
+                                    $pdo = Database::connect();
+                                    $sql = "SELECT * FROM CATEGORIA";
+                                    $q = $pdo->query($sql);
+                                    foreach ($q as $row) {
+                                        if ($row['ca_id'] == $Categoria) {
+                                            echo "<option value=".$row['ca_id']." selected>".$row['ca_nombre']."</option>";
+                                        } else {
+                                            echo "<option value=".$row['ca_id'].">".$row['ca_nombre']."</option>";
+                                        }
+                                    }
+                                    Database::disconnect();
+                                ?>
+                            </select>
                             <?php if (($CategoriaError != null)) ?>
                             <span class="help-inline"><?php echo $CategoriaError;?></span>
                         </td>
@@ -156,7 +170,21 @@
                             <label>Nivel</label>
                         </td>
                         <td>
-                            <input class="Text__Input" name="Nivel" type="text"  placeholder="" value="<?php echo !empty($Nivel)?$Nivel:'';?>" required>
+                            <select name="Nivel" class="Text__Input" required>
+                                <?php 
+                                    $pdo = Database::connect();
+                                    $sql = "SELECT * FROM NIVEL";
+                                    $q = $pdo->query($sql);
+                                    foreach ($q as $row) {
+                                        if ($row['n_id'] == $Nivel) {
+                                            echo "<option value=".$row['n_id']." selected>".$row['n_nombre']."</option>";
+                                        } else {
+                                            echo "<option value=".$row['n_id'].">".$row['n_nombre']."</option>";
+                                        }
+                                    }
+                                    Database::disconnect();
+                                ?>
+                            </select>
                             <?php if (($NivelError != null)) ?>
                             <span class="help-inline"><?php echo $NivelError;?></span>
                         </td>
@@ -168,7 +196,27 @@
                         </td>
 
                         <td>
-                            <input class="Text__Input" name="Estado" type="Text"  placeholder="" value="<?php echo !empty($Estado)?$Estado:'';?>" required>
+                            <select name="Estado" class="Text__Input" required>
+                                <?php 
+                                    
+                                        if ($Estado == "Registrado") {
+                                            echo "<option value='Registrado' selected>Registrado</option>";
+                                            echo "<option value='Rechazado'>Rechazado</option>";
+                                            echo "<option value='Aceptado'>Aceptado</option>";
+                                        } 
+                                        else if ($Estado == "Rechazado") {
+                                            echo "<option value='Rechazado' selected>Rechazado</option>";
+                                            echo "<option value='Registrado'>Registrado</option>";
+                                            echo "<option value='Aceptado'>Aceptado</option>";
+                                        }
+                                        else if ($Estado == "Aceptado") {
+                                            echo "<option value='Aceptado' selected>Aceptado</option>";
+                                            echo "<option value='Rechazado'>Rechazado</option>";
+                                            echo "<option value='Registrado'>Registrado</option>";
+                                        }
+                                    
+                                ?>
+                            </select>
                             <?php if (($EstadoError != null)) ?>
                             <span class="help-inline"><?php echo $EstadoError;?></span>
                         </td>
