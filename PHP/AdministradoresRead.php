@@ -20,7 +20,7 @@
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$sql = "SELECT * FROM ADMIN WHERE adm_correo = ?";
 		$q = $pdo->prepare($sql);
-		$q->execute(array($Usuario));
+		$q->execute(array(trim($Usuario)));
 		$data = $q->fetch(PDO::FETCH_ASSOC);
 		Database::disconnect();
 	}
