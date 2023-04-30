@@ -121,8 +121,8 @@
 											<p>&nbsp;</p>
 											<p>".trim($row['ed_id'])."</p>
 											<p>".trim($row['ed_nombre'])."</p>
-											<p>".trim($row['ed_fecha_inicio'])."</p>
-											<p>".trim($row['ed_fecha_fin'])."</p>
+											<p>".date("Y-m-d",strtotime(trim($row['ed_fecha_inicio'])))."</p>
+											<p>".date("Y-m-d",strtotime(trim($row['ed_fecha_fin'])))."</p>
 											<p></p>
 											<div class='Btn__Green'>
 												<a href='../PHP/EdicionRead.php?id=".trim($row['ed_id'])."'>Ver</a>
