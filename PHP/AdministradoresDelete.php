@@ -33,7 +33,7 @@
         if ( !empty($_POST)) {
             // keep track post values
             $Usuario = trim($_POST['Usuario']);
-
+            //No se puede eliminar asi mismo
             if ($Usuario === $_SESSION['id']) {
                 header("Location: AdministradoresView.php");
                 exit();
