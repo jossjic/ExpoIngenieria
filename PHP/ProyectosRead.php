@@ -66,8 +66,6 @@
     <title>Ver Proyectos</title>
 
     <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
-    <link rel="stylesheet" href="../CSS/FormsStructure.css">
-    <link rel="stylesheet" href="../CSS/Extra.css">
 
     <!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
