@@ -144,37 +144,72 @@
                         $busqueda = $_POST['ProyectoID'];
                         $Buscar = $_POST['BuscarNombre'];
 
-                        if (!empty($_POST)){
+                        if (trim($busqueda) == "ID"){
+                            if (!empty($_POST)){
 
-                            $pdo = Database::connect();
-                            $sql = "SELECT * FROM PROYECTO WHERE p_id = ?";
-                            $q = $pdo->prepare($sql);
-                            $q->execute(array($id));
-                            $data = $q->fetch(PDO::FETCH_ASSOC);
-                            foreach ($data as $row) {
-                                echo "
-                                        <p>&nbsp;</p>
-                                        <p>" . $row['p_id'] ."</p>
-                                        <p>" . $row['p_nombre'] ."</p>
-                                        <p>" . $row['ca_id'] ."</p>
-                                        <p>" . $row['p_estado'] ."</p>
-                                        <p>" . $row['n_id'] ."</p>
-                                        <div class='Btn__Green'>
-                                            <a href='../PHP/ProyectosRead.php?id=".trim($row['p_id'])."'>Ver</a>
-                                        </div>
-                                        <div class='Btn__Blue'>
-                                            <a href='../PHP/ProyectosUpdate.php?id=".trim($row['p_id'])."'>Actualizar</a>
-                                        </div>
-                                        <div class='Btn__Red'>
-                                            <a href='../PHP/ProyectosDelete.php?id=".trim($row['p_id'])."'>Eliminar</a>
-                                        </div>
-                                        <p></p>
-                                    ";
-
+                                $pdo = Database::connect();
+                                $sql = "SELECT * FROM PROYECTO WHERE p_id = ?";
+                                $q = $pdo->prepare($sql);
+                                $q->execute(array($Buscar));
+                                $data = $q->fetch(PDO::FETCH_ASSOC);
+                                foreach ($data as $row) {
+                                    echo "
+                                            <p>&nbsp;</p>
+                                            <p>" . $row['p_id'] ."</p>
+                                            <p>" . $row['p_nombre'] ."</p>
+                                            <p>" . $row['ca_id'] ."</p>
+                                            <p>" . $row['p_estado'] ."</p>
+                                            <p>" . $row['n_id'] ."</p>
+                                            <div class='Btn__Green'>
+                                                <a href='../PHP/ProyectosRead.php?id=".trim($row['p_id'])."'>Ver</a>
+                                            </div>
+                                            <div class='Btn__Blue'>
+                                                <a href='../PHP/ProyectosUpdate.php?id=".trim($row['p_id'])."'>Actualizar</a>
+                                            </div>
+                                            <div class='Btn__Red'>
+                                                <a href='../PHP/ProyectosDelete.php?id=".trim($row['p_id'])."'>Eliminar</a>
+                                            </div>
+                                            <p></p>
+                                        ";
+    
+                                }
+                                Database::disconnect();
+    
                             }
-                            Database::disconnect();
+                        }
+                        else if (trim($busqueda) == "Nombre") {
+                            if (!empty($_POST)){
 
+                                $pdo = Database::connect();
+                                $sql = "SELECT * FROM PROYECTO WHERE p_nombre = ?";
+                                $q = $pdo->prepare($sql);
+                                $q->execute(array($Buscar));
+                                $data = $q->fetch(PDO::FETCH_ASSOC);
+                                foreach ($data as $row) {
+                                    echo "
+                                            <p>&nbsp;</p>
+                                            <p>" . $row['p_id'] ."</p>
+                                            <p>" . $row['p_nombre'] ."</p>
+                                            <p>" . $row['ca_id'] ."</p>
+                                            <p>" . $row['p_estado'] ."</p>
+                                            <p>" . $row['n_id'] ."</p>
+                                            <div class='Btn__Green'>
+                                                <a href='../PHP/ProyectosRead.php?id=".trim($row['p_id'])."'>Ver</a>
+                                            </div>
+                                            <div class='Btn__Blue'>
+                                                <a href='../PHP/ProyectosUpdate.php?id=".trim($row['p_id'])."'>Actualizar</a>
+                                            </div>
+                                            <div class='Btn__Red'>
+                                                <a href='../PHP/ProyectosDelete.php?id=".trim($row['p_id'])."'>Eliminar</a>
+                                            </div>
+                                            <p></p>
+                                        ";
+    
+                                }
+                                Database::disconnect();
+    
                             }
+                        }
                         
                     ?>
     </div>
