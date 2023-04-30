@@ -122,7 +122,7 @@
                                             <p>".$row['adm_correo']."</p>
                                             <p></p>
 											<div class='Btn__Green'>
-												<a href='../PHP/EdministradoresRead.php?id=".trim($row['adm_correo'])."'>Ver</a>
+												<a href='../PHP/AdministradoresRead.php?id=".trim($row['adm_correo'])."'>Ver</a>
 											</div>
 											<div class='Btn__Blue'>
 												<a href='../PHP/AdministradoresUpdate.php?id=".trim($row['adm_correo'])."'>Actualizar</a>
