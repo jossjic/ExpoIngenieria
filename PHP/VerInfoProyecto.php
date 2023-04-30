@@ -87,26 +87,25 @@
 
         <main class="container my-5">
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-md-6 text-center">
 					<iframe
 						<?php 
-
 							preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $project['p_video'], $match);
 							$video_id = $match[1];
 							$video_full_link = "https://drive.google.com/file/d/".$video_id."/preview";
 							echo 'src="'.$video_full_link.'" title="YouTube video player" frameborder="0" allow="accelerometer"; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share allowfullscreen';
-						?>
-						
+						?>     
 					></iframe>
-
+				</div>
+				<div class="col-md-6 text-center">
 					<iframe
-					<?php
-                            preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $project['p_poster'], $match);
-                            $image_id = $match[1];
-                            $image_full_link = "https://drive.google.com/file/d/".$image_id."/preview";
-                            echo 'src="'.$image_full_link.'" allow="autoplay"';
-                    ?>
-				></iframe>
+						<?php
+							preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $project['p_poster'], $match);
+							$image_id = $match[1];
+							$image_full_link = "https://drive.google.com/file/d/".$image_id."/preview";
+							echo 'src="'.$image_full_link.'" allow="autoplay"';
+						?>
+					></iframe>
 				</div>
 				<div class="col-md-6">
 					<?php
