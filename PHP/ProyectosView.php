@@ -131,7 +131,7 @@
                 <p>Nombre</p>
                 <p>Categoria</p>
                 <p>Estado</p>
-                <p>Ultima Modificación</p>
+                <p>Nivel</p>
                 <div>
                     <p>Acciones</p>
                 </div>
@@ -139,15 +139,19 @@
             <div class="Info__Table">
                             <?php
                                 $pdo = Database::connect();
-                                $sql = "SELECT * FROM PROYECTO ORDER BY ed_id DESC";
+                                $sql = "SELECT * 
+                                        FROM PROYECTO
+                                        NATURAL JOIN NIVEL
+                                        NATURAL JOIN CATEGORIA 
+                                        ORDER BY ed_id DESC";
                                 foreach ($pdo->query($sql) as $row) {
                                     echo "
                                             <p>&nbsp;</p>
                                             <p>" . $row['p_id'] ."</p>
                                             <p>" . $row['p_nombre'] ."</p>
-                                            <p>" . $row['ca_id'] ."</p>
+                                            <p>" . $row['ca_nombre'] ."</p>
                                             <p>" . $row['p_estado'] ."</p>
-                                            <p>" . $row['n_id'] ."</p>
+                                            <p>" . $row['n_nombre'] ."</p>
                                             <div class='Btn__Green'>
                                                 <a href='../PHP/ProyectosRead.php?id=".trim($row['p_id'])."'>Ver</a>
                                             </div>
