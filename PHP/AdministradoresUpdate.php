@@ -127,7 +127,7 @@
 
             <h1>Actualizar</h1>
 
-            <form class="form-horizontal" action="AdministradorUpdate.php?id=<?php echo $Usuario?>" method="post">
+            <form class="form-horizontal" action="AdministradoresUpdate.php?id=<?php echo $Usuario?>" method="post">
 
 
                 <table>
