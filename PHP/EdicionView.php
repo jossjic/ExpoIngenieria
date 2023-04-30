@@ -85,6 +85,8 @@
 							<select name="ProyectoID" id="ProyectoID">
 								<option value="ID">ID</option>
 								<option value="Nombre">Nombre</option>
+								<option value="Fecha Inicio">Fecha Inicio</option>
+								<option value="Fecha Fin">Fecha Fin</option>
 							</select>
 						</td>
 						<td>
@@ -103,8 +105,8 @@
 					<p>&nbsp;</p>
 					<p>ID</p>
 					<p>Nombre</p>
-					<p>Fecha Fin</p>
 					<p>Fecha Inicio</p>
+					<p>Fecha Fin</p>
 					<p></p>
 					<div>
 						<p>Acciones</p>
@@ -117,7 +119,6 @@
 									foreach ($pdo->query($sql) as $row) {
 										echo "
 											<p>&nbsp;</p>
-											<p></p>
 											<p>". $row['ed_id']."</p>
 											<p>". $row['ed_nombre']."</p>
 											<p>". $row['ed_fecha_inicio']."</p>
