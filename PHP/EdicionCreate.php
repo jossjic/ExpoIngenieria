@@ -139,7 +139,9 @@
                         <td class="Td__Iniciar__Sesion" colspan="2">
                             <input class="Btn__Iniciar__Sesion" type="submit" value="Agregar edicion" id="submit" name="submit">
                         </td>
-                        <td></td>
+                        <td>
+                            <a class="Btn-Ancla" href="EdicionView.php">Regresar</a>
+                        </td>
                     </tr>
                 </table>
             </form>
