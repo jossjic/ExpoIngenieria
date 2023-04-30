@@ -91,7 +91,7 @@
 				<div class="col-md-6 text-center">
 					<iframe
 						width="80%";
-						height="60%";
+						height="50%";
 							<?php
 							preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $project['p_video'], $match);
 							$video_id = $match[1];
