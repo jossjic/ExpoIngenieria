@@ -238,7 +238,7 @@
 
 	    <main>
 	    	<div class="container">
-				<div class="row">
+				<div class="row vh-100 p-5">
 					<div class="col-md-6 text-center">
 						<iframe
 							width="80%";
@@ -252,7 +252,7 @@
 						></iframe>
 						<iframe
 							width="80%";
-							height="100%";
+							height="50%";
 								<?php
 								preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $project['p_poster'], $match);
 								$image_id = $match[1];
