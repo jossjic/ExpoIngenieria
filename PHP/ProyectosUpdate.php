@@ -213,6 +213,11 @@
                                             echo "<option value='Aceptado' selected>Aceptado</option>";
                                             echo "<option value='Rechazado'>Rechazado</option>";
                                             echo "<option value='Registrado'>Registrado</option>";
+                                        } 
+                                        else {
+                                            echo "<option value='Aceptado'>Aceptado</option>";
+                                            echo "<option value='Rechazado'>Rechazado</option>";
+                                            echo "<option value='Registrado'>Registrado</option>";
                                         }
                                     
                                 ?>
