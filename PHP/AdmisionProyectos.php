@@ -93,7 +93,8 @@
                     $sql = 'SELECT * 
                             FROM PROYECTO 
                             NATURAL JOIN CATEGORIA
-                            WHERE p_estado = "Registrado"
+                            NATURAL JOIN PROYECTO_DOCENTE
+                            WHERE p_estado = "Registrado" AND co_correo = '.$_SESSION['id'].'
                             ORDER BY p_nombre';
 
                     $projects = $pdo->query($sql);
@@ -158,7 +159,8 @@
                     $sql = 'SELECT * 
                             FROM PROYECTO 
                             NATURAL JOIN CATEGORIA
-                            WHERE p_estado = "Aceptado"
+                            NATURAL JOIN PROYECTO_DOCENTE
+                            WHERE p_estado = "Aceptado" AND co_correo = '.$_SESSION['id'].'
                             ORDER BY p_nombre';
 
                     $projects = $pdo->query($sql);
@@ -222,7 +224,8 @@
                     $sql = 'SELECT * 
                             FROM PROYECTO 
                             NATURAL JOIN CATEGORIA
-                            WHERE p_estado = "Rechazado"
+                            NATURAL JOIN PROYECTO_DOCENTE
+                            WHERE p_estado = "Rechazado" AND co_correo = '.$_SESSION['id'].'
                             ORDER BY p_nombre';
 
                     $projects = $pdo->query($sql);
