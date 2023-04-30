@@ -62,6 +62,30 @@
 			$valid = false;
 		}
 
+		// Obtener datos del proyecto
+		$pdo = Database::connect();
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = 'SELECT * 
+		        FROM PROYECTO 
+		        NATURAL JOIN CATEGORIA 
+		        WHERE p_id = ?';
+		$q = $pdo->prepare($sql);
+		$q->execute(array($id));
+		$project = $q->fetch(PDO::FETCH_ASSOC);
+		Database::disconnect();
+
+		//Datos Alumnos
+		$pdo = Database::connect();
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = 'SELECT * 
+		        FROM PROYECTO_ALUMNO 
+		        NATURAL JOIN ALUMNO 
+		        WHERE p_id = ?';
+		$q = $pdo->prepare($sql);
+		$q->execute(array($id));
+		$alumno = $q->fetchAll(PDO::FETCH_ASSOC);
+		Database::disconnect();
+
 		// update data
 		if ($valid) {
 			$user_id = $_SESSION['id'];
@@ -89,18 +113,7 @@
 				header("Location: CalificarProyecto.php?id=$id");
 				exit();
 			}
-			Database::disconnect();
 
-			//Datos Alumnos
-			$pdo = Database::connect();
-			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = 'SELECT * 
-					FROM PROYECTO_ALUMNO 
-					NATURAL JOIN ALUMNO 
-					WHERE p_id = ?';
-			$q = $pdo->prepare($sql);
-			$q->execute(array($id));
-			$alumno = $q->fetchAll(PDO::FETCH_ASSOC);
 
 			/*$q = $pdo->prepare($sql);
 			$acq = ($ac=="S")?1:0;
@@ -129,16 +142,6 @@
 			$project = $q->fetch(PDO::FETCH_ASSOC);
 			Database::disconnect();
 
-			//Datos Alumnos
-			$pdo = Database::connect();
-			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = 'SELECT * 
-					FROM PROYECTO_ALUMNO 
-					NATURAL JOIN ALUMNO 
-					WHERE p_id = ?';
-			$q = $pdo->prepare($sql);
-			$q->execute(array($id));
-			$alumno = $q->fetchAll(PDO::FETCH_ASSOC);
 		}
 	}
 	else {
@@ -160,21 +163,10 @@
 		$q->execute(array($id));
 		$project = $q->fetch(PDO::FETCH_ASSOC);
 
-		//Datos Alumnos
-		$pdo = Database::connect();
-		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = 'SELECT * 
-		        FROM PROYECTO_ALUMNO 
-		        NATURAL JOIN ALUMNO 
-		        WHERE p_id = ?';
-		$q = $pdo->prepare($sql);
-		$q->execute(array($id));
-		$alumno = $q->fetchAll(PDO::FETCH_ASSOC);
-
 		// Obtener datos de la evaluación
 		// del docente sobre proyecto
 		$user_id = $_SESSION['id']; // Cambiar para el id del usuario en la sesión
-		$pdo = Database::connect();
+		
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$sql = 'SELECT * 
 		        FROM EVALUACION 
