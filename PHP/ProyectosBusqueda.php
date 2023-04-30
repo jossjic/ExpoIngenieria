@@ -26,6 +26,13 @@
 
   <link rel="stylesheet" href="../CSS/AdminPages.css">
   <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
+
+    <script>
+        const quitarFiltrosBtn = document.getElementById('quitarFiltrosBtn');
+        quitarFiltrosBtn.addEventListener('click', function() {
+            window.location.href = '../PHP/ProyectosView.php';
+        });
+    </script>
 </head>
 <body>
 
@@ -215,13 +222,6 @@
     </div>
 </form>
 </main> 
-
-<script>
-  const quitarFiltrosBtn = document.getElementById('quitarFiltrosBtn');
-  quitarFiltrosBtn.addEventListener('click', function() {
-    window.location.href = 'ProyectosView.php';
-  });
-</script>
 
 </body>
 </html>
