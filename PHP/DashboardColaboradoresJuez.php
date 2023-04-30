@@ -88,7 +88,7 @@
         </header>
         <main>
             <div class="Action__Btn">
-                <a href="#">Calificar Proyectos</a>
+                <a href="../PHP/ProyectosACalificar.php">Calificar Proyectos</a>
             </div>
 
             <div class="Counter">
