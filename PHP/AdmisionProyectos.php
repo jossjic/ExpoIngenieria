@@ -202,7 +202,9 @@
                                             echo     '<td>'.$row['ca_nombre'].'</td>';
                                             echo     '<td>'.$row['p_ult_modif'].'</td>';
                                             echo     '<td>';
-                                    
+                                            echo         '<button type="button" class="btn btn-secondary" type="button" onclick="seeProject('.$row['p_id'].')">Ver más</button>';
+                                            echo         ' <button type="button" class="btn btn-success" type="button" onclick="acceptProject('.$row['p_id'].')">Aceptar</button> ';
+                                            echo         '<button type="button" class="btn btn-danger" type="button" onclick="denyProject('.$row['p_id'].')">Rechazar</button>';
                                             echo     '</td>';
                                             echo '</tr>';
                                             
@@ -254,7 +256,7 @@
                                         <th>Nombre</th>
                                         <th>Categoría</th>
                                         <th>Ultima Modificación</th>
-                                        
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -267,7 +269,9 @@
                                             echo     '<td>'.$row['ca_nombre'].'</td>';
                                             echo     '<td>'.$row['p_ult_modif'].'</td>';
                                             echo     '<td>';
-                                    
+                                            echo         '<button type="button" class="btn btn-secondary" type="button" onclick="seeProject('.$row['p_id'].')">Ver más</button>';
+                                            echo         ' <button type="button" class="btn btn-success" type="button" onclick="acceptProject('.$row['p_id'].')">Aceptar</button> ';
+                                            echo         '<button type="button" class="btn btn-danger" type="button" onclick="denyProject('.$row['p_id'].')">Rechazar</button>';
                                             echo     '</td>';
                                             echo '</tr>';
                                             
