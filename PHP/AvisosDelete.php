@@ -88,7 +88,7 @@
                     </tr>
 
                     <tr>
-                        <td>
+                        <td class="Btn-Ancla">
                             <input class="Btn__Iniciar__Sesion" type="submit" value="Si" id="submit" name="submit">
                         </td>
                     </tr>
