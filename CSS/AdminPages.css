@@ -268,11 +268,10 @@ a {
 
 	display: grid;
 	grid-template-columns: 3% 3% 10% 10% 10% 20% 10% 10% 10% 10%;
-	grid-template-rows: repeat(10, 10%);
+	grid-template-rows: repeat(9, calc(100% / 9));
 	justify-items: center;
 	align-items: center;
 
-	row-gap: 5px;
 	font-size: smaller;
 }
 
