@@ -69,7 +69,7 @@
 					<td>
 						<a
 							class="Btn__Ancla"
-							href="../PHP/CategoriasView.php"
+							href="../PHP/CategoriaView.php"
 							>Categorias</a
 						>
 					</td>
