@@ -14,6 +14,14 @@
 		$id = $_REQUEST['id'];
 	}
 
+    $pdo = Database::connect();
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$sql = "SELECT FROM PROYECTO WHERE p_id = ?";
+	$q = $pdo->prepare($sql);
+	$q->execute(array($id));
+    $data = $q->fetch(PDO::FETCH_ASSOC);
+	Database::disconnect();
+
 	if (!empty($_POST)) {
 		// keep track post values
 		$id = $_POST['id'];
@@ -25,6 +33,7 @@
 		$q->execute(array($id));
 		Database::disconnect();
 		header("Location: ../PHP/ProyectosView.php");
+        exit();
 	}
 ?>
 
@@ -67,7 +76,7 @@
 		</header>
 
         <main>
-            <h1>Eliminar Proyecto</h1>
+            <h1>Eliminar Proyecto <?php echo $data['p_nombre'] ?> </h1>
 
             <form action="../PHP/ProyectosDelete.php" method="post">
 
