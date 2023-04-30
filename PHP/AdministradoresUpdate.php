@@ -159,7 +159,7 @@
                             <label>Correo</label>
                         </td>
                         <td>
-                            <input class="Text__Input" name="Correo" type="text"  placeholder="Correo" value="<?php echo !empty($Correo)?$Correo:'';?>" required>
+                            <input class="Text__Input" name="Correo" type="text" pattern="^[^@]+@tec\.mx$" placeholder="Correo" value="<?php echo !empty($Correo)?$Correo:'';?>" required>
                             <?php if (($CorreoError != null)) ?>
                             <span class="help-inline"><?php echo $CorreoError;?></span>
                         </td>
