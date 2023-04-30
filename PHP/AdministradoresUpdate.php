@@ -58,7 +58,7 @@
 		if ($valid) {
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "UPDATE ADMIN SET adm_nombre = ?, adm_correo = ?, adm_pass = ?,adm_apellido = ? WHERE adm_usu = ?";
+			$sql = "UPDATE ADMIN SET adm_nombre = ?, adm_correo = ?, adm_pass = ?,adm_apellido = ? WHERE adm_correo= ?";
 			$q = $pdo->prepare($sql);
 			$q->execute(array($Nombre,$Correo,$Contraseña,$Apellido,$Usuario));
 			Database::disconnect();
@@ -68,7 +68,7 @@
 	else {
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "SELECT * FROM ADMIN WHERE adm_usu = ?";
+		$sql = "SELECT * FROM ADMIN WHERE adm_correo = ?";
 		$q = $pdo->prepare($sql);
 		$q->execute(array($Usuario));
 		$data = $q->fetch(PDO::FETCH_ASSOC);
