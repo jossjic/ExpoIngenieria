@@ -36,7 +36,7 @@
             $q = $pdo->prepare($sql);
             $q->execute(array("Aceptado", $id));
             Database::disconnect();
-            header("Location: admisionProyectos.php");
+            header("Location: AdmisionProyectos.php");
             exit();
         }
 
@@ -107,7 +107,7 @@
 
                 <?php else: ?>
 
-                    <form action="admisionProyectos.php" method="post" id="project-form-id">
+                    <form action="AdmisionProyectos.php" method="post" id="project-form-id">
                         <input type="hidden" name="project_id" value="" id="project-id">
                         <input type="hidden" name="project_action" value="" id="project-action">
                     </form>
@@ -173,7 +173,7 @@
 
                 <?php else: ?>
 
-                    <form action="admisionProyectos.php" method="post" id="project-form-id">
+                    <form action="AdmisionProyectos.php" method="post" id="project-form-id">
                         <input type="hidden" name="project_id" value="" id="project-id">
                         <input type="hidden" name="project_action" value="" id="project-action">
                     </form>
@@ -238,7 +238,7 @@
 
                 <?php else: ?>
 
-                    <form action="admisionProyectos.php" method="post" id="project-form-id">
+                    <form action="AdmisionProyectos.php" method="post" id="project-form-id">
                         <input type="hidden" name="project_id" value="" id="project-id">
                         <input type="hidden" name="project_action" value="" id="project-action">
                     </form>
