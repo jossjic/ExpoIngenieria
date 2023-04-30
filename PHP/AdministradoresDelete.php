@@ -116,13 +116,13 @@
                     </tr>
 
                     <tr>
-                        <td class="Td__Iniciar__Sesion">
+                        <td>
                             <input class="Btn__Iniciar__Sesion" type="submit" value="Si" id="submit" name="submit">
                         </td>
                     </tr>
 					
 					<tr>
-						<td class="Td__Iniciar__Sesion">
+						<td>
                             <a class="Btn-Ancla" href="AdministradoresView.php">Regresar</a>
                         </td>
 					</tr>
