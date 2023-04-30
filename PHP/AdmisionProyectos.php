@@ -23,10 +23,12 @@
 
         if (empty($id)) {
             header("Location: AdmisionProyectos.php");
+            exit();
         }
 
         if (empty($action)) {
             header("Location: AdmisionProyectos.php");
+            exit();
         }
 
         if ($action === "accept") {
@@ -52,6 +54,7 @@
         }
         else {
             header("Location: VerInfoProyecto.php?id=$id");
+            exit();
         }
         
     }
