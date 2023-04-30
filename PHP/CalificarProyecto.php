@@ -263,7 +263,7 @@
 				</div>
 			</div>
 
-				<form action="CalificarProyecto.php?id=<?php echo $id?>" method="post">
+				<form class="container" action="CalificarProyecto.php?id=<?php echo $id?>" method="post">
 					<input type="hidden" name="id" value="<?php echo $id;?>"/>
 					<fieldset class="rubric-container">
 						<legend><strong>Rúbrica de evaluación</strong></legend>
