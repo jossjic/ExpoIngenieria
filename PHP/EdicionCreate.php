@@ -136,7 +136,7 @@
                     </tr>
 
                     <tr>
-                        <td class="Td__Iniciar__Sesion" colspan="2">
+                        <td>
                             <input class="Btn__Iniciar__Sesion" type="submit" value="Agregar edicion" id="submit" name="submit">
                         </td>
                         <td>
