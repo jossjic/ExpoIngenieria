@@ -182,7 +182,7 @@
                             <input class="Btn__Iniciar__Sesion" type="submit" value="Actualizar Edicion" id="submit" name="submit">
                         </td>
                         <td>
-                            <a class="Btn-Anclas" href="AdministradoresView.php">Regresar</a>
+                            <a class="Btn-Ancla" href="AdministradoresView.php">Regresar</a>
                         </td>
                     </tr>
                 </table>
