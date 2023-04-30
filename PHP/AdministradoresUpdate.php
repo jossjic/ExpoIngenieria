@@ -1,6 +1,14 @@
 <?php
 
-	require 'dataBase.php';
+    require_once 'dataBase.php';
+
+    session_name("EngineerXpoWeb");
+    session_start();
+
+    if (!isset($_SESSION['logged_in'])) {
+        header("Location: ../index.php");
+        exit();
+    }
 
 	$Usuario = null;
 	if ( !empty($_GET['id'])) {
@@ -16,12 +24,14 @@
         $NombreError = null;
 		$CorreoError = null;
 		$ContraseñaError = null;
+        $ApellidoError = null;
         
 
 		// keep track post valuesv 
         $Nombre = $_POST['Nombre'];
 		$Correo = $_POST['Correo'];
 		$Contraseña  = $_POST['Contraseña'];
+        $Apellido = $_POST['Apellido'];
         
 
 		/// validate input
@@ -39,8 +49,8 @@
 			$ContraseñaError = 'Porfavor ingresa una contraseña';
 			$valid = false;
 		}
-        if (empty($Usuario)) {
-			$UsuarioError = 'Porfavor ingresa una contraseña';
+        if (empty($Apellido)) {
+			$ApellidoError = 'Porfavor ingresa una contraseña';
 			$valid = false;
 		}
 
@@ -48,9 +58,9 @@
 		if ($valid) {
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "UPDATE ADMIN SET adm_nombre = ?, adm_correo = ?, adm_pass =? WHERE adm_usu = ?";
+			$sql = "UPDATE ADMIN SET adm_nombre = ?, adm_correo = ?, adm_pass = ?,adm_apellido = ? WHERE adm_usu = ?";
 			$q = $pdo->prepare($sql);
-			$q->execute(array($Nombre,$Correo,$Contraseña,$Usuario));
+			$q->execute(array($Nombre,$Correo,$Contraseña,$Apellido,$Usuario));
 			Database::disconnect();
 			header("Location: AdministradoresView.php");
 		}
@@ -62,10 +72,10 @@
 		$q = $pdo->prepare($sql);
 		$q->execute(array($Usuario));
 		$data = $q->fetch(PDO::FETCH_ASSOC);
-		$Usuario 	= $data['adm_usu'];
-        $Nombre 	= $data['adm_nombre'];
+		$Nombre 	= $data['adm_nombre'];
+        $Correo 	= $data['adm_correo'];
 		$Contraseña = $data['adm_pass'];
-		$Correo = $data['adm_correo'];
+		$Apellido = $data['adm_apellido'];
 		Database::disconnect();
 	}
 ?>
@@ -83,38 +93,35 @@
 
         <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
         <link rel="stylesheet" href="../CSS/FormsStructure.css">
+		<link rel="stylesheet" href="../CSS/Extra.css">
 
 	</head>
 
     <body>
         
-        <header>
-			<img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
-
-            <ul>
-
-                <li>
-                    <a href="#">Menu</a>
-                </li>
-				<li>
-                    <a href="#">Usuarios</a>
-                </li>
-				<li>
-                    <a href="#">Reconocimientos</a>
-                </li>
-				<li>
-                    <a href="#">Eastadísticas</a>
-                </li>
-				
+    <header>
+			<a href="../index.php"
+				><img
+					class="Logo__Expo"
+					src="../media/logo-expo.svg"
+					alt="Logotipo de Expo ingenierías"
+			/></a>
+			<ul style="grid-column: 2/4">
+				<li><a href="../PHP/AdminInicio.php">Menu</a></li>
+				<li><a href="../PHP/AvisosView.php">Avisos</a></li>
+				<li><a href="../PHP/EdicionView.php">Ediciones</a></li>
+				<li><a href="../PHP/NivelView.php">Nivel</a></li>
+				<li><a href="../PHP/CategoriasView.php">Categorias</a></li>
+				<li><a href="../PHP/UsuariosView.php">Usuarios</a></li>
+				<li><a href="../PHP/ProyectosView.php">Proyectos</a></li>
+				<li><a href="../PHP/AdministradoresView.php">Administradores</a></li>
+				<li><a href="../PHP/EvaluacionesView.php">Evaluaciones</a></li>
+				<li style="font-weight: 600;">
+					<a href="../PHP/logout.php">Cerrar Sesion</a>
+				</li>
 			</ul>
-
-            <nav>
-				<ul>
-					<li><a href="#">Cerrar Sesion</a></li>
-				</ul>
-			</nav>
-
 		</header>
+
 
         <main>
 
@@ -127,22 +134,23 @@
 
                     <tr>
                         <td>
-                            <label for="">Usuario</label>
+                            <label>Nombre</label>
                         </td>
-
                         <td>
-                            <input name="Usuario" type="text" readonly placeholder="Usuario" value="<?php echo !empty($Usuario )?$Usuario :''; ?>">
+                            <input class="Text__Input" name="Nombre" type="text"  placeholder="Nombre" value="<?php echo !empty($Nombre)?$Nombre:'';?>" required>
+                            <?php if (($NombreError != null)) ?>
+                            <span class="help-inline"><?php echo $NombreError;?></span>
                         </td>
                     </tr>
 
                     <tr>
                         <td>
-                            <label>Nombre</label>
+                            <label>Apellido</label>
                         </td>
                         <td>
-                            <input class="Text__Input" name="Nombre" type="text"  placeholder="Nombre" value="<?php echo !empty($Nombre)?$Nombre:'';?>">
-                            <?php if (($NombreError != null)) ?>
-                            <span class="help-inline"><?php echo $NombreError;?></span>
+                            <input class="Text__Input" name="Apellido" type="text"  placeholder="Nombre" value="<?php echo !empty($Apellido)?$Apellido:'';?>" required>
+                            <?php if (($ApellidoError != null)) ?>
+                            <span class="help-inline"><?php echo $ApellidoError;?></span>
                         </td>
                     </tr>
 
@@ -151,7 +159,7 @@
                             <label>Correo</label>
                         </td>
                         <td>
-                            <input class="Text__Input" name="Correo" type="text"  placeholder="Correo" value="<?php echo !empty($Correo)?$Correo:'';?>">
+                            <input class="Text__Input" name="Correo" type="text"  placeholder="Correo" value="<?php echo !empty($Correo)?$Correo:'';?>" required>
                             <?php if (($CorreoError != null)) ?>
                             <span class="help-inline"><?php echo $CorreoError;?></span>
                         </td>
@@ -163,7 +171,7 @@
                         </td>
 
                         <td>
-                            <input class="Text__Input" name="Contraseña" type="text"  placeholder="Contraseña" value="<?php echo !empty($Contraseña)?$Contraseña:'';?>">
+                            <input class="Text__Input" name="Contraseña" type="text"  placeholder="Contraseña" value="<?php echo !empty($Contraseña)?$Contraseña:'';?>" required>
                             <?php if (($ContraseñaError != null)) ?>
                             <span class="help-inline"><?php echo $ContraseñaError;?></span>
                         </td>
@@ -174,7 +182,7 @@
                             <input class="Btn__Iniciar__Sesion" type="submit" value="Actualizar Edicion" id="submit" name="submit">
                         </td>
                         <td>
-                            <a class="Btn__Blue" href="EdicionView.php">Regresar</a>
+                            <a class="Btn-Anclas" href="AdministradoresView.php">Regresar</a>
                         </td>
                     </tr>
                 </table>
