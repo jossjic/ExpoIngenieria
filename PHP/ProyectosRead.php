@@ -94,7 +94,7 @@
                     </td>
                     <td>
                         <?php echo $data['p_descripcion'];?>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, ipsa facere? Ut minus facilis nesciunt debitis ipsa eum a necessitatibus?
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, ipsa facere? Ut minus facilis nesciunt debitis ipsa eum a necessitatibus?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus quo impedit voluptas. Accusantium eligendi expedita unde consectetur nemo distinctio porro.
                     </td>
                 </tr>
 
