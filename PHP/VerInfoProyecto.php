@@ -9,13 +9,6 @@
         exit();
     }
 
-    session_name("EngineerXpoWeb");
-    session_start();
-
-    if (!isset($_SESSION['logged_in'])) {
-        header("Location: ../index.php");
-        exit();
-    }
 
 	$id = null;
 	if ( !empty($_GET['id'])) {
@@ -25,14 +18,38 @@
 		header("Location: AdmisionProyectos.php");
 	} else {
 		$pdo = Database::connect();
+
+		//PROYECTO
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$sql = 'SELECT * 
 		        FROM PROYECTO 
-		        NATURAL JOIN CATEGORIA 
+		        NATURAL JOIN CATEGORIA
+				NATURAL JOIN NIVEL  
 		        WHERE p_id = ?';
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
 		$project = $q->fetch(PDO::FETCH_ASSOC);
+
+		//DOCENTE PROYECTO
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = "SELECT *
+				FROM COLABORADOR
+				NATURAL JOIN PROYECTO_DOCENTE
+				WHERE p_id = ?";
+		$q = $pdo->prepare($sql);
+		$q->execute(array($id));
+		$docente = $q->fetch(PDO::FETCH_ASSOC);
+
+		//ALUMNOS
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = "SELECT *
+				FROM ALUMNO
+				NATURAL JOIN PROYECTO_ALUMNO
+				WHERE p_id = ?";
+		$q = $pdo->prepare($sql);
+		$q->execute(array($id));
+		$alumno = $q->fetch(PDO::FETCH_ASSOC);
+
 		Database::disconnect();
 	}
 ?>
@@ -51,42 +68,76 @@
         <link rel="stylesheet" href="../CSS/estructuraProyecto.css">
         <link rel="stylesheet" href="../CSS/admisionProyecto.css">
         <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     </head>
     <body>
-        <header>
-            <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logotipo de la Escuela de Ingeniería y Ciencias">
+		<header>
+            <a href="../index.php"><img class="Logo__Expo" src="../media/logo-expo.svg" alt="Logotipo de Expo ingenierías"></a>
             <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Layout de proyectos</a></li>
+				<li><a href="../PHP/DashboardColaboradoresDocente.php">Dashboard</a></li>
+                <li><a href="../PHP/Mapa.php">Mapa de proyectos</a></li>
             </ul>
             <nav>
                 <ul>
-                    <li><a href="#">Cerrar Sesion</a></li>
+                    <li><a href="../PHP/logout.php">Cerrar Sesion</a></li>
                 </ul>
             </nav>
         </header>
 
-        <main>
-        	<div class="container">
-    	    	<div class="top-page">
-    	    		<h1>AZKABÁN</h1>
-    	    		<br>
-    	    		<dl>
-    	    			<dt><strong>Descripción</strong></dt>
-    	    			<dd>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id venenatis eros. Nam porttitor dolor vel nulla fermentum laoreet eu vitae.</dd>
-    	    		</dl>
-    	    		<br>
-    	    		<dl>
-    	    			<dt><strong>Autores</strong></dt>
-    	    			<dd>Jeffrey Hutchinson</dd>
-    	    			<dd>Ricardo Hall</dd>
-    	    			<dd>Brett Wang</dd>
-    	    			<dd>Karina Allison</dd>
-    	    		</dl>
-    	    	</div>
+        <main class="container my-5">
+			<div class="row">
+				<div class="col-md-6">
+					<iframe
+						<?php 
 
-    		</div>
-        </main>
+							preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $project['p_video'], $match);
+							$video_id = $match[1];
+							$video_full_link = "https://drive.google.com/file/d/".$video_id."/preview";
+							echo 'src="'.$video_full_link.'" title="YouTube video player" frameborder="0" allow="accelerometer"; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share allowfullscreen';
+						?>
+						
+					></iframe>
+
+					<iframe
+					<?php
+                            preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $project['p_poster'], $match);
+                            $image_id = $match[1];
+                            $image_full_link = "https://drive.google.com/file/d/".$image_id."/preview";
+                            echo 'src="'.$image_full_link.'" allow="autoplay"';
+                    ?>
+				></iframe>
+				</div>
+				<div class="col-md-6">
+					<?php
+						// Aquí va el código PHP para obtener la información del proyecto
+						$project_name = $project['p_nombre'];
+						$category = $project['ca_nombre'];
+						$level = $project['n_nombre'];
+						$teachers = $docente;
+						$students = $alumno;
+
+						// Imprime la información del proyecto
+						echo "<h2>$project_name</h2>";
+						echo "<h3>Categoría: $category</h3>";
+						echo "<h3>Nivel: $level</h3>";
+						echo "<h3>Profesores:</h3>";
+						echo "<ul>";
+						foreach ($teachers as $teacher) {
+							echo "<li>$teacher</li>";
+						}
+						echo "</ul>";
+						echo "<h3>Alumnos:</h3>";
+						echo "<ul>";
+						foreach ($students as $student) {
+							echo "<li>$student</li>";
+						}
+						echo "</ul>";
+					?>
+                    <a href="../PHP/AdmisionProyectos.php" class="btn btn-primary mx-2" style="background-color: #0033A0;">Regresar</a>
+				</div>
+			</div>
+    	</main>
 
     </body>
 
