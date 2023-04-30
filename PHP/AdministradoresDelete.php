@@ -14,6 +14,7 @@
 		$Usuario = $_REQUEST['id'];
 	}
 
+    //Revisar si es Mastes
     $pdo = Database::connect();
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$sql = "SELECT * FROM ADMIN WHERE adm_correo = ?";
@@ -22,7 +23,13 @@
     $q = $q->fetch(PDO::FETCH_ASSOC);
 	Database::disconnect();
 
-    if ($q['adm_master'] == 1){
+    //Revisar cantidad de Admin's > 1
+    $pdo = Database::connect();
+	$sql = "SELECT * FROM ADMIN";
+	$count = $pdo->query($sql)->rowCount();
+	Database::disconnect();
+
+    if ($q['adm_master'] == 1 && $count > 1){
         if ( !empty($_POST)) {
             // keep track post values
             $Usuario = $_POST['Usuario'];
@@ -110,7 +117,7 @@
 					
 					<tr>
 						<td class="Td__Iniciar__Sesion">
-                            <a class="Btn__Blue" href="AdministradoresView.php">Regresar</a>
+                            <a class="Btn-Ancla" href="AdministradoresView.php">Regresar</a>
                         </td>
 					</tr>
                 </table>
