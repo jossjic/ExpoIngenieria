@@ -118,12 +118,14 @@
 						$level = $project['n_nombre'];
 						$description = $project['p_descripcion'];
 						$edition = $project['ed_nombre'];
+						$status = $project['p_estado'];
 						$teachers = $docente;
 						$students = $alumno;
 
 						// Imprime la información del proyecto
 						echo "<h2>$project_name</h2>";
 						echo "<h3>Edicion: </h3> <p>$edition</p>";
+						echo "<h3>Estado: </h3> <p>$status</p>";
 						echo "<h3>Categoría: </h3> <p>$category</p>";
 						echo "<h3>Nivel: </h3><p>$level</p>";
 						echo "<h3>Descripcion: </h3> <p>$description</p>";

@@ -18,16 +18,39 @@
 		header("Location: ProyectosView.php");
 	} else {
 		$pdo = Database::connect();
+
+		//PROYECTO
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "SELECT * 
-                FROM PROYECTO 
-                NATURAL JOIN EDICION
-                NATURAL JOIN NIVEL
-                NATURAL JOIN CATEGORIA
-                WHERE p_id = ?";
+		$sql = 'SELECT * 
+		        FROM PROYECTO 
+		        NATURAL JOIN CATEGORIA
+				NATURAL JOIN NIVEL
+				NATURAL JOIN EDICION  
+		        WHERE p_id = ?';
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
-		$data = $q->fetch(PDO::FETCH_ASSOC);
+		$project = $q->fetch(PDO::FETCH_ASSOC);
+
+		//DOCENTE PROYECTO
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = "SELECT *
+				FROM COLABORADOR
+				NATURAL JOIN PROYECTO_DOCENTE
+				WHERE p_id = ?";
+		$q = $pdo->prepare($sql);
+		$q->execute(array($id));
+		$docente = $q->fetchAll(PDO::FETCH_ASSOC);
+
+		//ALUMNOS
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = "SELECT *
+				FROM ALUMNO
+				NATURAL JOIN PROYECTO_ALUMNO
+				WHERE p_id = ?";
+		$q = $pdo->prepare($sql);
+		$q->execute(array($id));
+		$alumno = $q->fetchAll(PDO::FETCH_ASSOC);
+
 		Database::disconnect();
 	}
 ?>
@@ -45,6 +68,9 @@
     <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
     <link rel="stylesheet" href="../CSS/FormsStructure.css">
     <link rel="stylesheet" href="../CSS/Extra.css">
+
+    <!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 
 </head>
 <body>
