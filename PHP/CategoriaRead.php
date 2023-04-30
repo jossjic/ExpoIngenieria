@@ -71,7 +71,7 @@
                 <table>
                     <tr>
                         <td>
-                            <label for="">ID</label>
+                            <label for="">ID Categoria</label>
                         </td>
                         <td>
                             <?php echo $data['ca_id'];?>
@@ -79,7 +79,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <label for="">Nombre</label>
+                            <label for="">Nombre Categoria</label>
                         </td>
                         <td>
                             <?php echo $data['ca_nombre'];?>
