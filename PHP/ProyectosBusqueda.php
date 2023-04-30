@@ -149,10 +149,10 @@
                                 $sql = "SELECT * 
                                         FROM PROYECTO 
                                         NATURAL JOIN CATEGORIA
-                                        NATRUAL JOIN NIVEL
+                                        NATURAL JOIN NIVEL
                                         WHERE p_id = ?";
                                 $q = $pdo->prepare($sql);
-                                $q->execute(array($BuscarNombre));
+                                $q->execute(array(trim($BuscarNombre)));
                                 foreach($q as $row){
                                     echo "
                                     <p>&nbsp;</p>
@@ -179,10 +179,10 @@
                                 $sql = "SELECT * 
                                         FROM PROYECTO 
                                         NATURAL JOIN CATEGORIA
-                                        NATRUAL JOIN NIVEL
+                                        NATURAL JOIN NIVEL
                                         WHERE p_nombre = ?";
                                 $q = $pdo->prepare($sql);
-                                $q->execute(array($BuscarNombre));
+                                $q->execute(array(trim($BuscarNombre)));
                                 foreach($q as $row){
                                     echo "
                                     <p>&nbsp;</p>
