@@ -1,5 +1,13 @@
 <?php
-	require 'dataBase.php';
+	require_once 'dataBase.php';
+
+    session_name("EngineerXpoWeb");
+    session_start();
+
+    if (!isset($_SESSION['logged_in'])) {
+        header("Location: ../index.php");
+        exit();
+    }
 
 	$id = 0;
 	if ( !empty($_GET['id'])) {
@@ -12,7 +20,7 @@
 		// delete data
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "DELETE FROM PROYECTOV1 WHERE p_id = ?";
+		$sql = "DELETE FROM PROYECTO WHERE p_id = ?";
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
 		Database::disconnect();
@@ -26,132 +34,74 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyectos View</title>
+    <title>Borrar Proyectos</title>
 
     <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
-    <link rel="stylesheet" href="../CSS/AdminPages.css">
+    <link rel="stylesheet" href="../CSS/FormsStructure.css">
+    <link rel="stylesheet" href="../CSS/Extra.css">
 
 </head>
 <body>
 
-    <header>
-        <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
-        <ul>
-            <li>
-                <a href="#">Cerrar Sesion</a>
-            </li>
-        </ul>
-        <nav>
-            <ul>
-                <li><a href="#">Menu</a></li>
-                <li><a href="#">Usuarios</a></li>
-                <li><a href="#">Reconocimientos</a></li>
-                <li><a href="#">Eastadísticas</a></li>
-            </ul>
-        </nav>
-    </header>
+        <header>
+			<a href="../index.php"
+				><img
+					class="Logo__Expo"
+					src="../media/logo-expo.svg"
+					alt="Logotipo de Expo ingenierías"
+			/></a>
+			<ul style="grid-column: 2/4">
+				<li><a href="../PHP/AdminInicio.php">Menu</a></li>
+				<li><a href="../PHP/AvisosView.php">Avisos</a></li>
+				<li><a href="../PHP/EdicionView.php">Ediciones</a></li>
+				<li><a href="../PHP/NivelView.php">Nivel</a></li>
+				<li><a href="../PHP/CategoriasView.php">Categorias</a></li>
+				<li><a href="../PHP/UsuariosView.php">Usuarios</a></li>
+				<li><a href="../PHP/ProyectosView.php">Proyectos</a></li>
+				<li><a href="../PHP/AdministradoresView.php">Administradores</a></li>
+				<li><a href="../PHP/EvaluacionesView.php">Evaluaciones</a></li>
+				<li style="font-weight: 600;">
+					<a href="../PHP/logout.php">Cerrar Sesion</a>
+				</li>
+			</ul>
+		</header>
 
-    <main>
+        <main>
+            <h1>Eliminar Proyecto</h1>
 
-        <div class="Admin__Start">
-            <div class="Admin__Start__Left">
-                <h1>Administrador de Proyectos</h1>
+            <form action="../PHP/ProyectosDelete.php" method="post">
+
                 <table>
                     <tr>
-                        <td>Total de Proyectos:</td>
-                        <td id="TotalProyectos">
-                            <?php
-                                $pdo = Database::connect();
-                                $sql = "SELECT * FROM PROYECTOV1";
-                                $q = $pdo->query($sql)->rowCount();
-                                echo "$q";
-                                Database::disconnect();
-                            ?>
+                        <td>
+                            <input type="hidden" name="id" value="<?php echo $id;?>"/>
                         </td>
                     </tr>
+
                     <tr>
-                        <td>Total Calificados:</td>
-                        <td id="TotalCalificados">
-                            <?php
-                                $pdo = Database::connect();
-                                $sql = "SELECT * FROM PROYECTOV1";
-                                $q = $pdo->query($sql)->rowCount();
-                                echo "$q";
-                                Database::disconnect();
-                            ?>
+                        <td style="text-align: center;">
+                            <p>Estas seguro de eliminar este proyecto</p>
+                            <p>Se eliminar todo aquello referenciado a este proyecto<br> <br></p>
+                            <p>Se borraran: <br> <br> Alumnos</p>
                         </td>
                     </tr>
+
                     <tr>
-                        <td>Total Pendientes:</td>
-                        <td id="TotalPendientes">
-                            <?php
-                                $pdo = Database::connect();
-                                $sql = "SELECT * FROM PROYECTOV1";
-                                $q = $pdo->query($sql)->rowCount();
-                                echo "$q";
-                                Database::disconnect();
-                            ?>
+                        <td class="Btn-Ancla">
+                            <input class="Btn__Iniciar__Sesion" type="submit" value="Si" id="submit" name="submit">
                         </td>
                     </tr>
+					
+					<tr>
+						<td>
+                            <a class="Btn-Ancla" href="ProyectosView.php">Regresar</a>
+                        </td>
+					</tr>
                 </table>
-            </div>
-
-            <div class="Estadisticas__Btn">
-                <a class="Admin__Start__Right__Btn" href="../PHP/EstadisticasUsuarios.php">Estadisticas Proyectos</a>
-            </div>
-        </div>
-
-        <form method="post" class="Winners__Explorer">
-            <table>
-                <tr>
-                    <td>
-                        Buscar
-                    </td>
-                    <td>
-                        <select name="ProyectoID" id="ProyectoID">
-                            <option value="ID">ID</option>
-                            <option value="Nombre">Nombre</option>
-                        </select>
-                    </td>
-                    <td>
-                        
-                        <input type="search" name="BuscarNombre" class="Text__Search" id="" placeholder="Ingresa el valor">
-                        <input type="submit" name="BtnBuscar" class="Search__Btn" id="" value="Buscar">
-                        
-                    </td>
-                    
-                </tr>
-              </table>
-        </form>
-
-        <div class="Info">
-
-            <div class="Name__Read">
-                <?php
-                    echo "<h1>Eliminar proyecto</h1>";
-                ?>
-            </div>
-            
-            <form action="../PHP/ProyectosDelete.php" method="post" class="Info__Read">
-                
-                <input type="hidden" name="id" value="<?php echo $id;?>"/>
-
-                <div class="InfoRead__Atributes">
-                    <p class='Danger__Alert'>Estas seguro de elimanar el proyecto</p>"
-                </div>
-
-
-                <div class="InfoRead__Atributes">
-                    <input class="Btn__Red__Delete" type="submit" value="Si">
-
-                    <div class='Btn__Green__Delete'>
-                        <a href='../PHP/ProyectosRead.php'>No</a>
-                    </div>
-                </div>
 
             </form>
-        </div>
-    </main> 
+
+        </main>
 
 </body>
 </html>
