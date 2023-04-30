@@ -38,7 +38,7 @@
 				WHERE p_id = ?";
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
-		$docente = $q->fetch(PDO::FETCH_ASSOC);
+		$docente = $q->fetchAll(PDO::FETCH_ASSOC);
 
 		//ALUMNOS
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -48,7 +48,7 @@
 				WHERE p_id = ?";
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
-		$alumno = $q->fetch(PDO::FETCH_ASSOC);
+		$alumno = $q->fetchAll(PDO::FETCH_ASSOC);
 
 		Database::disconnect();
 	}
