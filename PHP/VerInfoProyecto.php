@@ -90,7 +90,7 @@
 				<div class="col-md-6 text-center">
 					<iframe
 						width="80%";
-						height="70%";
+						height="60%";
 							<?php
 							preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $project['p_video'], $match);
 							$video_id = $match[1];
@@ -100,7 +100,7 @@
 					></iframe>
 					<iframe
 						width="80%";
-						height="70%";
+						height="100%";
 							<?php
 							preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $project['p_poster'], $match);
 							$image_id = $match[1];
