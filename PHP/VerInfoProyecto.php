@@ -115,6 +115,7 @@
 						$project_name = $project['p_nombre'];
 						$category = $project['ca_nombre'];
 						$level = $project['n_nombre'];
+						$description = $project['p_descripcion'];
 						$teachers = $docente;
 						$students = $alumno;
 
@@ -122,6 +123,7 @@
 						echo "<h2>$project_name</h2>";
 						echo "<h3>Categoría: </h3> <p>$category</p>";
 						echo "<h3>Nivel: </h3><p>$level</p>";
+						echo "<h3>Descripcion: </h3> <p>$description</p>";
 						echo "<h3>Profesores:</h3>";
 						echo "<ol>";
 						foreach ($teachers as $teacher) {
