@@ -124,13 +124,13 @@
 						echo "<h3>Profesores:</h3>";
 						echo "<ul>";
 						foreach ($teachers as $teacher) {
-							echo "<li>$teacher</li>";
+							echo "<li>".$teacher['co_nombre']." ".$teacher['co_apellido']." ".$teacher['co_correo']."</li>";
 						}
 						echo "</ul>";
 						echo "<h3>Alumnos:</h3>";
 						echo "<ul>";
 						foreach ($students as $student) {
-							echo "<li>$student</li>";
+							echo "<li>".$student['a_nombre']." ".$student['a_apellido']." ".$student['a_correo']."</li>";
 						}
 						echo "</ul>";
 					?>
