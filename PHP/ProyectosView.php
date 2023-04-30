@@ -58,19 +58,6 @@
                 <h1>Administrador de Proyectos</h1>
                 <table>
                     <tr>
-                        <td>Total de Proyectos: </td>
-                        <td>
-                            <?php
-                                $pdo = Database::connect();
-                                $sql = "SELECT * FROM PROYECTO";
-                                $q = $pdo->query($sql)->rowCount();
-                                echo "$q";
-                                Database::disconnect();
-                            ?>
-                        </td>
-                    </tr>
-
-                    <tr>
                         <td>Total Registrados: </td>
                         <td>
                             <?php
