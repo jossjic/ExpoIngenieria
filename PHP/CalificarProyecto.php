@@ -265,9 +265,9 @@
 					?>
                     <a href="../PHP/ProyectosACalificar.php" class="btn btn-primary mx-2" style="background-color: #0033A0;">Regresar</a>
 				</div>
-				
-			</div class="container">
 
+			</div>
+			<div class="container">
 				<form class="row" action="CalificarProyecto.php?id=<?php echo $id?>" method="post">
 					<input type="hidden" name="id" value="<?php echo $id;?>"/>
 					<fieldset class="rubric-container">
