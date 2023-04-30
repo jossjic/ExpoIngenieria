@@ -40,6 +40,7 @@
 
         <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
         <link rel="stylesheet" href="../CSS/FormsStructure.css">
+        <link rel="stylesheet" href="../CSS/Extra.css">
 	</head>
 
 	<body>
@@ -79,7 +80,7 @@
                     </tr>
 
                     <tr>
-                        <td>
+                        <td class="Btn-Ancla">
                             <input class="Btn__Iniciar__Sesion" type="submit" value="Si" id="submit" name="submit">
                         </td>
                     </tr>
