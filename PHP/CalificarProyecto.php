@@ -91,6 +91,17 @@
 			}
 			Database::disconnect();
 
+			//Datos Alumnos
+			$pdo = Database::connect();
+			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$sql = 'SELECT * 
+					FROM PROYECTO_ALUMNO 
+					NATURAL JOIN ALUMNO 
+					WHERE p_id = ?';
+			$q = $pdo->prepare($sql);
+			$q->execute(array($id));
+			$alumno = $q->fetch(PDO::FETCH_ASSOC);
+
 			/*$q = $pdo->prepare($sql);
 			$acq = ($ac=="S")?1:0;
 			$q->execute(array($id,$subm,$marc,$acq, $id));
@@ -117,6 +128,17 @@
 			$q->execute(array($id));
 			$project = $q->fetch(PDO::FETCH_ASSOC);
 			Database::disconnect();
+
+			//Datos Alumnos
+			$pdo = Database::connect();
+			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$sql = 'SELECT * 
+					FROM PROYECTO_ALUMNO 
+					NATURAL JOIN ALUMNO 
+					WHERE p_id = ?';
+			$q = $pdo->prepare($sql);
+			$q->execute(array($id));
+			$alumno = $q->fetch(PDO::FETCH_ASSOC);
 		}
 	}
 	else {
