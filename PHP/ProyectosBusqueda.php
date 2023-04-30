@@ -118,7 +118,7 @@
                 
                 <input type="search" name="BuscarNombre" class="Text__Search" id="" placeholder="Ingresa el valor">
                 <input type="submit" name="BtnBuscar" class="Search__Btn" id="" value="Buscar">
-                <form action="ProyectosView.php">
+                <form action="ProyectosView.php" style="display: inline;">
                     <input type="submit" value="Quitar Filtros">
                 </form>
                 
