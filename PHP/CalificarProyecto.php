@@ -267,8 +267,8 @@
 				</div>
 
 			</div>
-			<div class="container">
-				<div class="row">
+			<div>
+				<div>
 					<form action="CalificarProyecto.php?id=<?php echo $id?>" method="post">
 						<input type="hidden" name="id" value="<?php echo $id;?>"/>
 						<fieldset class="rubric-container">
