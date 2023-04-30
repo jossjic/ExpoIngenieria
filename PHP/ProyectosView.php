@@ -139,7 +139,7 @@
             <div class="Info__Table">
                             <?php
                                 $pdo = Database::connect();
-                                $sql = "SELECT * FROM PROYECTO";
+                                $sql = "SELECT * FROM PROYECTO ORDER BY ed_id DESC";
                                 foreach ($pdo->query($sql) as $row) {
                                     echo "
                                             <p>&nbsp;</p>
