@@ -102,7 +102,7 @@
                         <label for="">Video</label>
                     </td>
                     <td>
-                        <?php echo $data['p_nombre'];?>
+                        <?php echo $data['p_video'];?>
                     </td>
                 </tr>
 
@@ -111,7 +111,7 @@
                         <label for="">Poster</label>
                     </td>
                     <td>
-                        <?php echo $data['p_nombre'];?>
+                        <?php echo $data['p_poster'];?>
                     </td>
                 </tr>
 
