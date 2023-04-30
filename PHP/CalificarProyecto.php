@@ -64,29 +64,30 @@
 
 		// update data
 		if ($valid) {
-			$user_id = "A0123456";
+			$user_id = $_SESSION['id'];
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql = 'SELECT * 
-			        FROM V2_EVALUACION 
-			        WHERE j_id = ? AND p_id = ?';
+			        FROM EVALUACION 
+			        WHERE co_correo = ? AND p_id = ?';
 			$q = $pdo->prepare($sql);
 			$q->execute(array($user_id, $id));
 			$evaluacion = $q->fetch(PDO::FETCH_ASSOC);
 			$number_of_evaluations = $q->rowCount();
 			if ($number_of_evaluations != 0) {
-				$sql = 'UPDATE V2_EVALUACION 
+				$sql = 'UPDATE EVALUACION 
 						SET 
 							ev_criterio_1 = ?,
 							ev_criterio_2 = ?,
 							ev_criterio_3 = ?,
 							ev_criterio_4 = ?,
 							ev_criterio_5 = ?
-				        WHERE j_id = ? AND p_id = ?';
+				        WHERE co_correo = ? AND p_id = ?';
 				$q = $pdo->prepare($sql);
 				$q->execute(array($p1, $p2, $p3, $p4, $p5, $user_id, $id));
 				Database::disconnect();
-				header("Location: calificarProyecto.php?id=$id");
+				header("Location: CalificarProyecto.php?id=$id");
+				exit();
 			}
 			Database::disconnect();
 
@@ -109,8 +110,8 @@
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql = 'SELECT * 
-			        FROM V2_PROYECTO 
-			        NATURAL JOIN V2_CATEGORIA 
+			        FROM PROYECTO 
+			        NATURAL JOIN CATEGORIA 
 			        WHERE p_id = ?';
 			$q = $pdo->prepare($sql);
 			$q->execute(array($id));
@@ -122,15 +123,16 @@
 		if ($id == null) {
 			// Dependiendo del tipo de usuario es la ruta a la que se enviará
 			// Pagina anterior alojada en la sesion
-			header("Location: admisionProyectos.php");
+			header("Location: ProyectosACalificar.php");
+			exit();
 		}
 
 		// Obtener datos del proyecto
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$sql = 'SELECT * 
-		        FROM V2_PROYECTO 
-		        NATURAL JOIN V2_CATEGORIA 
+		        FROM PROYECTO 
+		        NATURAL JOIN CATEGORIA 
 		        WHERE p_id = ?';
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
@@ -138,12 +140,12 @@
 
 		// Obtener datos de la evaluación
 		// del docente sobre proyecto
-		$user_id = "A0123456"; // Cambiar para el id del usuario en la sesión
+		$user_id = $_SESSION['id']; // Cambiar para el id del usuario en la sesión
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$sql = 'SELECT * 
-		        FROM V2_EVALUACION 
-		        WHERE j_id = ? AND p_id = ?';
+		        FROM EVALUACION 
+		        WHERE co_correo = ? AND p_id = ?';
 		$q = $pdo->prepare($sql);
 		$q->execute(array($user_id, $id));
 		$evaluation = $q->fetch(PDO::FETCH_ASSOC);
@@ -212,16 +214,17 @@
 		    			<?php
 		    			    $pdo = Database::connect();
 		    			    $sql = 'SELECT * 
-		    			            FROM V2_ALUMNO 
+		    			            FROM PROYECTO_ALUMNO
+									NATURAL JOIN ALUMNO 
 		    			            WHERE p_id = ?
-		    			            ORDER BY a_matricula';
+		    			            ORDER BY a_correo';
 		    			    $q = $pdo->prepare($sql);
 		    			    $q->execute(array($id));
 		    			    $projects = $q->fetchAll();
 		    			    Database::disconnect();
 
 		    			    foreach ($projects as $row) {
-		    					echo '<dd>'.$row['a_nombre'].' '.$row['a_ap_pa'].'</dd>';
+		    					echo '<dd>'.$row['a_nombre'].' '.$row['a_apellido'].'</dd>';
 		    				}
 		    			?>
 
