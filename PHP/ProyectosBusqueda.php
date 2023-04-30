@@ -26,13 +26,6 @@
 
   <link rel="stylesheet" href="../CSS/AdminPages.css">
   <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
-
-    <script>
-        const quitarFiltrosBtn = document.getElementById('quitarFiltrosBtn');
-        quitarFiltrosBtn.addEventListener('click', function() {
-            window.location.href = '../PHP/ProyectosView.php';
-        });
-    </script>
 </head>
 <body>
 
@@ -125,7 +118,9 @@
                 
                 <input type="search" name="BuscarNombre" class="Text__Search" id="" placeholder="Ingresa el valor">
                 <input type="submit" name="BtnBuscar" class="Search__Btn" id="" value="Buscar">
-                <button class="Search__Btn" id="quitarFiltrosBtn">Quitar Filtros</button>
+                <form action="ProyectosView.php">
+                    <input type="submit" value="Quitar Filtros">
+                </form>
                 
             </td>
             
@@ -148,74 +143,72 @@
     <div class="Info__Table">
                     <?php
 
-                        $busqueda = $_POST['ProyectoID'];
-                        $Buscar = $_POST['BuscarNombre'];
+                        if (!empty($_POST)){
+                            $ProyectoID = $_POST['ProyectoID'];
+                            $BuscarNombre = $_POST['BuscarNombre']; 
 
-                        if (trim($busqueda) == "ID"){
-                            if (!empty($_POST)){
-
+                            if(trim($ProyectoID) == 'ID') {
                                 $pdo = Database::connect();
-                                $sql = "SELECT * FROM PROYECTO WHERE p_id = ?";
+                                $sql = "SELECT * 
+                                        FROM PROYECTO 
+                                        NATURAL JOIN CATEGORIA
+                                        NATRUAL JOIN NIVEL
+                                        WHERE p_id = ?";
                                 $q = $pdo->prepare($sql);
-                                $q->execute(array($Buscar));
-                                $data = $q->fetch(PDO::FETCH_ASSOC);
-                                foreach ($data as $row) {
+                                $q->execute(array(trim($BuscarNombre)));
+                                foreach($q as $row){
                                     echo "
-                                            <p>&nbsp;</p>
-                                            <p>" . $row['p_id'] ."</p>
-                                            <p>" . $row['p_nombre'] ."</p>
-                                            <p>" . $row['ca_id'] ."</p>
-                                            <p>" . $row['p_estado'] ."</p>
-                                            <p>" . $row['n_id'] ."</p>
-                                            <div class='Btn__Green'>
-                                                <a href='../PHP/ProyectosRead.php?id=".trim($row['p_id'])."'>Ver</a>
-                                            </div>
-                                            <div class='Btn__Blue'>
-                                                <a href='../PHP/ProyectosUpdate.php?id=".trim($row['p_id'])."'>Actualizar</a>
-                                            </div>
-                                            <div class='Btn__Red'>
-                                                <a href='../PHP/ProyectosDelete.php?id=".trim($row['p_id'])."'>Eliminar</a>
-                                            </div>
-                                            <p></p>
-                                        ";
-    
+                                    <p>&nbsp;</p>
+                                    <p>" . $row['p_id'] . "</p>
+                                    <p>" . $row['p_nombre'] . "</p>
+                                    <p>" . $row['ca_nombre'] . "</p>
+                                    <p>" . $row['p_estado'] . "</p>
+                                    <p>" . $row['n_nombre'] . "</p>
+                                    <div class='Btn__Green'>
+                                        <a href='../PHP/ProyectosRead.php?id=".trim($row['p_id'])."'>Ver</a>
+                                    </div>
+                                    <div class='Btn__Blue'>
+                                        <a href='../PHP/ProyectosUpdate.php?id=".trim($row['p_id'])."'>Actualizar</a>
+                                    </div>
+                                    <div class='Btn__Red'>
+                                        <a href='../PHP/ProyectosDelete.php?id=".trim($row['p_id'])."'>Eliminar</a>
+                                    </div>
+                                    <p></p>
+                                ";
                                 }
                                 Database::disconnect();
-    
-                            }
-                        }
-                        else if (trim($busqueda) == "Nombre") {
-                            if (!empty($_POST)){
-
+                            } elseif (trim($ProyectoID) == 'Nombre') {
                                 $pdo = Database::connect();
-                                $sql = "SELECT * FROM PROYECTO WHERE p_nombre = ?";
+                                $sql = "SELECT * 
+                                        FROM PROYECTO 
+                                        NATURAL JOIN CATEGORIA
+                                        NATRUAL JOIN NIVEL
+                                        WHERE p_nombre = ?";
                                 $q = $pdo->prepare($sql);
-                                $q->execute(array($Buscar));
-                                $data = $q->fetch(PDO::FETCH_ASSOC);
-                                foreach ($data as $row) {
+                                $q->execute(array(trim($BuscarNombre)));
+                                foreach($q as $row){
                                     echo "
-                                            <p>&nbsp;</p>
-                                            <p>" . $row['p_id'] ."</p>
-                                            <p>" . $row['p_nombre'] ."</p>
-                                            <p>" . $row['ca_id'] ."</p>
-                                            <p>" . $row['p_estado'] ."</p>
-                                            <p>" . $row['n_id'] ."</p>
-                                            <div class='Btn__Green'>
-                                                <a href='../PHP/ProyectosRead.php?id=".trim($row['p_id'])."'>Ver</a>
-                                            </div>
-                                            <div class='Btn__Blue'>
-                                                <a href='../PHP/ProyectosUpdate.php?id=".trim($row['p_id'])."'>Actualizar</a>
-                                            </div>
-                                            <div class='Btn__Red'>
-                                                <a href='../PHP/ProyectosDelete.php?id=".trim($row['p_id'])."'>Eliminar</a>
-                                            </div>
-                                            <p></p>
-                                        ";
-    
+                                    <p>&nbsp;</p>
+                                    <p>" . $row['p_id'] . "</p>
+                                    <p>" . $row['p_nombre'] . "</p>
+                                    <p>" . $row['ca_nombre'] . "</p>
+                                    <p>" . $row['p_estado'] . "</p>
+                                    <p>" . $row['n_nombre'] . "</p>
+                                    <div class='Btn__Green'>
+                                        <a href='../PHP/ProyectosRead.php?id=".trim($row['p_id'])."'>Ver</a>
+                                    </div>
+                                    <div class='Btn__Blue'>
+                                        <a href='../PHP/ProyectosUpdate.php?id=".trim($row['p_id'])."'>Actualizar</a>
+                                    </div>
+                                    <div class='Btn__Red'>
+                                        <a href='../PHP/ProyectosDelete.php?id=".trim($row['p_id'])."'>Eliminar</a>
+                                    </div>
+                                    <p></p>
+                                ";
                                 }
                                 Database::disconnect();
-    
                             }
+
                         }
                         
                     ?>
