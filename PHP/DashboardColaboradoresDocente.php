@@ -74,7 +74,7 @@
         <header>
             <a href="../index.php"><img class="Logo__Expo" src="../media/logo-expo.svg" alt="Logotipo de Expo ingenierías"></a>
             <ul>
-                <li><a href="#">Layout de proyectos</a></li>
+                <li><a href="../PHP/Mapa.php">Mapa de proyectos</a></li>
             </ul>
             <nav>
                 <ul>
@@ -90,7 +90,7 @@
         </header>
         <main>
             <div class="Action__Btn">
-                <a href="../PHP/">Calificar Proyectos</a>
+                <a href="../PHP/AdmisionProyectos.php">Calificar Proyectos</a>
             </div>
 
             <div class="Counter">
