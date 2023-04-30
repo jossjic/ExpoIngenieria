@@ -96,8 +96,6 @@
 							echo 'src="'.$video_full_link.'" title="YouTube video player" frameborder="0" allow="accelerometer"; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share allowfullscreen';
 							?>
 					></iframe>
-				</div>
-				<div class="col-md-6 text-center">
 					<iframe
 							<?php
 							preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $project['p_poster'], $match);
