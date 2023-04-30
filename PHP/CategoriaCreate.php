@@ -1,9 +1,17 @@
 <?php
 
-	require 'dataBase.php';
+	require_once 'dataBase.php';
 
-		$ca_idError = null;
-		$ca_nombreError = null;
+	session_name("EngineerXpoWeb");
+	session_start();
+
+	if (!isset($_SESSION['logged_in'])) {
+		header("Location: ../index.php");
+		exit();
+	}
+
+	$ca_idError = null;
+	$ca_nombreError = null;
 
 	if ( !empty($_POST)) {
 
@@ -31,59 +39,74 @@
 	}
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-    <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>CRUD EDICION</title>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Categoria Create</title>
 
-        <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
-        <link rel="stylesheet" href="../CSS/galeria.css">
+		<link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
+		<link rel="stylesheet" href="../CSS/FormsStructure.css">
+		<link rel="stylesheet" href="../CSS/Extra.css">
 	</head>
-
-    <header>
-        <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
-        <ul>
-        <li>
-            <a href="#">Layout Proyectos</a>
-        </li>
-        </ul>
-        <nav>
-        <ul>
-            <li><a href="#">Cerrar Sesión</a></li>
-        </ul>
-        </nav>
-    </header>
-
 	<body>
-	    <div class="container">
-	    	<div class="span10 offset1">
-	    		<div class="row">
-		   			<h3>Registro de Categorias</h3>
-		   		</div>
 
-				<form class="form-horizontal" action="createCategoria.php" method="post">
+		<header>
+			<a href="../index.php"
+				><img
+					class="Logo__Expo"
+					src="../media/logo-expo.svg"
+					alt="Logotipo de Expo ingenierías"
+			/></a>
+			<ul style="grid-column: 2/4">
+				<li><a href="../PHP/AdminInicio.php">Menu</a></li>
+				<li><a href="../PHP/AvisosView.php">Avisos</a></li>
+				<li><a href="../PHP/EdicionView.php">Ediciones</a></li>
+				<li><a href="../PHP/NivelView.php">Nivel</a></li>
+				<li><a href="../PHP/CategoriasView.php">Categorias</a></li>
+				<li><a href="../PHP/UsuariosView.php">Usuarios</a></li>
+				<li><a href="../PHP/ProyectosView.php">Proyectos</a></li>
+				<li><a href="../PHP/AdministradoresView.php">Administradores</a></li>
+				<li><a href="../PHP/EvaluacionesView.php">Evaluaciones</a></li>
+				<li style="font-weight: 600;">
+					<a href="../PHP/logout.php">Cerrar Sesion</a>
+				</li>
+			</ul>
+		</header>
 
+		<main>
 
-				<div class="control-group <?php echo !empty($ca_nombreError)?'error':'';?>">
-						<label class="control-label">Nombre</label>
-					    <div class="controls">
-					      	<input name="ca_nombre" type="text"  placeholder="Nombre Categoria" value="">
-					      	<?php if (($ca_nombreError != null)) ?>
-					      		<span class="help-inline"><?php echo $ca_nombreError;?></span>
-					    </div>
-				</div>
+            <h1>Crear Categoria</h1>
 
+            <form class="form-horizontal" action="CategoriaCreate.php" method="post">
+                <table>
 
-					<div>
-						<input class="btn btn-primary btn-block" type="submit" value="Agregar categoria" id="submit" name="submit">
-					</div>
+                    <tr>
+                        <td>
+                            <label>Nombre Categoria</label>
+                        </td>
+                        <td>
+                            <input class="Text__Input" name="ca_nombre" type="text"  placeholder="Nombre" value="" required>
+                            <?php if (($ca_nombreError != null)) ?>
+                            <span class="help-inline"><?php echo $ca_nombreError;?></span>
+                        </td>
+                    </tr>
 
-				</form>
-			</div>
-	    </div> <!-- /container -->
+					<tr>
+                        <td>
+                            <input class="Btn__Iniciar__Sesion" type="submit" value="Agregar Categoria" id="submit" name="submit">
+                        </td>
+                        <td>
+                            <a class="Btn-Ancla" href="CategoriaView.php">Regresar</a>
+                        </td>
+                    </tr>
+
+                </table>
+            </form>
+
+        </main>
+		
 	</body>
 </html>
