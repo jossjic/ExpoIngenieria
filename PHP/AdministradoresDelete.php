@@ -32,16 +32,22 @@
     if ($q['adm_master'] == 1 && $count > 1){
         if ( !empty($_POST)) {
             // keep track post values
-            $Usuario = $_POST['Usuario'];
-            // delete data
-            $pdo = Database::connect();
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "DELETE FROM ADMIN WHERE adm_correo = ?";
-            $q = $pdo->prepare($sql);
-            $q->execute(array($Usuario));
-            Database::disconnect();
-            header("Location: AdministradoresView.php");
-            exit();
+            $Usuario = trim($_POST['Usuario']);
+
+            if ($Usuario === $_SESSION['id']) {
+                header("Location: AdministradoresView.php");
+                exit();
+            } else {
+                // delete data
+                $pdo = Database::connect();
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $sql = "DELETE FROM ADMIN WHERE adm_correo = ?";
+                $q = $pdo->prepare($sql);
+                $q->execute(array($Usuario));
+                Database::disconnect();
+                header("Location: AdministradoresView.php");
+                exit();
+            }
         }
     } 
     else if($q['adm_master'] == 0 || $count == 1) {
