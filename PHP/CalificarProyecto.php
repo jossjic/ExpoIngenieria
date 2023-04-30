@@ -217,6 +217,7 @@
 
 		<link rel="stylesheet" href="../CSS/estructuraProyecto.css">
 		<link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
+		<link rel="stylesheet" href="../CSS/CalificarProyectoView.css">
 
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
@@ -236,7 +237,7 @@
 		</header>
 
 	    <main>
-	    	<div class="container">
+	    	<div class="container first-cal">
 				<div class="row">
 				<div class="col-md-6 text-center">
 					<iframe
@@ -289,7 +290,7 @@
 				</div>
 
 			</div>
-			<div>
+			<div class="second-cal">
 				<div>
 					<form action="CalificarProyecto.php?id=<?php echo $id?>" method="post">
 						<input type="hidden" name="id" value="<?php echo $id;?>"/>
