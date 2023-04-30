@@ -5,105 +5,286 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="icon" type="image/ico" href="../media/favicon.ico"/>
-
-		<title>Proyectos a calificar | EngineerXpoWeb</title>
+		<title>Calificar proyecto | EngineerXpoWeb</title>
 
 		<link rel="stylesheet" href="../CSS/estructuraProyecto.css">
-        <link rel="stylesheet" href="../CSS/admisionProyecto.css">
-        <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
-
+		<link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
 	</head>
 	<body>
 		<header>
-            <a href="../index.php"><img class="Logo__Expo" src="../media/logo-expo.svg" alt="Logotipo de Expo ingenierías"></a>
-            <ul>
-				<li><a href="../PHP/DashboardColaboradoresJurado.php">Dashboard</a></li>
-                <li><a href="../PHP/Mapa.php">Mapa de proyectos</a></li>
-            </ul>
-            <nav>
-                <ul>
-                    <li><a href="../PHP/logout.php">Cerrar Sesion</a></li>
-                </ul>
-            </nav>
-        </header>
+		    <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logotipo de la Escuela de Ingeniería y Ciencias">
+		    <ul>
+		        <li><a href="#">Inicio</a></li>
+		        <li><a href="#">Layout de proyectos</a></li>
+		    </ul>
+		    <nav>
+		        <ul>
+		            <li><a href="#">Cerrar Sesion</a></li>
+		        </ul>
+		    </nav>
+		</header>
 
 	    <main>
-			<div class="container">
+	    	<div class="container">
+				<div class="row">
+				<div class="col-md-6 text-center">
+					<iframe
+						width="80%";
+						height="50%";
+							<?php
+							preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $project['p_video'], $match);
+							$video_id = $match[1];
+							$video_full_link = "https://drive.google.com/file/d/".$video_id."/preview";
+							echo 'src="'.$video_full_link.'" title="YouTube video player" frameborder="0" allow="accelerometer"; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share allowfullscreen';
+							?>
+					></iframe>
+					<iframe
+						width="80%";
+						height="100%";
+							<?php
+							preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $project['p_poster'], $match);
+							$image_id = $match[1];
+							$image_full_link = "https://drive.google.com/file/d/".$image_id."/preview";
+							echo 'src="'.$image_full_link.'" allow="autoplay"';
+							?>
+					></iframe>
+				</div>
+				<div class="col-md-6">
+					<?php
+						// Aquí va el código PHP para obtener la información del proyecto
+						$project_name = $project['p_nombre'];
+						$category = $project['ca_nombre'];
+						$level = $project['n_nombre'];
+						$description = $project['p_descripcion'];
+						$edition = $project['ed_nombre'];
+						$status = $project['p_estado'];
+						$teachers = $docente;
+						$students = $alumno;
 
-				<?php
-					$pdo = Database::connect();
-					$sql = 'SELECT * 
-							FROM PROYECTO 
-							NATURAL JOIN CATEGORIA
-							NATURAL JOIN NIVEL
-							NATURAL JOIN EDICION
-							NATURAL JOIN PROYECTO_JURADO
-							WHERE p_estado = "Aceptado" AND co_correo = \''.$_SESSION['id'].'\'
-							ORDER BY p_nombre';
+						// Imprime la información del proyecto
+						echo "<h2>$project_name</h2>";
+						echo "<h3>Edicion: </h3> <p>$edition</p>";
+						echo "<h3>Estado: </h3> <p>$status</p>";
+						echo "<h3>Categoría: </h3> <p>$category</p>";
+						echo "<h3>Nivel: </h3><p>$level</p>";
+						echo "<h3>Descripcion: </h3> <p>$description</p>";
+						echo "<h3>Profesores:</h3>";
+						echo "<ol>";
+						foreach ($teachers as $teacher) {
+							echo "<li>".$teacher['co_nombre']." ".$teacher['co_apellido']." ".$teacher['co_correo']."</li>";
+						}
+						echo "</ol>";
+						echo "<h3>Alumnos:</h3>";
+						echo "<ol>";
+						foreach ($students as $student) {
+							echo "<li>".$student['a_nombre']." ".$student['a_apellido']." ".$student['a_correo']."</li>";
+						}
+						echo "</ol>";
+					?>
+				</div>
+			</div>
 
-					$projects = $pdo->query($sql);
-					Database::disconnect();
-					$number_of_projects = $projects->rowCount();
-				?>
-
-				<?php if ($number_of_projects == 0): ?>
-					<div class="announce"><h2>Sin Proyectos Por Calificar</h2></div>
-
-				<?php else: ?>
-
-					<form action="ProyectosACalificar.php" method="post" id="project-form-id">
-						<input type="hidden" name="project_id" value="" id="project-id">
-						<input type="hidden" name="project_action" value="" id="project-action">
-					</form>
-					<fieldset class="project-container">
-						<legend><strong>Proyectos por calificar</strong></legend>
+				<form action="CalificarProyecto.php?id=<?php echo $id?>" method="post">
+					<input type="hidden" name="id" value="<?php echo $id;?>"/>
+					<fieldset class="rubric-container">
+						<legend><strong>Rúbrica de evaluación</strong></legend>
 						<br>
 						<hr>
 						<div class="rubric-elements">
 							<table>
 								<thead>
 									<tr>
-										<th>ID</th>
-										<th>Nombre</th>
-										<th>Categoría</th>
-										<th>Ultima Modificación</th>
-										<th>Acciones</th>
+										<th>&nbsp;</th>
+										<th>Deficiente</th>
+										<th>Regular</th>
+										<th>Bueno</th>
+										<th>Excelente</th>
 									</tr>
 								</thead>
 								<tbody>
-									<?php
-										foreach ($projects as $row) {
-
-											echo '<tr>';
-											echo     '<td>'.$row['p_id'].'</td>';
-											echo     '<td>'.$row['p_nombre'].'</td>';
-											echo     '<td>'.$row['ca_nombre'].'</td>';
-											echo     '<td>'.$row['p_ult_modif'].'</td>';
-											echo     '<td>';
-											echo         '<button type="button" class="btn btn-success" type="button" onclick="gradeProject('.$row['p_id'].')">Calificar</button>';
-											echo     '</td>';
-											echo '</tr>';
-											
-										}
-									?>
+									<tr>
+										<td><b>Utilidad:</b>
+											<p>El proyecto resuelve un problema actual en el área de interés y/o el proyecto da alta prioridad al cliente quien queda ampliamente satisfecho.</p>
+										</td>
+										<?php 
+											if ($p1 === '1') {
+												echo '<td><input type="radio" name="p_1" value="1" checked></td>';
+											}
+											else {
+												echo '<td><input type="radio" name="p_1" value="1"></td>';
+											}
+											if ($p1 === '2') {
+												echo '<td><input type="radio" name="p_1" value="2" checked></td>';
+											}
+											else {
+												echo '<td><input type="radio" name="p_1" value="2"></td>';
+											}
+											if ($p1 === '3') {
+												echo '<td><input type="radio" name="p_1" value="3" checked></td>';
+											}
+											else {
+												echo '<td><input type="radio" name="p_1" value="3"></td>';
+											}
+											if ($p1 === '4') {
+												echo '<td><input type="radio" name="p_1" value="4" checked></td>';
+											}
+											else {
+												echo '<td><input type="radio" name="p_1" value="4"></td>';
+											}
+										?>
+									</tr>
+									<?php if (!empty($p1Error)): ?>
+										<tr><td colspan="5" class="project-rubric-score"><?php echo $p1Error;?></td></tr>
+									<?php endif;?>
+									<tr>
+										<td>
+											<b>Impacto e innovación:</b>
+											<p>El proyecto presenta una idea nueva e impacta positivamente en el área de interés y/o el producto presenta una idea nueva e incrementa la productividad.</p>
+										</td>
+										<?php 
+											if ($p2 === '1') {
+												echo '<td><input type="radio" name="p_2" value="1" checked></td>';
+											}
+											else {
+												echo '<td><input type="radio" name="p_2" value="1"></td>';
+											}
+											if ($p2 === '2') {
+												echo '<td><input type="radio" name="p_2" value="2" checked></td>';
+											}
+											else {
+												echo '<td><input type="radio" name="p_2" value="2"></td>';
+											}
+											if ($p2 === '3') {
+												echo '<td><input type="radio" name="p_2" value="3" checked></td>';
+											}
+											else {
+												echo '<td><input type="radio" name="p_2" value="3"></td>';
+											}
+											if ($p2 === '4') {
+												echo '<td><input type="radio" name="p_2" value="4" checked></td>';
+											}
+											else {
+												echo '<td><input type="radio" name="p_2" value="4"></td>';
+											}
+										?>
+									</tr>
+									<?php if (!empty($p2Error)): ?>
+										<tr><td colspan="5" class="project-rubric-score"><?php echo $p2Error;?></td></tr>
+									<?php endif;?>
+									<tr>
+										<td>
+											<b>Desarrollo experimental o técnico y/o resultados o producto final:</b>
+											<p>Ausencia de errores técnicos los resultados y/o producto resuelven el problema propuesto.</p>
+										</td>
+										<?php 
+											if ($p3 === '1') {
+												echo '<td><input type="radio" name="p_3" value="1" checked></td>';
+											}
+											else {
+												echo '<td><input type="radio" name="p_3" value="1"></td>';
+											}
+											if ($p3 === '2') {
+												echo '<td><input type="radio" name="p_3" value="2" checked></td>';
+											}
+											else {
+												echo '<td><input type="radio" name="p_3" value="2"></td>';
+											}
+											if ($p3 === '3') {
+												echo '<td><input type="radio" name="p_3" value="3" checked></td>';
+											}
+											else {
+												echo '<td><input type="radio" name="p_3" value="3"></td>';
+											}
+											if ($p3 === '4') {
+												echo '<td><input type="radio" name="p_3" value="4" checked></td>';
+											}
+											else {
+												echo '<td><input type="radio" name="p_3" value="4"></td>';
+											}
+										?>
+									</tr>
+									<?php if (!empty($p3Error)): ?>
+										<tr><td colspan="5" class="project-rubric-score"><?php echo $p3Error;?></td></tr>
+									<?php endif;?>
+									<tr>
+										<td>
+											<b>Claridad y precisión de ideas:</b>
+											<p>La presentación es concreta y clara.</p>
+										</td>
+										<?php 
+											if ($p4 === '1') {
+												echo '<td><input type="radio" name="p_4" value="1" checked></td>';
+											}
+											else {
+												echo '<td><input type="radio" name="p_4" value="1"></td>';
+											}
+											if ($p4 === '2') {
+												echo '<td><input type="radio" name="p_4" value="2" checked></td>';
+											}
+											else {
+												echo '<td><input type="radio" name="p_4" value="2"></td>';
+											}
+											if ($p4 === '3') {
+												echo '<td><input type="radio" name="p_4" value="3" checked></td>';
+											}
+											else {
+												echo '<td><input type="radio" name="p_4" value="3"></td>';
+											}
+											if ($p4 === '4') {
+												echo '<td><input type="radio" name="p_4" value="4" checked></td>';
+											}
+											else {
+												echo '<td><input type="radio" name="p_4" value="4"></td>';
+											}
+										?>
+									</tr>
+									<?php if (!empty($p4Error)): ?>
+										<tr><td colspan="5" class="project-rubric-score"><?php echo $p4Error;?></td></tr>
+									<?php endif;?>
+									<tr>
+										<td>
+											<b>Respuestas a preguntas:</b>
+											<p>Respuestas precisas de acuerdo al diseño, al estado de avance del proyecto, al impacto y a los resultados obtenidos.</p>
+										</td>
+										<?php 
+											if ($p5 === '1') {
+												echo '<td><input type="radio" name="p_5" value="1" checked></td>';
+											}
+											else {
+												echo '<td><input type="radio" name="p_5" value="1"></td>';
+											}
+											if ($p5 === '2') {
+												echo '<td><input type="radio" name="p_5" value="2" checked></td>';
+											}
+											else {
+												echo '<td><input type="radio" name="p_5" value="2"></td>';
+											}
+											if ($p5 === '3') {
+												echo '<td><input type="radio" name="p_5" value="3" checked></td>';
+											}
+											else {
+												echo '<td><input type="radio" name="p_5" value="3"></td>';
+											}
+											if ($p5 === '4') {
+												echo '<td><input type="radio" name="p_5" value="4" checked></td>';
+											}
+											else {
+												echo '<td><input type="radio" name="p_5" value="4"></td>';
+											}
+										?>
+									</tr>
+									<?php if (!empty($p5Error)): ?>
+										<tr><td colspan="5" class="project-rubric-score"><?php echo $p5Error;?></td></tr>
+									<?php endif;?>
 								</tbody>
 							</table>
 						</div>
 					</fieldset>
-
-				<?php endif ?>
-
+					<div class="submit-btn-container">
+						<input type="submit" class="submit-btn" value="Confirmar calificación"> 
+					</div>
+				</form>
 			</div>
 	    </main>
-
-		<script>
-        function gradeProject(projectId) {
-            if (document.getElementById("project-id").value === "") {
-                document.getElementById("project-id").value = projectId;
-                document.getElementById("project-action").value = "calificar";
-                document.getElementById("project-form-id").submit();
-            }
-        }
-    </script>
 	</body>
 </html>

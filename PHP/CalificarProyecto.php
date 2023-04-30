@@ -201,37 +201,66 @@
 
 	    <main>
 	    	<div class="container">
-		    	<div class="top-page">
-		    		<h1><?php echo $project['p_nombre'];?></h1>
-		    		<br>
-		    		<dl>
-		    			<dt><strong>Descripción</strong></dt>
-		    			<dd><?php echo $project['p_descripcion'];?></dd>
-		    		</dl>
-		    		<br>
-		    		<dl>
-		    			<dt><strong>Autores</strong></dt>
-		    			<?php
-		    			    $pdo = Database::connect();
-		    			    $sql = 'SELECT * 
-		    			            FROM PROYECTO_ALUMNO
-									NATURAL JOIN ALUMNO 
-		    			            WHERE p_id = ?
-		    			            ORDER BY a_correo';
-		    			    $q = $pdo->prepare($sql);
-		    			    $q->execute(array($id));
-		    			    $projects = $q->fetchAll();
-		    			    Database::disconnect();
+				<div class="row">
+				<div class="col-md-6 text-center">
+					<iframe
+						width="80%";
+						height="50%";
+							<?php
+							preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $project['p_video'], $match);
+							$video_id = $match[1];
+							$video_full_link = "https://drive.google.com/file/d/".$video_id."/preview";
+							echo 'src="'.$video_full_link.'" title="YouTube video player" frameborder="0" allow="accelerometer"; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share allowfullscreen';
+							?>
+					></iframe>
+					<iframe
+						width="80%";
+						height="100%";
+							<?php
+							preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $project['p_poster'], $match);
+							$image_id = $match[1];
+							$image_full_link = "https://drive.google.com/file/d/".$image_id."/preview";
+							echo 'src="'.$image_full_link.'" allow="autoplay"';
+							?>
+					></iframe>
+				</div>
+				<div class="col-md-6">
+					<?php
+						// Aquí va el código PHP para obtener la información del proyecto
+						$project_name = $project['p_nombre'];
+						$category = $project['ca_nombre'];
+						$level = $project['n_nombre'];
+						$description = $project['p_descripcion'];
+						$edition = $project['ed_nombre'];
+						$status = $project['p_estado'];
+						$teachers = $docente;
+						$students = $alumno;
 
-		    			    foreach ($projects as $row) {
-		    					echo '<dd>'.$row['a_nombre'].' '.$row['a_apellido'].'</dd>';
-		    				}
-		    			?>
+						// Imprime la información del proyecto
+						echo "<h2>$project_name</h2>";
+						echo "<h3>Edicion: </h3> <p>$edition</p>";
+						echo "<h3>Estado: </h3> <p>$status</p>";
+						echo "<h3>Categoría: </h3> <p>$category</p>";
+						echo "<h3>Nivel: </h3><p>$level</p>";
+						echo "<h3>Descripcion: </h3> <p>$description</p>";
+						echo "<h3>Profesores:</h3>";
+						echo "<ol>";
+						foreach ($teachers as $teacher) {
+							echo "<li>".$teacher['co_nombre']." ".$teacher['co_apellido']." ".$teacher['co_correo']."</li>";
+						}
+						echo "</ol>";
+						echo "<h3>Alumnos:</h3>";
+						echo "<ol>";
+						foreach ($students as $student) {
+							echo "<li>".$student['a_nombre']." ".$student['a_apellido']." ".$student['a_correo']."</li>";
+						}
+						echo "</ol>";
+					?>
+                    <a href="../PHP/AdmisionProyectos.php" class="btn btn-primary mx-2" style="background-color: #0033A0;">Regresar</a>
+				</div>
+			</div>
 
-		    		</dl>
-		    	</div>
-
-				<form action="calificarProyecto.php?id=<?php echo $id?>" method="post">
+				<form action="CalificarProyecto.php?id=<?php echo $id?>" method="post">
 					<input type="hidden" name="id" value="<?php echo $id;?>"/>
 					<fieldset class="rubric-container">
 						<legend><strong>Rúbrica de evaluación</strong></legend>
