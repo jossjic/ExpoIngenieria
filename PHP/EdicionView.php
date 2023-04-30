@@ -119,10 +119,10 @@
 									foreach ($pdo->query($sql) as $row) {
 										echo "
 											<p>&nbsp;</p>
-											<p>".$row['ed_id']."</p>
-											<p>".$row['ed_nombre']."</p>
-											<p>".$row['ed_fecha_inicio']."</p>
-											<p>".$row['ed_fecha_fin']."</p>
+											<p>".trim($row['ed_id'])."</p>
+											<p>".trim($row['ed_nombre'])."</p>
+											<p>".trim($row['ed_fecha_inicio'])."</p>
+											<p>".trim($row['ed_fecha_fin'])."</p>
 											<p></p>
 											<div class='Btn__Green'>
 												<a href='../PHP/EdicionRead.php?id=".trim($row['ed_id'])."'>Ver</a>
