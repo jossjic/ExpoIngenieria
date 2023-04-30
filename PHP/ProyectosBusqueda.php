@@ -152,7 +152,7 @@
                                         NATRUAL JOIN NIVEL
                                         WHERE p_id = ?";
                                 $q = $pdo->prepare($sql);
-                                $q->execute(array(trim($BuscarNombre)));
+                                $q->execute(array($BuscarNombre));
                                 foreach($q as $row){
                                     echo "
                                     <p>&nbsp;</p>
@@ -182,7 +182,7 @@
                                         NATRUAL JOIN NIVEL
                                         WHERE p_nombre = ?";
                                 $q = $pdo->prepare($sql);
-                                $q->execute(array(trim($BuscarNombre)));
+                                $q->execute(array($BuscarNombre));
                                 foreach($q as $row){
                                     echo "
                                     <p>&nbsp;</p>
