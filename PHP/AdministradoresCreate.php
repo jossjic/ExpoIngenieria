@@ -148,7 +148,7 @@
                             <label>Correo</label>
                         </td>
                         <td>
-                            <input class="Text__Input" name="Correo" type="email"  placeholder="tucorreo@dominio.com" value="" required>
+                            <input class="Text__Input" name="Correo" type="email"  placeholder="tucorreo@dominio.com" value="" pattern="^[^@]+@tec\.mx$" required>
                             <?php if (($CorreoError != null)) ?>
                             <span class="help-inline"><?php echo $CorreoError;?></span>
                         </td>
