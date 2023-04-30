@@ -12,7 +12,7 @@
 		private static $dbHost 					= 'localhost';
 		private static $dbUsername 			= 'TC2005B_401_5';
 		private static $dbUserPassword 	= 'b#-ap+E4ru97?STi';
-
+		
 		private static $cont  = null;
 		
 

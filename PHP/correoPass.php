@@ -15,54 +15,103 @@
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		if ($type=='co'){
-			$sql = "DELETE FROM COLABORADOR WHERE co_correo = ?";
-			$q = $pdo->prepare($sql);
-			$q->execute(array($correo));
+			
 			$sql = "SELECT * FROM COLABORADOR WHERE co_correo = ?";
 			$q = $pdo->prepare($sql);
 			$q->execute(array($correo));
-			if($q->rowCount()<=0){
-				$verif=true;
-			}
-			else{
-				$verif=false;
-			}
+            $info = $q->fetch(PDO::FETCH_ASSOC);
+
+          
+	
+
+	
+	$para = trim($info['co_correo']);
+	$asunto = 'Recuperación contraseña';
+	$mensaje =  "
+<html>
+<head>
+<style type='text/css'>
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(http://themes.googleusercontent.com/static/fonts/opensans/v6/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+body {
+	color: #333;
+	font-family: 'Open Sans', sans-serif;
+	margin: 0px;
+	font-size: 16px;
+}
+.pie {
+	font-size:12px;
+	color:#999797;
+}
+.centro {
+	font-size:16px;
+}
+.centro a{
+	text-decoration:none;
+	color: #0487b8;
+}
+.centro a:hover{
+	text-decoration: underline;
+	color: #0487b8;
+}
+</style>
+</head>
+<body>
+<table width='593' height='324' border='0' align='center'>
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td height='97' valign='top' class='centro'><h3>Recuperación contraseña
+    </h3>
+   Tu contraseña es:".$info['co_pass']." </td>
+  </tr>
+  <tr>
+    <td height='17' ></td>
+  </tr>
+  <tr>
+    <td height='27' class='pie'>Este email es una notificaci&oacute;n autom&aacute;tica</td>
+  </tr>
+</table>
+</body>
+</html>
+";
+	
+// Cabecera que especifica que es un HMTL
+$cabeceras  = 'MIME-Version: 1.0' . "\r\n";
+$cabeceras .= "Content-type: text/html\r\n";
+$cabeceras .= 'From: ExpoIngeWeb' . "\r\n" . //poner el domn
+    'Reply-To: no_contestar@ExpoIngeWeb.com' . "\r\n";
+
+	mail($para, $asunto, $mensaje, $cabeceras);
+			//header(dashboard de cada tipo de usuario)
 
 		}
+
 		else if ($type=='al'){
-			$sql = "DELETE FROM ALUMNO WHERE a_correo = ?";
-			$q = $pdo->prepare($sql);
-			$q->execute(array($correo));
+			
 			$sql = "SELECT * FROM ALUMNO WHERE a_correo = ?";
 			$q = $pdo->prepare($sql);
 			$q->execute(array($correo));
-			if($q->rowCount()<=0){
-				$verif=true;
-			}
-			else{
-				$verif=false;
-			}
+			
 		}
 		else if ($type=='adm'){
-			$sql = "DELETE FROM ADMIN WHERE adm_correo = ?";
-			$q = $pdo->prepare($sql);
-			$q->execute(array($correo));
+			
 			$sql = "SELECT * FROM ADMIN WHERE adm_correo = ?";
 			$q = $pdo->prepare($sql);
 			$q->execute(array($correo));
-			if($q->rowCount()<=0){
-				$verif=true;
-			}
-			else{
-				$verif=false;
-			}
+			
 		}
 		else{
 			echo "Error en tipo de usuario";
-			$verif=false;
+
 		}
 		Database::disconnect();
-		header("Location: UsuariosView.php?verif=$verif");
+		header("Location: UsuariosView.php");
 	}
 
 
@@ -109,13 +158,13 @@
 			    	<h3>Eliminar Usuario</h3>
 			    </div>
 
-			    <form class="form-horizontal" action="UsuariosDelete.php" method="post">
+			    <form class="form-horizontal" action="correoPass.php" method="post">
 		    		<input type="hidden" name="correo" value="<?php echo $correo;?>"/>
 					<input type="hidden" name="type" value="<?php echo $type;?>"/>
-					<p class="alert alert-error">Estas seguro que quieres eliminar a este usuario?</p>
+					<p class="alert alert-error">¿Olvidaste tu contraseña?</p>
 					<div class="form-actions">
-						<div class="Btn_red"><button type="submit">Si</button></div>
-						<div class="Btn_blue"><a href="UsuariosView.php">No</a></div>
+						<div class="Btn_red"><button type="submit">Pulsa aquí para recuperarla</button></div>
+						<div class="Btn_blue"><a href="UsuariosView.php">Regresar</a></div>
 					</div>
 				</form>
 			</div>
