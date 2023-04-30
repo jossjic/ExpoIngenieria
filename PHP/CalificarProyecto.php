@@ -100,7 +100,7 @@
 					WHERE p_id = ?';
 			$q = $pdo->prepare($sql);
 			$q->execute(array($id));
-			$alumno = $q->fetch(PDO::FETCH_ASSOC);
+			$alumno = $q->fetchAll(PDO::FETCH_ASSOC);
 
 			/*$q = $pdo->prepare($sql);
 			$acq = ($ac=="S")?1:0;
@@ -138,7 +138,7 @@
 					WHERE p_id = ?';
 			$q = $pdo->prepare($sql);
 			$q->execute(array($id));
-			$alumno = $q->fetch(PDO::FETCH_ASSOC);
+			$alumno = $q->fetchAll(PDO::FETCH_ASSOC);
 		}
 	}
 	else {
@@ -169,7 +169,7 @@
 		        WHERE p_id = ?';
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
-		$alumno = $q->fetch(PDO::FETCH_ASSOC);
+		$alumno = $q->fetchAll(PDO::FETCH_ASSOC);
 
 		// Obtener datos de la evaluación
 		// del docente sobre proyecto
