@@ -1,5 +1,5 @@
 <?php
-require 'database.php';
+require 'dataBase.php';
 require("../fpdf/fpdf.php");
 if ($_GET) {
     if (isset($_GET['matricula'])) {
