@@ -25,6 +25,7 @@
 		$q->execute(array($id));
 		Database::disconnect();
 		header("Location: EdicionView.php");
+		exit();
 	}
 ?>
 
