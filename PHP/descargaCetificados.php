@@ -44,7 +44,9 @@
 
                     <?php
                         $pdo = Database::connect();
-                        $sql = "SELECT COLABORADOR.co_correo, COLABORADOR.co_nomina, COLABORADOR.co_nombre, COLABORADOR.co_apellido, COLABORADOR.co_es_jurado FROM COLABORADOR ORDER BY COLABORADOR.co_nombre";
+                        $sql = "SELECT co_correo, co_nomina, co_nombre, co_apellido, co_es_jurado 
+                                FROM COLABORADOR 
+                                ORDER BY co_nombre;";
                         $q = $pdo->query($sql);
                         $filas = $q->fetchAll();
                         Database::disconnect();
@@ -86,7 +88,14 @@
 
                         <?php
                             $pdo = Database::connect();
-                            $sql = "SELECT proyecto.p_id, proyecto.p_nombre, edicion.ed_id, edicion.ed_nombre, alumno.a_matricula, alumno.a_nombre, alumno.a_apellido FROM `proyecto` JOIN categoria ON proyecto.ca_id = categoria.ca_id JOIN edicion ON proyecto.ed_id = edicion.ed_id JOIN nivel ON proyecto.n_id = nivel.n_id JOIN proyecto_alumno ON proyecto.p_id = proyecto_alumno.p_id JOIN alumno ON proyecto_alumno.a_matricula = alumno.a_matricula ORDER BY edicion.ed_id,proyecto.p_id,alumno.a_apellido,alumno.a_nombre ASC;";
+                            $sql = "SELECT p.p_id, p.p_nombre, e.ed_id, e.ed_nombre, a.a_matricula, a.a_nombre, a.a_apellido 
+                                    FROM PROYECTO p 
+                                    NATURAL JOIN CATEGORIA 
+                                    NATURAL JOIN EDICION e
+                                    NATURAL JOIN nivel n
+                                    NATURAL JOIN proyecto_alumno pa 
+                                    NATURAL JOIN alumno a 
+                                    ORDER BY e.ed_id, p.p_id, a.a_apellido, a.a_nombre ASC";
                             $q = $pdo->query($sql);
                             $filas = $q->fetchAll();
                             Database::disconnect();

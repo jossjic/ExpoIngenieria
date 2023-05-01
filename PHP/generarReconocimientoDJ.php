@@ -1,6 +1,6 @@
 <?php
 require 'database.php';
-require("../fpdf/fpdf.php");
+require("/fpdf/fpdf.php");
 if ($_GET) {
     if (isset($_GET['matricula'])) {
         $pdo = Database::connect();
