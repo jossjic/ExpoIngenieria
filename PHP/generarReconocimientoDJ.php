@@ -4,7 +4,11 @@ require("/fpdf/fpdf.php");
 if ($_GET) {
     if (isset($_GET['matricula'])) {
         $pdo = Database::connect();
-        $sql = "SELECT colaborador.co_correo, colaborador.co_nombre, colaborador.co_nomina, colaborador.co_apellido, colaborador.co_es_jurado, edicion.ed_nombre FROM colaborador JOIN edicion_colaborador ON colaborador.co_correo = edicion_colaborador.co_correo JOIN edicion ON edicion_colaborador.ed_id = edicion.ed_id  WHERE colaborador.co_correo = '{$_GET['matricula']}';";
+        $sql = "SELECT * 
+                FROM COLABORADOR 
+                NATURAL JOIN EDICION_COLABORADOR 
+                NATURAL JOIN EDICION
+                WHERE co_correo = '{$_GET['matricula']}';";
         $q = $pdo->query($sql);
         //var_dump($q);
         $filas = $q->fetch();
