@@ -109,9 +109,7 @@
 
         </div>
 
-            <div class="Estadisticas__Btn">
-                <a cglass="Admin__Start__Right__Btn" href="../PHP/EstadisticasUsuarios.php">Estadisticas Usuarios</a>
-            </div>
+            
         </div>
 
         <form action="../PHP/UsuariosBusqueda.php" method="post" class="Winners__Explorer">
