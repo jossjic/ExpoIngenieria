@@ -37,7 +37,7 @@
 				<li><a href="../PHP/AvisosView.php">Avisos</a></li>
 				<li><a href="../PHP/EdicionView.php">Ediciones</a></li>
 				<li><a href="../PHP/NivelView.php">Nivel</a></li>
-				<li><a href="../PHP/CategoriasView.php">Categorias</a></li>
+				<li><a href="../PHP/CategoriaView.php">Categorias</a></li>
 				<li><a href="../PHP/UsuariosView.php">Usuarios</a></li>
 				<li><a href="../PHP/ProyectosView.php">Proyectos</a></li>
 				<li><a href="../PHP/AdministradoresView.php">Administradores</a></li>
