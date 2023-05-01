@@ -1,7 +1,7 @@
 <?php
 require 'dataBase.php';
 require("/fpdf/fpdf.php");
-if ($_GET) {
+
     if (isset($_GET['matricula'])) {
         $matricula = $_REQUEST['matricula'];
         $pdo = Database::connect();
@@ -91,6 +91,6 @@ $fpdf->Output();
 
 $pdo = Database::connect();
  }
-}
+
 
 ?>
