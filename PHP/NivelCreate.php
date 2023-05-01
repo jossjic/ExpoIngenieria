@@ -91,7 +91,7 @@
                             <label>Nombre Nivel</label>
                         </td>
                         <td>
-							<input name="n_nombre" type="text"  placeholder="Nombre Nivel" value="" required>
+							<input name="n_nombre" class="Text__Input" type="text"  placeholder="Nombre Nivel" value="" required>
 					      	<?php if (($n_nombreError != null)) ?>
 					      		<span class="help-inline"><?php echo $n_nombreError;?></span>
                         </td>
