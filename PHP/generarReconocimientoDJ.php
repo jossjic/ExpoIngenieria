@@ -86,6 +86,8 @@ $fpdf->Ln(5);
 $fpdf->SetFont('Arial', 'I', 12);
 $fpdf->Cell($ancho[0], 7, $campus, 0, 0, 'C');
 $fpdf->Output();
+
+$pdo = Database::connect();
  }
 }
 
