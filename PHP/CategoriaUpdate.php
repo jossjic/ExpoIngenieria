@@ -1,6 +1,14 @@
 <?php
 
-	require 'dataBase.php';
+	require_once 'dataBase.php';
+
+	session_name("EngineerXpoWeb");
+	session_start();
+
+	if (!isset($_SESSION['logged_in'])) {
+		header("Location: ../index.php");
+		exit();
+	}
 
 	$id = null;
 	if ( !empty($_GET['id'])) {
@@ -8,7 +16,8 @@
 	}
 
 	if ( $id==null ) {
-		header("Location: CategoriaCRUD.php");
+		header("Location: CategoriaView.php");
+		exit();
 	}
 
 	if ( !empty($_POST)) {
@@ -32,12 +41,13 @@
 		if ($valid) {
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "UPDATE CATEGORIA  set ca_id = ?, ca_nombre = ? WHERE ca_id = ?";
+			$sql = "UPDATE CATEGORIA  SET ca_id = ?, ca_nombre = ? WHERE ca_id = ?";
 			$q = $pdo->prepare($sql);
 			//$acq = ($ac=="S")?1:0;
 			$q->execute(array($ca_id,$ca_nombre,$ca_id));
 			Database::disconnect();
-			header("Location: CategoriaCRUD.php");
+			header("Location: CategoriaView.php");
+			exit();
 		}
 	}
 	else {
@@ -53,71 +63,93 @@
 	}
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>UPDATE EDICION</title>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Categoria Update</title>
 
-        <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
-        <link rel="stylesheet" href="../CSS/galeria.css">
+		<link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
+		<link rel="stylesheet" href="../CSS/FormsStructure.css">
+		<link rel="stylesheet" href="../CSS/Extra.css">
+
 	</head>
 
-    <header>
-        <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
-        <ul>
-        <li>
-            <a href="#">Layout Proyectos</a>
-        </li>
-        </ul>
-        <nav>
-        <ul>
-            <li><a href="#">Cerrar Sesión</a></li>
-        </ul>
-        </nav>
-    </header>
-
 	<body>
-    	<div class="container">
-    		<div class="span10 offset1">
-    			<div class="row">
-		    		<h3>Actualizar datos de una categoria</h3>
-		    	</div>
 
-	    			<form class="form-horizontal" action="updateCategoria.php?id=<?php echo $id?>" method="post">
+		<header>
+			<a href="../index.php"
+				><img
+					class="Logo__Expo"
+					src="../media/logo-expo.svg"
+					alt="Logotipo de Expo ingenierías"
+			/></a>
+			<ul style="grid-column: 2/4">
+				<li><a href="../PHP/AdminInicio.php">Menu</a></li>
+				<li><a href="../PHP/AvisosView.php">Avisos</a></li>
+				<li><a href="../PHP/EdicionView.php">Ediciones</a></li>
+				<li><a href="../PHP/NivelView.php">Nivel</a></li>
+				<li><a href="../PHP/CategoriasView.php">Categorias</a></li>
+				<li><a href="../PHP/UsuariosView.php">Usuarios</a></li>
+				<li><a href="../PHP/ProyectosView.php">Proyectos</a></li>
+				<li><a href="../PHP/AdministradoresView.php">Administradores</a></li>
+				<li><a href="../PHP/EvaluacionesView.php">Evaluaciones</a></li>
+				<li style="font-weight: 600;">
+					<a href="../PHP/logout.php">Cerrar Sesion</a>
+				</li>
+			</ul>
+		</header>
 
-					  <div class="control-group <?php echo !empty($ca_idError)?'error':'';?>">
+		<main>
 
-					    <label class="control-label">ID</label>
-					    <div class="controls">
-					      	<input name="ca_id" type="text" readonly placeholder="id" value="<?php echo !empty($ca_id )?$ca_id :''; ?>">
+            <h1>Actualizar Categoria</h1>
+
+            <form class="form-horizontal" action="CategoriaUpdate.php?id=<?php echo $id?>" method="post">
+
+
+                <table>
+
+                    <tr>
+                        <td>
+                            <label for="">ID</label>
+                        </td>
+
+                        <td>
+							<input name="ca_id" type="text" readonly placeholder="id" value="<?php echo !empty($ca_id )?$ca_id :''; ?>" required>
 					      	<?php if (!empty($ca_idError)): ?>
 					      		<span class="help-inline"><?php echo $ca_idError;?></span>
 					      	<?php endif; ?>
-					    </div>
-					  </div>
+                        </td>
+                    </tr>
 
-					  <div class="control-group <?php echo !empty($ca_nombreError)?'error':'';?>">
-
-					    <label class="control-label">Nombre</label>
-					    <div class="controls">
-					      	<input name="ca_nombre" type="text" placeholder="nombre" value="<?php echo !empty($ca_nombre)?$ca_nombre:'';?>">
+                    <tr>
+                        <td>
+                            <label>Nombre</label>
+                        </td>
+                        <td>
+							<input name="ca_nombre" type="text" placeholder="nombre" value="<?php echo !empty($ca_nombre)?$ca_nombre:'';?>" required>
 					      	<?php if (!empty($ca_nombreError)): ?>
 					      		<span class="help-inline"><?php echo $ca_nombreError;?></span>
 					      	<?php endif;?>
-					    </div>
-					  </div>
+                        </td>
+                    </tr>
 
-					  <div class="form-actions">
-						  <button type="submit" class="btn btn-success">Actualizar</button>
-						  <a class="btn" href="CategoriaCRUD.php">Regresar</a>
-						</div>
-					</form>
-				</div>
+                    <tr>
+                        <td class="Td__Iniciar__Sesion">
+                            <input class="Btn__Iniciar__Sesion" type="submit" value="Actualizar Categoria" id="submit" name="submit">
+                        </td>
+                        <td>
+                            <a class="Btn-Ancla" href="CategoriaView.php">Regresar</a>
+                        </td>
+                    </tr>
+                </table>
+            </form>
 
-    </div> <!-- /container -->
-  </body>
+        </main>
+		
+	</body>
 </html>
+
  
