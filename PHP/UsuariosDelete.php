@@ -92,7 +92,6 @@
     <link rel="stylesheet" href="../CSS/FormsStructure.css">
     <link rel="stylesheet" href="../CSS/Extra.css">
 </head>
-<>
 
 		<header>
 			<a href="../index.php"
@@ -119,7 +118,7 @@
 
 		<main>
 
-			<h3>Eliminar Usuario</h3>
+			<h1>Eliminar Usuario</h1>
 
 			<form class="form-horizontal" action="UsuariosDelete.php" method="post">
 
@@ -152,29 +151,8 @@
 					</tr>
 
 				</table>
-				
+
 			</form>
 
 		</main>
-
-	
-  
-	    <div class="container">
-	    	<div class="span10 offset1">
-	    		<div class="row">
-			    	<h3>Eliminar Usuario</h3>
-			    </div>
-
-			    <form class="form-horizontal" action="UsuariosDelete.php" method="post">
-		    		<input type="hidden" name="correo" value="<?php echo $correo;?>"/>
-					<input type="hidden" name="type" value="<?php echo $type;?>"/>
-					<p class="alert alert-error">Estas seguro que quieres eliminar a este usuario?</p>
-					<div class="form-actions">
-						<div class="Btn_red"><button type="submit">Si</button></div>
-						<div class="Btn_blue"><a href="UsuariosView.php">No</a></div>
-					</div>
-				</form>
-			</div>
-	  </div> <!-- /container -->
-
 </html>
