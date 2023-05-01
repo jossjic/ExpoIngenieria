@@ -91,7 +91,7 @@
 				<li><a href="../PHP/AvisosView.php">Avisos</a></li>
 				<li><a href="../PHP/EdicionView.php">Ediciones</a></li>
 				<li><a href="../PHP/NivelView.php">Nivel</a></li>
-				<li><a href="../PHP/CategoriasView.php">Categorias</a></li>
+				<li><a href="../PHP/CategoriaView.php">Categorias</a></li>
 				<li><a href="../PHP/UsuariosView.php">Usuarios</a></li>
 				<li><a href="../PHP/ProyectosView.php">Proyectos</a></li>
 				<li><a href="../PHP/AdministradoresView.php">Administradores</a></li>
@@ -117,7 +117,7 @@
                         </td>
 
                         <td>
-							<input name="ca_id" type="text" readonly placeholder="id" value="<?php echo !empty($ca_id )?$ca_id :''; ?>" required>
+							<input name="ca_id" class="Text__Input" type="text" readonly placeholder="id" value="<?php echo !empty($ca_id )?$ca_id :''; ?>" required>
 					      	<?php if (!empty($ca_idError)): ?>
 					      		<span class="help-inline"><?php echo $ca_idError;?></span>
 					      	<?php endif; ?>
@@ -129,7 +129,7 @@
                             <label>Nombre</label>
                         </td>
                         <td>
-							<input name="ca_nombre" type="text" placeholder="nombre" value="<?php echo !empty($ca_nombre)?$ca_nombre:'';?>" required>
+							<input name="ca_nombre" class="Text__Input" type="text" placeholder="nombre" value="<?php echo !empty($ca_nombre)?$ca_nombre:'';?>" required>
 					      	<?php if (!empty($ca_nombreError)): ?>
 					      		<span class="help-inline"><?php echo $ca_nombreError;?></span>
 					      	<?php endif;?>
