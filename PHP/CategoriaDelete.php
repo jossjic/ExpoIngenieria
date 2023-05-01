@@ -24,7 +24,7 @@
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
 		Database::disconnect();
-		header("Location: CategoriaCRUD.php");
+		header("Location: CategoriaView.php");
 		exit();
 	}
 ?>
