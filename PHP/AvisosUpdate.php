@@ -17,6 +17,7 @@
 
 	if ( $id==null ) {
 		header("Location: AvisosView.php");
+		exit();
 	}
 
 	if ( !empty($_POST)) {
@@ -57,6 +58,7 @@
 			$q->execute(array($Titulo,$Contenido,$Grupo,$id));
 			Database::disconnect();
 			header("Location: AvisosView.php");
+			exit();
 		}
 	}
 	else {
