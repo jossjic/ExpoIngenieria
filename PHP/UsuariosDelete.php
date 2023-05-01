@@ -1,5 +1,14 @@
 <?php
-	require 'dataBase.php';
+	require_once 'dataBase.php';
+
+    session_name("EngineerXpoWeb");
+    session_start();
+
+    if (!isset($_SESSION['logged_in'])) {
+        header("Location: ../index.php");
+        exit();
+    }
+
 	$correo = 0;
 	$type = 0;
 	if ( !empty($_GET['correo'])&& !empty($_GET['type'])) {
@@ -79,30 +88,77 @@
   <link rel="icon" type="image/x-icon" href="../media/favicon.ico">
   <title>Admin Usuarios Detalles</title>
 
-  <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
-  <link rel="stylesheet" href="../CSS/AdminPages.css">
+  	<link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
+    <link rel="stylesheet" href="../CSS/FormsStructure.css">
+    <link rel="stylesheet" href="../CSS/Extra.css">
 </head>
-<body>
+<>
 
-<header>
-      <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
-      <ul>
-          <li>
-              <a href="#">Cerrar Sesion</a>
-          </li>
-      </ul>
-      <nav>
-          <ul>
-		  <li><a href="../PHP/ProyectosView.php">Proyectos</a></li>
-              <li><a href="../PHP/UsuariosView.php">Usuarios</a></li>
-              <li><a href="../PHP/ReconocimientosView.php">Reconocimientos</a></li>
-              <li><a href="../PHP/EstadisticasView.php">Estadísticas</a></li>
-          </ul>
-      </nav>
-  </header>
+		<header>
+			<a href="../index.php"
+				><img
+					class="Logo__Expo"
+					src="../media/logo-expo.svg"
+					alt="Logotipo de Expo ingenierías"
+			/></a>
+			<ul style="grid-column: 2/4">
+				<li><a href="../PHP/AdminInicio.php">Menu</a></li>
+				<li><a href="../PHP/AvisosView.php">Avisos</a></li>
+				<li><a href="../PHP/EdicionView.php">Ediciones</a></li>
+				<li><a href="../PHP/NivelView.php">Nivel</a></li>
+				<li><a href="../PHP/CategoriaView.php">Categorias</a></li>
+				<li><a href="../PHP/UsuariosView.php">Usuarios</a></li>
+				<li><a href="../PHP/ProyectosView.php">Proyectos</a></li>
+				<li><a href="../PHP/AdministradoresView.php">Administradores</a></li>
+				<li><a href="../PHP/EvaluacionesView.php">Evaluaciones</a></li>
+				<li style="font-weight: 600;">
+					<a href="../PHP/logout.php">Cerrar Sesion</a>
+				</li>
+			</ul>
+		</header>
+
+		<main>
+
+			<h3>Eliminar Usuario</h3>
+
+			<form class="form-horizontal" action="UsuariosDelete.php" method="post">
+
+				<table>
+					<tr>
+						<td>
+							<input type="hidden" name="correo" value="<?php echo $correo;?>"/>
+						</td>
+						<td>
+							<input type="hidden" name="type" value="<?php echo $type;?>"/>
+						</td>
+					</tr>
+
+					<tr>
+						<td style="text-align: center;">
+							<p>¿Estas seguro de que quieres eliminar a este usuario?</p>
+						</td>
+					</tr>
+
+					<tr>
+                        <td class="Btn-Ancla">
+                            <input class="Btn__Iniciar__Sesion" type="submit" value="Si" id="submit" name="submit">
+                        </td>
+                    </tr>
+					
+					<tr>
+						<td>
+                            <a class="Btn-Ancla" href="UsuariosView.php">Regresar</a>
+                        </td>
+					</tr>
+
+				</table>
+				
+			</form>
+
+		</main>
 
 	
-  <body>
+  
 	    <div class="container">
 	    	<div class="span10 offset1">
 	    		<div class="row">
@@ -120,9 +176,5 @@
 				</form>
 			</div>
 	  </div> <!-- /container -->
-	</body>
-	
-	<footer>
-    <img class="Logo__Tec" src="../media/LogoTec.png" alt="Logo TEC">
-  </footer>
+
 </html>
