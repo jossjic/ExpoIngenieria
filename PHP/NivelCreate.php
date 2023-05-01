@@ -1,6 +1,14 @@
 <?php
 
-	require 'dataBase.php';
+	require_once 'dataBase.php';
+
+	session_name("EngineerXpoWeb");
+	session_start();
+
+	if (!isset($_SESSION['logged_in'])) {
+		header("Location: ../index.php");
+		exit();
+	}
 
 		$n_idError = null;
 		$n_nombreError = null;
@@ -26,7 +34,7 @@
 			$q = $pdo->prepare($sql);
 			$q->execute(array($n_id,$n_nombre));
 			Database::disconnect();
-			header("Location: NivelCRUD.php");
+			header("Location: NivelView.php");
 		}
 	}
 ?>

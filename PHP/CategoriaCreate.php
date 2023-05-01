@@ -35,6 +35,7 @@
 			$q->execute(array($ca_id,$ca_nombre));
 			Database::disconnect();
 			header("Location: CategoriaView.php");
+			exit();
 		}
 	}
 ?>
