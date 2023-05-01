@@ -8,7 +8,7 @@ if ($_GET) {
                 FROM COLABORADOR 
                 NATURAL JOIN EDICION_COLABORADOR 
                 NATURAL JOIN EDICION
-                WHERE co_correo = '{$_REQUEST['matricula']}';";
+                WHERE co_correo = '{$_REQUEST['matricula']}'";
         $q = $pdo->query($sql);
         //var_dump($q);
         $filas = $q->fetch();
