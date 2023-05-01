@@ -121,14 +121,14 @@
 											<p>".$row['co_nombre']."</p>
                                             <p>".($row['ev_criterio_1']+$row['ev_criterio_2']+$row['ev_criterio_3']+$row['ev_criterio_4']+$row['ev_criterio_5'])."</p>
                                             <p></p>
-											<div class='Btn__Green'>
-												<a href='../PHP/EvaluacionesRead.php?id=".trim($row['p_id'])."'>Ver</a>
+											<div>
+												<a href='../PHP/EvaluacionesDelete.php?id=".trim($row['p_id'])."'>Eliminar</a>
 											</div>
 											<div>
 												
 											</div>
-											<div class='Btn__Red'>
-												<a href='../PHP/EvaluacionesDelete.php?id=".trim($row['p_id'])."'>Eliminar</a>
+											<div >
+												
 											</div>
 											<p></p>
 										";
