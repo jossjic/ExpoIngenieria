@@ -105,7 +105,7 @@
                         </td>
 
                         <td>
-							<input name="n_id" type="text" readonly placeholder="id" value="<?php echo !empty($n_id )?$n_id :''; ?>">
+							<input name="n_id" class="Text__Input" type="text" readonly placeholder="id" value="<?php echo !empty($n_id )?$n_id :''; ?>">
 					      	<?php if (!empty($n_idError)): ?>
 					      		<span class="help-inline"><?php echo $n_idError;?></span>
 					      	<?php endif; ?>
@@ -117,7 +117,7 @@
                             <label>Nombre Nivel</label>
                         </td>
                         <td>
-							<input name="n_nombre" type="text" placeholder="nombre" value="<?php echo !empty($n_nombre)?$n_nombre:'';?>">
+							<input name="n_nombre" class="Text__Input" type="text" placeholder="nombre" value="<?php echo !empty($n_nombre)?$n_nombre:'';?>">
 					      	<?php if (!empty($n_nombreError)): ?>
 					      		<span class="help-inline"><?php echo $n_nombreError;?></span>
 					      	<?php endif;?>
