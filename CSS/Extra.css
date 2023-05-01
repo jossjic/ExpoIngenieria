@@ -10,6 +10,10 @@
 	font-size: smaller;
 }
 
+.Btn-Ancla a {
+	color: white;
+}
+
 .Size {
 	display: grid;
 	height: calc(100vh - 200px);
@@ -21,4 +25,6 @@
 .Size-1 {
 	display: grid;
 	justify-content: center;
+	margin: 50px;
+	align-items: center;
 }
