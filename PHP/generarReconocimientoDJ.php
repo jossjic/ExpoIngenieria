@@ -3,15 +3,17 @@ require 'dataBase.php';
 require("/fpdf/fpdf.php");
 if ($_GET) {
     if (isset($_GET['matricula'])) {
+        $matricula = $_REQUEST['matricula'];
         $pdo = Database::connect();
         $sql = "SELECT * 
                 FROM COLABORADOR 
                 NATURAL JOIN EDICION_COLABORADOR 
                 NATURAL JOIN EDICION
-                WHERE co_correo = '{$_REQUEST['matricula']}'";
-        $q = $pdo->query($sql);
+                WHERE co_correo = ?";
+        $filas = $pdo->prepare($sql);
+        $filas = $q->execute(array($matricula));
         //var_dump($q);
-        $filas = $q->fetch();
+        $filas = $q->fetch(PDO::FETCH_ASSOC);
         //var_dump($filas);
         //Database::disconnect();
     
