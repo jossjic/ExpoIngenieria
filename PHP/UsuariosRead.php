@@ -1,6 +1,16 @@
-<?php
-    require 'dataBase.php'
+<?php 
+
+	require_once 'dataBase.php';
+
+    session_name("EngineerXpoWeb");
+    session_start();
+
+    if (!isset($_SESSION['logged_in'])) {
+        header("Location: ../index.php");
+        exit();
+    }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,32 +20,39 @@
   <link rel="icon" type="image/ico" href="../media/favicon.ico"/>
 
   <link rel="icon" type="image/x-icon" href="../media/favicon.ico">
-  <title>Admin Usuarios Detalles</title>
+  <title>Ver Usuario</title>
 
   <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
+  <link rel="stylesheet" href="../CSS/Extra.css">
   <!-- <link rel="stylesheet" href="../CSS/AdminPages.css"> -->
 
 </head>
 <body>
 
-<header>
-      <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
-      <ul>
-          <li>
-              <a href="#">Cerrar Sesion</a>
-          </li>
-      </ul>
-      <nav>
-          <ul>
-              <li><a href="../PHP/ProyectosView.php">Proyectos</a></li>
-              <li><a href="../PHP/UsuariosView.php">Usuarios</a></li>
-              <li><a href="../PHP/ReconocimientosView.php">Reconocimientos</a></li>
-              <li><a href="../PHP/EstadisticasView.php">Estadísticas</a></li>
-          </ul>
-      </nav>
-  </header>
+    <header>
+			<a href="../index.php"
+				><img
+					class="Logo__Expo"
+					src="../media/logo-expo.svg"
+					alt="Logotipo de Expo ingenierías"
+			/></a>
+			<ul style="grid-column: 2/4">
+				<li><a href="../PHP/AdminInicio.php">Menu</a></li>
+				<li><a href="../PHP/AvisosView.php">Avisos</a></li>
+				<li><a href="../PHP/EdicionView.php">Ediciones</a></li>
+				<li><a href="../PHP/NivelView.php">Nivel</a></li>
+				<li><a href="../PHP/CategoriaView.php">Categorias</a></li>
+				<li><a href="../PHP/UsuariosView.php">Usuarios</a></li>
+				<li><a href="../PHP/ProyectosView.php">Proyectos</a></li>
+				<li><a href="../PHP/AdministradoresView.php">Administradores</a></li>
+				<li><a href="../PHP/EvaluacionesView.php">Evaluaciones</a></li>
+				<li style="font-weight: 600;">
+					<a href="../PHP/logout.php">Cerrar Sesion</a>
+				</li>
+			</ul>
+		</header>
 
-<main>
+<main class="Size-1">
   <?php
   $pdo = Database::connect();
   $correo=$_GET['correo'];
@@ -169,7 +186,7 @@
           echo '<p>No hay proyectos asociados a este usuario</p><br>';
         }
 
-        echo '<div class="Btn__Blue"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
+        echo '<div class="Btn-Ancla"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
         ';
 
       }
@@ -260,7 +277,7 @@
         }
 
 
-        echo '<div class="Btn__Blue"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
+        echo '<div class="Btn-Ancla"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
         ';
       }
     }
@@ -349,7 +366,7 @@
         else{
           echo '<p>No hay proyectos asociados a este usuario</p><br>';
         }
-        echo '<div class="Btn__Blue"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
+        echo '<div class="Btn-Ancla"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
         ';
       }
       else{
@@ -399,7 +416,7 @@
         else{
           echo '<p ERROR: No hay ediciones asociadas a este usuario</p><br>';
         }
-        echo '<div class="Btn__Blue"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
+        echo '<div class="Btn-Ancla"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
         ';
       }
     }
@@ -463,7 +480,7 @@
           echo '<p>No hay proyectos asociados a este usuario</p><br>';
         }
 
-        echo '<div class="Btn__Blue"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
+        echo '<div class="Btn-Ancla"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
         ';
   }
 
@@ -487,14 +504,14 @@
             <td>'.$info['adm_correo'].'</td>
           </tr>
         </table>
-        <div class="Btn__Blue"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
+        <div class="Btn-Ancla"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
         ';
   }
 
   else{
     echo '<h1>Hubo un error en la consulta de tipo de usuario</h1>
     <br>
-    <div class="Btn__Blue"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
+    <div class="Btn-Ancla"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
     ';
   }
 
@@ -502,10 +519,4 @@
   ?>
   
 </main>
-	
-
-	
-	<footer>
-    <img class="Logo__Tec" src="../media/LogoTec.png" alt="Logo TEC">
-  </footer>
 </html>

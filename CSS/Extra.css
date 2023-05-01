@@ -17,3 +17,8 @@
 	grid-template-rows: 120px 100px calc(100vh - 320px);
 	place-items: center;
 }
+
+.Size-1 {
+	display: grid;
+	justify-content: center;
+}
