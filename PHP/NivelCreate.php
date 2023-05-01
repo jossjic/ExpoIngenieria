@@ -35,6 +35,7 @@
 			$q->execute(array($n_id,$n_nombre));
 			Database::disconnect();
 			header("Location: NivelView.php");
+			exit();
 		}
 	}
 ?>
@@ -46,52 +47,69 @@
     <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>CRUD EDICION</title>
+        <title>Nivel Create</title>
 
         <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
-        <link rel="stylesheet" href="../CSS/galeria.css">
+		<link rel="stylesheet" href="../CSS/FormsStructure.css">
+		<link rel="stylesheet" href="../CSS/Extra.css">
 	</head>
 
-    <header>
-        <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
-        <ul>
-        <li>
-            <a href="#">Layout Proyectos</a>
-        </li>
-        </ul>
-        <nav>
-        <ul>
-            <li><a href="#">Cerrar Sesión</a></li>
-        </ul>
-        </nav>
-    </header>
-
 	<body>
-	    <div class="container">
-	    	<div class="span10 offset1">
-	    		<div class="row">
-		   			<h3>Registro de Niveles</h3>
-		   		</div>
 
-				<form class="form-horizontal" action="createNivel.php" method="post">
+		<header>
+			<a href="../index.php"
+				><img
+					class="Logo__Expo"
+					src="../media/logo-expo.svg"
+					alt="Logotipo de Expo ingenierías"
+			/></a>
+			<ul style="grid-column: 2/4">
+				<li><a href="../PHP/AdminInicio.php">Menu</a></li>
+				<li><a href="../PHP/AvisosView.php">Avisos</a></li>
+				<li><a href="../PHP/EdicionView.php">Ediciones</a></li>
+				<li><a href="../PHP/NivelView.php">Nivel</a></li>
+				<li><a href="../PHP/CategoriaView.php">Categorias</a></li>
+				<li><a href="../PHP/UsuariosView.php">Usuarios</a></li>
+				<li><a href="../PHP/ProyectosView.php">Proyectos</a></li>
+				<li><a href="../PHP/AdministradoresView.php">Administradores</a></li>
+				<li><a href="../PHP/EvaluacionesView.php">Evaluaciones</a></li>
+				<li style="font-weight: 600;">
+					<a href="../PHP/logout.php">Cerrar Sesion</a>
+				</li>
+			</ul>
+		</header>
 
+		<main>
 
-				<div class="control-group <?php echo !empty($n_nombreError)?'error':'';?>">
-						<label class="control-label">Nombre</label>
-					    <div class="controls">
-					      	<input name="n_nombre" type="text"  placeholder="Nombre Nivel" value="">
+			<h1>Crear Nivel</h1>
+
+			<form class="form-horizontal" action="NivelCreate.php" method="post">
+                <table>
+
+                    <tr>
+                        <td>
+                            <label>Nombre Nivel</label>
+                        </td>
+                        <td>
+							<input name="n_nombre" type="text"  placeholder="Nombre Nivel" value="">
 					      	<?php if (($n_nombreError != null)) ?>
 					      		<span class="help-inline"><?php echo $n_nombreError;?></span>
-					    </div>
-				</div>
+                        </td>
+                    </tr>
 
+					<tr>
+                        <td>
+                            <input class="Btn__Iniciar__Sesion" type="submit" value="Agregar Categoria" id="submit" name="submit">
+                        </td>
+                        <td>
+                            <a class="Btn-Ancla" href="CategoriaView.php">Regresar</a>
+                        </td>
+                    </tr>
 
-					<div>
-						<input class="btn btn-primary btn-block" type="submit" value="Agregar edicion" id="submit" name="submit">
-					</div>
+                </table>
+            </form>
 
-				</form>
-			</div>
-	    </div> <!-- /container -->
+		</main>
+		
 	</body>
 </html>
