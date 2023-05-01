@@ -74,7 +74,7 @@
                 <table>
                     <tr>
                         <td>
-                            <label for="">ID</label>
+                            <label for="">ID Nivel</label>
                         </td>
                         <td>
                             <?php echo $data['n_id'];?>
@@ -82,7 +82,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <label for="">Nombre</label>
+                            <label for="">Nombre Nivel</label>
                         </td>
                         <td>
                             <?php echo $data['n_nombre'];?>
@@ -100,5 +100,5 @@
 		</main>
 
 	</body>
-	
+
 </html>
