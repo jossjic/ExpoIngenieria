@@ -9,3 +9,11 @@
 	text-align: center;
 	font-size: smaller;
 }
+
+.Size {
+	display: grid;
+	height: calc(100vh - 200px);
+	grid-template-columns: 5% 90% 5%;
+	grid-template-rows: 120px 100px calc(100vh - 320px);
+	place-items: center;
+}

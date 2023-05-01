@@ -1,6 +1,6 @@
 <?php
 require 'dataBase.php';
-require("/fpdf/fpdf.php");
+require("../fpdf/fpdf.php");
 
     if (isset($_GET['matricula'])) {
         $matricula = $_REQUEST['matricula'];
