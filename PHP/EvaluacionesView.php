@@ -122,7 +122,7 @@
                                             <p>".($row['ev_criterio_1']+$row['ev_criterio_2']+$row['ev_criterio_3']+$row['ev_criterio_4']+$row['ev_criterio_5'])."</p>
                                             <p></p>
 											<div>
-												<a href='../PHP/EvaluacionesDelete.php?id=".trim($row['p_id'])."'>Eliminar</a>
+												<a href='../PHP/EvaluacionesDelete.php?id=".trim($row['p_id'])."&correo=".$row['co_correo']."'>Eliminar</a>
 											</div>
 											<div>
 												
