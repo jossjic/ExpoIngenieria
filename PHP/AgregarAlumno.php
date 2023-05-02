@@ -8,12 +8,14 @@
         header("Location: ../index.php");
         exit();
     } 
-    if (isset($_POST['student_name'], $_POST['student_email'], $_POST['student_lastname'], $_POST['student_matricula'])) {
-        $student_name = $_POST['student_name'];
-        $student_lastname = $_POST['student_lastname'];
-        $student_matricula = $_POST['student_matricula'];
-        $student_email = $_POST['student_email'];
-    
+
+    $student_name = $_POST['student_name'];
+    $student_lastname = $_POST['student_lastname'];
+    $student_matricula = $_POST['student_matricula'];
+    $student_email = $_POST['student_email'];
+
+    if (isset($student_email, $student_name, $student_lastname, $student_matricula)) {
+
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
@@ -24,7 +26,7 @@
             $stmt->execute([$student_matricula, $_SESSION['id']]);
             $numRows = $stmt->rowCount();
     
-            if ($numRows >= 1) {
+            if ($numRows == 1) {
                 // The student already exists in the project, redirect to AdministradorProyecto.php
                 header("Location: ../PHP/AdministradorProyecto.php");
                 exit();
