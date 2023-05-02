@@ -317,6 +317,7 @@
 						id="student_email"
 						name="student_email"
 						required
+						pattern="^[^@]+@tec\.mx$"
 					/>
 					<br><br>
 					<input type="submit" value="Guardar"/>
