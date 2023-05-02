@@ -282,7 +282,7 @@
 									$sql = "SELECT * FROM PROYECTO_DOCENTE NATURAL JOIN COLABORADOR WHERE p_id = ?";
 									$q = $pdo->prepare($sql);
 									$q->execute(array($_SESSION['id']));
-									$dataAlumno = $q->fetchAll(PDO::FETCH_ASSOC);
+									$dataProfesor = $q->fetchAll(PDO::FETCH_ASSOC);
 									foreach ($dataProfesor as $row) {
 										echo " <span class='nombrecompleto'>".$row['co_nombre']. " ".$row['co_apellido']."</span>
 											   <span class='correo'>".$row['co_correo']."</span>
