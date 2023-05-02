@@ -8,7 +8,7 @@
         header("Location: ../index.php");
         exit();
     } 
-    if (!isset($_POST['student_name'], $_POST['student_email'], $_POST['student_lastname'], $_POST['student_matricula'])) {
+    if (isset($_POST['student_name'], $_POST['student_email'], $_POST['student_lastname'], $_POST['student_matricula'])) {
         $student_name = $_POST['student_name'];
         $student_lastname = $_POST['student_lastname'];
         $student_matricula = $_POST['student_matricula'];
