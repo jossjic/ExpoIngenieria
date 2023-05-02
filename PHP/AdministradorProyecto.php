@@ -300,7 +300,7 @@
 			<div class="modal-content">
 				<span class="close close-estudiante">&times;</span>
 				<h2>Agregar Alumno</h2>
-				<form action="../PHP/AgregarAlumno.php" method="POST" id="student_form">
+				<form action="../PHP/AgregarAlumno.php" method="post" id="student_form">
 					<br><br>
 					<label for="student_name">Nombre</label>
 					<input type="text" id="student_name" name="student_name" required/>
