@@ -1,4 +1,4 @@
-const fechafinal = document.getElementById("countdown").textContent;
+const fechafinal = document.getElementById("countdown").textContent.trim();
 console.log(fechafinal);
 const fechafinalmilisegundos = new Date(fechafinal);
 const timestamp = fechafinalmilisegundos.getTime();
