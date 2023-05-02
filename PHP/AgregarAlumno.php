@@ -29,6 +29,10 @@
             $q = $pdo->prepare($sql);
             $q->execute(array($student_email, $_SESSION['id']));
             Database::disconnect();
+
+            header("Location: ../PHP/AdministradorProyecto.php");
+            exit();
+            
         } else {
             #Insertar el nombre completo y correo en la tabla ALUMNO
             #Insertar el correo del alumno en la tabla del ProyectoAlumno 
