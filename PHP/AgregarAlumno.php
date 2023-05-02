@@ -45,14 +45,14 @@
                 $sql = "INSERT INTO ALUMNO(a_matricula,a_nombre,a_apellido,a_correo) VALUES(?,?,?,?);";
                 $q = $pdo->prepare($sql);
                 $q->execute(array(trim($student_matricula),trim($student_name),trim($student_lastname),trim($student_email)));
-                echo "Registro en la tabla Alumno";
             
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $sql = "INSERT INTO PROYECTO_ALUMNO (a_correo, p_id) VALUES (?, ?)";
+                echo $sql;
                 $q = $pdo->prepare($sql);
                 $pdo = $q->execute(array( $student_email,$_SESSION['id']));
             
-                echo $q;
+                echo $pdo;
                 echo "Registro en la tabla Proyecto Alumno";
                 Database::disconnect();
             } catch (PDOException $e) {
