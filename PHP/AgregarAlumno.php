@@ -4,7 +4,7 @@
     session_start();
 
 
-    if (isset($_POST['student_name']) AND isset($_POST['student_email'])) {
+    if (isset($_POST['student_name']) AND isset($_POST['student_email']) AND isset($_POST['student_matricula']) AND isset($_POST['student_lastname']) ) {
         $student_name = $_POST['student_name'];
         $student_lastname = $_POST['student_lastname'];
         $student_matricula = $_POST['student_matricula'];
@@ -30,9 +30,7 @@
             $q->execute(array($student_email, $_SESSION['id']));
             Database::disconnect();
 
-            header("Location: ../PHP/AdministradorProyecto.php");
-            exit();
-            
+
         } else {
             #Insertar el nombre completo y correo en la tabla ALUMNO
             #Insertar el correo del alumno en la tabla del ProyectoAlumno 
