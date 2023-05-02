@@ -59,22 +59,26 @@
   $type=$_GET['type'];
 
   if($type=='co'){
-    $sql = "SELECT * FROM COLABORADOR WHERE co_correo='$correo'";
-    $res = $pdo->query($sql);
+    $sql = "SELECT * FROM COLABORADOR WHERE co_correo=?";
+    $res = $pdo->prepare($sql);
+    $res->execute(array($correo));
     $info = $res->fetch(PDO::FETCH_ASSOC);
 
     if ($info['co_nomina']!=NULL){
       if($info['co_es_jurado']){
-        $sql =  "SELECT ed.ed_id, ed.ed_nombre FROM EDICION_COLABORADOR NATURAL JOIN EDICION as ed WHERE co_correo='$correo'";
-        $queryed = $pdo->query($sql);
+        $sql =  "SELECT ed.ed_id, ed.ed_nombre FROM EDICION_COLABORADOR NATURAL JOIN EDICION as ed WHERE co_correo=?";
+        $queryed = $pdo->prepare($sql);
+        $queryed->execute(array($correo));
        $infoed = $queryed->fetchAll(PDO::FETCH_OBJ);
 
-       $sql =  "SELECT p.p_id, p.p_nombre_clave, p.p_estado FROM PROYECTO_DOCENTE NATURAL JOIN PROYECTO as p WHERE co_correo='$correo'";
-        $querypa = $pdo->query($sql);
+       $sql =  "SELECT p.p_id, p.p_nombre_clave, p.p_estado FROM PROYECTO_DOCENTE NATURAL JOIN PROYECTO as p WHERE co_correo=?";
+        $querypa = $pdo->prepare($sql);
+       $querypa->execute(array($correo));
        $infopa = $querypa->fetchAll(PDO::FETCH_OBJ);
 
-       $sql =  "SELECT p.p_id, p.p_nombre_clave, p.p_estado FROM PROYECTO_JURADO NATURAL JOIN PROYECTO as p WHERE co_correo='$correo'";
-        $querypc = $pdo->query($sql);
+       $sql =  "SELECT p.p_id, p.p_nombre_clave, p.p_estado FROM PROYECTO_JURADO NATURAL JOIN PROYECTO as p WHERE co_correo=?";
+        $querypc = $pdo->prepare($sql);
+       $querypc->execute(array($correo));
        $infopc = $querypc->fetchAll(PDO::FETCH_OBJ);
         echo '<h1>Detalles del Profesor</h1>
         <br>
@@ -191,12 +195,14 @@
 
       }
       else{
-        $sql =  "SELECT ed.ed_id, ed.ed_nombre FROM EDICION_COLABORADOR NATURAL JOIN EDICION as ed WHERE co_correo='$correo'";
-        $queryed = $pdo->query($sql);
+        $sql =  "SELECT ed.ed_id, ed.ed_nombre FROM EDICION_COLABORADOR NATURAL JOIN EDICION as ed WHERE co_correo=?";
+        $queryed = $pdo->prepare($sql);
+        $queryed->execute(array($correo));
        $infoed = $queryed->fetchAll(PDO::FETCH_OBJ);
 
-       $sql =  "SELECT p.p_id, p.p_nombre_clave, p.p_estado FROM PROYECTO_DOCENTE NATURAL JOIN PROYECTO as p WHERE co_correo='$correo'";
-        $querypa = $pdo->query($sql);
+       $sql =  "SELECT p.p_id, p.p_nombre_clave, p.p_estado FROM PROYECTO_DOCENTE NATURAL JOIN PROYECTO as p WHERE co_correo=?";
+        $querypa = $pdo->prepare($sql);
+        $querypa->execute(array($correo));
        $infopa = $querypa->fetchAll(PDO::FETCH_OBJ);
         echo '<h1>Detalles del Profesor</h1>
         <br>
@@ -283,12 +289,14 @@
 
     else{
       if($info['co_es_jurado']){
-        $sql =  "SELECT ed.ed_id, ed.ed_nombre FROM EDICION_COLABORADOR NATURAL JOIN EDICION as ed WHERE co_correo='$correo'";
-        $queryed = $pdo->query($sql);
+        $sql =  "SELECT ed.ed_id, ed.ed_nombre FROM EDICION_COLABORADOR NATURAL JOIN EDICION as ed WHERE co_correo=?";
+        $queryed = $pdo->prepare($sql);
+        $queryed->execute(array($correo));
        $infoed = $queryed->fetchAll(PDO::FETCH_OBJ);
 
-       $sql =  "SELECT p.p_id, p.p_nombre_clave, p.p_estado FROM PROYECTO_JURADO NATURAL JOIN PROYECTO as p WHERE co_correo='$correo'";
-        $querypc = $pdo->query($sql);
+       $sql =  "SELECT p.p_id, p.p_nombre_clave, p.p_estado FROM PROYECTO_JURADO NATURAL JOIN PROYECTO as p WHERE co_correo=?";
+        $querypc = $pdo->prepare($sql);
+        $querypc->execute(array($correo));
        $infopc = $querypc->fetchAll(PDO::FETCH_OBJ);
 
 
@@ -369,8 +377,9 @@
         ';
       }
       else{
-        $sql =  "SELECT ed.ed_id, ed.ed_nombre FROM EDICION_COLABORADOR NATURAL JOIN EDICION as ed WHERE co_correo='$correo'";
-        $queryed = $pdo->query($sql);
+        $sql =  "SELECT ed.ed_id, ed.ed_nombre FROM EDICION_COLABORADOR NATURAL JOIN EDICION as ed WHERE co_correo=?";
+        $queryed = $pdo->prepare($sql);
+        $queryed->execute(array($correo));
        $infoed = $queryed->fetchAll(PDO::FETCH_OBJ);
         echo '<h1>Detalles del Externo</h1>
         <br>
@@ -422,16 +431,18 @@
   }
 
   elseif ($type=='al') {
-    $sql = "SELECT * FROM ALUMNO WHERE a_correo='$correo'";
-    $res = $pdo->query($sql);
-    $info = $res->fetch(PDO::FETCH_ASSOC);
+    $sql = "SELECT * FROM ALUMNO WHERE a_correo=?";
+    $query = $pdo->prepare($sql);
+    $query->execute(array($correo));
+    $info = $query->fetch(PDO::FETCH_ASSOC);
 
     $sql =  "SELECT p.p_id, p.p_nombre_clave, p.p_estado
     FROM PROYECTO_ALUMNO AS pa
     JOIN PROYECTO AS p ON pa.p_id = p.p_id
-    WHERE pa.a_correo = '$correo'
+    WHERE pa.a_correo = ?
     ";
-    $querypa = $pdo->query($sql);
+    $querypa = $pdo->prepare($sql);
+    $querypa->execute(array($correo));
    $infopa = $querypa->fetchAll(PDO::FETCH_OBJ);
     echo '<h1>Detalles del Alumno</h1>
         <br>
@@ -483,13 +494,17 @@
           echo 'No hay proyectos asociados a este usuario';
         }
 
+        
+
         echo '<div class="Btn-Ancla"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
         ';
+
   }
 
   elseif ($type=='adm') {
-    $sql = "SELECT * FROM ADMIN WHERE adm_correo='$correo'";
-    $res = $pdo->query($sql);
+    $sql = "SELECT * FROM ADMIN WHERE adm_correo=?";
+    $query = $pdo->prepare($sql);
+    $res->execute(array($correo));
     $info = $res->fetch(PDO::FETCH_ASSOC);
     echo '<h1>Detalles del Administrador</h1>
         <br>
