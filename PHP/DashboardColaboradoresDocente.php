@@ -96,7 +96,7 @@
 
             <div class="Counter">
                 <p>ExpoIngenieria comienza en:</p>
-                <h1 id="countdown"></h1>
+                <h1 id="countdown">
                     <?php echo $fecha['ed_fecha_fin'] ?>
                 </h1>
             </div>
