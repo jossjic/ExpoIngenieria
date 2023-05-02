@@ -121,5 +121,7 @@
                 </div>
             </div>
         </main>
+
+        <script src="../JS/Counter.js"></script>
     </body>
 </html>
