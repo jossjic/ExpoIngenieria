@@ -63,8 +63,8 @@ if (fechafinal) {
 }
 
 if (fechafinaldos) {
-	console.log(fechafinal);
-	const fechafinalmilisegundos = new Date(fechafinal);
+	console.log(fechafinaldos);
+	const fechafinalmilisegundos = new Date(fechafinaldos);
 	const timestamp = fechafinalmilisegundos.getTime();
 	console.log(timestamp);
 
@@ -89,7 +89,7 @@ if (fechafinaldos) {
 	const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
 	// Actualizamos el contenido del elemento HTML con ID "countdown"
-	const countdownElement = document.getElementById("countdown");
+	const countdownElement = document.getElementById("countdowndocente");
 	countdownElement.textContent = `${days}:${hours}:${minutes}:${seconds}`;
 
 	// Creamos un intervalo que actualiza el contador cada segundo
