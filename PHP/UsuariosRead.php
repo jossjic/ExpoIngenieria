@@ -125,7 +125,7 @@
           }
         }
         else{
-          echo "ERROR: No hay ediciones asociadas a este usuario<br>";
+          echo "ERROR: No hay ediciones asociadas a este usuario";
         }
 
         echo '<h2>Proyectos Asignados</h2>
@@ -154,7 +154,7 @@
           }
         }
         else{
-          echo 'No hay proyectos asociados a este usuario <br>';
+          echo 'No hay proyectos asociados a este usuario';
         }
 
             echo '<h2>Proyectos para Calificar</h2>
@@ -183,7 +183,7 @@
           }
         }
         else{
-          echo 'No hay proyectos asociados a este usuario <br>';
+          echo 'No hay proyectos asociados a este usuario';
         }
 
         echo '<div class="Btn-Ancla"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
@@ -243,7 +243,7 @@
             ';
           }
         } else{
-          echo "ERROR: No hay ediciones asociadas a este usuario<br>";
+          echo "ERROR: No hay ediciones asociadas a este usuario";
         }
 
         echo '<h2>Proyectos Asignados</h2>
@@ -272,7 +272,7 @@
           }
         }
         else{
-          echo 'No hay proyectos asociados a este usuario <br>';
+          echo 'No hay proyectos asociados a este usuario';
         }
 
 
@@ -334,7 +334,7 @@
           }
         }
         else{
-          echo "ERROR: No hay ediciones asociadas a este usuario<br>";
+          echo "ERROR: No hay ediciones asociadas a este usuario";
         }
         
         echo '<h2>Proyectos para Calificar</h2>
@@ -363,7 +363,7 @@
           }
         }
         else{
-          echo 'No hay proyectos asociados a este usuario <br>';
+          echo 'No hay proyectos asociados a este usuario';
         }
         echo '<div class="Btn-Ancla"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
         ';
@@ -413,7 +413,7 @@
           }
         }
         else{
-          echo "ERROR: No hay ediciones asociadas a este usuario<br>";
+          echo "ERROR: No hay ediciones asociadas a este usuario";
         }
         echo '<div class="Btn-Ancla"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
         ';
@@ -476,7 +476,7 @@
           }
         }
         else{
-          echo 'No hay proyectos asociados a este usuario <br>';
+          echo 'No hay proyectos asociados a este usuario';
         }
 
         echo '<div class="Btn-Ancla"> <a href="../PHP/UsuariosView.php">Regresar</a></div>
