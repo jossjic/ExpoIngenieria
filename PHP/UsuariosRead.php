@@ -426,7 +426,11 @@
     $res = $pdo->query($sql);
     $info = $res->fetch(PDO::FETCH_ASSOC);
 
-    $sql =  "SELECT p.p_id, p.p_nombre_clave, p.p_estado FROM PROYECTO_ALUMNO NATURAL JOIN PROYECTO as p WHERE a_correo='$correo';";
+    $sql =  "SELECT p.p_id, p.p_nombre_clave, p.p_estado
+    FROM PROYECTO_ALUMNO AS pa
+    JOIN PROYECTO AS p ON pa.p_id = p.p_id
+    WHERE pa.a_correo = '$correo';
+    ";
     $querypa = $pdo->query($sql);
    $infopa = $querypa->fetchAll(PDO::FETCH_OBJ);
     echo '<h1>Detalles del Alumno</h1>

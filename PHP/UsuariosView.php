@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
   <link rel="stylesheet" href="../CSS/AdminPages.css">
   <link rel="stylesheet" href="../CSS/Extra.css">
+  <link rel="icon" type="image/ico" href="../media/favicon.ico"/>
 </head>
 <body>
 
