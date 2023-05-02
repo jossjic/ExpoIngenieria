@@ -47,7 +47,7 @@
                 echo "Hola";
                 $q = $pdo->prepare($sql);
                 echo $q;
-                $q->execute(array($student_matricula,$student_name,$student_lastname,$student_email));
+                $q->execute(array(trim($student_matricula),trim($student_name),trim($student_lastname),trim($student_email)));
                 echo $q;
                 echo "Registro en la tabla Alumno";
             
