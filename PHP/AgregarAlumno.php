@@ -22,8 +22,10 @@
         echo $numRows;
         Database::disconnect();
 
+        echo "Aqui";
         #Revisar si el correo del alumno no existe en la tabla ALUMNO
-        if ($numRows == 1) {
+        if ($numRows >= 1) {
+            echo "Aqui1";
             #Insertar el correo del alumno en la tabla ProyectoAlumno
             #con el id del proyecto
             $pdo = Database::connect();
@@ -37,6 +39,7 @@
             echo "Registro en la tabla Proyecto Alumno";
 
         } else {
+            echo "Aqui2";
             #Insertar el nombre completo y correo en la tabla ALUMNO
             #Insertar el correo del alumno en la tabla del ProyectoAlumno 
             #con el id del proyecto
