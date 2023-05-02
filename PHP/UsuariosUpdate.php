@@ -367,7 +367,7 @@
                 </td>
 
                 <td>
-                    <input class="Text__Input" name="correo" type="text"  placeholder="" value='.(!empty($nomMat)?$nomMat:"").'>
+                    <input class="Text__Input" name="nomMat" type="text"  placeholder="" value='.(!empty($nomMat)?$nomMat:"").'>
                     ';
 
                 if (!empty($nomMatError)){
