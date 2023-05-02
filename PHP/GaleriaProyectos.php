@@ -1,5 +1,24 @@
 <?php
-    require 'dataBase.php';
+    require "dataBase.php";
+
+    // GET METHOD
+        // guardar el url completo y que el regex se haga al renderizar
+
+        // Regex for Google Drive video
+        $str = 'https://drive.google.com/file/d/1zna5luHn-cdM1Cyqkoz8M0sQixjVCqbY/view?usp=sharing';
+        if (preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $str, $match) == 1) {
+            $video_id = $match[1];
+        }
+        $video_full_link = "https://drive.google.com/file/d/".$video_id."/preview";
+        echo $video_full_link;
+
+        // Regex for Google Drive image
+        $str = 'https://drive.google.com/file/d/1_YeOir5f72U8WrprQfbxhPWwt2VLGatb/view?usp=sharing';
+        if (preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $str, $match) == 1) {
+            $image_id = $match[1];
+        }
+        $image_full_link = "https://drive.google.com/uc?export=view&id=".$image_id;
+        echo $image_full_link;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,8 +27,6 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/ico" href="../media/favicon.ico"/>
-
   <title>Galería</title>
 
   <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
@@ -38,7 +55,7 @@
   </header>
   <div>
   <?php       $pdo = Database::connect();
-                                    $sql = "SELECT v2_proyecto.p_id, v2_proyecto.p_nombre, v2_proyecto.p_descripcion, v2_proyecto.p_avance_proyecto, v2_categoria.ca_nombre FROM `v2_proyecto` INNER JOIN v2_categoria ON v2_proyecto.ca_id = v2_categoria.ca_id ORDER BY v2_proyecto.p_nombre;";
+                                    $sql = "SELECT proyecto.p_id, proyecto.p_nombre, proyecto.p_descripcion, proyecto.p_estado, proyecto.p_video, proyecto.p_poster, categoria.ca_nombre, edicion.ed_nombre, nivel.n_nombre, alumno.a_nombre, alumno.a_apellido FROM `proyecto` JOIN categoria ON proyecto.ca_id = categoria.ca_id JOIN edicion ON proyecto.ed_id = edicion.ed_id JOIN nivel ON proyecto.n_id = nivel.n_id JOIN proyecto_alumno ON proyecto.p_id = proyecto_alumno.p_id JOIN alumno ON proyecto_alumno.a_correo = alumno.a_correo ORDER BY proyecto.p_nombre;";
                                     $q = $pdo->query($sql);
                                     //var_dump($q);
                                     $filas = $q->fetchAll();
@@ -81,22 +98,36 @@
             <p>&nbsp;</p>
             <p class="categoria">Categoria</p>
             <p><?php echo $proyecto['ca_nombre']; ?></p>
-            
+            <p>&nbsp;</p>
             <p class="categoria">Avance Proyecto</p>
-            <p><?php echo $proyecto['p_avance_proyecto']; ?></p>
+            <p><?php echo $proyecto['p_estado']; ?></p>
 
           </td>
 
           <td>
+          <p class="categoria">Video</p>
             <div class="imagenpropatineta">
-              <button class="btn"><img class="btn" src="../media/play.png"></button>
+            <?php
+                           preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $proyecto['p_video'], $match);
+                            $video_id = $match[1];
+                            $video_full_link = "https://drive.google.com/file/d/".$video_id."/preview";
+                               echo '<dd><iframe width="100%" src="'.$video_full_link.'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></dd>';
+                              
+                        ?>
+              <p><?php /*echo $proyecto['p_video']; */?></p>
             </div>
           </td>
 
           <td>
             <p class="categoria">Poster</p>
-            <img class="proimg" src="../media/poster.png">
-
+            
+            <?php
+                            preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $proyecto['p_poster'], $match);
+                            $image_id = $match[1];
+                            $image_full_link = "https://drive.google.com/file/d/".$image_id."/preview";
+                            echo '<dd><iframe width="100%" src="'.$image_full_link.'" allow="autoplay"></iframe></dd>';
+                        ?>
+            <p><?//php echo $proyecto['p_poster']; ?></p>
           </td>
 
           <td>
@@ -104,20 +135,33 @@
             <p><?php echo $proyecto['p_descripcion']; ?></p>
 
           </td>
-
+ 
           <td>
             <p class="categoria">Integrantes</p>
-            <ul>
-              <li>Victor Manuel Peréz</li>
-              <li>Juan Lara</li>
-              <li>Victor Rivas</li>
-            </ul>
+            <p><?php 
+            //foreach($filas as $proyecto){
+              $proyectos = "";
+              if ($proyecto["p_id"] == $proyectos) {
+              }
+                else
+                {
+                  $proyectos = $proyecto["p_id"];
+                  echo "<h3>" . $proyecto["p_nombre"] . "</h3>";
+                }
+              
+              echo '<dd>' .$proyecto['a_nombre'].' '.$proyecto['a_apellido']. '</dd>';
+           // }
+              
+            ?></p>
 
           </td>
 
           <td>
-            <p class="categoria">UF</p>
-            <p>Diseño de sistemas embebidos avanzados</p>
+            <p class="categoria">Edicion</p>
+            <p><?php echo $proyecto['ed_nombre']; ?></p>
+            <p>&nbsp;</p>
+            <p class="categoria">Nivel</p>
+            <p><?php echo $proyecto['n_nombre']; ?></p>
           </td>
 
         </tr>
