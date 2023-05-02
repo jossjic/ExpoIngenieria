@@ -67,7 +67,7 @@
 
         <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
         <link rel="stylesheet" href="../CSS/Dashboards.css">
-        <script src="../JS/Counter.js"></script>
+        
     </head>
     <body>
         <header>
@@ -119,5 +119,7 @@
                 </div>
             </div>
         </main>
+
+        <script src="../JS/Counter.js"></script>
     </body>
 </html>
