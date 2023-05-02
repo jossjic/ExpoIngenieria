@@ -39,29 +39,29 @@
             echo "Registro en la tabla Proyecto Alumno";
 
         } else {
-            echo "Aqui2";
-            #Insertar el nombre completo y correo en la tabla ALUMNO
-            #Insertar el correo del alumno en la tabla del ProyectoAlumno 
-            #con el id del proyecto
-            $pdo = Database::connect();
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "INSERT INTO ALUMNO(a_matricula,a_nombre,a_apellido,a_correo) VALUES(?,?,?,?)";
-            echo $sql;
-            $q = $pdo->prepare($sql);
-            echo $q;
-            $q->execute(array($student_matricula,$student_name,$student_lastname,$student_email));
-            echo $q;
-            echo "Registro en la tabla Alumno";
-
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "INSERT INTO PROYECTO_ALUMNO (a_correo, p_id) VALUES (?, ?)";
-            $q = $pdo->prepare($sql);
-            $pdo = $q->execute(array($_SESSION['id'], $student_email));
-
-            echo $q;
-            echo "Registro en la tabla Proyecto Alumno";
-            Database::disconnect();
-
+            try {
+                $pdo = Database::connect();
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $sql = "INSERT INTO ALUMNO(a_matricula,a_nombre,a_apellido,a_correo) VALUES(?,?,?,?)";
+                echo $sql;
+                $q = $pdo->prepare($sql);
+                echo $q;
+                $q->execute(array($student_matricula,$student_name,$student_lastname,$student_email));
+                echo $q;
+                echo "Registro en la tabla Alumno";
+            
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $sql = "INSERT INTO PROYECTO_ALUMNO (a_correo, p_id) VALUES (?, ?)";
+                $q = $pdo->prepare($sql);
+                $pdo = $q->execute(array( $student_email,$_SESSION['id']));
+            
+                echo $q;
+                echo "Registro en la tabla Proyecto Alumno";
+                Database::disconnect();
+            } catch (PDOException $e) {
+                echo 'Error: ' . $e->getMessage();
+            }
+            
             
 
 
