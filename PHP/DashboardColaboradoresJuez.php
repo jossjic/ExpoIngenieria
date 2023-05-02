@@ -120,6 +120,6 @@
             </div>
         </main>
 
-        <script src="../JS/Counter.js"></script>
+        <script src="../JS/CounterJuez.js"></script>
     </body>
 </html>

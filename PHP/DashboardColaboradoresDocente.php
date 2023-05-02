@@ -122,6 +122,6 @@
             </div>
         </main>
 
-        <script src="../JS/Counter.js"></script>
+        <script src="../JS/CounterDocente.js"></script>
     </body>
 </html>
