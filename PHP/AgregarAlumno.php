@@ -43,13 +43,8 @@
                 $pdo = Database::connect();
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $sql = "INSERT INTO ALUMNO(a_matricula,a_nombre,a_apellido,a_correo) VALUES(?,?,?,?);";
-                echo $sql;
-                echo "Hola";
                 $q = $pdo->prepare($sql);
-                echo $q;
-                echo "Hola";
                 $q->execute(array(trim($student_matricula),trim($student_name),trim($student_lastname),trim($student_email)));
-                echo $q;
                 echo "Registro en la tabla Alumno";
             
                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
