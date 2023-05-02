@@ -30,6 +30,7 @@
                 exit();
             } else {
                 // Check if the email already exists in the ALUMNO table
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $sql = "SELECT a_correo FROM ALUMNO WHERE a_correo = ?";
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute([$student_email]);
@@ -37,15 +38,18 @@
     
                 if ($numRows == 1) {
                     // The email already exists, insert it in PROYECTO_ALUMNO with the project ID
+                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     $sql = "INSERT INTO PROYECTO_ALUMNO(a_matricula, p_id) VALUES (?, ?)";
                     $stmt = $pdo->prepare($sql);
                     $stmt->execute([$student_matricula, $_SESSION['id']]);
                 } else {
                     // The email doesn't exist, insert the student data in ALUMNO and then in PROYECTO_ALUMNO
+                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     $sql = "INSERT INTO ALUMNO(a_matricula, a_nombre, a_apellido, a_correo) VALUES (?, ?, ?, ?)";
                     $stmt = $pdo->prepare($sql);
                     $stmt->execute([$student_matricula, $student_name, $student_lastname, $student_email]);
-    
+                    
+                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     $sql = "INSERT INTO PROYECTO_ALUMNO(a_matricula, p_id) VALUES (?, ?)";
                     $stmt = $pdo->prepare($sql);
                     $stmt->execute([$student_matricula, $_SESSION['id']]);
