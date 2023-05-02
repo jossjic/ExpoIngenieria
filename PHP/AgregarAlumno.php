@@ -38,16 +38,16 @@
     
                 if ($numRows == 1) {
                     // The email already exists, insert it in PROYECTO_ALUMNO with the project ID
-                    $sql = "INSERT INTO PROYECTO_ALUMNO (a_matricula, p_id) VALUES (?, ?)";
+                    $sql = "INSERT INTO PROYECTO_ALUMNO(a_matricula, p_id) VALUES (?, ?)";
                     $stmt = $pdo->prepare($sql);
                     $stmt->execute([$student_matricula, $_SESSION['id']]);
                 } else {
                     // The email doesn't exist, insert the student data in ALUMNO and then in PROYECTO_ALUMNO
-                    $sql = "INSERT INTO ALUMNO (a_matricula, a_nombre, a_apellido, a_correo) VALUES (?, ?, ?, ?)";
+                    $sql = "INSERT INTO ALUMNO(a_matricula, a_nombre, a_apellido, a_correo) VALUES (?, ?, ?, ?)";
                     $stmt = $pdo->prepare($sql);
                     $stmt->execute([$student_matricula, $student_name, $student_lastname, $student_email]);
     
-                    $sql = "INSERT INTO PROYECTO_ALUMNO (a_matricula, p_id) VALUES (?, ?)";
+                    $sql = "INSERT INTO PROYECTO_ALUMNO(a_matricula, p_id) VALUES (?, ?)";
                     $stmt = $pdo->prepare($sql);
                     $stmt->execute([$student_matricula, $_SESSION['id']]);
                 }
