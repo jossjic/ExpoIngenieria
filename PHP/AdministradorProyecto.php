@@ -267,7 +267,7 @@
 										<div class='students_div_menu_eachone'>
 											<span class='nombrecompleto'>".$row['a_nombre']. " ".$row['a_apellido']."</span>
 											<span class='correo'>".$row['a_correo']."</span>
-											<span style='color: black;' >&times;</span>
+											<span style='color: black;' class='close' >&times;</span>
 										</div>
 											";
 									}
@@ -290,7 +290,7 @@
 												<div class='teachers_div_menu_eachone'>
 													<span class='nombrecompleto'>".$row['co_nombre']. " ".$row['co_apellido']."</span>
 													<span class='correo'>".$row['co_correo']."</span>
-													<span style='color: black;' >&times;</span>
+													<span style='color: black;' class='close' >&times;</span>
 												</div>
 											";
 									}
