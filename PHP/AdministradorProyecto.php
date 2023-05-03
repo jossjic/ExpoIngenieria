@@ -50,6 +50,7 @@
 
 		<link rel="stylesheet" href="../CSS/HeaderFooterStructure.css" />
 		<link rel="stylesheet" href="../CSS/Page5.css" />
+		<link rel="stylesheet" href="../CSS/Extra.css" />
 	</head>
 	<body>
 		<header>
@@ -254,7 +255,6 @@
 				<div class="students_div">
 					<h3>Alumnos</h3>
 					<div class="students_div_menu">
-						<div class="students_div_menu_eachone">
 								<?php 
 									$pdo = Database::connect();
 									$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -263,20 +263,22 @@
 									$q->execute(array($_SESSION['id']));
 									$dataAlumno = $q->fetchAll(PDO::FETCH_ASSOC);
 									foreach ($dataAlumno as $row) {
-										echo " <span class='nombrecompleto'>".$row['a_nombre']. " ".$row['a_apellido']."</span>
-											   <span class='matricula'>".$row['a_matricula']."</span>
-											   <span class='correo'>".$row['a_correo']."</span>
+										echo " 
+										<div class='students_div_menu_eachone'>
+											<span class='nombrecompleto'>".$row['a_nombre']. " ".$row['a_apellido']."</span>
+											<span class='correo'>".$row['a_correo']."</span>
+											<span style='color: black;' >&times;</span>
+										</div>
 											";
 									}
 								?>
-						</div>
+
 					</div>
 				</div>
 				<div class="teachers_div">
 					<h3>Profesores</h3>
 					<div class="teachers_div_menu">
-						<div class="teachers_div_menu_eachone">
-								 <?php  
+								<?php  
 									$pdo = Database::connect();
 									$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 									$sql = "SELECT * FROM PROYECTO_DOCENTE NATURAL JOIN COLABORADOR WHERE p_id = ?";
@@ -284,12 +286,16 @@
 									$q->execute(array($_SESSION['id']));
 									$dataProfesor = $q->fetchAll(PDO::FETCH_ASSOC);
 									foreach ($dataProfesor as $row) {
-										echo " <span class='nombrecompleto'>".$row['co_nombre']. " ".$row['co_apellido']."</span>
-											   <span class='correo'>".$row['co_correo']."</span>
+										echo " 
+												<div class='teachers_div_menu_eachone'></div>
+													<span class='nombrecompleto'>".$row['co_nombre']. " ".$row['co_apellido']."</span>
+													<span class='correo'>".$row['co_correo']."</span>
+													<span style='color: black;' >&times;</span>
+												</div>
 											";
 									}
 								?> 
-						</div>
+						
 					</div>
 				</div>
 			</div>

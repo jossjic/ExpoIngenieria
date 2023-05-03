@@ -62,29 +62,7 @@
 			$valid = false;
 		}
 
-		// Obtener datos del proyecto
-		$pdo = Database::connect();
-		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = 'SELECT * 
-		        FROM PROYECTO 
-		        NATURAL JOIN CATEGORIA 
-		        WHERE p_id = ?';
-		$q = $pdo->prepare($sql);
-		$q->execute(array($id));
-		$project = $q->fetch(PDO::FETCH_ASSOC);
-		Database::disconnect();
 
-		//Datos Alumnos
-		$pdo = Database::connect();
-		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = 'SELECT * 
-		        FROM PROYECTO_ALUMNO 
-		        NATURAL JOIN ALUMNO 
-		        WHERE p_id = ?';
-		$q = $pdo->prepare($sql);
-		$q->execute(array($id));
-		$alumno = $q->fetchAll(PDO::FETCH_ASSOC);
-		Database::disconnect();
 
 		// update data
 		if ($valid) {
@@ -98,6 +76,7 @@
 			$q->execute(array($user_id, $id));
 			$evaluacion = $q->fetch(PDO::FETCH_ASSOC);
 			$number_of_evaluations = $q->rowCount();
+			
 			if ($number_of_evaluations != 0) {
 				$sql = 'UPDATE EVALUACION 
 						SET 
@@ -195,6 +174,30 @@
 		//$subm = $project['nombrec'];
 		//$marc = $project['idmarca'];
 		#$ac   = ($project['ac'])?"S":"N";
+
+		// Obtener datos del proyecto
+		$pdo = Database::connect();
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = 'SELECT * 
+		        FROM PROYECTO 
+		        NATURAL JOIN CATEGORIA 
+		        WHERE p_id = ?';
+		$q = $pdo->prepare($sql);
+		$q->execute(array($id));
+		$project = $q->fetch(PDO::FETCH_ASSOC);
+		Database::disconnect();
+
+		//Datos Alumnos
+		$pdo = Database::connect();
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = 'SELECT * 
+		        FROM PROYECTO_ALUMNO 
+		        NATURAL JOIN ALUMNO 
+		        WHERE p_id = ?';
+		$q = $pdo->prepare($sql);
+		$q->execute(array($id));
+		$alumno = $q->fetchAll(PDO::FETCH_ASSOC);
+		Database::disconnect();
 	}
 ?>
 

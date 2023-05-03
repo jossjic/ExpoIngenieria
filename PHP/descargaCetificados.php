@@ -81,7 +81,7 @@
                 <br>
                     <br>
                     <h2>ALUMNO</h2>
-
+                                    
                     <table >
 
                         <?php
