@@ -97,21 +97,8 @@
             $q = $pdo->prepare($sql);
             $q->execute(array($collaborator_email, $collaborator_pass));
 
-            
-            $collaborator = $q->fetch(PDO::FETCH_ASSOC);
-
-            $sql = "SELECT * FROM EDICION ORDER BY ed_id DESC LIMIT 1";
-            $q = $pdo->query($sql);
-            $last_edition_id = $q->fetchAll(PDO::FETCH_ASSOC);
-
-             echo $last_edition_id;
-
-            //Insert into Edicion Colaborador with the last edition able on edition table
-            $sql = "INSERT INTO EDICION_COLABORADOR(co_correo,ed_id) VALUES(?,?)";
-            $q = $pdo->prepare($sql);
-            $q->execute(array($collaborator['co_correo'],$last_edition_id[0]['ed_id']));
-
             Database::disconnect();
+            $collaborator = $q->fetch(PDO::FETCH_ASSOC);
             
             // Create session variables
             $_SESSION['logged_in'] = true;
