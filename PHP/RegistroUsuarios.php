@@ -89,14 +89,13 @@
             // Create collaborator
             $sql = "INSERT INTO COLABORADOR (co_correo, co_nomina, co_nombre, co_apellido, co_pass, co_es_jurado) VALUES (?, ?, ?, ?, ?, ?)";
             $q = $pdo->prepare($sql);
-            $is_judge = false;
+            $is_judge = true;
             $q->execute(array($collaborator_email, $collaborator_payroll, $collaborator_name, $collaborator_lastname, $collaborator_pass, $is_judge));
 
             // Get project data
             $sql = "SELECT * FROM COLABORADOR WHERE co_correo = ? AND co_pass = ?";
             $q = $pdo->prepare($sql);
             $q->execute(array($collaborator_email, $collaborator_pass));
-
             Database::disconnect();
             $collaborator = $q->fetch(PDO::FETCH_ASSOC);
             
@@ -106,7 +105,7 @@
             $_SESSION['id'] = $collaborator['co_correo'];
             
             // Redirect
-            header("Location: ../PHP/DashboardColaboradoresDocente.php");
+            header("Location: ../PHP/DashboardColaboradores.php");
             exit();
         }
     }
