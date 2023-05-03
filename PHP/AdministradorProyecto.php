@@ -164,8 +164,8 @@
 		</div>
 
 		<main>
-			<form class="First__Form" action="../PHP/InfoProyecto.php" method="POST">
-				<table class="table-1 card">
+			<form class="First__Form card" style="width: 90%;" action="../PHP/InfoProyecto.php" method="POST">
+				<table class="table-1">
 					<tr>
 						<td>
 							<label for="project_name">
