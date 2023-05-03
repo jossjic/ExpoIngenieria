@@ -238,16 +238,18 @@
 			</form>
 
 			<div class="Second__Form">
-				<div>
+				<div class="Add_People">
 					<button
 						id="add_student_btn"
 						onclick="showStudentFieldInput()"
+						class="btn-submit"
 					>
 						Agregar Alumno
 					</button>
 					<button
 						id="add_teacher_btn"
 						onclick="showTeacherFieldInput()"
+						class="btn-submit"
 					>
 						Agregar Profesor
 					</button>

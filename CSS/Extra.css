@@ -40,6 +40,11 @@
 	place-items: center;
 }
 
+.Add_People {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
 .teachers_div,
 .students_div {
 	width: 90%;
