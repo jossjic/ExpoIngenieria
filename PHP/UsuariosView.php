@@ -158,12 +158,16 @@
 <?php
             if(isset($_GET['actu'])){
                 $actu = $_GET['actu'];
-                echo ' <script>
-                alert(<?php echo $actu;?>);
-            </script>';
             }
        ?>
-
+        <script>
+            if (<?php echo $actu;?>){
+                alert(<?php echo $actu;?>);
+            }
+            else {
+                //ola
+            }
+        </script>
 
         <div class="Info">
             <div class="Info__Header">
