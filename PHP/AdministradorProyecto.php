@@ -172,6 +172,9 @@
 								Nombre del Proyecto
 							</label>
 						</td>
+					</tr>
+					<tr>
+						
 						<td>
 								<input
 									type="text"
@@ -188,6 +191,9 @@
 						<td>
 							<label for="category"> Categoría </label>
 						</td>
+					</tr>
+					<tr>
+					
 						<td>
 							<select name="category" id="category">
 								<?php 
@@ -202,11 +208,14 @@
 							</select>
 						</td>
 					</tr>
+
 					<tr>
 						<td>
 							<label for="status">Avance</label>
 						</td>
-						
+					</tr>
+
+					<tr>
 						<td>
 							<select name="level" id="level">
 								<?php 
@@ -236,8 +245,7 @@
 						</td>
 					</tr>
 				</table>
-
-				<table style="text-align: center" class="table-2">
+				<table style="text-align: center" class="table-1">
 					<tr>
 						<td>
 							<textarea
@@ -246,6 +254,7 @@
 								id="project_description"
 								cols="30"
 								rows="10"
+								style="display: inline; width: 100%; height: 100%;"
 							> <?php echo	$data['p_descripcion'] ?>
 							</textarea>
 						</td>
