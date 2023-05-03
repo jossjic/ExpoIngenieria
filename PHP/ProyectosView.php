@@ -1,5 +1,14 @@
-<?php
-    require 'dataBase.php'
+<?php 
+
+	require_once 'dataBase.php';
+
+    session_name("EngineerXpoWeb");
+    session_start();
+
+    if (!isset($_SESSION['logged_in'])) {
+        header("Location: ../index.php");
+        exit();
+    }
 ?>
 
 
@@ -19,22 +28,28 @@
 </head>
 <body>
 
-    <header>
-        <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
-        <ul>
-            <li>
-                <a href="#">Cerrar Sesion</a>
-            </li>
-        </ul>
-        <nav>
-            <ul>
-                <li><a href="#">Menu</a></li>
-                <li><a href="#">Usuarios</a></li>
-                <li><a href="#">Reconocimientos</a></li>
-                <li><a href="#">Eastadísticas</a></li>
-            </ul>
-        </nav>
-    </header>
+        <header>
+			<a href="../index.php"
+				><img
+					class="Logo__Expo"
+					src="../media/logo-expo.svg"
+					alt="Logotipo de Expo ingenierías"
+			/></a>
+			<ul style="grid-column: 2/4">
+				<li><a href="../PHP/AdminInicio.php">Menu</a></li>
+				<li><a href="../PHP/AvisosView.php">Avisos</a></li>
+				<li><a href="../PHP/EdicionView.php">Ediciones</a></li>
+				<li><a href="../PHP/NivelView.php">Nivel</a></li>
+				<li><a href="../PHP/CategoriaView.php">Categorias</a></li>
+				<li><a href="../PHP/UsuariosView.php">Usuarios</a></li>
+				<li><a href="../PHP/ProyectosView.php">Proyectos</a></li>
+				<li><a href="../PHP/AdministradoresView.php">Administradores</a></li>
+				<li><a href="../PHP/EvaluacionesView.php">Evaluaciones</a></li>
+				<li style="font-weight: 600;">
+					<a href="../PHP/logout.php">Cerrar Sesion</a>
+				</li>
+			</ul>
+		</header>
 
     <main>
 
@@ -43,35 +58,37 @@
                 <h1>Administrador de Proyectos</h1>
                 <table>
                     <tr>
-                        <td>Total de Proyectos:</td>
-                        <td id="TotalProyectos">
+                        <td>Total Registrados: </td>
+                        <td>
                             <?php
                                 $pdo = Database::connect();
-                                $sql = "SELECT * FROM PROYECTOV1";
+                                $sql = "SELECT * FROM PROYECTO WHERE p_estado = 'Registrado'";
                                 $q = $pdo->query($sql)->rowCount();
                                 echo "$q";
                                 Database::disconnect();
                             ?>
                         </td>
                     </tr>
+
                     <tr>
-                        <td>Total Calificados:</td>
-                        <td id="TotalCalificados">
+                        <td>Total Aceptados: </td>
+                        <td>
                             <?php
                                 $pdo = Database::connect();
-                                $sql = "SELECT * FROM PROYECTOV1";
+                                $sql = "SELECT * FROM PROYECTO WHERE p_estado = 'Aceptado'";
                                 $q = $pdo->query($sql)->rowCount();
                                 echo "$q";
                                 Database::disconnect();
                             ?>
                         </td>
                     </tr>
+
                     <tr>
-                        <td>Total Pendientes:</td>
-                        <td id="TotalPendientes">
+                        <td>Total Rechazados: </td>
+                        <td>
                             <?php
                                 $pdo = Database::connect();
-                                $sql = "SELECT * FROM PROYECTOV1";
+                                $sql = "SELECT * FROM PROYECTO WHERE p_estado = 'Rechazado'";
                                 $q = $pdo->query($sql)->rowCount();
                                 echo "$q";
                                 Database::disconnect();
@@ -81,9 +98,7 @@
                 </table>
             </div>
 
-            <div class="Estadisticas__Btn">
-                <a class="Admin__Start__Right__Btn" href="../PHP/EstadisticasUsuarios.php">Estadisticas Proyectos</a>
-            </div>
+            
         </div>
 
         <form action="../PHP/ProyectosBusqueda.php" method="post" class="Winners__Explorer">
@@ -116,7 +131,7 @@
                 <p>Nombre</p>
                 <p>Categoria</p>
                 <p>Estado</p>
-                <p>Ultima Modificación</p>
+                <p>Nivel</p>
                 <div>
                     <p>Acciones</p>
                 </div>
@@ -124,15 +139,19 @@
             <div class="Info__Table">
                             <?php
                                 $pdo = Database::connect();
-                                $sql = "SELECT * FROM PROYECTOV1";
+                                $sql = "SELECT * 
+                                        FROM PROYECTO
+                                        NATURAL JOIN NIVEL
+                                        NATURAL JOIN CATEGORIA 
+                                        ORDER BY ed_id DESC";
                                 foreach ($pdo->query($sql) as $row) {
                                     echo "
-                                            <input type='checkbox' name='' id=''>
+                                            <p>&nbsp;</p>
                                             <p>" . $row['p_id'] ."</p>
                                             <p>" . $row['p_nombre'] ."</p>
-                                            <p>" . $row['ca_id'] ."</p>
+                                            <p>" . $row['ca_nombre'] ."</p>
                                             <p>" . $row['p_estado'] ."</p>
-                                            <p>" . $row['p_fecha_modificacion'] ."</p>
+                                            <p>" . $row['n_nombre'] ."</p>
                                             <div class='Btn__Green'>
                                                 <a href='../PHP/ProyectosRead.php?id=".trim($row['p_id'])."'>Ver</a>
                                             </div>
@@ -142,9 +161,7 @@
                                             <div class='Btn__Red'>
                                                 <a href='../PHP/ProyectosDelete.php?id=".trim($row['p_id'])."'>Eliminar</a>
                                             </div>
-                                            <div class='Btn__Green'>
-                                                    <a href='../PHP/Certificados.php?id=".trim($row['p_id'])."'>Reconocimientos</a>
-                                            </div>
+                                            <p></p>
                                         ";
 
                                 }

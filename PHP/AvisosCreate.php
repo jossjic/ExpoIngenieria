@@ -1,26 +1,29 @@
 <?php
+        require_once 'dataBase.php';
 
-	require 'dataBase.php';
+        session_name("EngineerXpoWeb");
+        session_start();
+
+        if (!isset($_SESSION['logged_in'])) {
+            header("Location: ../index.php");
+            exit();
+        }
 
 		$TituloError = null;
 		$ContenidoError = null;
 		$GrupoError = null;
-        $FechaError = null;
-        $Adm_UsuError = null;
 
 	if ( !empty($_POST)) {
 
         $Titulo = $_POST['Titulo'];
 		$Contenido = $_POST['Contenido'];
 		$Grupo  = $_POST['Grupo'];
-        $Fecha = $_POST['Fecha'];
-        $Adm_Usu = $_POST['Usuario'];
 
 		// validate input
 		$valid = true;
 
 		if (empty($Titulo)) {
-			$TItuloError = 'Porfavor ingresa el titulo';
+			$TituloError = 'Porfavor ingresa el titulo';
 			$valid = false; 
 		}
 		if (empty($Contenido)) {
@@ -31,22 +34,14 @@
 			$GrupoError = 'Porfavor ingresa el grupo';
 			$valid = false;
 		}
-        if (empty($Fecha)) {
-			$FechaError = 'Porfavor ingresa la fecha en que se publicara el anuncio';
-			$valid = false;
-		}
-        if (empty($Adm_Usu)) {
-			$Adm_UsuError = 'Porfavor ingresa el usuario que eres';
-			$valid = false;
-		}
 
 		// insert data
 		if ($valid) {
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "INSERT INTO ANUNCIO(an_titulo, an_contenido, an_grupo, an_fecha, adm_usu) VALUES(?, ?, ?, ?, ?)";
+			$sql = "INSERT INTO ANUNCIO(an_titulo, an_contenido, an_grupo, an_fecha, adm_correo) VALUES(?, ?, ?, NOW(), ?)";
 			$q = $pdo->prepare($sql);
-			$q->execute(array($Usuario,$Correo,$Nombre,$Contraseña));
+			$q->execute(array($Titulo,$Contenido,$Grupo,$_SESSION['id']));
 			Database::disconnect();
 			header("Location: AvisosView.php");
 		}
@@ -66,37 +61,33 @@
 
         <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
         <link rel="stylesheet" href="../CSS/FormsStructure.css">
+        <link rel="stylesheet" href="../CSS/Extra.css">
 
 	</head>
 
     <body>
         
         <header>
-			<img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
-
-            <ul>
-
-                <li>
-                    <a href="#">Menu</a>
-                </li>
-				<li>
-                    <a href="#">Usuarios</a>
-                </li>
-				<li>
-                    <a href="#">Reconocimientos</a>
-                </li>
-				<li>
-                    <a href="#">Eastadísticas</a>
-                </li>
-				
+			<a href="../index.php"
+				><img
+					class="Logo__Expo"
+					src="../media/logo-expo.svg"
+					alt="Logotipo de Expo ingenierías"
+			/></a>
+			<ul style="grid-column: 2/4">
+				<li><a href="../PHP/AdminInicio.php">Menu</a></li>
+				<li><a href="../PHP/AvisosView.php">Avisos</a></li>
+				<li><a href="../PHP/EdicionView.php">Ediciones</a></li>
+				<li><a href="../PHP/NivelView.php">Nivel</a></li>
+				<li><a href="../PHP/CategoriasView.php">Categorias</a></li>
+				<li><a href="../PHP/UsuariosView.php">Usuarios</a></li>
+				<li><a href="../PHP/ProyectosView.php">Proyectos</a></li>
+				<li><a href="../PHP/AdministradoresView.php">Administradores</a></li>
+				<li><a href="../PHP/EvaluacionesView.php">Evaluaciones</a></li>
+				<li style="font-weight: 600;">
+					<a href="../PHP/logout.php">Cerrar Sesion</a>
+				</li>
 			</ul>
-
-            <nav>
-				<ul>
-					<li><a href="#">Cerrar Sesion</a></li>
-				</ul>
-			</nav>
-
 		</header>
 
         <main>
@@ -111,7 +102,7 @@
                             <label>Titulo</label>
                         </td>
                         <td>
-                            <input class="Text__Input" name="Titulo" type="text"  placeholder="Titulo" value="">
+                            <input class="Text__Input" name="Titulo" type="text"  placeholder="Titulo" value="" required>
                             <?php if (($TituloError != null)) ?>
                             <span class="help-inline"><?php echo $TituloError;?></span>
                         </td>
@@ -122,7 +113,7 @@
                             <label>Contenido</label>
                         </td>
                         <td>
-                            <input class="Text__Input" name="Contenido" type="text"  placeholder="!HOLA¡" value="">
+                            <input class="Text__Input" name="Contenido" type="text"  placeholder="!HOLA¡" value="" required>
                             <?php if (($ContenidoError != null)) ?>
                             <span class="help-inline"><?php echo $ContenidoError;?></span>
                         </td>
@@ -133,7 +124,7 @@
                             <label>Grupo</label>
                         </td>
                         <td>
-                            <input class="Text__Input" name="Grupo" type="text"  placeholder="Grupo" value="">
+                            <input class="Text__Input" name="Grupo" type="text"  placeholder="Grupo" value="" pattern="[0-9]" required>
                             <?php if (($GrupoError != null)) ?>
                             <span class="help-inline"><?php echo $GrupoError;?></span>
                         </td>
@@ -141,21 +132,11 @@
 
                     <tr>
                         <td>
-                            <label>Fecha</label>
-                        </td>
-
-                        <td>
-                            <input class="Text__Input" name="Fecha" type="date"  value="">
-                            <?php if (($FechaError != null)) ?>
-                            <span class="help-inline"><?php echo $FechaError;?></span>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="Td__Iniciar__Sesion" colspan="2">
                             <input class="Btn__Iniciar__Sesion" type="submit" value="Publicar Anuncio" id="submit" name="submit">
                         </td>
-                        <td></td>
+                        <td>
+                            <a class="Btn-Ancla" href="AvisosView.php">Regresar</a>
+                        </td>
                     </tr>
 
                 </table>

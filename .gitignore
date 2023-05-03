@@ -1,1 +1,5 @@
-media/ComandosLinux.pdf
+./media/ComandosLinux.pdf
+./PHP/generarReconocimientoDJ.php
+./PHP/generarReconocimientoA.php
+./fpdf
+./PHP/descargaCertificados.php

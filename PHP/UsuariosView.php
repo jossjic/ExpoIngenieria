@@ -1,75 +1,136 @@
+<?php 
+
+	require_once 'dataBase.php';
+
+    session_name("EngineerXpoWeb");
+    session_start();
+
+    if (!isset($_SESSION['logged_in'])) {
+        header("Location: ../index.php");
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Usuarios</title>
-  <link rel="icon" type="image/ico" href="../media/favicon.ico"/>
+  <title>Usuarios View</title>
+
   <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
   <link rel="stylesheet" href="../CSS/AdminPages.css">
+  <link rel="stylesheet" href="../CSS/Extra.css">
+  <link rel="icon" type="image/ico" href="../media/favicon.ico"/>
 </head>
 <body>
 
-  <header>
-      <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
-      <ul>
-          <li>
-              <a href="#">Cerrar Sesion</a>
-          </li>
-      </ul>
-      <nav>
-          <ul>
-              <li><a href="#">Proyectos</a></li>
-              <li><a href="#">Usuarios</a></li>
-              <li><a href="#">Reconocimientos</a></li>
-              <li><a href="#">Eastadísticas</a></li>
-          </ul>
-      </nav>
-  </header>
+        <header>
+			<a href="../index.php"
+				><img
+					class="Logo__Expo"
+					src="../media/logo-expo.svg"
+					alt="Logotipo de Expo ingenierías"
+			/></a>
+			<ul style="grid-column: 2/4">
+				<li><a href="../PHP/AdminInicio.php">Menu</a></li>
+				<li><a href="../PHP/AvisosView.php">Avisos</a></li>
+				<li><a href="../PHP/EdicionView.php">Ediciones</a></li>
+				<li><a href="../PHP/NivelView.php">Nivel</a></li>
+				<li><a href="../PHP/CategoriaView.php">Categorias</a></li>
+				<li><a href="../PHP/UsuariosView.php">Usuarios</a></li>
+				<li><a href="../PHP/ProyectosView.php">Proyectos</a></li>
+				<li><a href="../PHP/AdministradoresView.php">Administradores</a></li>
+				<li><a href="../PHP/EvaluacionesView.php">Evaluaciones</a></li>
+				<li style="font-weight: 600;">
+					<a href="../PHP/logout.php">Cerrar Sesion</a>
+				</li>
+			</ul>
+		</header>
 
-  <main>
-        <div class="Admin__Start">
+  <main class="Size">
+        <div class="Admin__Start ">
             <div class="Admin__Start__Left">
                 <h1>Administrador de Usuarios</h1>
                 <table>
                     <tr>
                         <td>Total de Usuarios:</td>
-                        <td id="TotalUsuarios">6</td>
+                        <td id="TotalUsuarios">
+                        <?php
+                                $pdo = Database::connect();
+                                $sql = "SELECT * FROM COLABORADOR";
+                                $q1 = $pdo->query($sql)->rowCount();
+                                $sql = "SELECT * FROM ALUMNO";
+                                $q2 = $pdo->query($sql)->rowCount();
+                                $a=$q1+$q2;
+                                echo "$a";
+                                Database::disconnect();
+                            ?>
+                        </td>
                     </tr>
                     <tr>
                         <td>Jurados:</td>
-                        <td id="TotalJurados">4</td>
+                        <td id="TotalJurados">
+                        <?php
+                                $pdo = Database::connect();
+                                $sql = "SELECT * FROM COLABORADOR WHERE co_es_jurado = true";
+                                $q = $pdo->query($sql)->rowCount();
+                                echo "$q";
+                                Database::disconnect();
+                            ?>
+                        </td>
                     </tr>
                     <tr>
-                        <td>Profesores:</td>
-                        <td id="TotalProfesores">2</td>
+                        <td>Docentes: </td>
+                        <td id="TotalProfes">
+                        <?php
+                                $pdo = Database::connect();
+                                $sql = "SELECT * FROM COLABORADOR WHERE co_nomina IS NOT NULL";
+                                $q = $pdo->query($sql)->rowCount();
+                                echo "$q";
+                                Database::disconnect();
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Alumnos:</td>
+                        <td id="TotalAlumnos">
+                        <?php
+                                $pdo = Database::connect();
+                                $sql = "SELECT * FROM ALUMNO";
+                                $q = $pdo->query($sql)->rowCount();
+                                echo "$q";
+                                Database::disconnect();
+                            ?>
+                        </td>
                     </tr>
                 </table>
             </div>
 
-            <div class="Estadisticas__Btn">
-                <a cglass="Admin__Start__Right__Btn" href="../PHP/EstadisticasUsuarios.php">Estadisticas Proyectos</a>
-            </div>
         </div>
 
-        <form method="post" class="Winners__Explorer">
+            
+        </div>
+
+        <form action="../PHP/UsuariosBusqueda.php" method="post" class="Winners__Explorer">
             <table>
                 <tr>
                     <td>
                         Buscar
                     </td>
                     <td>
-                        <select name="ProyectoID" id="ProyectoID">
-                            <option value="ID">ID</option>
-                            <option value="Nombre">Nombre</option>
-                            <option value="Edicion">Edicion</option>
+                        <select name="UserID" id="UserID">
+                            <option value="Matrícula">Matricula</option>
                             <option value="Tipo">Tipo</option>
+                            <option value="Nombre">Nombre</option>
+                            <option value="Apellido">Apellido</option>
+                            <option value="Correo">Correo</option>
                         </select>
                     </td>
                     <td>
                         
-                        <input type="search" name="BuscarNombre" class="Text__Search" id="" placeholder="Ingresa el valor">
+                        <input type="search" name="inp" class="Text__Search" id="" placeholder="Ingresa el valor">
                         <input type="submit" name="BtnBuscar" class="Search__Btn" id="" value="Buscar">
                         
                     </td>
@@ -77,64 +138,112 @@
                 </tr>
               </table>
         </form>
-       
+       <?php
+            if(isset($_GET['verif'])){
+                $verif = $_GET['verif'];
+            }
+       ?>
+        <script>
+            if(<?php echo $verif;?>){
+                alert("El usuario ha sido eliminado exitosamente")
+            }
+            else if (!<?php echo $verif;?>){
+                alert("Hubo un error al eliminar el usuario")
+            }
+            else {
+                //ola
+            }
+        </script>
+
+<?php
+            if(isset($_GET['actu'])){
+                $actu = $_GET['actu'];
+            }
+       ?>
+        <script>
+            if (<?php echo $actu;?>){
+                alert(<?php echo $actu;?>);
+            }
+            else {
+                //ola
+            }
+        </script>
 
         <div class="Info">
             <div class="Info__Header">
                 <p>&nbsp;</p>
                 <p></p>
-                <p>ID</p>
+                <p>Matrícula</p>
+                <p>Tipo</p>
                 <p>Nombre</p>
-                <p>Apellido Paterno</p>
-                <p>Correo</p>
+                <p>Apellido</p>
                 <p>Acciones</p>
-            </div>
-            <div class="Info__Table">
+             </div>
+                <div class="Info__Table">
                   
                 <?php
-								   	include 'dataBase.php';
 								   	$pdo = Database::connect();
-								   	$sql = 'SELECT * FROM V3_COLABORADOR ORDER BY co_apellido';
+								   	$sql = 'SELECT * FROM COLABORADOR ORDER BY co_apellido';
 				 				   	foreach ($pdo->query($sql) as $row) {
-                                        echo '<input type="checkbox" name="" id="">' ;
+                                        /*echo '<input type="checkbox" name="" id="">' ;*/
+                                        echo '<p></p>';
                                         echo '<p></p>';
 
-                                        echo '<p>'. $row['co_nomina'] . '</p>';
-			    					   	echo '<p>'. $row['co_nombre'] . '</>';
-			    					  	echo '<p>'. $row['co_apellido_paterno'] . '</p>';
-                      					echo '<p>'. $row['co_correo'] . '</p>';
+                                    
+                                        if ($row['co_es_jurado'] == 1 && $row['co_nomina']!=NULL) {
+                                            echo '<p>'. $row['co_nomina'] . '</p>';
+                                            echo '<p>Jurado Profesor</p>';}
+                                        else if ($row['co_es_jurado']==0 && $row['co_nomina']!=NULL) {
+                                            echo '<p>'. $row['co_nomina'] . '</p>';
+                                            echo '<p>Profesor</p>';}
+                                        else if ($row['co_es_jurado']==1 && $row['co_nomina']==NULL) {
+                                            echo '<p>N/A</p>';
+                                            echo '<p>Jurado Externo</p>';}
+                                        else {
+                                            echo '<p>N/A</p>';
+                                            echo '<p>Externo</p>';}
+
+                                            echo '<p>'. $row['co_nombre'] . '</>';
+                                            echo '<p>'. $row['co_apellido'] . '</p>';
+                                            
+                                
                                         echo '<p></p>';
 
-			    					   	echo ' <div class="Btn__Green"> <a href="UsuariosRead.php?id='.$row['d_nomina'].'">Ver</a></div>';
-			    					  	echo ' <div class="Btn__Blue"> <a href="UsuariosUpdate.php?id='.$row['d_nomina'].'">Actualizar</a></div>';
-			    					   	echo ' <div class="Btn__Red" ><a href="UsuariosDelete.php?id='.$row['d_nomina'].'">Eliminar</a></div>';
+			    					   	echo ' <div class="Btn__Green" > <a href="UsuariosRead.php?correo='.$row['co_correo'].'&type=co">Ver</a></div>';
+			    					  	echo ' <div class="Btn__Blue"> <a href="UsuariosUpdate.php?correo='.$row['co_correo'].'&type=co">Actualizar</a></div>';
+			    					   	echo ' <div class="Btn__Red" ><a href="UsuariosDelete.php?correo='.$row['co_correo'].'&type=co">Eliminar</a></div>';
                                         
 								    }
+								   	
+				  				?>
+                                 <?php
 
+								   
+								   	$sql = 'SELECT * FROM ALUMNO ORDER BY a_apellido';
+				 				   	foreach ($pdo->query($sql) as $row) {
+                                       /* echo '<input type="checkbox" name="" id="">' ;*/
+                                        echo '<p></p>';
+                                        echo '<p></p>';
 
-								$sql = 'SELECT * FROM V2_ALUMNO ORDER BY a_ap_pa';
-								foreach ($pdo->query($sql) as $row) {
-                                    echo '<input type="checkbox" name="" id="">' ;
+                                        echo '<p>'. $row['a_matricula'] . '</p>';
+                                        echo '<p>Alumno</p>';
+			    					   	echo '<p>'. $row['a_nombre'] . '</>';
+			    					  	echo '<p>'. $row['a_apellido'] . '</p>';
+                      					
+                                        echo '<p></p>';
 
-                                    echo '<p>'. $row['a_matricula'] . '</p>';
-								    echo '<p>'. $row['a_nombre'] . '</p>';
-								    echo '<p>'. $row['a_ap_pa'] . '</p>';
-			  					    echo '<p>'. $row['a_correo'] . '</p>';
-
-								    echo ' <div class="Btn__Green"> <a href="readAdminUsu.php?id='.$row['a_matricula'].'">Ver</a></div>';
-								    echo ' <div class="Btn__Blue" > <a href="updateAdminUsu.php?id='.$row['a_matricula'].'">Actualizar</a></div>';
-								    echo ' <div class="Btn__Red" > <a href="deleteAdminUsu.php?id='.$row['a_matricula'].'">Eliminar</a></div>';
-                                    
-							}
-
-
+			    					   	echo ' <div class="Btn__Green"> <a href="UsuariosRead.php?correo='.$row['a_correo'].'&type=al">Ver</a></div>';
+			    					  	echo ' <div class="Btn__Blue"> <a href="UsuariosUpdate.php?correo='.$row['a_correo'].'&type=al">Actualizar</a></div>';
+			    					   	echo ' <div class="Btn__Red" ><a href="UsuariosDelete.php?correo='.$row['a_correo'].'&type=al">Eliminar</a></div>';
+                                        
+								    }
 								   	Database::disconnect();
 				  				?>
-
-
-
+            
             </div>
         </div>
+                                        
+     
 
   </main>
 

@@ -1,5 +1,14 @@
 <?php
-	require 'dataBase.php';
+	require_once 'dataBase.php';
+
+    session_name("EngineerXpoWeb");
+    session_start();
+
+    if (!isset($_SESSION['logged_in'])) {
+        header("Location: ../index.php");
+        exit();
+    }
+
 	$id = 0;
 	if ( !empty($_GET['id'])) {
 		$id = $_REQUEST['id'];
@@ -11,11 +20,12 @@
 		// delete data
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "DELETE FROM V2_EDICION WHERE ed_id = ?";
+		$sql = "DELETE FROM EDICION WHERE ed_id = ?";
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
 		Database::disconnect();
 		header("Location: EdicionView.php");
+		exit();
 	}
 ?>
 
@@ -30,25 +40,34 @@
         <title>Eliminar Edicion</title>
 
         <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
-        <link rel="stylesheet" href="../CSS/AdminPages.css">
         <link rel="stylesheet" href="../CSS/FormsStructure.css">
+        <link rel="stylesheet" href="../CSS/Extra.css">
 	</head>
 
 	<body>
 
         <header>
-            <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
-            <ul>
-                <li>
-                    <a href="#">Layout Proyectos</a>
-                </li>
-            </ul>
-            <nav>
-                <ul>
-                    <li><a href="#">Cerrar Sesión</a></li>
-                </ul>
-            </nav>
-        </header>
+			<a href="../index.php"
+				><img
+					class="Logo__Expo"
+					src="../media/logo-expo.svg"
+					alt="Logotipo de Expo ingenierías"
+			/></a>
+			<ul style="grid-column: 2/4">
+				<li><a href="../PHP/AdminInicio.php">Menu</a></li>
+				<li><a href="../PHP/AvisosView.php">Avisos</a></li>
+				<li><a href="../PHP/EdicionView.php">Ediciones</a></li>
+				<li><a href="../PHP/NivelView.php">Nivel</a></li>
+				<li><a href="../PHP/CategoriaView.php">Categorias</a></li>
+				<li><a href="../PHP/UsuariosView.php">Usuarios</a></li>
+				<li><a href="../PHP/ProyectosView.php">Proyectos</a></li>
+				<li><a href="../PHP/AdministradoresView.php">Administradores</a></li>
+				<li><a href="../PHP/EvaluacionesView.php">Evaluaciones</a></li>
+				<li style="font-weight: 600;">
+					<a href="../PHP/logout.php">Cerrar Sesion</a>
+				</li>
+			</ul>
+		</header>
 
         <main>
             <h1>Eliminar Edición</h1>
@@ -71,14 +90,14 @@
                     </tr>
 
                     <tr>
-                        <td class="Td__Iniciar__Sesion">
+                        <td class="Btn-Ancla">
                             <input class="Btn__Iniciar__Sesion" type="submit" value="Si" id="submit" name="submit">
                         </td>
                     </tr>
 					
 					<tr>
 						<td>
-                            <a class="Btn__Blue" href="EdicionView.php">Regresar</a>
+                            <a class="Btn-Ancla" href="EdicionView.php">Regresar</a>
                         </td>
 					</tr>
                 </table>

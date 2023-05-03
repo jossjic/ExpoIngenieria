@@ -1,0 +1,12 @@
+main {
+	display: grid;
+	grid-template-rows: 100vh 100vh;
+}
+
+.first-cal {
+	grid-row: 1/2;
+}
+
+.second-cal {
+	grid-row: 2/3;
+}

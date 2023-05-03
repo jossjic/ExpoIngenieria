@@ -31,38 +31,63 @@
             $valid = false;
         }
 
+
         // Verify credentials
         $pdo = Database::connect();
         $sql = "SELECT * FROM COLABORADOR WHERE co_correo = ? AND co_pass = ?";
         $q = $pdo->prepare($sql);
         $q->execute(array($collaborator_email, $collaborator_pass));
+
+        $sql = "SELECT * FROM ADMIN WHERE adm_correo = ? AND adm_pass = ?";
+        $admin = $pdo->prepare($sql);
+        $admin->execute(array($collaborator_email, $collaborator_pass)); 
+        $isAdmin = $admin->rowCount() == 1;
         Database::disconnect();
 
         // Credentials are incorrect
-        if ($q->rowCount() == 0) {
+        if ($q->rowCount() == 0 && $admin->rowCount() == 0) {
             $login_error = 'El nombre o contraseña que ingresaste no están asociados a una cuenta';
             $valid = false;
-        }
+        } 
 
-        if ($valid) {
-            // Get collaborator data
-            $collaborator = $q->fetch(PDO::FETCH_ASSOC);
+        if ($isAdmin){
+            if($valid){
+                $collaborator = $admin->fetch(PDO::FETCH_ASSOC);
+                $_SESSION['logged_in'] = true;
+                $_SESSION['user_type'] = "ADMIN";
+                $_SESSION['id'] = $collaborator['adm_correo'];
+                // Redirect
+                header("Location: ../PHP/AdminInicio.php");
+                exit();
+            }
+        } else {
 
-            // Create session variables
-            $_SESSION['logged_in'] = true;
-            $_SESSION['user_type'] = "collaborator";
-            $_SESSION['id'] = $collaborator['co_correo'];
+            if ($valid) {
+                // Get collaborator data
+                $collaborator = $q->fetch(PDO::FETCH_ASSOC);
+    
+                // Create session variables
+                if ($collaborator['co_es_jurado'] == true){
+                    $_SESSION['logged_in'] = true;
+                    $_SESSION['user_type'] = "collaborator-judge";
+                    $_SESSION['id'] = $collaborator['co_correo'];
+                    // Redirect
+                    header("Location: ../PHP/DashboardColaboradoresJuez.php");
+                    exit();
+                } elseif ($collaborator['co_es_jurado'] == false) {
+                    $_SESSION['logged_in'] = true;
+                    $_SESSION['user_type'] = "collaborator-teacher";
+                    $_SESSION['id'] = $collaborator['co_correo'];
+                    // Redirect
+                    header("Location: ../PHP/DashboardColaboradoresDocente.php");
+                    exit();
+                }
+                
+            }
 
-            // Redirect
-            header("Location: ../PHP/DashboardColaboradores.php");
-            exit();
         }
     }
 
-    // GET METHOD
-    else {
-
-    }
 ?>
 
 <!DOCTYPE html>
@@ -95,14 +120,32 @@
                     <table>
                         <tr>
                             <td>Correo</td>
-                            <td><input class="Text__Input" type="email" name="collaborator_email" value="<?php echo !empty($collaborator_email) ? $collaborator_email : ''; ?>" autofocus required></td>
+                            <td>
+                                <input class="Text__Input" type="email" name="collaborator_email" value="<?php echo !empty($collaborator_email) ? $collaborator_email : ''; ?>" autofocus required>
+                                <?php if (!empty($collaborator_email_error)): ?>
+                                    <br>
+                                    <span class="Error__Message"><?php echo $collaborator_email_error; ?></span>
+                                <?php endif; ?>
+                            </td>
                         </tr>
                         <tr>
                             <td>Contraseña  </td>
-                            <td><input class="Text__Input" type="password" name="collaborator_pass" value="<?php echo !empty($collaborator_pass) ? $collaborator_pass : ''; ?>" required></td>
+                            <td>
+                                <input class="Text__Input" type="password" name="collaborator_pass" value="<?php echo !empty($collaborator_pass) ? $collaborator_pass : ''; ?>" required>
+                                <?php if (!empty($collaborator_pass_error)): ?>
+                                    <br>
+                                    <span class="Error__Message"><?php echo $collaborator_pass_error; ?></span>
+                                <?php endif; ?>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="Td__Iniciar__Sesion" colspan="2"><input class="Btn__Iniciar__Sesion" type="submit" value="Iniciar sesión" name="submit"></td>
+                            <td class="Td__Iniciar__Sesion" colspan="2">
+                                <input class="Btn__Iniciar__Sesion" type="submit" value="Iniciar sesión" name="submit">
+                                <?php if (!empty($login_error)): ?>
+                                    <br>
+                                    <span class="Error__Message"><?php echo $login_error; ?></span>
+                                <?php endif; ?>
+                            </td>
                         </tr>
                     </table>
                 </form>

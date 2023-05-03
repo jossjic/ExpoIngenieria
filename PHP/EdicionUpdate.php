@@ -1,6 +1,14 @@
 <?php
 
-	require 'dataBase.php';
+    require_once 'dataBase.php';
+
+    session_name("EngineerXpoWeb");
+    session_start();
+
+    if (!isset($_SESSION['logged_in'])) {
+        header("Location: ../index.php");
+        exit();
+    }
 
 	$id = null;
 	if ( !empty($_GET['id'])) {
@@ -44,10 +52,10 @@
 		if ($valid) {
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "UPDATE V2_EDICION  set ed_id = ?, ed_nombre = ?, ed_fecha_inicio =?, ed_fecha_fin= ? WHERE ed_id = ?";
+			$sql = "UPDATE EDICION  set ed_nombre = ?, ed_fecha_inicio =?, ed_fecha_fin= ? WHERE ed_id = ?";
 			$q = $pdo->prepare($sql);
 			//$acq = ($ac=="S")?1:0;
-			$q->execute(array($ed_id,$ed_nombre,$ed_fecha_inicio,$ed_fecha_fin,$ed_id));
+			$q->execute(array($ed_nombre,$ed_fecha_inicio,$ed_fecha_fin,$id));
 			Database::disconnect();
 			header("Location: EdicionView.php");
 		}
@@ -55,7 +63,7 @@
 	else {
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "SELECT * FROM V2_EDICION where ed_id = ?";
+		$sql = "SELECT * FROM EDICION where ed_id = ?";
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
 		$data = $q->fetch(PDO::FETCH_ASSOC);
@@ -80,25 +88,34 @@
 
         <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
         <link rel="stylesheet" href="../CSS/FormsStructure.css">
-        <link rel="stylesheet" href="../CSS/AdminPages.css">
+        <link rel="stylesheet" href="../CSS/Extra.css">
 
 	</head>
 
     <body>
         
         <header>
-            <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
-            <ul>
-            <li>
-                <a href="#">Layout Proyectos</a>
-            </li>
-            </ul>
-            <nav>
-                <ul>
-                    <li><a href="#">Cerrar Sesión</a></li>
-                </ul>
-            </nav>
-        </header>
+			<a href="../index.php"
+				><img
+					class="Logo__Expo"
+					src="../media/logo-expo.svg"
+					alt="Logotipo de Expo ingenierías"
+			/></a>
+			<ul style="grid-column: 2/4">
+				<li><a href="../PHP/AdminInicio.php">Menu</a></li>
+				<li><a href="../PHP/AvisosView.php">Avisos</a></li>
+				<li><a href="../PHP/EdicionView.php">Ediciones</a></li>
+				<li><a href="../PHP/NivelView.php">Nivel</a></li>
+				<li><a href="../PHP/CategoriasView.php">Categorias</a></li>
+				<li><a href="../PHP/UsuariosView.php">Usuarios</a></li>
+				<li><a href="../PHP/ProyectosView.php">Proyectos</a></li>
+				<li><a href="../PHP/AdministradoresView.php">Administradores</a></li>
+				<li><a href="../PHP/EvaluacionesView.php">Evaluaciones</a></li>
+				<li style="font-weight: 600;">
+					<a href="../PHP/logout.php">Cerrar Sesion</a>
+				</li>
+			</ul>
+		</header>
 
         <main>
 
@@ -127,7 +144,7 @@
                             <label>Nombre</label>
                         </td>
                         <td>
-                            <input class="Text__Input" name="ed_nombre" type="text"  placeholder="Nombre Edicion" value="<?php echo !empty($ed_nombre)?$ed_nombre:'';?>">
+                            <input class="Text__Input" name="ed_nombre" type="text"  placeholder="Nombre Edicion" value="<?php echo !empty($ed_nombre)?$ed_nombre:'';?>" required>
                             <?php if (($ed_nombreError != null)) ?>
                             <span class="help-inline"><?php echo $ed_nombreError;?></span>
                         </td>
@@ -138,7 +155,7 @@
                             <label>Fecha de inicio</label>
                         </td>
                         <td>
-                            <input class="Text__Input" name="ed_fecha_inicio" type="date"  placeholder="Fecha Inicio" value="<?php echo !empty($ed_fecha_inicio)?$ed_fecha_inicio:'';?>">
+                            <input class="Text__Input" name="ed_fecha_inicio" type="date"  placeholder="Fecha Inicio" value="<?php echo !empty($ed_fecha_inicio)?$ed_fecha_inicio:'';?>" required>
                             <?php if (($ed_fecha_inicioError != null)) ?>
                             <span class="help-inline"><?php echo $ed_fecha_inicioError;?></span>
                         </td>
@@ -150,18 +167,18 @@
                         </td>
 
                         <td>
-                            <input class="Text__Input" name="ed_fecha_fin" type="date"  placeholder="Fecha Fin" value="<?php echo !empty($ed_fecha_fin)?$ed_fecha_fin:'';?>">
+                            <input class="Text__Input" name="ed_fecha_fin" type="date"  placeholder="Fecha Fin" value="<?php echo !empty($ed_fecha_fin)?$ed_fecha_fin:'';?>" required>
                             <?php if (($ed_fecha_finError != null)) ?>
                             <span class="help-inline"><?php echo $ed_fecha_finError;?></span>
                         </td>
                     </tr>
 
                     <tr>
-                        <td class="Td__Iniciar__Sesion">
+                        <td>
                             <input class="Btn__Iniciar__Sesion" type="submit" value="Actualizar Edicion" id="submit" name="submit">
                         </td>
                         <td>
-                            <a class="Btn__Blue" href="EdicionView.php">Regresar</a>
+                            <a class="Btn-Ancla" href="EdicionView.php">Regresar</a>
                         </td>
                     </tr>
                 </table>

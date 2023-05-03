@@ -13,8 +13,18 @@
         }
 
         // Collaborator user
-        elseif ($_SESSION['user_type'] === "collaborator") {
-            header("Location: ./PHP/DashboardColaboradores.php");
+        elseif ($_SESSION['user_type'] === "collaborator-teacher") {
+            header("Location: ./PHP/DashboardColaboradoresDocente.php");
+            exit();
+        }
+
+        elseif ($_SESSION['user_type'] === "collaborator-judge") {
+            header("Location: ./PHP/DashboardColaboradoresJuez.php");
+            exit();
+        }
+
+        elseif ($_SESSION['user_type'] === "ADMIN") {
+            header("Location: ./PHP/AdminInicio.php");
             exit();
         }
     }
@@ -31,7 +41,7 @@
 
     <title>Bienvenida | Expo ingenierías</title>
 
-    <link rel="stylesheet" href="./CSS/PaginaInicio.css">
+    <link rel="stylesheet" href="./CSS/Home.css">
 </head>
 <body>
     <header>
@@ -65,13 +75,13 @@
                 <h1>REGISTRA TU PROYECTO!</h1>
             </div> -->
             <div class="Explanation">
-                <h1>¿Que es ExpoIngenieria?</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus commodi et dolore nulla sit asperiores quod dolores esse. Consequuntur nostrum, dolore nesciunt iure consequatur voluptatum iste doloremque aut aperiam similique. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem pariatur dolore esse, aspernatur eos sunt ipsam impedit unde sed optio. Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, dolorum.</p>
-                <a class="Registrar__Proyecto" href="#">Registrar Proyecto</a>
+                <h1>En la Escuela de Ingeniería y Ciencias del Tec de Monterrey estamos convencidos de que el ingenio humano es lo que transforma al mundo.</h1>
+                <p>En este evento podrás conocer muestras y exhibiciones de los proyectos más ingeniosos, innovadores y peculiares de estudiantes actuales de todas nuestras carreras de Ingeniería y Ciencias. También podrás participar en diversas actividades interactivas como las que se describen a continuación.</p>
+                <a class="Registrar__Proyecto" href="./PHP/RegistroProyecto.php">Registrar Proyecto</a>
             </div>
             
             <div class="Video__Explanation">
-                <iframe width="100%" height="80%" src="https://www.youtube.com/embed/JlE4XlMmTJI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe width="100%" height="80%" src="https://www.youtube.com/embed/E1fUpr9EA-Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
         </section>
         

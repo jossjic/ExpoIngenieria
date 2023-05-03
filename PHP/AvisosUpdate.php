@@ -1,6 +1,14 @@
 <?php
 
-	require 'dataBase.php';
+    require_once 'dataBase.php';
+
+    session_name("EngineerXpoWeb");
+    session_start();
+
+    if (!isset($_SESSION['logged_in'])) {
+        header("Location: ../index.php");
+        exit();
+    }
 
 	$id = null;
 	if ( !empty($_GET['id'])) {
@@ -9,6 +17,7 @@
 
 	if ( $id==null ) {
 		header("Location: AvisosView.php");
+		exit();
 	}
 
 	if ( !empty($_POST)) {
@@ -16,23 +25,19 @@
         $TituloError = null;
 		$ContenidoError = null;
 		$GrupoError = null;
-        $FechaError = null;
-        $Adm_UsuError = null;
-        
+    
 
 		// keep track post valuesv 
         $Titulo = $_POST['Titulo'];
 		$Contenido = $_POST['Contenido'];
 		$Grupo  = $_POST['Grupo'];
-        $Fecha = $_POST['Fecha'];
-        $Adm_Usu = $_POST['Usuario'];
         
 
 		/// validate input
 		$valid = true;
 
 		if (empty($Titulo)) {
-			$TItuloError = 'Porfavor ingresa el titulo';
+			$TituloError = 'Porfavor ingresa el titulo';
 			$valid = false; 
 		}
 		if (empty($Contenido)) {
@@ -43,24 +48,17 @@
 			$GrupoError = 'Porfavor ingresa el grupo';
 			$valid = false;
 		}
-        if (empty($Fecha)) {
-			$FechaError = 'Porfavor ingresa la fecha en que se publicara el anuncio';
-			$valid = false;
-		}
-        if (empty($Adm_Usu)) {
-			$Adm_UsuError = 'Porfavor ingresa el usuario que eres';
-			$valid = false;
-		}
 
 		// update data
 		if ($valid) {
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "UPDATE ANUNCIO SET an_titulo = ?, an_contenido = ?, an_grupo = ?, an_fecha = ?, adm_usu = ? = WHERE an_id = ?";
+			$sql = "UPDATE ANUNCIO SET an_titulo = ?, an_contenido = ?, an_grupo = ? WHERE an_id = ?";
 			$q = $pdo->prepare($sql);
-			$q->execute(array($Titulo,$Contenido,$Grupo,$Fecha,$Adm_Usu,$id));
+			$q->execute(array($Titulo,$Contenido,$Grupo,$id));
 			Database::disconnect();
-			header("Location: AnuncioView.php");
+			header("Location: AvisosView.php");
+			exit();
 		}
 	}
 	else {
@@ -73,8 +71,6 @@
 		$Titulo 	= $data['an_titulo'];
         $Contenido 	= $data['an_contenido'];
 		$Grupo = $data['an_grupo'];
-		$Fecha = $data['an_fecha'];
-        $Adm_Usu = $data['adm_usu'];
 		Database::disconnect();
 	}
 ?>
@@ -92,37 +88,33 @@
 
         <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
         <link rel="stylesheet" href="../CSS/FormsStructure.css">
+		<link rel="stylesheet" href="../CSS/Extra.css">
 
 	</head>
 
     <body>
         
         <header>
-			<img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
-
-            <ul>
-
-                <li>
-                    <a href="#">Menu</a>
-                </li>
-				<li>
-                    <a href="#">Usuarios</a>
-                </li>
-				<li>
-                    <a href="#">Reconocimientos</a>
-                </li>
-				<li>
-                    <a href="#">Eastadísticas</a>
-                </li>
-				
+			<a href="../index.php"
+				><img
+					class="Logo__Expo"
+					src="../media/logo-expo.svg"
+					alt="Logotipo de Expo ingenierías"
+			/></a>
+			<ul style="grid-column: 2/4">
+				<li><a href="../PHP/AdminInicio.php">Menu</a></li>
+				<li><a href="../PHP/AvisosView.php">Avisos</a></li>
+				<li><a href="../PHP/EdicionView.php">Ediciones</a></li>
+				<li><a href="../PHP/NivelView.php">Nivel</a></li>
+				<li><a href="../PHP/CategoriasView.php">Categorias</a></li>
+				<li><a href="../PHP/UsuariosView.php">Usuarios</a></li>
+				<li><a href="../PHP/ProyectosView.php">Proyectos</a></li>
+				<li><a href="../PHP/AdministradoresView.php">Administradores</a></li>
+				<li><a href="../PHP/EvaluacionesView.php">Evaluaciones</a></li>
+				<li style="font-weight: 600;">
+					<a href="../PHP/logout.php">Cerrar Sesion</a>
+				</li>
 			</ul>
-
-            <nav>
-				<ul>
-					<li><a href="#">Cerrar Sesion</a></li>
-				</ul>
-			</nav>
-
 		</header>
 
         <main>
@@ -179,23 +171,11 @@
                     </tr>
 
                     <tr>
-                        <td>
-                            <label>Fecha</label>
-                        </td>
-
-                        <td>
-                            <input class="Text__Input" name="Fecha" type="date" readonly placeholder="" value="<?php echo !empty($Fecha)?$Fecha:'';?>">
-                            <?php if (($FechaError != null)) ?>
-                            <span class="help-inline"><?php echo $FechaError;?></span>
-                        </td>
-                    </tr>
-
-                    <tr>
                         <td class="Td__Iniciar__Sesion">
                             <input class="Btn__Iniciar__Sesion" type="submit" value="Actualizar Anuncio" id="submit" name="submit">
                         </td>
                         <td>
-                            <a class="Btn__Blue" href="AvisosView.php">Regresar</a>
+                            <a class="Btn-Ancla" href="AvisosView.php">Regresar</a>
                         </td>
                     </tr>
                 </table>

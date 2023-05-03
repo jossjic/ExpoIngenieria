@@ -1,25 +1,83 @@
 <?php
-	require 'database.php';
-	$id = 0;
-	if ( !empty($_GET['id'])) {
-		$id = $_REQUEST['id'];
+	require_once 'dataBase.php';
+
+    session_name("EngineerXpoWeb");
+    session_start();
+
+    if (!isset($_SESSION['logged_in'])) {
+        header("Location: ../index.php");
+        exit();
+    }
+
+	$correo = 0;
+	$type = 0;
+	if ( !empty($_GET['correo'])&& !empty($_GET['type'])) {
+		$correo = $_REQUEST['correo'];
+		$type = $_REQUEST['type'];
 	}
 
 	if ( !empty($_POST)) {
 		// keep track post values
-		$id = $_POST['id'];
+		$correo = $_POST['correo'];
+		$type = $_POST['type'];
 		// delete data
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "DELETE FROM V2_DOCENTE WHERE d_nomina = ?";
-		$q = $pdo->prepare($sql);
-		$q->execute(array($id));
+		if ($type=='co'){
+			$sql = "DELETE FROM COLABORADOR WHERE co_correo = ?";
+			$q = $pdo->prepare($sql);
+			$q->execute(array($correo));
+			$sql = "SELECT * FROM COLABORADOR WHERE co_correo = ?";
+			$q = $pdo->prepare($sql);
+			$q->execute(array($correo));
+			if($q->rowCount()<=0){
+				$verif=true;
+			}
+			else{
+				$verif=false;
+			}
+
+		}
+		else if ($type=='al'){
+			$sql = "DELETE FROM ALUMNO WHERE a_correo = ?";
+			$q = $pdo->prepare($sql);
+			$q->execute(array($correo));
+			$sql = "SELECT * FROM ALUMNO WHERE a_correo = ?";
+			$q = $pdo->prepare($sql);
+			$q->execute(array($correo));
+			if($q->rowCount()<=0){
+				$verif=true;
+			}
+			else{
+				$verif=false;
+			}
+		}
+		else if ($type=='adm'){
+			$sql = "DELETE FROM ADMIN WHERE adm_correo = ?";
+			$q = $pdo->prepare($sql);
+			$q->execute(array($correo));
+			$sql = "SELECT * FROM ADMIN WHERE adm_correo = ?";
+			$q = $pdo->prepare($sql);
+			$q->execute(array($correo));
+			if($q->rowCount()<=0){
+				$verif=true;
+			}
+			else{
+				$verif=false;
+			}
+		}
+		else{
+			echo "Error en tipo de usuario";
+			$verif=false;
+		}
 		Database::disconnect();
-		header("Location: AdminUsuarios.php");
+		header("Location: UsuariosView.php?verif=$verif");
 	}
 
 
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,49 +88,71 @@
   <link rel="icon" type="image/x-icon" href="../media/favicon.ico">
   <title>Admin Usuarios Detalles</title>
 
-  <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
-  <link rel="stylesheet" href="../CSS/AdminPages.css">
+  	<link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
+    <link rel="stylesheet" href="../CSS/FormsStructure.css">
+    <link rel="stylesheet" href="../CSS/Extra.css">
 </head>
-<body>
 
-<header>
-      <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
-      <ul>
-          <li>
-              <a href="#">Cerrar Sesion</a>
-          </li>
-      </ul>
-      <nav>
-          <ul>
-              <li><a href="#">Proyectos</a></li>
-              <li><a href="#">Usuarios</a></li>
-              <li><a href="#">Reconocimientos</a></li>
-              <li><a href="#">Estadísticas</a></li>
-          </ul>
-      </nav>
-  </header>
+		<header>
+			<a href="../index.php"
+				><img
+					class="Logo__Expo"
+					src="../media/logo-expo.svg"
+					alt="Logotipo de Expo ingenierías"
+			/></a>
+			<ul style="grid-column: 2/4">
+				<li><a href="../PHP/AdminInicio.php">Menu</a></li>
+				<li><a href="../PHP/AvisosView.php">Avisos</a></li>
+				<li><a href="../PHP/EdicionView.php">Ediciones</a></li>
+				<li><a href="../PHP/NivelView.php">Nivel</a></li>
+				<li><a href="../PHP/CategoriaView.php">Categorias</a></li>
+				<li><a href="../PHP/UsuariosView.php">Usuarios</a></li>
+				<li><a href="../PHP/ProyectosView.php">Proyectos</a></li>
+				<li><a href="../PHP/AdministradoresView.php">Administradores</a></li>
+				<li><a href="../PHP/EvaluacionesView.php">Evaluaciones</a></li>
+				<li style="font-weight: 600;">
+					<a href="../PHP/logout.php">Cerrar Sesion</a>
+				</li>
+			</ul>
+		</header>
 
-	
-  <body>
-	    <div class="container">
-	    	<div class="span10 offset1">
-	    		<div class="row">
-			    	<h3>Eliminar un docente</h3>
-			    </div>
+		<main>
 
-			    <form class="form-horizontal" action="delete.php" method="post">
-		    		<input type="hidden" name="id" value="<?php echo $id;?>"/>
-					<p class="alert alert-error">Estas seguro que quieres eliminar a este usuario?</p>
-					<div class="form-actions">
-						<button type="submit" class="btn btn-danger">Si</button>
-						<a class="btn" href="AdminUsuarios.php">No</a>
-					</div>
-				</form>
-			</div>
-	  </div> <!-- /container -->
-	</body>
-	
-	<footer>
-    <img class="Logo__Tec" src="../media/LogoTec.png" alt="Logo TEC">
-  </footer>
+			<h1>Eliminar Usuario</h1>
+
+			<form class="form-horizontal" action="UsuariosDelete.php" method="post">
+
+				<table>
+					<tr>
+						<td>
+							<input type="hidden" name="correo" value="<?php echo $correo;?>"/>
+						</td>
+						<td>
+							<input type="hidden" name="type" value="<?php echo $type;?>"/>
+						</td>
+					</tr>
+
+					<tr>
+						<td style="text-align: center;">
+							<p>¿Estas seguro de que quieres eliminar a este usuario?</p>
+						</td>
+					</tr>
+
+					<tr>
+                        <td class="Btn-Ancla">
+                            <input class="Btn__Iniciar__Sesion" type="submit" value="Si" id="submit" name="submit">
+                        </td>
+                    </tr>
+					
+					<tr>
+						<td>
+                            <a class="Btn-Ancla" href="UsuariosView.php">Regresar</a>
+                        </td>
+					</tr>
+
+				</table>
+
+			</form>
+
+		</main>
 </html>

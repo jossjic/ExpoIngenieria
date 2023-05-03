@@ -1,5 +1,13 @@
 <?php 
-	require 'dataBase.php';
+	require_once 'dataBase.php';
+
+    session_name("EngineerXpoWeb");
+    session_start();
+
+    if (!isset($_SESSION['logged_in'])) {
+        header("Location: ../index.php");
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -18,24 +26,27 @@
 
 
     <body>
-        <header>
-			<img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo__EscNegCie">
-
-            <ul>
-				
-                <li><a href="#">Menu</a></li>
-				<li><a href="#">Usuarios</a></li>
-				<li><a href="#">Reconocimientos</a></li>
-				<li><a href="#">Eastadísticas</a></li>
-				
+	<header>
+			<a href="../index.php"
+				><img
+					class="Logo__Expo"
+					src="../media/logo-expo.svg"
+					alt="Logotipo de Expo ingenierías"
+			/></a>
+			<ul style="grid-column: 2/4">
+				<li><a href="../PHP/AdminInicio.php">Menu</a></li>
+				<li><a href="../PHP/AvisosView.php">Avisos</a></li>
+				<li><a href="../PHP/EdicionView.php">Ediciones</a></li>
+				<li><a href="../PHP/NivelView.php">Nivel</a></li>
+				<li><a href="../PHP/CategoriasView.php">Categorias</a></li>
+				<li><a href="../PHP/UsuariosView.php">Usuarios</a></li>
+				<li><a href="../PHP/ProyectosView.php">Proyectos</a></li>
+				<li><a href="../PHP/AdministradoresView.php">Administradores</a></li>
+				<li><a href="../PHP/EvaluacionesView.php">Evaluaciones</a></li>
+				<li style="font-weight: 600;">
+					<a href="../PHP/logout.php">Cerrar Sesion</a>
+				</li>
 			</ul>
-
-            <nav>
-				<ul>
-					<li><a href="#">Cerrar Sesion</a></li>
-				</ul>
-			</nav>
-
 		</header>
 
 		<main>
@@ -49,7 +60,7 @@
 							<td id="TotalProyectos">
 								<?php
 									$pdo = Database::connect();
-									$sql = "SELECT * FROM EDICIONV1";
+									$sql = "SELECT * FROM ADMIN";
 									$q = $pdo->query($sql)->rowCount();
 									echo "$q";
 									Database::disconnect();
@@ -91,8 +102,8 @@
 					<p>&nbsp;</p>
 					<p></p>
 					<p>Nombre</p>
-					<p>Correo</p>
-                    <p></p>
+					<p>Apellido</p>
+                    <p>Correo</p>
 					<p></p>
 					<div>
 						<p>Acciones</p>
@@ -101,24 +112,25 @@
 				<div class="Info__Table">
                                 <?php
 									$pdo = Database::connect();
-									$sql = "SELECT * FROM V2_EDICION ORDER BY ed_nombre";
+									$sql = "SELECT * FROM ADMIN ORDER BY adm_nombre";
 									foreach ($pdo->query($sql) as $row) {
 										echo "
 											<p>&nbsp;</p>
 											<p></p>
-											<p>" . $row['ed_nombre'] ."</p>
-											<p>" . $row['ed_estado'] ."</p>
-                                            <p></p>
+											<p>".$row['adm_nombre']."</p>
+											<p>".$row['adm_apellido']."</p>
+                                            <p>".$row['adm_correo']."</p>
                                             <p></p>
 											<div class='Btn__Green'>
-												<a href='../PHP/EdministradoresRead.php?id=".trim($row['adm_usu'])."'>Ver</a>
+												<a href='../PHP/AdministradoresRead.php?id=".trim($row['adm_correo'])."'>Ver</a>
 											</div>
 											<div class='Btn__Blue'>
-												<a href='../PHP/AdministradoresUpdate.php?id=".trim($row['adm_usu'])."'>Actualizar</a>
+												<a href='../PHP/AdministradoresUpdate.php?id=".trim($row['adm_correo'])."'>Actualizar</a>
 											</div>
 											<div class='Btn__Red'>
-												<a href='../PHP/AdministradoresDelete.php?id=".trim($row['adm_usu'])."'>Eliminar</a>
+												<a href='../PHP/AdministradoresDelete.php?id=".trim($row['adm_correo'])."'>Eliminar</a>
 											</div>
+											<p></p>
 										";
 									}
 									Database::disconnect();
