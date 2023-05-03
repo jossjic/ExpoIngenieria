@@ -100,7 +100,7 @@
             //Insert into Edicion Colaborador with the last edition able on edition table
             $sql = "INSERT INTO EDICION_COLABORADOR(co_correo,ed_id) VALUES(?,?)";
             $q = $pdo->prepare($sql);
-            $q->execute(array($collaborator_email,$last_edition_id['ed_id']));
+            $q->execute(array($collaborator_email,$last_edition_id[0]['ed_id']));
 
             // Get project data
             $sql = "SELECT * FROM COLABORADOR WHERE co_correo = ? AND co_pass = ?";
