@@ -87,10 +87,20 @@
             $pdo = Database::connect();
 
             // Create collaborator
-            $sql = "INSERT INTO COLABORADOR (co_correo, co_nomina, co_nombre, co_apellido, co_pass, co_es_jurado) VALUES (?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO COLABORADOR (co_correo, co_nomina, co_nombre, co_apellido, co_pass, co_es_jurado,) VALUES (?, ?, ?, ?, ?, ?)";
             $q = $pdo->prepare($sql);
             $is_judge = false;
             $q->execute(array($collaborator_email, $collaborator_payroll, $collaborator_name, $collaborator_lastname, $collaborator_pass, $is_judge));
+
+            //Get the last edition able
+            $sql = "SELECT id FROM edicion ORDER BY id DESC LIMIT 1";
+            $q = $pdo->query($sql);
+            $last_edition_id = $q->fetchColumn();
+
+            //Insert into Edicion Colaborador with the last edition able on edition table
+            $sql = "INSERT INTO EDICION_COLABORADOR(co_correo,ed_id) VALUES(?,?)";
+            $q = $pdo->prepare($sql);
+            $q->execute(array($collaborator_email,$last_edition_id));
 
             // Get project data
             $sql = "SELECT * FROM COLABORADOR WHERE co_correo = ? AND co_pass = ?";
