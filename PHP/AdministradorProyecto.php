@@ -163,7 +163,7 @@
 			</div>
 		</div>
 
-		<main>
+		<main style="padding: 0;">
 			<form class="First__Form card" style="width: 90%;" action="../PHP/InfoProyecto.php" method="POST">
 				<table class="table-1">
 					<tr>
