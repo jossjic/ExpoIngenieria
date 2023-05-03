@@ -93,7 +93,7 @@
             $q->execute(array($collaborator_email, $collaborator_payroll, $collaborator_name, $collaborator_lastname, $collaborator_pass, $is_judge));
 
             //Get the last edition able
-            $sql = "SELECT id FROM edicion ORDER BY id DESC LIMIT 1";
+            $sql = "SELECT ed_id FROM EDICION ORDER BY ed_id DESC LIMIT 1";
             $q = $pdo->query($sql);
             $last_edition_id = $q->fetchColumn();
 
