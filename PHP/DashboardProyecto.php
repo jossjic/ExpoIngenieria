@@ -91,7 +91,7 @@
             <a href="../index.php"><img class="Logo__Expo" src="../media/logo-expo.svg" alt="Logotipo de Expo ingenierías"></a>
             <ul>
                 <li><a href="../index.php">Inicio</a></li>
-                <li><a href="#">Layout de proyectos</a></li>
+                <li><a href="#">Mapa de proyectos</a></li>
             </ul>
             <nav>
                 <ul>

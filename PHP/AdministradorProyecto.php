@@ -54,17 +54,17 @@
 	</head>
 	<body>
 		<header>
-			<img
-				class="Logo__EscNegCie"
-				src="../media/logotec-ings.svg"
-				alt="Logo TEC"
-			/>
-			<ul>
-				<li><a href="../PHP/DashboardProyecto.php">Dashboard</a></li>
-				<li><a href="#">Galeria de Proyectos</a></li>
-			</ul>
-			<a class="Otros" href="../PHP/logout.php">Cerrar Sesion</a>
-		</header>
+            <a href="../index.php"><img class="Logo__Expo" src="../media/logo-expo.svg" alt="Logotipo de Expo ingenierías"></a>
+            <ul>
+                <li><a href="../index.php">Inicio</a></li>
+                <li><a href="#">Mapa de proyectos</a></li>
+            </ul>
+            <nav>
+                <ul>
+                    <li><a href="../PHP/logout.php">Cerrar Sesion</a></li>
+                </ul>
+            </nav>
+        </header>
 
 		<aside class="card">
 			<h1>
