@@ -249,12 +249,12 @@
 					<tr>
 						<td>
 							<textarea
-								class="input"
+								class="input card"
 								name="project_description"
 								id="project_description"
 								cols="30"
 								rows="10"
-								style="display: inline; width: 100%; height: 100%;"
+								style="display: inline; width: 100%; height: 100%; resize: none;"
 							> <?php echo	$data['p_descripcion'] ?>
 							</textarea>
 						</td>
