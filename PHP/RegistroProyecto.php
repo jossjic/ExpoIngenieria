@@ -63,7 +63,7 @@
             $pdo = Database::connect();
 
             // Create project
-            $sql = "INSERT INTO PROYECTO (p_nombre_clave, p_pass) VALUES (?, ?)";
+            $sql = "INSERT INTO PROYECTO (p_nombre_clave, p_pass, p_estado) VALUES (?, ?, 'Registrado')";
             $q = $pdo->prepare($sql);
             $q->execute(array($project_name_code, $project_pass));
             
