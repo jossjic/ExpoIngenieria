@@ -101,11 +101,11 @@
             
             // Create session variables
             $_SESSION['logged_in'] = true;
-            $_SESSION['user_type'] = "collaborator";
+            $_SESSION['user_type'] = "collaborator-docente";
             $_SESSION['id'] = $collaborator['co_correo'];
             
             // Redirect
-            header("Location: ../PHP/DashboardColaboradores.php");
+            header("Location: ../PHP/DashboardColaboradoresDocente.php");
             exit();
         }
     }
