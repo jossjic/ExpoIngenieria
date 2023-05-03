@@ -240,11 +240,6 @@
 				<table style="text-align: center" class="table-2">
 					<tr>
 						<td>
-							<label for="project_description">
-								Descripción del Proyecto
-							</label>
-						</td>
-						<td>
 							<textarea
 								class="input"
 								name="project_description"
