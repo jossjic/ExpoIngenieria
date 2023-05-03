@@ -19,6 +19,8 @@
         if ($data['count'] > 0) {
             // El docente ya está registrado en el proyecto, mostrar mensaje de error
             echo "El docente ya está registrado en el proyecto";
+            header("Location: ../PHP/AdministradorProyecto.php");
+            exit();
         } else {
             // El docente no está registrado en el proyecto, realizar la inserción en la tabla PROYECTO_DOCENTE
             $sql = "INSERT INTO PROYECTO_DOCENTE (p_id, co_correo) VALUES (?, ?)";
