@@ -102,7 +102,7 @@
             //Get the last edition able
             $sql = "SELECT * FROM EDICION ORDER BY ed_id DESC LIMIT 1";
             $q = $pdo->query($sql);
-            $last_edition_id = $q->fetchAll(PDO::FETCH_ASSOC);
+            $last_edition_id = $q->fetch(PDO::FETCH_ASSOC);
 
             echo $last_edition_id[0]['ed_id'];
 
