@@ -165,96 +165,97 @@
 
 		<main>
 			<form class="First__Form" action="../PHP/InfoProyecto.php" method="POST">
-			<table style="text-align: center">
-			<tr>
-				<td>
-					<label for="project_name">
-						Nombre del Proyecto
-					</label>
-				</td>
-				<td>
-						<input
-							type="text"
-							name="project_name"
-							id="project_name"
-							<?php echo "value='".$data['p_nombre']."'" ?>
-						/>
-				</td>
-				
-				
-			</tr>
+				<table style="text-align: center" class="table-1">
+					<tr>
+						<td>
+							<label for="project_name">
+								Nombre del Proyecto
+							</label>
+						</td>
+						<td>
+								<input
+									type="text"
+									name="project_name"
+									id="project_name"
+									<?php echo "value='".$data['p_nombre']."'" ?>
+								/>
+						</td>
+						
+						
+					</tr>
 
-			<tr>
-				<td>
-					<label for="category"> Categoría </label>
-				</td>
-				<td>
-					<select name="category" id="category">
-						<?php 
-							foreach ($categorias as $row) {
-								if ($row['ca_id'] == $data['ca_id']) {
-									echo "<option value='".$row['ca_id']."' selected>".$row['ca_nombre']."</option>";
-								} else {
-									echo "<option value='".$row['ca_id']."'>".$row['ca_nombre']."</option>";
-								}
-							}
-						?>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<label for="status">Avance</label>
-				</td>
-				
-				<td>
-					<select name="level" id="level">
-						<?php 
-							foreach ($nivel as $row) {
-								if ($row['n_id'] == $data['n_id']) {
-									echo "<option value='".$row['n_id']."' selected>".$row['n_nombre']."</option>";
-								} else {
-									echo "<option value='".$row['n_id']."'>".$row['n_nombre']."</option>";
-								}
-								
-							}
-						?>
-					</select>
-				</td>
-				
-			</tr>
-			<tr>
-				<td colspan="2">
+					<tr>
+						<td>
+							<label for="category"> Categoría </label>
+						</td>
+						<td>
+							<select name="category" id="category">
+								<?php 
+									foreach ($categorias as $row) {
+										if ($row['ca_id'] == $data['ca_id']) {
+											echo "<option value='".$row['ca_id']."' selected>".$row['ca_nombre']."</option>";
+										} else {
+											echo "<option value='".$row['ca_id']."'>".$row['ca_nombre']."</option>";
+										}
+									}
+								?>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label for="status">Avance</label>
+						</td>
+						
+						<td>
+							<select name="level" id="level">
+								<?php 
+									foreach ($nivel as $row) {
+										if ($row['n_id'] == $data['n_id']) {
+											echo "<option value='".$row['n_id']."' selected>".$row['n_nombre']."</option>";
+										} else {
+											echo "<option value='".$row['n_id']."'>".$row['n_nombre']."</option>";
+										}
+										
+									}
+								?>
+							</select>
+						</td>
+						
+					</tr>
+					<tr>
+						<td colspan="2">
 
-					<input type="submit" class="btn-submit" value="Guardar" />
+							<input type="submit" class="btn-submit" value="Guardar" />
 
-				</td>
-				<td>
-				
-					
-				
-				</td>
-			</tr>
-		</table>
-		<table>
-			<tr>
-				<td>
-					<label for="project_description">
-						Descripción del Proyecto
-					</label>
-				</td>
-				<td>
-					<textarea
-						class="input"
-						name="project_description"
-						id="project_description"
-						cols="30"
-						rows="10"
-					> <?php echo	$data['p_descripcion'] ?>
-					</textarea>
-				</td>
-			</tr>
-		</table>
+						</td>
+						<td>
+						
+							
+						
+						</td>
+					</tr>
+				</table>
+
+				<table style="text-align: center" class="table-2">
+					<tr>
+						<td>
+							<label for="project_description">
+								Descripción del Proyecto
+							</label>
+						</td>
+						<td>
+							<textarea
+								class="input"
+								name="project_description"
+								id="project_description"
+								cols="30"
+								rows="10"
+							> <?php echo	$data['p_descripcion'] ?>
+							</textarea>
+						</td>
+					</tr>
+				</table>
 			</form>
 
 			<div class="Second__Form">
