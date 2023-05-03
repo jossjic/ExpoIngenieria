@@ -98,7 +98,7 @@
             $q->execute(array($collaborator_email, $collaborator_pass));
             
             $collaborator = $q->fetch(PDO::FETCH_ASSOC);
-
+            Database::disconnect();
             // //Get the last edition able
             // $sql = "SELECT * FROM EDICION ORDER BY ed_id DESC LIMIT 1";
             // $q = $pdo->query($sql);
@@ -111,7 +111,6 @@
             // $q = $pdo->prepare($sql);
             // $q->execute(array($collaborator['co_correo'],$last_edition_id[0]['ed_id']));
 
-            Database::disconnect();
             // Create session variables
             $_SESSION['logged_in'] = true;
             $_SESSION['user_type'] = "collaborator-teacher";
