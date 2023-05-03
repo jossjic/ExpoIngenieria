@@ -20,7 +20,7 @@
 		$q = $pdo->prepare($sql);
 		$q->execute(array($_SESSION['id'],$correo));
 		Database::disconnect();
-		header("Location: EvaluacionesView.php");
+		header("Location: AdministradorProyecto.php");
 		exit();
 
 	} else {
