@@ -66,7 +66,7 @@
 			<a class="Otros" href="../PHP/logout.php">Cerrar Sesion</a>
 		</header>
 
-		<aside>
+		<aside class="card">
 			<h1>
 				Bienvenido <br />
 				de nuevo!
@@ -165,7 +165,7 @@
 
 		<main>
 			<form class="First__Form" action="../PHP/InfoProyecto.php" method="POST">
-				<table style="text-align: center" class="table-1">
+				<table class="table-1 card">
 					<tr>
 						<td>
 							<label for="project_name">
@@ -263,7 +263,7 @@
 			</form>
 
 			<div class="Second__Form">
-				<div class="Add_People">
+				<div class="Add_People cardBtn">
 					<button
 						id="add_student_btn"
 						onclick="showStudentFieldInput()"
@@ -279,7 +279,7 @@
 						Agregar Profesor
 					</button>
 				</div>
-				<div class="students_div">
+				<div class="students_div card">
 					<h3>Alumnos</h3>
 					<div class="students_div_menu">
 								<?php 
@@ -302,7 +302,7 @@
 
 					</div>
 				</div>
-				<div class="teachers_div">
+				<div class="teachers_div card">
 					<h3>Profesores</h3>
 					<div class="teachers_div_menu">
 								<?php  

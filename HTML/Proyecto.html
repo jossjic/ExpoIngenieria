@@ -18,100 +18,28 @@
 		/>
 	</head>
 	<body>
-		<table style="text-align: center" class="table-1">
-			<tr>
-				<td>
-					<label for="project_name">
-						Nombre del Proyecto
-					</label>
-				</td>
-			</tr>
-			<tr>
-				
-				<td>
-						<input
-							type="text"
-							name="project_name"
-							id="project_name"
-							<?php echo "value='".$data['p_nombre']."'" ?>
-						/>
-				</td>
-				
-				
-			</tr>
-
-			<tr>
-				<td>
-					<label for="category"> Categoría </label>
-				</td>
-			</tr>
-			<tr>
-			
-				<td>
-					<select name="category" id="category">
-						<?php 
-							foreach ($categorias as $row) {
-								if ($row['ca_id'] == $data['ca_id']) {
-									echo "<option value='".$row['ca_id']."' selected>".$row['ca_nombre']."</option>";
-								} else {
-									echo "<option value='".$row['ca_id']."'>".$row['ca_nombre']."</option>";
-								}
+		<div class="teachers_div card">
+			<h3>Profesores</h3>
+			<div class="teachers_div_menu">
+						<?php  
+							$pdo = Database::connect();
+							$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+							$sql = "SELECT * FROM PROYECTO_DOCENTE NATURAL JOIN COLABORADOR WHERE p_id = ?";
+							$q = $pdo->prepare($sql);
+							$q->execute(array($_SESSION['id']));
+							$dataProfesor = $q->fetchAll(PDO::FETCH_ASSOC);
+							foreach ($dataProfesor as $row) {
+								echo " 
+										<div class='teachers_div_menu_eachone'>
+											<span class='nombrecompleto'>".$row['co_nombre']. " ".$row['co_apellido']."</span>
+											<span class='correo'>".$row['co_correo']."</span>
+											<span style='color: black;' class='close' >&times;</span>
+										</div>
+									";
 							}
-						?>
-					</select>
-				</td>
-			</tr>
-
-			<tr>
-				<td>
-					<label for="status">Avance</label>
-				</td>
-			</tr>
-
-			<tr>
-				<td>
-					<select name="level" id="level">
-						<?php 
-							foreach ($nivel as $row) {
-								if ($row['n_id'] == $data['n_id']) {
-									echo "<option value='".$row['n_id']."' selected>".$row['n_nombre']."</option>";
-								} else {
-									echo "<option value='".$row['n_id']."'>".$row['n_nombre']."</option>";
-								}
-								
-							}
-						?>
-					</select>
-				</td>
+						?> 
 				
-			</tr>
-			<tr>
-				<td colspan="2">
-
-					<input type="submit" class="btn-submit" value="Guardar" />
-
-				</td>
-				<td>
-				
-					
-				
-				</td>
-			</tr>
-		</table>
-		<table style="text-align: center" class="table-1">
-			<tr>
-				<td>
-					<textarea
-						class="input"
-						name="project_description"
-						id="project_description"
-						cols="30"
-						rows="10"
-						style="display: inline; width: 100%; height: 100%;"
-					> <?php echo	$data['p_descripcion'] ?>
-					</textarea>
-				</td>
-			</tr>
-		</table>
+			</div>
+		</div>
 	</body>
 </html>
