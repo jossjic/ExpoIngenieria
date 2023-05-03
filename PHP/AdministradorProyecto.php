@@ -294,7 +294,7 @@
 										<div class='students_div_menu_eachone'>
 											<span class='nombrecompleto'>".$row['a_nombre']. " ".$row['a_apellido']."</span>
 											<span class='correo'>".$row['a_correo']."</span>
-											<span style='color: black;' class='close'><a href='../EliminarEstudiante.php?id=".$row['a_correo']."'</a>&times;</a></span>
+											<span style='color: black;' class='close'><a href='../PHP/EliminarEstudiante.php?id=".$row['a_correo']."'</a>&times;</a></span>
 										</div>
 											";
 									}
