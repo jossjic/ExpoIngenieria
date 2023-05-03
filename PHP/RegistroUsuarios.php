@@ -87,37 +87,25 @@
             $pdo = Database::connect();
 
             // Create collaborator
-            $sql = "INSERT INTO COLABORADOR (co_correo, co_nomina, co_nombre, co_apellido, co_pass, co_es_jurado,) VALUES (?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO COLABORADOR (co_correo, co_nomina, co_nombre, co_apellido, co_pass, co_es_jurado) VALUES (?, ?, ?, ?, ?, ?)";
             $q = $pdo->prepare($sql);
-            $is_judge = false;
+            $is_judge = true;
             $q->execute(array($collaborator_email, $collaborator_payroll, $collaborator_name, $collaborator_lastname, $collaborator_pass, $is_judge));
 
-            // Get colaborator data
+            // Get project data
             $sql = "SELECT * FROM COLABORADOR WHERE co_correo = ? AND co_pass = ?";
             $q = $pdo->prepare($sql);
             $q->execute(array($collaborator_email, $collaborator_pass));
-            
-            $collaborator = $q->fetch(PDO::FETCH_ASSOC);
             Database::disconnect();
-            // //Get the last edition able
-            // $sql = "SELECT * FROM EDICION ORDER BY ed_id DESC LIMIT 1";
-            // $q = $pdo->query($sql);
-            // $last_edition_id = $q->fetch(PDO::FETCH_ASSOC);
-
-            // echo $last_edition_id[0]['ed_id'];
-
-            // //Insert into Edicion Colaborador with the last edition able on edition table
-            // $sql = "INSERT INTO EDICION_COLABORADOR(co_correo,ed_id) VALUES(?,?)";
-            // $q = $pdo->prepare($sql);
-            // $q->execute(array($collaborator['co_correo'],$last_edition_id[0]['ed_id']));
-
+            $collaborator = $q->fetch(PDO::FETCH_ASSOC);
+            
             // Create session variables
             $_SESSION['logged_in'] = true;
-            $_SESSION['user_type'] = "collaborator-teacher";
+            $_SESSION['user_type'] = "collaborator";
             $_SESSION['id'] = $collaborator['co_correo'];
             
             // Redirect
-            header("Location: ../PHP/DashboardColaboradoresDocente.php");
+            header("Location: ../PHP/DashboardColaboradores.php");
             exit();
         }
     }
