@@ -11,6 +11,7 @@
 
     // POST METHOD
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        
         $collaborator_name_error = null;
         $collaborator_lastname_error = null;
         $collaborator_email_error = null;
@@ -181,7 +182,7 @@
                             <td><input class="Text__Input" type="password" name="collaborator_pass" value="<?php echo !empty($collaborator_pass) ? $collaborator_pass : ''; ?>" required></td>
                         </tr>
                             <td>Confirmar contraseña</td>
-                            <td><input class="Text__Input" type="password" name="collaborator_pass_confirm" value="<?php echo !empty($collaborator_pass_confirm) ? $collaborator_confirm : ''; ?>" required></td>
+                            <td><input class="Text__Input" type="password" name="collaborator_pass_confirm" value="<?php echo !empty($collaborator_pass_confirm) ? $collaborator_pass_confirm : ''; ?>" required></td>
                         </tr>
                         <tr>
                             <td class="Td__Registrar" colspan="2"><input class="Btn__Registrar" type="submit" value="Registrar" name="submit"></td>
