@@ -113,8 +113,8 @@
         </header>
         <main> 
             <div class="Card-1">
-                <a class="Btns Btn-1" href="../PHP/Login/LoginUsuarios.php">Iniciar sesión</a>
-                <a class="Btns Btn-2" href="../PHP/SignUp/RegistroUsuarios.php">Registrarse</a>
+                <a class="Btns Btn-1" href="../PHP/LoginUsuarios.php">Iniciar sesión</a>
+                <a class="Btns Btn-2" href="../PHP/RegistroUsuarios.php">Registrarse</a>
                 <form class="Form__Card-1" action="" method="post">
                     <center><b>¡Bienvenido!<br><br>Ingresa las credenciales de tu cuenta</b></center>
                     <table>
