@@ -5,7 +5,7 @@ if ($_GET) {
     if (isset($_GET['matricula'])) {
         $pdo = Database::connect();
         //$sql = "SELECT * FROM alumno";
-        $sql = "SELECT alumno.a_nombre, alumno.a_apellido, proyecto.p_nombre, edicion.ed_nombre FROM alumno JOIN proyecto_alumno ON alumno.a_correo = proyecto_alumno.a_correo JOIN proyecto ON proyecto_alumno.p_id = proyecto.p_id JOIN edicion ON proyecto.ed_id = edicion.ed_id WHERE alumno.a_matricula = '{$_GET['matricula']}' AND proyecto.p_id = {$_GET['proyecto']};";
+        $sql = "SELECT ALUMNO.a_nombre, ALUMNO.a_apellido, PROYECTO.p_nombre, EDICION.ed_nombre FROM ALUMNO JOIN PROYECTO_ALUMNO ON ALUMNO.a_correo = PROYECTO_ALUMNO.a_correo JOIN PROYECTO ON PROYECTO_ALUMNO.p_id = PROYECTO.p_id JOIN EDICION ON PROYECTO.ed_id = EDICION.ed_id WHERE ALUMNO.a_matricula = '{$_GET['matricula']}' AND PROYECTO.p_id = {$_GET['proyecto']};";
         $q = $pdo->query($sql);
         //var_dump($q);
         $filas = $q->fetch();
