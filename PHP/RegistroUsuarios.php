@@ -93,14 +93,14 @@
             $q->execute(array($collaborator_email, $collaborator_payroll, $collaborator_name, $collaborator_lastname, $collaborator_pass, $is_judge));
 
             //Get the last edition able
-            $sql = "SELECT ed_id FROM EDICION ORDER BY ed_id DESC LIMIT 1";
+            $sql = "SELECT * FROM EDICION ORDER BY ed_id DESC LIMIT 1";
             $q = $pdo->query($sql);
-            $last_edition_id = $q->fetchColumn();
+            $last_edition_id = $q->fetchAll(PDO::FETCH_ASSOC);
 
             //Insert into Edicion Colaborador with the last edition able on edition table
             $sql = "INSERT INTO EDICION_COLABORADOR(co_correo,ed_id) VALUES(?,?)";
             $q = $pdo->prepare($sql);
-            $q->execute(array($collaborator_email,$last_edition_id));
+            $q->execute(array($collaborator_email,$last_edition_id['ed_id']));
 
             // Get project data
             $sql = "SELECT * FROM COLABORADOR WHERE co_correo = ? AND co_pass = ?";
