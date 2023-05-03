@@ -10,6 +10,11 @@
 		exit();
 	}
 
+	if ($_SESSION['user_type'] != "collaborator-judge") {
+		header("Location: ../index.php");
+		exit();
+	}
+
 	$id = null;
 	
 	$p1 = null; $p2 = null; $p3 = null; $p4 = null; $p5 = null;
@@ -33,6 +38,8 @@
 		$p3 = $_POST['p_3'];
 		$p4 = $_POST['p_4'];
 		$p5 = $_POST['p_5'];
+
+		$ev_retro = $_POST['ev_retro'];
 
 		/// validate input
 		$valid = true;
@@ -62,9 +69,10 @@
 			$valid = false;
 		}
 
+		if (empty($ev_retro)) {
+			$ev_retro = null;
+		}
 
-
-		// update data
 		if ($valid) {
 			$user_id = $_SESSION['id'];
 			$pdo = Database::connect();
@@ -76,7 +84,8 @@
 			$q->execute(array($user_id, $id));
 			$evaluacion = $q->fetch(PDO::FETCH_ASSOC);
 			$number_of_evaluations = $q->rowCount();
-			
+
+			// Evaluation of judge already exists
 			if ($number_of_evaluations != 0) {
 				$sql = 'UPDATE EVALUACION 
 						SET 
@@ -84,10 +93,42 @@
 							ev_criterio_2 = ?,
 							ev_criterio_3 = ?,
 							ev_criterio_4 = ?,
-							ev_criterio_5 = ?
+							ev_criterio_5 = ?,
+							ev_retro = ?
 				        WHERE co_correo = ? AND p_id = ?';
 				$q = $pdo->prepare($sql);
-				$q->execute(array($p1, $p2, $p3, $p4, $p5, $user_id, $id));
+				$q->execute(array($p1, $p2, $p3, $p4, $p5, $ev_retro, $user_id, $id));
+				Database::disconnect();
+				header("Location: CalificarProyecto.php?id=$id");
+				exit();
+			}
+
+			// Evaluation of judge is new
+			else {
+				$sql = 'INSERT INTO EVALUACION
+						(
+							ev_criterio_1,
+							ev_criterio_2,
+							ev_criterio_3,
+							ev_criterio_4,
+							ev_criterio_5,
+							ev_retro,
+							co_correo,
+							p_id
+						)
+						VALUES
+						(
+							?,
+							?,
+							?,
+							?,
+							?,
+							?,
+							?
+							)
+						';
+				$q = $pdo->prepare($sql);
+				$q->execute(array($p1, $p2, $p3, $p4, $p5, $ev_retro, $user_id, $id));
 				Database::disconnect();
 				header("Location: CalificarProyecto.php?id=$id");
 				exit();
@@ -161,6 +202,7 @@
 			$p3 = $evaluation['ev_criterio_3'];
 			$p4 = $evaluation['ev_criterio_4'];
 			$p5 = $evaluation['ev_criterio_5'];
+			$ev_retro = $evaluation['ev_retro'];
 		}
 
 
@@ -221,7 +263,7 @@
 		<header>
             <a href="../index.php"><img class="Logo__Expo" src="../media/logo-expo.svg" alt="Logotipo de Expo ingenierías"></a>
             <ul>
-				<li><a href="../PHP/DashboardColaboradoresJurado.php">Dashboard</a></li>
+				<li><a href="../PHP/DashboardColaboradoresJuez.php">Dashboard</a></li>
                 <li><a href="../PHP/Mapa.php">Mapa de proyectos</a></li>
             </ul>
             <nav>
@@ -283,213 +325,214 @@
 						?>
 						<a href="../PHP/ProyectosACalificar.php" class="btn btn-primary mx-2" style="background-color: #0033A0;">Regresar</a>
 					</div>
-
 				</div>
-
 				<div class="row">
-					
-						<form action="CalificarProyecto.php?id=<?php echo $id?>" method="post">
-							<input type="hidden" name="id" value="<?php echo $id;?>"/>
-							<fieldset class="rubric-container">
-								<legend><strong>Rúbrica de evaluación</strong></legend>
-								<br>
-								<hr>
-								<div class="rubric-elements">
-									<table>
-										<thead>
-											<tr>
-												<th>&nbsp;</th>
-												<th>Deficiente</th>
-												<th>Regular</th>
-												<th>Bueno</th>
-												<th>Excelente</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td><b>Utilidad:</b>
-													<p>El proyecto resuelve un problema actual en el área de interés y/o el proyecto da alta prioridad al cliente quien queda ampliamente satisfecho.</p>
-												</td>
-												<?php 
-													if ($p1 === '1') {
-														echo '<td><input type="radio" name="p_1" value="1" checked></td>';
-													}
-													else {
-														echo '<td><input type="radio" name="p_1" value="1"></td>';
-													}
-													if ($p1 === '2') {
-														echo '<td><input type="radio" name="p_1" value="2" checked></td>';
-													}
-													else {
-														echo '<td><input type="radio" name="p_1" value="2"></td>';
-													}
-													if ($p1 === '3') {
-														echo '<td><input type="radio" name="p_1" value="3" checked></td>';
-													}
-													else {
-														echo '<td><input type="radio" name="p_1" value="3"></td>';
-													}
-													if ($p1 === '4') {
-														echo '<td><input type="radio" name="p_1" value="4" checked></td>';
-													}
-													else {
-														echo '<td><input type="radio" name="p_1" value="4"></td>';
-													}
-												?>
-											</tr>
-											<?php if (!empty($p1Error)): ?>
-												<tr><td colspan="5" class="project-rubric-score"><?php echo $p1Error;?></td></tr>
-											<?php endif;?>
-											<tr>
-												<td>
-													<b>Impacto e innovación:</b>
-													<p>El proyecto presenta una idea nueva e impacta positivamente en el área de interés y/o el producto presenta una idea nueva e incrementa la productividad.</p>
-												</td>
-												<?php 
-													if ($p2 === '1') {
-														echo '<td><input type="radio" name="p_2" value="1" checked></td>';
-													}
-													else {
-														echo '<td><input type="radio" name="p_2" value="1"></td>';
-													}
-													if ($p2 === '2') {
-														echo '<td><input type="radio" name="p_2" value="2" checked></td>';
-													}
-													else {
-														echo '<td><input type="radio" name="p_2" value="2"></td>';
-													}
-													if ($p2 === '3') {
-														echo '<td><input type="radio" name="p_2" value="3" checked></td>';
-													}
-													else {
-														echo '<td><input type="radio" name="p_2" value="3"></td>';
-													}
-													if ($p2 === '4') {
-														echo '<td><input type="radio" name="p_2" value="4" checked></td>';
-													}
-													else {
-														echo '<td><input type="radio" name="p_2" value="4"></td>';
-													}
-												?>
-											</tr>
-											<?php if (!empty($p2Error)): ?>
-												<tr><td colspan="5" class="project-rubric-score"><?php echo $p2Error;?></td></tr>
-											<?php endif;?>
-											<tr>
-												<td>
-													<b>Desarrollo experimental o técnico y/o resultados o producto final:</b>
-													<p>Ausencia de errores técnicos los resultados y/o producto resuelven el problema propuesto.</p>
-												</td>
-												<?php 
-													if ($p3 === '1') {
-														echo '<td><input type="radio" name="p_3" value="1" checked></td>';
-													}
-													else {
-														echo '<td><input type="radio" name="p_3" value="1"></td>';
-													}
-													if ($p3 === '2') {
-														echo '<td><input type="radio" name="p_3" value="2" checked></td>';
-													}
-													else {
-														echo '<td><input type="radio" name="p_3" value="2"></td>';
-													}
-													if ($p3 === '3') {
-														echo '<td><input type="radio" name="p_3" value="3" checked></td>';
-													}
-													else {
-														echo '<td><input type="radio" name="p_3" value="3"></td>';
-													}
-													if ($p3 === '4') {
-														echo '<td><input type="radio" name="p_3" value="4" checked></td>';
-													}
-													else {
-														echo '<td><input type="radio" name="p_3" value="4"></td>';
-													}
-												?>
-											</tr>
-											<?php if (!empty($p3Error)): ?>
-												<tr><td colspan="5" class="project-rubric-score"><?php echo $p3Error;?></td></tr>
-											<?php endif;?>
-											<tr>
-												<td>
-													<b>Claridad y precisión de ideas:</b>
-													<p>La presentación es concreta y clara.</p>
-												</td>
-												<?php 
-													if ($p4 === '1') {
-														echo '<td><input type="radio" name="p_4" value="1" checked></td>';
-													}
-													else {
-														echo '<td><input type="radio" name="p_4" value="1"></td>';
-													}
-													if ($p4 === '2') {
-														echo '<td><input type="radio" name="p_4" value="2" checked></td>';
-													}
-													else {
-														echo '<td><input type="radio" name="p_4" value="2"></td>';
-													}
-													if ($p4 === '3') {
-														echo '<td><input type="radio" name="p_4" value="3" checked></td>';
-													}
-													else {
-														echo '<td><input type="radio" name="p_4" value="3"></td>';
-													}
-													if ($p4 === '4') {
-														echo '<td><input type="radio" name="p_4" value="4" checked></td>';
-													}
-													else {
-														echo '<td><input type="radio" name="p_4" value="4"></td>';
-													}
-												?>
-											</tr>
-											<?php if (!empty($p4Error)): ?>
-												<tr><td colspan="5" class="project-rubric-score"><?php echo $p4Error;?></td></tr>
-											<?php endif;?>
-											<tr>
-												<td>
-													<b>Respuestas a preguntas:</b>
-													<p>Respuestas precisas de acuerdo al diseño, al estado de avance del proyecto, al impacto y a los resultados obtenidos.</p>
-												</td>
-												<?php 
-													if ($p5 === '1') {
-														echo '<td><input type="radio" name="p_5" value="1" checked></td>';
-													}
-													else {
-														echo '<td><input type="radio" name="p_5" value="1"></td>';
-													}
-													if ($p5 === '2') {
-														echo '<td><input type="radio" name="p_5" value="2" checked></td>';
-													}
-													else {
-														echo '<td><input type="radio" name="p_5" value="2"></td>';
-													}
-													if ($p5 === '3') {
-														echo '<td><input type="radio" name="p_5" value="3" checked></td>';
-													}
-													else {
-														echo '<td><input type="radio" name="p_5" value="3"></td>';
-													}
-													if ($p5 === '4') {
-														echo '<td><input type="radio" name="p_5" value="4" checked></td>';
-													}
-													else {
-														echo '<td><input type="radio" name="p_5" value="4"></td>';
-													}
-												?>
-											</tr>
-											<?php if (!empty($p5Error)): ?>
-												<tr><td colspan="5" class="project-rubric-score"><?php echo $p5Error;?></td></tr>
-											<?php endif;?>
-										</tbody>
-									</table>
-								</div>
-							</fieldset>
-							<div class="submit-btn-container">
-								<input type="submit" class="submit-btn" value="Confirmar calificación"> 
+					<form action="CalificarProyecto.php?id=<?php echo $id?>" method="post">
+						<input type="hidden" name="id" value="<?php echo $id;?>"/>
+						<fieldset class="rubric-container">
+							<legend><strong>Rúbrica de evaluación</strong></legend>
+							<br>
+							<hr>
+							<div class="rubric-elements">
+								<table>
+									<thead>
+										<tr>
+											<th>&nbsp;</th>
+											<th>Deficiente</th>
+											<th>Regular</th>
+											<th>Bueno</th>
+											<th>Excelente</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><b>Utilidad:</b>
+												<p>El proyecto resuelve un problema actual en el área de interés y/o el proyecto da alta prioridad al cliente quien queda ampliamente satisfecho.</p>
+											</td>
+											<?php 
+												if ($p1 === '1') {
+													echo '<td><input type="radio" name="p_1" value="1" checked></td>';
+												}
+												else {
+													echo '<td><input type="radio" name="p_1" value="1"></td>';
+												}
+												if ($p1 === '2') {
+													echo '<td><input type="radio" name="p_1" value="2" checked></td>';
+												}
+												else {
+													echo '<td><input type="radio" name="p_1" value="2"></td>';
+												}
+												if ($p1 === '3') {
+													echo '<td><input type="radio" name="p_1" value="3" checked></td>';
+												}
+												else {
+													echo '<td><input type="radio" name="p_1" value="3"></td>';
+												}
+												if ($p1 === '4') {
+													echo '<td><input type="radio" name="p_1" value="4" checked></td>';
+												}
+												else {
+													echo '<td><input type="radio" name="p_1" value="4"></td>';
+												}
+											?>
+										</tr>
+										<?php if (!empty($p1Error)): ?>
+											<tr><td colspan="5" class="project-rubric-score"><?php echo $p1Error;?></td></tr>
+										<?php endif;?>
+										<tr>
+											<td>
+												<b>Impacto e innovación:</b>
+												<p>El proyecto presenta una idea nueva e impacta positivamente en el área de interés y/o el producto presenta una idea nueva e incrementa la productividad.</p>
+											</td>
+											<?php 
+												if ($p2 === '1') {
+													echo '<td><input type="radio" name="p_2" value="1" checked></td>';
+												}
+												else {
+													echo '<td><input type="radio" name="p_2" value="1"></td>';
+												}
+												if ($p2 === '2') {
+													echo '<td><input type="radio" name="p_2" value="2" checked></td>';
+												}
+												else {
+													echo '<td><input type="radio" name="p_2" value="2"></td>';
+												}
+												if ($p2 === '3') {
+													echo '<td><input type="radio" name="p_2" value="3" checked></td>';
+												}
+												else {
+													echo '<td><input type="radio" name="p_2" value="3"></td>';
+												}
+												if ($p2 === '4') {
+													echo '<td><input type="radio" name="p_2" value="4" checked></td>';
+												}
+												else {
+													echo '<td><input type="radio" name="p_2" value="4"></td>';
+												}
+											?>
+										</tr>
+										<?php if (!empty($p2Error)): ?>
+											<tr><td colspan="5" class="project-rubric-score"><?php echo $p2Error;?></td></tr>
+										<?php endif;?>
+										<tr>
+											<td>
+												<b>Desarrollo experimental o técnico y/o resultados o producto final:</b>
+												<p>Ausencia de errores técnicos los resultados y/o producto resuelven el problema propuesto.</p>
+											</td>
+											<?php 
+												if ($p3 === '1') {
+													echo '<td><input type="radio" name="p_3" value="1" checked></td>';
+												}
+												else {
+													echo '<td><input type="radio" name="p_3" value="1"></td>';
+												}
+												if ($p3 === '2') {
+													echo '<td><input type="radio" name="p_3" value="2" checked></td>';
+												}
+												else {
+													echo '<td><input type="radio" name="p_3" value="2"></td>';
+												}
+												if ($p3 === '3') {
+													echo '<td><input type="radio" name="p_3" value="3" checked></td>';
+												}
+												else {
+													echo '<td><input type="radio" name="p_3" value="3"></td>';
+												}
+												if ($p3 === '4') {
+													echo '<td><input type="radio" name="p_3" value="4" checked></td>';
+												}
+												else {
+													echo '<td><input type="radio" name="p_3" value="4"></td>';
+												}
+											?>
+										</tr>
+										<?php if (!empty($p3Error)): ?>
+											<tr><td colspan="5" class="project-rubric-score"><?php echo $p3Error;?></td></tr>
+										<?php endif;?>
+										<tr>
+											<td>
+												<b>Claridad y precisión de ideas:</b>
+												<p>La presentación es concreta y clara.</p>
+											</td>
+											<?php 
+												if ($p4 === '1') {
+													echo '<td><input type="radio" name="p_4" value="1" checked></td>';
+												}
+												else {
+													echo '<td><input type="radio" name="p_4" value="1"></td>';
+												}
+												if ($p4 === '2') {
+													echo '<td><input type="radio" name="p_4" value="2" checked></td>';
+												}
+												else {
+													echo '<td><input type="radio" name="p_4" value="2"></td>';
+												}
+												if ($p4 === '3') {
+													echo '<td><input type="radio" name="p_4" value="3" checked></td>';
+												}
+												else {
+													echo '<td><input type="radio" name="p_4" value="3"></td>';
+												}
+												if ($p4 === '4') {
+													echo '<td><input type="radio" name="p_4" value="4" checked></td>';
+												}
+												else {
+													echo '<td><input type="radio" name="p_4" value="4"></td>';
+												}
+											?>
+										</tr>
+										<?php if (!empty($p4Error)): ?>
+											<tr><td colspan="5" class="project-rubric-score"><?php echo $p4Error;?></td></tr>
+										<?php endif;?>
+										<tr>
+											<td>
+												<b>Respuestas a preguntas:</b>
+												<p>Respuestas precisas de acuerdo al diseño, al estado de avance del proyecto, al impacto y a los resultados obtenidos.</p>
+											</td>
+											<?php 
+												if ($p5 === '1') {
+													echo '<td><input type="radio" name="p_5" value="1" checked></td>';
+												}
+												else {
+													echo '<td><input type="radio" name="p_5" value="1"></td>';
+												}
+												if ($p5 === '2') {
+													echo '<td><input type="radio" name="p_5" value="2" checked></td>';
+												}
+												else {
+													echo '<td><input type="radio" name="p_5" value="2"></td>';
+												}
+												if ($p5 === '3') {
+													echo '<td><input type="radio" name="p_5" value="3" checked></td>';
+												}
+												else {
+													echo '<td><input type="radio" name="p_5" value="3"></td>';
+												}
+												if ($p5 === '4') {
+													echo '<td><input type="radio" name="p_5" value="4" checked></td>';
+												}
+												else {
+													echo '<td><input type="radio" name="p_5" value="4"></td>';
+												}
+											?>
+										</tr>
+										<?php if (!empty($p5Error)): ?>
+											<tr><td colspan="5" class="project-rubric-score"><?php echo $p5Error;?></td></tr>
+										<?php endif;?>
+										<tr>
+											<td>Retroalimentación (opcional)</td>
+											<td colspan="4"><textarea rows="4" name="ev_retro" style="width: 100%;"><?php echo $ev_retro;?></textarea></td>
+
+										</tr>
+									</tbody>
+								</table>
 							</div>
-						</form>
+						</fieldset>
+						<div class="submit-btn-container">
+							<input type="submit" class="submit-btn" value="Confirmar calificación"> 
+						</div>
+					</form>
 				</div>
-				
 			</div>
 	    </main>
 	</body>
