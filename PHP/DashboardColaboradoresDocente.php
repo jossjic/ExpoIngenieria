@@ -4,6 +4,8 @@
     session_name("EngineerXpoWeb");
     session_start();
 
+    $_SESSION['user_type'] = "collaborator-teacher";
+
     if (!isset($_SESSION['logged_in'])) {
         header("Location: ../index.php");
         exit();
@@ -82,7 +84,6 @@
                     <?php 
                         if ($tipoUsuario['co_es_jurado'] == true && $nomina['co_nomina'] != null) {
                             echo "<li><a href='../PHP/DashboardColaboradoresJuez.php'>Cambiar Vista a Jurado</a></li>";
-                            $_SESSION['user_type'] = "collaborator-judge";
                         }
                     ?>
                     <li><a href="../PHP/logout.php">Cerrar Sesion</a></li>
