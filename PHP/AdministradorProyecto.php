@@ -245,7 +245,7 @@
 						</td>
 					</tr>
 				</table>
-				<table style="text-align: center" class="table-1">
+				<table style="text-align: center" class="table-2">
 					<tr>
 						<td>
 							<textarea
