@@ -287,7 +287,7 @@
 									$dataProfesor = $q->fetchAll(PDO::FETCH_ASSOC);
 									foreach ($dataProfesor as $row) {
 										echo " 
-												<div class='teachers_div_menu_eachone'></div>
+												<div class='teachers_div_menu_eachone'>
 													<span class='nombrecompleto'>".$row['co_nombre']. " ".$row['co_apellido']."</span>
 													<span class='correo'>".$row['co_correo']."</span>
 													<span style='color: black;' >&times;</span>
