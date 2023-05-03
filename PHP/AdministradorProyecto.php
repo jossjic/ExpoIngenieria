@@ -294,7 +294,7 @@
 										<div class='students_div_menu_eachone'>
 											<span class='nombrecompleto'>".$row['a_nombre']. " ".$row['a_apellido']."</span>
 											<span class='correo'>".$row['a_correo']."</span>
-											<span style='color: black;' class='close'><a href='../PHP/EliminarAlumno.php?id=".$row['a_correo']."'</a>&times;</a></span>
+											<span style='color: black;' class='close'><a href='../PHP/EliminarAlumno.php?correo=".trim($row['a_correo'])."&id=".$_SESSION['id']."'</a>&times;</a></span>
 										</div>
 											";
 									}
@@ -317,7 +317,7 @@
 												<div class='teachers_div_menu_eachone'>
 													<span class='nombrecompleto'>".$row['co_nombre']. " ".$row['co_apellido']."</span>
 													<span class='correo'>".$row['co_correo']."</span>
-													<span style='color: black;' class='close'><a href='../PHP/EliminarDocente.php?id=".$row['co_correo']."'>&times;</a></span>
+													<span style='color: black;' class='close'><a href='../PHP/EliminarDocente.php?correo=".trim($row['co_correo'])."&id=".$_SESSION['id']."'>&times;</a></span>
 												</div>
 											";
 									}

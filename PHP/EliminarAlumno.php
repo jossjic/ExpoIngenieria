@@ -9,16 +9,17 @@
         exit();
     }
 
-    
+    $id = null;
     $correo = null;
-	if (!empty($_GET['id'])) {
+	if (!empty($_GET['id']) && !empty($_GET['correo'])) {
 		
-        $correo = $_REQUEST['id'];
+        $correo = $_GET['correo'];
+        $id = $_GET['id'];
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "DELETE FROM PROYECTO_ALUMNO WHERE p_id = ? AND a_correo";
+		$sql = "DELETE FROM PROYECTO_ALUMNO WHERE p_id = ? AND a_correo = ?";
 		$q = $pdo->prepare($sql);
-		$q->execute(array($_SESSION['id'],$correo));
+		$q->execute(array($id,$correo));
 		Database::disconnect();
 		header("Location: AdministradorProyecto.php");
 		exit();
