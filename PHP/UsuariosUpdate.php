@@ -17,14 +17,13 @@
 	}
 
     if ( $correo==null || $type==null ) {
-		header("Location: ../PHP/UsuariosView.php");
+		header("Location: ../PHP/UsuariosView.php?actu='Error al actualizar'");
 	}
 
     if ( !empty($_POST)) {
 		// keep track validation errors
 		    $nombreError = null;
         $apellidoError = null;
-        $correoError = null;
         $esJuradoError = null;
         $nomMatError = null;
     
@@ -34,7 +33,6 @@
 		// keep track post values
 		    $nombre = $_POST['nombre'];
         $apellido = $_POST['apellido'];
-        $correo = $_POST['correo'];
         $nomMat = $_POST['nomMat'];
         if (isset($_POST['esJurado'])){
           if (strtolower(trim($_POST['esJurado']))=='s') {
@@ -60,11 +58,6 @@
             $valid = false;
           }
       
-              if (empty($correo)) {
-            $correoError = 'Por favor ingresa un correo';
-            $valid = false;
-          }
-      
       
               if (!isset($esJurado)) {
             $esJuradoError = 'Por favor ingresa un estado de jurado';
@@ -82,17 +75,8 @@
             $apellidoError = 'Por favor ingresa un apellido';
             $valid = false;
           }
-      
-              if (empty($correo)) {
-            $correoError = 'Por favor ingresa un correo';
-            $valid = false;
-          }
-      
-      
-              if (empty($esJurado)) {
-            $esJuradoError = 'Por favor ingresa un estado de jurado';
-            $valid = false;
-          }  
+    
+       
 
           if (empty($nomMat)) {
             $nomMatError = 'Por favor ingresa una matricula';
@@ -106,24 +90,22 @@
       if ($type == 'co') {
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "UPDATE COLABORADOR SET co_nombre = ?, co_apellido = ?, co_correo = ?, co_nomina = ?, co_es_jurado = ? WHERE co_correo = ?";
+        $sql = "UPDATE COLABORADOR SET co_nombre = ?, co_apellido = ?, co_nomina = ?, co_es_jurado = ? WHERE co_correo = ?";
         $q = $pdo->prepare($sql);
-        $q->execute(array($nombre,$apellido,$correo,$nomMat,$esJurado,$correo));
+        $q->execute(array($nombre,$apellido,$nomMat,$esJurado,$correo));
         Database::disconnect();
-        echo '<script>alert("Colaborador Actualizado");</script>';
-        header("Location: ../PHP/UsuariosView.php");
+        header("Location: ../PHP/UsuariosView.php?actu='Colaborador actualizado exitosamente'");
         exit();
       }
 
       else if ($type == 'al') {
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "UPDATE ALUMNO SET a_nombre = ?, a_apellido = ?, a_correo = ?, a_matricula = ? WHERE a_correo = ?";
+        $sql = "UPDATE ALUMNO SET a_nombre = ?, a_apellido = ?, a_matricula = ? WHERE a_correo = ?";
         $q = $pdo->prepare($sql);
-        $q->execute(array($nombre,$apellido,$correo,$nomMat,$correo));
+        $q->execute(array($nombre,$apellido,$nomMat,$correo));
         Database::disconnect();
-        echo '<script>alert("Alumno Actualizado");</script>';
-        header("Location: ../PHP/UsuariosView.php");
+        header("Location: ../PHP/UsuariosView.php?actu='Alumno actualizado exitosamente'");
         exit();
       }
     
@@ -255,7 +237,7 @@
                 </td>
 
                 <td>
-                    <input class="Text__Input" name="correo" type="text"  placeholder="" value='.(!empty($correo)?$correo:"").'>
+                    <input class="Text__Input" name="correo" type="text"  onmousedown="return false;" readonly placeholder="" value='.(!empty($correo)?$correo:"").'>
                     ';
 
                 if (!empty($correoError)){
@@ -350,7 +332,7 @@
                 </td>
 
                 <td>
-                    <input class="Text__Input" name="correo" type="text"  placeholder="" value='.(!empty($correo)?$correo:"").'>
+                    <input class="Text__Input" name="correo" type="text" readonly onmousedown="return false;" placeholder="" value='.(!empty($correo)?$correo:"").'>
                     ';
 
                 if (!empty($correoError)){
@@ -388,7 +370,7 @@
                             <input class="Btn__Iniciar__Sesion" type="submit" value="Actualizar Usuario" id="submit" name="submit">
                         </td>
                         <td>
-                            <a class="Btn-Ancla" href="UsuariosView.php">Regresar</a>
+                            <a class="Btn-Ancla" href="UsuariosView.php?actu='No se ha realizado ningun cambio'">Regresar</a>
                         </td>
                     </tr>
                 </table>

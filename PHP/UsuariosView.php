@@ -155,6 +155,15 @@
             }
         </script>
 
+<?php
+            if(isset($_GET['actu'])){
+                $actu = $_GET['actu'];
+            }
+       ?>
+        <script>
+            alert(<?php echo $actu;?>);
+        </script>
+
         <div class="Info">
             <div class="Info__Header">
                 <p>&nbsp;</p>
