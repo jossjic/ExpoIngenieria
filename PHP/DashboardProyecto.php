@@ -99,6 +99,7 @@
                 </ul>
             </nav>
         </header>
+
         <main class="Proyect__View">
             <div class="Action__Btn">
                 <h1>Estado de tu proyecto</h1>
@@ -124,6 +125,10 @@
                 </div>
                 <div class="Info__Menu">
                     <dl>
+                        <dt><strong>Última modificación</strong></dt>
+                        <dd><?php echo $project['p_ult_modif']; ?></dd>
+                    </dl>
+                    <dl>
                         <dt><strong>Integrantes</strong></dt>
                         <?php
                             foreach ($students as $row) {
@@ -137,7 +142,7 @@
                     </dl>
                     <dl>
                         <dt><strong>Nivel de desarrollo</strong></dt>
-                        <dd><?php echo $project['p_avance_proyecto']; ?></dd>
+                        <dd><?php echo $project['n_nombre']; ?></dd>
                     </dl>
                     <dl>
                         <dt><strong>Área estratégica</strong></dt>
@@ -149,7 +154,7 @@
                             preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $project['p_video'], $match);
                             $video_id = $match[1];
                             $video_full_link = "https://drive.google.com/file/d/".$video_id."/preview";
-                                echo '<dd><iframe width="100%" src="'.$video_full_link.'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></dd>';
+                                echo '<dd style="width: 100%;><iframe width="100%" src="'.$video_full_link.'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></dd>';
                         ?>
                     </dl>
                     <dl>
@@ -158,14 +163,10 @@
                             preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $project['p_poster'], $match);
                             $image_id = $match[1];
                             $image_full_link = "https://drive.google.com/file/d/".$image_id."/preview";
-                            echo '<dd><iframe width="100%" src="'.$image_full_link.'" allow="autoplay"></iframe></dd>';
+                            echo '<dd style="width: 100%;"><iframe width="100%" src="'.$image_full_link.'" allow="autoplay"></iframe></dd>';
                         ?>
                     </dl>
-                    <dl>
-                        <dt><strong>Última modificación</strong></dt>
-                        <dd><?php echo $project['p_ult_modif']; ?></dd>
-                    </dl>
-
+    
                 </div>
             </div>
 
