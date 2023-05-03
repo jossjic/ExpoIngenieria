@@ -9,7 +9,7 @@
              $q = $pdo->query($sql);
              $last_edition_id = $q->fetch(PDO::FETCH_ASSOC);
 
-             echo $last_edition_id[0]['ed_id'];
+             echo $last_edition_id;
 
             //Insert into Edicion Colaborador with the last edition able on edition table
             // $sql = "INSERT INTO EDICION_COLABORADOR(co_correo,ed_id) VALUES(?,?)";
