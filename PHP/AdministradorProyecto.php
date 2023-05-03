@@ -180,6 +180,7 @@
 									type="text"
 									name="project_name"
 									id="project_name"
+									required
 									<?php echo "value='".$data['p_nombre']."'" ?>
 								/>
 						</td>
@@ -195,7 +196,7 @@
 					<tr>
 					
 						<td>
-							<select name="category" id="category">
+							<select name="category" id="category" required>
 								<?php 
 									foreach ($categorias as $row) {
 										if ($row['ca_id'] == $data['ca_id']) {
@@ -217,7 +218,7 @@
 
 					<tr>
 						<td>
-							<select name="level" id="level">
+							<select name="level" id="level" required>
 								<?php 
 									foreach ($nivel as $row) {
 										if ($row['n_id'] == $data['n_id']) {
@@ -254,6 +255,7 @@
 								id="project_description"
 								cols="30"
 								rows="10"
+								required
 								style="display: inline; width: 100%; height: 100%; resize: none;"
 							> <?php echo	$data['p_descripcion'] ?>
 							</textarea>
