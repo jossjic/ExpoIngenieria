@@ -89,7 +89,7 @@
             // Create collaborator
             $sql = "INSERT INTO COLABORADOR (co_correo, co_nomina, co_nombre, co_apellido, co_pass, co_es_jurado) VALUES (?, ?, ?, ?, ?, ?)";
             $q = $pdo->prepare($sql);
-            $is_judge = true;
+            $is_judge = false;
             $q->execute(array($collaborator_email, $collaborator_payroll, $collaborator_name, $collaborator_lastname, $collaborator_pass, $is_judge));
 
             // Get project data
@@ -101,7 +101,7 @@
             
             // Create session variables
             $_SESSION['logged_in'] = true;
-            $_SESSION['user_type'] = "collaborator-docente";
+            $_SESSION['user_type'] = "collaborator-teacher";
             $_SESSION['id'] = $collaborator['co_correo'];
             
             // Redirect
