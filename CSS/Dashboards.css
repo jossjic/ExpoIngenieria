@@ -120,7 +120,7 @@ main {
 
 .Info__Other .Info__Tittle {
 	font-size: 1em;
-	width: 100%;
+
 	display: grid;
 	place-items: center;
 }
