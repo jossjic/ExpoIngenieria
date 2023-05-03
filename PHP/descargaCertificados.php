@@ -81,14 +81,15 @@
                 <br>
                     <br>
                     <h2>ALUMNO</h2>
-                                    
+
                     <table >
 
                         <?php
                             $pdo = Database::connect();
-                            $sql = "SELECT proyecto.p_id, proyecto.p_nombre, edicion.ed_id, edicion.ed_nombre, alumno.a_matricula, alumno.a_nombre, alumno.a_apellido, alumno.a_correo FROM `proyecto` JOIN categoria ON proyecto.ca_id = categoria.ca_id JOIN edicion ON proyecto.ed_id = edicion.ed_id JOIN nivel ON proyecto.n_id = nivel.n_id JOIN proyecto_alumno ON proyecto.p_id = proyecto_alumno.p_id JOIN alumno ON proyecto_alumno.a_correo = alumno.a_correo ORDER BY edicion.ed_id,proyecto.p_id,alumno.a_apellido,alumno.a_nombre ASC;";
+                            $sql = "SELECT PROYECTO.p_id, PROYECTO.p_nombre, EDICION.ed_id, EDICION.ed_nombre, ALUMNO.a_matricula, ALUMNO.a_nombre, ALUMNO.a_apellido, ALUMNO.a_correo FROM PROYECTO JOIN CATEGORIA ON PROYECTO.ca_id = CATEGORIA.ca_id JOIN EDICION ON PROYECTO.ed_id = EDICION.ed_id JOIN NIVEL ON PROYECTO.n_id = NIVEL.n_id JOIN PROYECTO_ALUMNO ON PROYECTO.p_id = PROYECTO_ALUMNO.p_id JOIN ALUMNO ON PROYECTO_ALUMNO.a_correo = ALUMNO.a_correo ORDER BY EDICION.ed_id,PROYECTO.p_id,ALUMNO.a_apellido,ALUMNO.a_nombre ASC;";
                             $q = $pdo->query($sql);
                             $filas = $q->fetchAll();
+                            //var_dump($filas);
                             Database::disconnect();
                         ?>
                         
@@ -155,5 +156,3 @@
         <a href="#">Volver</a>
 	</body>
 </html>
-
-

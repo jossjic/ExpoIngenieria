@@ -1,19 +1,13 @@
 <?php
 require 'dataBase.php';
 require("../fpdf/fpdf.php");
-
+if ($_GET) {
     if (isset($_GET['matricula'])) {
-        $matricula = $_REQUEST['matricula'];
         $pdo = Database::connect();
-        $sql = "SELECT * 
-                FROM COLABORADOR 
-                NATURAL JOIN EDICION_COLABORADOR 
-                NATURAL JOIN EDICION
-                WHERE co_correo = ?";
-        $filas = $pdo->prepare($sql);
-        $filas = $q->execute(array($matricula));
+        $sql = "SELECT COLABORADOR.co_correo, COLABORADOR.co_nombre, COLABORADOR.co_nomina, COLABORADOR.co_apellido, COLABORADOR.co_es_jurado, EDICION.ed_nombre FROM COLABORADOR JOIN EDICION_COLABORADOR ON COLABORADOR.co_correo = EDICION_COLABORADOR.co_correo JOIN EDICION ON EDICION_COLABORADOR.ed_id = EDICION.ed_id  WHERE COLABORADOR.co_correo = '{$_GET['matricula']}';";
+        $q = $pdo->query($sql);
         //var_dump($q);
-        $filas = $q->fetch(PDO::FETCH_ASSOC);
+        $filas = $q->fetch();
         //var_dump($filas);
         //Database::disconnect();
     
@@ -88,9 +82,5 @@ $fpdf->Ln(5);
 $fpdf->SetFont('Arial', 'I', 12);
 $fpdf->Cell($ancho[0], 7, $campus, 0, 0, 'C');
 $fpdf->Output();
-
-$pdo = Database::connect();
  }
-
-
-?>
+}

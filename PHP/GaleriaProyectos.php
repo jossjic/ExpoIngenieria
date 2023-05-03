@@ -55,7 +55,7 @@
   </header>
   <div>
   <?php       $pdo = Database::connect();
-                                    $sql = "SELECT proyecto.p_id, proyecto.p_nombre, proyecto.p_descripcion, proyecto.p_estado, proyecto.p_video, proyecto.p_poster, categoria.ca_nombre, edicion.ed_nombre, nivel.n_nombre, alumno.a_nombre, alumno.a_apellido FROM `proyecto` JOIN categoria ON proyecto.ca_id = categoria.ca_id JOIN edicion ON proyecto.ed_id = edicion.ed_id JOIN nivel ON proyecto.n_id = nivel.n_id JOIN proyecto_alumno ON proyecto.p_id = proyecto_alumno.p_id JOIN alumno ON proyecto_alumno.a_correo = alumno.a_correo ORDER BY proyecto.p_nombre;";
+                                    $sql = "SELECT PROYECTO.p_id, PROYECTO.p_nombre, PROYECTO.p_descripcion, PROYECTO.p_estado, PROYECTO.p_video, PROYECTO.p_poster, CATEGORIA.ca_nombre, EDICION.ed_nombre, NIVEL.n_nombre, ALUMNO.a_nombre, ALUMNO.a_apellido FROM PROYECTO JOIN CATEGORIA ON PROYECTO.ca_id = CATEGORIA.ca_id JOIN EDICION ON PROYECTO.ed_id = EDICION.ed_id JOIN NIVEL ON PROYECTO.n_id = NIVEL.n_id JOIN PROYECTO_ALUMNO ON PROYECTO.p_id = PROYECTO_ALUMNO.p_id JOIN ALUMNO ON PROYECTO_ALUMNO.a_correo = ALUMNO.a_correo ORDER BY PROYECTO.p_nombre;";
                                     $q = $pdo->query($sql);
                                     //var_dump($q);
                                     $filas = $q->fetchAll();
@@ -76,7 +76,7 @@
           </select>
         </td>
       </tr>
-
+ 
 
     </table>
   </div>
