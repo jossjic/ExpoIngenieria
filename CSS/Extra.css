@@ -49,8 +49,9 @@
 .students_div_menu_eachone {
 	box-sizing: border-box;
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	border-radius: 10px;
 	border: solid #0033a0 2px;
 	margin: 5px;
+	padding: 5px;
 }
