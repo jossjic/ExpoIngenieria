@@ -63,9 +63,10 @@
             $pdo = Database::connect();
 
             // Create project
-            $sql = "INSERT INTO PROYECTO (p_nombre_clave, p_pass, p_estado) VALUES (?, ?, 'Registrado')";
+            $p_estado = "Registrado";
+            $sql = "INSERT INTO PROYECTO (p_nombre_clave, p_pass, p_estado) VALUES (?, ?, ?)";
             $q = $pdo->prepare($sql);
-            $q->execute(array($project_name_code, $project_pass));
+            $q->execute(array($project_name_code, $project_pass, $p_estado));
             
             // Get project data
             $sql = "SELECT * FROM PROYECTO WHERE p_nombre_clave = ? AND p_pass = ?";
