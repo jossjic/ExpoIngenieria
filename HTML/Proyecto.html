@@ -21,25 +21,23 @@
 		<div class="teachers_div card">
 			<h3>Profesores</h3>
 			<div class="teachers_div_menu">
-						<?php  
+				<?php  
 							$pdo = Database::connect();
-							$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-							$sql = "SELECT * FROM PROYECTO_DOCENTE NATURAL JOIN COLABORADOR WHERE p_id = ?";
-							$q = $pdo->prepare($sql);
-							$q->execute(array($_SESSION['id']));
-							$dataProfesor = $q->fetchAll(PDO::FETCH_ASSOC);
-							foreach ($dataProfesor as $row) {
-								echo " 
-										<div class='teachers_div_menu_eachone'>
-											<span class='nombrecompleto'>".$row['co_nombre']. " ".$row['co_apellido']."</span>
-											<span class='correo'>".$row['co_correo']."</span>
-											<span style='color: black;' class='close' >&times;</span>
-										</div>
-									";
-							}
-						?> 
-				
+							$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); $sql = "SELECT *
+				FROM PROYECTO_DOCENTE NATURAL JOIN COLABORADOR WHERE p_id = ?";
+				$q = $pdo->prepare($sql); $q->execute(array($_SESSION['id']));
+				$dataProfesor = $q->fetchAll(PDO::FETCH_ASSOC); foreach
+				($dataProfesor as $row) { echo "
+				<div class="teachers_div_menu_eachone">
+					<span class="nombrecompleto"
+						>".$row['co_nombre']. " ".$row['co_apellido']."</span
+					>
+					<span class="correo">".$row['co_correo']."</span>
+					<span style="color: black" class="close">&times;</span>
+				</div>
+				"; } ?>
 			</div>
 		</div>
+		<a href=''>&times;</a>
 	</body>
 </html>
