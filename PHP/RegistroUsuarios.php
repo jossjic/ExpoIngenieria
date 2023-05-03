@@ -105,7 +105,7 @@
             $_SESSION['id'] = $collaborator['co_correo'];
             
             // Redirect
-            header("Location: ../PHP/DashboardColaboradores.php");
+            header("Location: ../PHP/DashboardColaboradoresDocente.php");
             exit();
         }
     }
