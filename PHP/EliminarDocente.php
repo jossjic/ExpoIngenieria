@@ -18,7 +18,7 @@
         $id = $_GET['id'];
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "DELETE FROM PROYECTO_DOCENTE WHERE p_id = ? AND co_correo";
+		$sql = "DELETE FROM PROYECTO_DOCENTE WHERE p_id = ? AND co_correo = ?";
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id,$correo));
 		Database::disconnect();
