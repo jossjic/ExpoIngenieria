@@ -12,17 +12,17 @@
     // POST METHOD
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
-        $project_private_name_error = null;
+        $project_name_code_error = null;
         $project_pass_error = null;
         $login_error = null;
         
-        $project_private_name = $_POST['project_private_name'];
+        $project_name_code = $_POST['project_name_code'];
         $project_pass = $_POST['project_pass'];
 
         $valid = true;
 
-        if (empty($project_private_name)) {
-            $project_private_name_error = 'Por favor ingresa el nombre privado de tu proyecto';
+        if (empty($project_name_code)) {
+            $project_name_code_error = 'Por favor ingresa el nombre clave de tu proyecto';
             $valid = false;
         }
 
@@ -35,7 +35,7 @@
         $pdo = Database::connect();
         $sql = "SELECT * FROM PROYECTO WHERE p_nombre_clave = ? AND p_pass = ?";
         $q = $pdo->prepare($sql);
-        $q->execute(array($project_private_name, $project_pass));
+        $q->execute(array($project_name_code, $project_pass));
         Database::disconnect();
 
         // Credentials are incorrect
@@ -94,15 +94,33 @@
                     <center><b>¡Bienvenido!<br><br>Ingresa las credenciales de tu proyecto</b></center>
                     <table>
                         <tr>
-                            <td>Nombre privado</td>
-                            <td><input class="Text__Input" type="text" name="project_private_name" value="<?php echo !empty($project_private_name) ? $project_private_name : ''; ?>" autofocus required></td>
+                            <td>Nombre clave</td>
+                            <td>
+                                <input class="Text__Input" type="text" name="project_name_code" value="<?php echo !empty($project_name_code) ? $project_name_code : ''; ?>" autofocus required>
+                                <?php if (!empty($project_name_code_error)): ?>
+                                    <br>
+                                    <span><?php echo $project_name_code_error; ?></span>
+                                <?php endif; ?>
+                            </td>
                         </tr>
                         <tr>
                             <td>Contraseña</td>
-                            <td><input class="Text__Input" type="password" name="project_pass" value="<?php echo !empty($project_pass) ? $project_pass : ''; ?>" required></td>
+                            <td>
+                                <input class="Text__Input" type="password" name="project_pass" value="<?php echo !empty($project_pass) ? $project_pass : ''; ?>" required>
+                                <?php if (!empty($project_pass_error)): ?>
+                                    <br>
+                                    <span"><?php echo $project_pass_error; ?></span>
+                                <?php endif; ?>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="Td__Iniciar__Sesion" colspan="2"><input class="Btn__Iniciar__Sesion" type="submit" value="Iniciar sesión" name="submit"></td>
+                            <td class="Td__Iniciar__Sesion" colspan="2">
+                                <input class="Btn__Iniciar__Sesion" type="submit" value="Iniciar sesión" name="submit">
+                                <?php if (!empty($login_error)): ?>
+                                    <br>
+                                    <span><?php echo $login_error; ?></span>
+                                <?php endif; ?>
+                            </td>
                         </tr>
                     </table>
                 </form>
