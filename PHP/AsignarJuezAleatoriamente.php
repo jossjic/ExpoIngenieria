@@ -29,6 +29,7 @@
     $totalJuecesProyecto = floor($proyectoscount/$juecescount);
 
     foreach ($proyectos as $project) {
+        echo $project['p_nombre'];
         $judge_keys = array_rand($jueces, $totalJuecesProyecto);
         foreach ($judge_keys as $judge) {
             echo $judge;
