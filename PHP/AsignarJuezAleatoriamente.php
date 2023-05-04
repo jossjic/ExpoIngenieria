@@ -28,12 +28,14 @@
 
     $totalJuecesProyecto = floor($proyectoscount/$juecescount);
 
-    foreach ($proyectos as $proyecto) {
-        echo $proyecto['p_nombre']."\n";
-    }
+    foreach ($proyectos as $project) {
+        $judge_keys = array_rand($jueces, $totalJuecesProyecto);
+        foreach ($judge_keys as $judge) {
+            echo $judge['co_nombre']."\n\r";
+        }
+        // Asignar $judge1 y $judge2 al proyecto
 
-    foreach ($jueces as $juez) {
-        echo $juez['co_nombre']."\n";
+        
     }
 
     echo $totalJuecesProyecto;

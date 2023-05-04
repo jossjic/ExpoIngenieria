@@ -34,13 +34,13 @@ CREATE TABLE `PROYECTO` (
   `ed_id` INT,
   PRIMARY KEY (`p_id`),
   FOREIGN KEY (`ed_id`) REFERENCES `EDICION`(`ed_id`)
-  ON DELETE CASCADE
+  
 ON UPDATE CASCADE,
   FOREIGN KEY (`ca_id`) REFERENCES `CATEGORIA`(`ca_id`)
-  ON DELETE CASCADE
+  
 ON UPDATE CASCADE,
   FOREIGN KEY (`n_id`) REFERENCES `NIVEL`(`n_id`)
-  ON DELETE CASCADE
+  
 ON UPDATE CASCADE
 
 );
@@ -59,10 +59,10 @@ CREATE TABLE `PROYECTO_DOCENTE` (
   `p_id` INT,
   `co_correo` VARCHAR(100),
   FOREIGN KEY (`co_correo`) REFERENCES `COLABORADOR`(`co_correo`)
-  ON DELETE CASCADE
+  
 ON UPDATE CASCADE,
   FOREIGN KEY (`p_id`) REFERENCES `PROYECTO`(`p_id`)
-  ON DELETE CASCADE
+  
 ON UPDATE CASCADE
 );
 
@@ -70,10 +70,10 @@ CREATE TABLE `PROYECTO_JURADO` (
   `p_id` INT,
   `co_correo` VARCHAR(100),
   FOREIGN KEY (`p_id`) REFERENCES `PROYECTO`(`p_id`)
-  ON DELETE CASCADE
+  
 ON UPDATE CASCADE,
   FOREIGN KEY (`co_correo`) REFERENCES `COLABORADOR`(`co_correo`)
-    ON DELETE CASCADE
+    
 ON UPDATE CASCADE
 );
 
@@ -95,7 +95,7 @@ CREATE TABLE `ANUNCIO` (
   `adm_correo` VARCHAR(100),
   PRIMARY KEY (`an_id`),
   FOREIGN KEY (`adm_correo`) REFERENCES ADMIN(`adm_correo`)
-  ON DELETE CASCADE
+  
 ON UPDATE CASCADE
 );
 
@@ -110,10 +110,10 @@ CREATE TABLE `EVALUACION` (
   `ev_retro` TEXT,
   `ev_cancelada` BOOLEAN,
   FOREIGN KEY (`p_id`) REFERENCES `PROYECTO`(`p_id`)
-  ON DELETE CASCADE
+  
 ON UPDATE CASCADE,
   FOREIGN KEY (`co_correo`) REFERENCES `COLABORADOR`(`co_correo`)
-  ON DELETE CASCADE
+  
 ON UPDATE CASCADE
 );
 
@@ -133,7 +133,7 @@ CREATE TABLE `ETAPA` (
   `ed_id` INT,
   PRIMARY KEY (`et_id`),
   FOREIGN KEY (`ed_id`) REFERENCES `EDICION`(`ed_id`)
-  ON DELETE CASCADE
+  
 ON UPDATE CASCADE
 );
 
@@ -141,10 +141,10 @@ CREATE TABLE `EDICION_COLABORADOR` (
   `ed_id` INT,
   `co_correo` VARCHAR(100),
   FOREIGN KEY (`ed_id`) REFERENCES `EDICION`(`ed_id`)
-  ON DELETE CASCADE
+  
 ON UPDATE CASCADE,
   FOREIGN KEY (`co_correo`) REFERENCES `COLABORADOR`(`co_correo`)
-  ON DELETE CASCADE
+  
 ON UPDATE CASCADE
 );
 
@@ -152,10 +152,10 @@ CREATE TABLE `PROYECTO_ALUMNO` (
   `a_correo` VARCHAR(100),
   `p_id` INT,
   FOREIGN KEY (`a_correo`) REFERENCES `ALUMNO`(`a_correo`)
-    ON DELETE CASCADE
+    
 ON UPDATE CASCADE,
   FOREIGN KEY (`p_id`) REFERENCES `PROYECTO`(`p_id`)
-    ON DELETE CASCADE
+    
 ON UPDATE CASCADE
 );
 
@@ -221,15 +221,18 @@ INSERT INTO `ETAPA` (`et_nombre`, `et_fecha_inicio`, `et_fecha_fin`, `ed_id`) VA
 INSERT INTO `ETAPA` (`et_nombre`, `et_fecha_inicio`, `et_fecha_fin`, `ed_id`) VALUES ('Etapa 4', '2023-08-01 00:00:00', '2023-08-31 23:59:59', 3);
 INSERT INTO `ETAPA` (`et_nombre`, `et_fecha_inicio`, `et_fecha_fin`, `ed_id`) VALUES ('Etapa 5', '2023-09-01 00:00:00', '2023-09-30 23:59:59', 3);
 
-INSERT INTO PROYECTO (p_nombre_clave, p_nombre, p_descripcion, n_id, p_estado, p_pass, p_video, p_poster, p_ult_modif, ca_id, ed_id) VALUES('proyecto1', 'Proyecto 1', 'Descripción del proyecto 1', 2, 'En progreso', '123456', 'https://drive.google.com/file/d/1QogWuB8owADYErTrLSeXaH7ltzTW5pTp/view?usp=sharing', 'https://drive.google.com/file/d/1m_Kaaqp0hQ_q5WgbQKNQY67eMJqonjQ4/view?usp=sharing', NOW(), 3, 1);
-INSERT INTO PROYECTO (p_nombre_clave, p_nombre, p_descripcion, n_id, p_estado, p_pass, p_video, p_poster, p_ult_modif, ca_id, ed_id) VALUES('proyecto2', 'Proyecto 2', 'Descripción del proyecto 2', 1, 'Finalizado', 'abcdef', 'https://drive.google.com/file/d/1QogWuB8owADYErTrLSeXaH7ltzTW5pTp/view?usp=sharing', 'https://drive.google.com/file/d/1m_Kaaqp0hQ_q5WgbQKNQY67eMJqonjQ4/view?usp=sharing', NOW(), 2, 1);
-INSERT INTO PROYECTO (p_nombre_clave, p_nombre, p_descripcion, n_id, p_estado, p_pass, p_video, p_poster, p_ult_modif, ca_id, ed_id) VALUES('proyecto3', 'Proyecto 3', 'Descripción del proyecto 3', 2, 'En progreso', 'qwerty', 'https://drive.google.com/file/d/1QogWuB8owADYErTrLSeXaH7ltzTW5pTp/view?usp=sharing', 'https://drive.google.com/file/d/1m_Kaaqp0hQ_q5WgbQKNQY67eMJqonjQ4/view?usp=sharing', NOW(), 1, 2);
-INSERT INTO PROYECTO (p_nombre_clave, p_nombre, p_descripcion, n_id, p_estado, p_pass, p_video, p_poster, p_ult_modif, ca_id, ed_id) VALUES('proyecto4', 'Proyecto 4', 'Descripción del proyecto 4', 3, 'En revisión', 'mypass', 'https://drive.google.com/file/d/1QogWuB8owADYErTrLSeXaH7ltzTW5pTp/view?usp=sharing', 'https://drive.google.com/file/d/1m_Kaaqp0hQ_q5WgbQKNQY67eMJqonjQ4/view?usp=sharing', NOW(), 2, 2);
-INSERT INTO PROYECTO (p_nombre_clave, p_nombre, p_descripcion, n_id, p_estado, p_pass, p_video, p_poster, p_ult_modif, ca_id, ed_id) VALUES('proyecto5', 'Proyecto 5', 'Descripción del proyecto 5', 1, 'En progreso', 'password123', 'https://drive.google.com/file/d/1QogWuB8owADYErTrLSeXaH7ltzTW5pTp/view?usp=sharing', 'https://drive.google.com/file/d/1m_Kaaqp0hQ_q5WgbQKNQY67eMJqonjQ4/view?usp=sharing', NOW(), 3, 2);
-INSERT INTO PROYECTO (p_nombre_clave, p_nombre, p_descripcion, n_id, p_estado, p_pass, p_video, p_poster, p_ult_modif, ca_id, ed_id) VALUES('proyecto1', 'Proyecto 1', 'Descripción del proyecto 1', 1, 'En progreso', 'password123', 'https://drive.google.com/file/d/1QogWuB8owADYErTrLSeXaH7ltzTW5pTp/view?usp=sharing', 'https://drive.google.com/file/d/1m_Kaaqp0hQ_q5WgbQKNQY67eMJqonjQ4/view?usp=sharing', NOW(), 2, 11);
-INSERT INTO PROYECTO (p_nombre_clave, p_nombre, p_descripcion, n_id, p_estado, p_pass, p_video, p_poster, p_ult_modif, ca_id, ed_id) VALUES('proyecto2', 'Proyecto 2', 'Descripción del proyecto 2', 2, 'En revisión', 'mypass', 'https://drive.google.com/file/d/1QogWuB8owADYErTrLSeXaH7ltzTW5pTp/view?usp=sharing', 'https://drive.google.com/file/d/1m_Kaaqp0hQ_q5WgbQKNQY67eMJqonjQ4/view?usp=sharing', NOW(), 3, 11);
-INSERT INTO PROYECTO (p_nombre_clave, p_nombre, p_descripcion, n_id, p_estado, p_pass, p_video, p_poster, p_ult_modif, ca_id, ed_id) VALUES('proyecto3', 'Proyecto 3', 'Descripción del proyecto 3', 3, 'Finalizado', 'abcdef', 'https://drive.google.com/file/d/1QogWuB8owADYErTrLSeXaH7ltzTW5pTp/view?usp=sharing', 'https://drive.google.com/file/d/1m_Kaaqp0hQ_q5WgbQKNQY67eMJqonjQ4/view?usp=sharing', NOW(), 1, 11);
-INSERT INTO PROYECTO (p_nombre_clave, p_nombre, p_descripcion, n_id, p_estado, p_pass, p_video, p_poster, p_ult_modif, ca_id, ed_id) VALUES('proyecto4', 'Proyecto 4', 'Descripción del proyecto 4', 2, 'En progreso', 'qwerty', 'https://drive.google.com/file/d/1QogWuB8owADYErTrLSeXaH7ltzTW5pTp/view?usp=sharing', 'https://drive.google.com/file/d/1m_Kaaqp0hQ_q5WgbQKNQY67eMJqonjQ4/view?usp=sharing', NOW(), 2, 11);
+INSERT INTO PROYECTO (p_nombre_clave, p_nombre, p_descripcion, n_id, p_estado, p_pass, p_video, p_poster, p_ult_modif, ca_id, ed_id) VALUES('proyecto1', 'Proyecto 1', 'Descripción del proyecto 1', 3, 'En progreso', '123456', 'https://drive.google.com/file/d/1QogWuB8owADYErTrLSeXaH7ltzTW5pTp/view?usp=sharing', 'https://drive.google.com/file/d/1m_Kaaqp0hQ_q5WgbQKNQY67eMJqonjQ4/view?usp=sharing', NOW(), 1, 11);
+INSERT INTO PROYECTO (p_nombre_clave, p_nombre, p_descripcion, n_id, p_estado, p_pass, p_video, p_poster, p_ult_modif, ca_id, ed_id) VALUES('proyecto2', 'Proyecto 2', 'Descripción del proyecto 2', 3, 'Finalizado', 'abcdef', 'https://drive.google.com/file/d/1QogWuB8owADYErTrLSeXaH7ltzTW5pTp/view?usp=sharing', 'https://drive.google.com/file/d/1m_Kaaqp0hQ_q5WgbQKNQY67eMJqonjQ4/view?usp=sharing', NOW(), 1, 11);
+INSERT INTO PROYECTO (p_nombre_clave, p_nombre, p_descripcion, n_id, p_estado, p_pass, p_video, p_poster, p_ult_modif, ca_id, ed_id) VALUES('proyecto3', 'Proyecto 3', 'Descripción del proyecto 3', 3, 'En progreso', 'qwerty', 'https://drive.google.com/file/d/1QogWuB8owADYErTrLSeXaH7ltzTW5pTp/view?usp=sharing', 'https://drive.google.com/file/d/1m_Kaaqp0hQ_q5WgbQKNQY67eMJqonjQ4/view?usp=sharing', NOW(), 1, 11);
+INSERT INTO PROYECTO (p_nombre_clave, p_nombre, p_descripcion, n_id, p_estado, p_pass, p_video, p_poster, p_ult_modif, ca_id, ed_id) VALUES('proyecto4', 'Proyecto 4', 'Descripción del proyecto 4', 3, 'En revisión', 'mypass', 'https://drive.google.com/file/d/1QogWuB8owADYErTrLSeXaH7ltzTW5pTp/view?usp=sharing', 'https://drive.google.com/file/d/1m_Kaaqp0hQ_q5WgbQKNQY67eMJqonjQ4/view?usp=sharing', NOW(), 1, 11);
+INSERT INTO PROYECTO (p_nombre_clave, p_nombre, p_descripcion, n_id, p_estado, p_pass, p_video, p_poster, p_ult_modif, ca_id, ed_id) VALUES('proyecto5', 'Proyecto 5', 'Descripción del proyecto 5', 3, 'En progreso', 'password123', 'https://drive.google.com/file/d/1QogWuB8owADYErTrLSeXaH7ltzTW5pTp/view?usp=sharing', 'https://drive.google.com/file/d/1m_Kaaqp0hQ_q5WgbQKNQY67eMJqonjQ4/view?usp=sharing', NOW(), 1, 11);
+INSERT INTO PROYECTO (p_nombre_clave, p_nombre, p_descripcion, n_id, p_estado, p_pass, p_video, p_poster, p_ult_modif, ca_id, ed_id) VALUES('proyecto6', 'Proyecto 6', 'Descripción del proyecto 1', 3, 'En progreso', 'password123', 'https://drive.google.com/file/d/1QogWuB8owADYErTrLSeXaH7ltzTW5pTp/view?usp=sharing', 'https://drive.google.com/file/d/1m_Kaaqp0hQ_q5WgbQKNQY67eMJqonjQ4/view?usp=sharing', NOW(), 1, 11);
+INSERT INTO PROYECTO (p_nombre_clave, p_nombre, p_descripcion, n_id, p_estado, p_pass, p_video, p_poster, p_ult_modif, ca_id, ed_id) VALUES('proyecto7', 'Proyecto 7', 'Descripción del proyecto 2', 3, 'En revisión', 'mypass', 'https://drive.google.com/file/d/1QogWuB8owADYErTrLSeXaH7ltzTW5pTp/view?usp=sharing', 'https://drive.google.com/file/d/1m_Kaaqp0hQ_q5WgbQKNQY67eMJqonjQ4/view?usp=sharing', NOW(), 1, 11);
+INSERT INTO PROYECTO (p_nombre_clave, p_nombre, p_descripcion, n_id, p_estado, p_pass, p_video, p_poster, p_ult_modif, ca_id, ed_id) VALUES('proyecto8', 'Proyecto 8', 'Descripción del proyecto 3', 3, 'Finalizado', 'abcdef', 'https://drive.google.com/file/d/1QogWuB8owADYErTrLSeXaH7ltzTW5pTp/view?usp=sharing', 'https://drive.google.com/file/d/1m_Kaaqp0hQ_q5WgbQKNQY67eMJqonjQ4/view?usp=sharing', NOW(), 1, 11);
+INSERT INTO PROYECTO (p_nombre_clave, p_nombre, p_descripcion, n_id, p_estado, p_pass, p_video, p_poster, p_ult_modif, ca_id, ed_id) VALUES('proyecto9', 'Proyecto 9', 'Descripción del proyecto 4', 3, 'En progreso', 'qwerty', 'https://drive.google.com/file/d/1QogWuB8owADYErTrLSeXaH7ltzTW5pTp/view?usp=sharing', 'https://drive.google.com/file/d/1m_Kaaqp0hQ_q5WgbQKNQY67eMJqonjQ4/view?usp=sharing', NOW(), 1, 11);
+INSERT INTO PROYECTO (p_nombre_clave, p_nombre, p_descripcion, n_id, p_estado, p_pass, p_video, p_poster, p_ult_modif, ca_id, ed_id) VALUES('proyecto10', 'Proyecto 10', 'Descripción del proyecto 2', 3, 'En revisión', 'mypass', 'https://drive.google.com/file/d/1QogWuB8owADYErTrLSeXaH7ltzTW5pTp/view?usp=sharing', 'https://drive.google.com/file/d/1m_Kaaqp0hQ_q5WgbQKNQY67eMJqonjQ4/view?usp=sharing', NOW(), 1, 11);
+INSERT INTO PROYECTO (p_nombre_clave, p_nombre, p_descripcion, n_id, p_estado, p_pass, p_video, p_poster, p_ult_modif, ca_id, ed_id) VALUES('proyecto11', 'Proyecto 11', 'Descripción del proyecto 3', 3, 'Finalizado', 'abcdef', 'https://drive.google.com/file/d/1QogWuB8owADYErTrLSeXaH7ltzTW5pTp/view?usp=sharing', 'https://drive.google.com/file/d/1m_Kaaqp0hQ_q5WgbQKNQY67eMJqonjQ4/view?usp=sharing', NOW(), 1, 11);
+INSERT INTO PROYECTO (p_nombre_clave, p_nombre, p_descripcion, n_id, p_estado, p_pass, p_video, p_poster, p_ult_modif, ca_id, ed_id) VALUES('proyecto12', 'Proyecto 12', 'Descripción del proyecto 4', 3, 'En progreso', 'qwerty', 'https://drive.google.com/file/d/1QogWuB8owADYErTrLSeXaH7ltzTW5pTp/view?usp=sharing', 'https://drive.google.com/file/d/1m_Kaaqp0hQ_q5WgbQKNQY67eMJqonjQ4/view?usp=sharing', NOW(), 1, 11);
 
 
 
