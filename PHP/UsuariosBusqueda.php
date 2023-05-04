@@ -185,9 +185,9 @@
                                 
                                         
 
-			    					   	echo ' <div class="Btn__Green" > <a href="UsuariosRead.php?correo='.$row['co_correo'].'&type=co">Ver</a></div>';
-			    					  	echo ' <div class="Btn__Blue"> <a href="UsuariosUpdate.php?correo='.$row['co_correo'].'&type=co">Actualizar</a></div>';
-			    					   	echo ' <div class="Btn__Red" ><a href="UsuariosDelete.php?correo='.$row['co_correo'].'&type=co">Eliminar</a></div>';
+			    					   	echo '  <a class="Btn__Green"  href="UsuariosRead.php?correo='.$row['co_correo'].'&type=co">Ver</a>';
+			    					  	echo '  <a class="Btn__Blue" href="UsuariosUpdate.php?correo='.$row['co_correo'].'&type=co">Actualizar</a>';
+			    					   	echo '<a class="Btn__Red" href="UsuariosDelete.php?correo='.$row['co_correo'].'&type=co">Eliminar</a>';
                                         
 								    }
 								   	
@@ -246,9 +246,9 @@
                                  
                                          
  
-                                            echo ' <div class="Btn__Green" > <a href="UsuariosRead.php?correo='.$row['co_correo'].'&type=co">Ver</a></div>';
-                                            echo ' <div class="Btn__Blue"> <a href="UsuariosUpdate.php?correo='.$row['co_correo'].'&type=co">Actualizar</a></div>';
-                                            echo ' <div class="Btn__Red" ><a href="UsuariosDelete.php?correo='.$row['co_correo'].'&type=co">Eliminar</a></div>';
+                                            echo '  <a class="Btn__Green"  href="UsuariosRead.php?correo='.$row['co_correo'].'&type=co">Ver</a>';
+                                            echo '  <a class="Btn__Blue" href="UsuariosUpdate.php?correo='.$row['co_correo'].'&type=co">Actualizar</a>';
+                                            echo '<a class="Btn__Red" href="UsuariosDelete.php?correo='.$row['co_correo'].'&type=co">Eliminar</a>';
                                          
                                         }
                                         
@@ -320,9 +320,9 @@
                                             echo '<p>'. $row['co_apellido'] . '</p>';
                                             echo '<p></p>';
                                             
-                                            echo ' <div class="Btn__Green" > <a href="UsuariosRead.php?correo='.$row['co_correo'].'&type=co">Ver</a></div>';
-                                            echo ' <div class="Btn__Blue"> <a href="UsuariosUpdate.php?correo='.$row['co_correo'].'&type=co">Actualizar</a></div>';
-                                            echo ' <div class="Btn__Red" ><a href="UsuariosDelete.php?correo='.$row['co_correo'].'&type=co">Eliminar</a></div>';
+                                            echo '  <a class="Btn__Green"  href="UsuariosRead.php?correo='.$row['co_correo'].'&type=co">Ver</a>';
+                                            echo '  <a class="Btn__Blue" href="UsuariosUpdate.php?correo='.$row['co_correo'].'&type=co">Actualizar</a>';
+                                            echo '<a class="Btn__Red" href="UsuariosDelete.php?correo='.$row['co_correo'].'&type=co">Eliminar</a>';
                                          }
                                      }
                                         
@@ -341,9 +341,9 @@
                                                echo '<p>'. $row['co_apellido'] . '</p>';
                                               
                                             echo '<p></p>';
-                                               echo ' <div class="Btn__Green" > <a href="UsuariosRead.php?correo='.$row['co_correo'].'&type=co">Ver</a></div>';
-                                              echo ' <div class="Btn__Blue"> <a href="UsuariosUpdate.php?correo='.$row['co_correo'].'&type=co">Actualizar</a></div>';
-                                               echo ' <div class="Btn__Red" ><a href="UsuariosDelete.php?correo='.$row['co_correo'].'&type=co">Eliminar</a></div>';
+                                               echo '  <a class="Btn__Green"  href="UsuariosRead.php?correo='.$row['co_correo'].'&type=co">Ver</a>';
+                                              echo '  <a class="Btn__Blue" href="UsuariosUpdate.php?correo='.$row['co_correo'].'&type=co">Actualizar</a>';
+                                               echo '<a class="Btn__Red" href="UsuariosDelete.php?correo='.$row['co_correo'].'&type=co">Eliminar</a>';
                                             }
                                         }
                                     }
@@ -427,9 +427,9 @@
                                  
                                          echo '<p></p>';
  
-                                            echo ' <div class="Btn__Green" > <a href="UsuariosRead.php?correo='.$row['co_correo'].'&type=co">Ver</a></div>';
-                                           echo ' <div class="Btn__Blue"> <a href="UsuariosUpdate.php?correo='.$row['co_correo'].'&type=co">Actualizar</a></div>';
-                                            echo ' <div class="Btn__Red" ><a href="UsuariosDelete.php?correo='.$row['co_correo'].'&type=co">Eliminar</a></div>';
+                                            echo '  <a class="Btn__Green"  href="UsuariosRead.php?correo='.$row['co_correo'].'&type=co">Ver</a>';
+                                           echo '  <a class="Btn__Blue" href="UsuariosUpdate.php?correo='.$row['co_correo'].'&type=co">Actualizar</a>';
+                                            echo '<a class="Btn__Red" href="UsuariosDelete.php?correo='.$row['co_correo'].'&type=co">Eliminar</a>';
                                          
                                      }
                                         
@@ -512,9 +512,9 @@
                                  
                                             echo '<p></p>';
  
-                                            echo ' <div class="Btn__Green" > <a href="UsuariosRead.php?correo='.$row['co_correo'].'&type=co">Ver</a></div>';
-                                            echo ' <div class="Btn__Blue"> <a href="UsuariosUpdate.php?correo='.$row['co_correo'].'&type=co">Actualizar</a></div>';
-                                            echo ' <div class="Btn__Red" ><a href="UsuariosDelete.php?correo='.$row['co_correo'].'&type=co">Eliminar</a></div>';
+                                            echo '  <a class="Btn__Green"  href="UsuariosRead.php?correo='.$row['co_correo'].'&type=co">Ver</a>';
+                                            echo '  <a class="Btn__Blue" href="UsuariosUpdate.php?correo='.$row['co_correo'].'&type=co">Actualizar</a>';
+                                            echo '<a class="Btn__Red" href="UsuariosDelete.php?correo='.$row['co_correo'].'&type=co">Eliminar</a>';
                                          
                                      }
                                         
@@ -591,9 +591,9 @@
                                  
                                             echo '<p></p>';
  
-                                            echo ' <div class="Btn__Green" > <a href="UsuariosRead.php?correo='.$row['co_correo'].'&type=co">Ver</a></div>';
-                                            echo ' <div class="Btn__Blue"> <a href="UsuariosUpdate.php?correo='.$row['co_correo'].'&type=co">Actualizar</a></div>';
-                                            echo ' <div class="Btn__Red" ><a href="UsuariosDelete.php?correo='.$row['co_correo'].'&type=co">Eliminar</a></div>';
+                                            echo '  <a class="Btn__Green"  href="UsuariosRead.php?correo='.$row['co_correo'].'&type=co">Ver</a>';
+                                            echo '  <a class="Btn__Blue" href="UsuariosUpdate.php?correo='.$row['co_correo'].'&type=co">Actualizar</a>';
+                                            echo '<a class="Btn__Red" href="UsuariosDelete.php?correo='.$row['co_correo'].'&type=co">Eliminar</a>';
                                          
                                      }
                                         
