@@ -40,6 +40,7 @@ header {
 	grid-auto-flow: column;
 	place-items: center;
 
+
 	background-image: url("../media/HomePageImage.jpg");
 	background-size: cover;
 	background-position: center;
@@ -77,6 +78,8 @@ header {
 	height: 80%;
 	grid-column: 1/2;
 	grid-row: 2/3;
+	border-radius: 15px;
+
 
 	display: grid;
 	place-items: center;
@@ -90,6 +93,9 @@ header {
 	background-color: #02b1fe;
 	border: black solid 2px;
 	color: white;
+}
+.Explanation a:hover {
+	background-color: #75e6ff;
 }
 
 .Explanation h1 {
@@ -160,29 +166,35 @@ main h2 {
 
 .Usuarios,
 .Proyectos {
-	border: solid black 3px;
-	background-color: white;
-	background-color: #ea047e;
-	width: 13em;
-	height: 4em;
+	border: solid black 1px;
+	transition:background-position 0.3s ease;
+	background:linear-gradient(to right, #0033A0 50%, #75e6ff 50%) no-repeat left / 200%;
+	padding: 20px 40px;
 
+	border-radius: 15px;
+	color : #75e6ff;
 	align-self: center;
+	text-align: center;
 	display: grid;
 }
+.Usuarios:hover,
+.Proyectos:hover {
+	background-position: right;
+	color: #0033A0 ;
+}
+
 
 .Usuarios {
 	/* grid-column: 1/2;
     grid-row: 2/3; */
-	background-color: #ff6d28;
 	justify-self: start;
-	margin: 0 0 0 0;
 }
 
 a {
 	font-family: "Inter", sans-serif;
 	font-weight: 500;
 	font-size: 1em;
-	color: black;
+	color: #0033A0 ;
 
 	text-decoration: none;
 
