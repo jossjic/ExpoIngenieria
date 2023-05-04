@@ -22,6 +22,7 @@ function showTeacherFieldInput() {
 	modal.style.display = "block";
 }
 
+
 //==================================================================
 
 // Ocultar ventana emergente para ingresar el enlace del video
@@ -47,6 +48,8 @@ function hideTeacherFieldInput() {
 	const modal = document.getElementById("docente-data-modal");
 	modal.style.display = "none";
 }
+
+
 
 //==================================================================
 
