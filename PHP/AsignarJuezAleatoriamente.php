@@ -26,7 +26,7 @@
 
     Database::disconnect();
 
-    $totalJuecesProyecto = $proyectoscount/$juecescount;
+    $totalJuecesProyecto = floor($proyectoscount/$juecescount);
 
     foreach ($proyectos as $proyecto) {
         echo $proyecto['p_nombre']."\n";
@@ -37,6 +37,8 @@
     }
 
     echo $totalJuecesProyecto;
+    echo $proyectoscount;
+    echo $juecescount;
 
 ?>
 
