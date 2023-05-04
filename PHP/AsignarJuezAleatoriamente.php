@@ -32,7 +32,7 @@
         echo $project['p_nombre'];
         $judge_keys = array_rand($jueces, $totalJuecesProyecto);
         foreach ($judge_keys as $judge) {
-            echo $jueces[$judge]['co_nombre'];
+            echo $judge;
         }
         // Asignar $judge1 y $judge2 al proyecto
 
