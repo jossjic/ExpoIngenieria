@@ -23,12 +23,24 @@
     $q->execute(array($_SESSION['id']));
     $fecha = $q->fetch(PDO::FETCH_ASSOC);
 
-    //Proyectos por revisar
-    $sql = "SELECT *
-            FROM PROYECTO_JURADO 
-            WHERE co_correo = ?";
+    // Projects without evaluation
+    $sql = 'SELECT * 
+            FROM PROYECTO 
+            NATURAL JOIN CATEGORIA 
+            NATURAL JOIN PROYECTO_JURADO 
+            WHERE co_correo = ? AND 
+            p_id IN (
+                SELECT p_id 
+                FROM PROYECTO 
+                WHERE p_id NOT IN (
+                    SELECT p_id 
+                    FROM EVALUACION 
+                    WHERE co_correo = ?
+                )
+            ) 
+            ORDER BY p_nombre';
     $q = $pdo->prepare($sql);
-    $q->execute(array($_SESSION['id']));
+    $q->execute(array($_SESSION['id'], $_SESSION['id']));
     $proyectosCalificar = $q->rowCount();
 
     //Avisos

@@ -24,14 +24,15 @@
 	}
 
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-		// keep track validation errors
+		
+		// keep track of validation errors
 		$p1Error   = null;
 		$p2Error   = null;
 		$p3Error   = null;
 		$p4Error   = null;
 		$p5Error   = null;
 
-		// keep track post values
+		// Keep track of post values
 		$id = $_POST['id'];
 		$p1 = $_POST['p_1'];
 		$p2 = $_POST['p_2'];
@@ -41,7 +42,7 @@
 
 		$ev_retro = $_POST['ev_retro'];
 
-		/// validate input
+		/// Validate input
 		$valid = true;
 
 		if (empty($p1)) {
@@ -74,6 +75,7 @@
 		}
 
 		if ($valid) {
+			// Get evaluation of judge for project
 			$user_id = $_SESSION['id'];
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -82,7 +84,6 @@
 			        WHERE co_correo = ? AND p_id = ?';
 			$q = $pdo->prepare($sql);
 			$q->execute(array($user_id, $id));
-			$evaluacion = $q->fetch(PDO::FETCH_ASSOC);
 			$number_of_evaluations = $q->rowCount();
 
 			// Evaluation of judge already exists
@@ -94,13 +95,11 @@
 							ev_criterio_3 = ?,
 							ev_criterio_4 = ?,
 							ev_criterio_5 = ?,
-							ev_retro = ?
+							ev_retro = ?,
+							ev_cancelada = ?
 				        WHERE co_correo = ? AND p_id = ?';
 				$q = $pdo->prepare($sql);
-				$q->execute(array($p1, $p2, $p3, $p4, $p5, $ev_retro, $user_id, $id));
-				Database::disconnect();
-				header("Location: CalificarProyecto.php?id=$id");
-				exit();
+				$q->execute(array($p1, $p2, $p3, $p4, $p5, $ev_retro, 0, $user_id, $id));
 			}
 
 			// Evaluation of judge is new
@@ -113,6 +112,7 @@
 							ev_criterio_4,
 							ev_criterio_5,
 							ev_retro,
+							ev_cancelada,
 							co_correo,
 							p_id
 						)
@@ -124,33 +124,48 @@
 							?,
 							?,
 							?,
+							?,
+							?,
 							?
 							)
 						';
 				$q = $pdo->prepare($sql);
-				$q->execute(array($p1, $p2, $p3, $p4, $p5, $ev_retro, $user_id, $id));
-				Database::disconnect();
-				header("Location: CalificarProyecto.php?id=$id");
-				exit();
+				$q->execute(array($p1, $p2, $p3, $p4, $p5, $ev_retro, 0, $user_id, $id));
 			}
 
-
-			/*$q = $pdo->prepare($sql);
-			$acq = ($ac=="S")?1:0;
-			$q->execute(array($id,$subm,$marc,$acq, $id));
-			Database::disconnect();
-
-			$pdo = Database::connect();
-			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "UPDATE auto  set idauto = ?, nombrec = ?, idmarca =?, ac= ? WHERE idauto = ?";
+			// Get total judges assigned for project
+			$sql = 'SELECT * 
+			        FROM PROYECTO_JURADO 
+			        WHERE p_id = ?';
 			$q = $pdo->prepare($sql);
-			$acq = ($ac=="S")?1:0;
-			$q->execute(array($id,$subm,$marc,$acq, $id));
+			$q->execute(array($id));
+			$judges = $q->fetch(PDO::FETCH_ASSOC);
+			$judges_assigned = $q->rowCount();
+
+			// Get evaluations completed for project
+			$sql = 'SELECT * 
+			        FROM EVALUACION 
+			        WHERE p_id = ?';
+			$q = $pdo->prepare($sql);
+			$q->execute(array($id));
+			$evaluacion = $q->fetch(PDO::FETCH_ASSOC);
+			$number_of_evaluations = $q->rowCount();
+
+			if ($judges_assigned === $number_of_evaluations) {
+				// Update project state to "Calificado"
+				$sql = 'UPDATE PROYECTO 
+						SET p_estado = ?
+				        WHERE p_id = ?';
+				$q = $pdo->prepare($sql);
+				$q->execute(array("Calificado", $id));
+			}
 			Database::disconnect();
-			header("Location: index.php");
-			*/
+			header("Location: CalificarProyecto.php?id=$id");
+			exit();
+
 		}
 		else {
+			// Project data
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql = 'SELECT * 
@@ -166,13 +181,11 @@
 	}
 	else {
 		if ($id == null) {
-			// Dependiendo del tipo de usuario es la ruta a la que se enviará
-			// Pagina anterior alojada en la sesion
 			header("Location: ProyectosACalificar.php");
 			exit();
 		}
 
-		// Obtener datos del proyecto
+		// Project data
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$sql = 'SELECT * 
@@ -183,10 +196,8 @@
 		$q->execute(array($id));
 		$project = $q->fetch(PDO::FETCH_ASSOC);
 
-		// Obtener datos de la evaluación
-		// del docente sobre proyecto
-		$user_id = $_SESSION['id']; // Cambiar para el id del usuario en la sesión
-		
+		// Judge evaluation data
+		$user_id = $_SESSION['id'];
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$sql = 'SELECT * 
 		        FROM EVALUACION 
@@ -205,33 +216,7 @@
 			$ev_retro = $evaluation['ev_retro'];
 		}
 
-
-		Database::disconnect();
-
-		// Aquí irá el chequeo del login del usuario para obtener el registro de su calificacion
-		// sobre el proyecto (si no hay una calificacion de este jurado para el proyecto, no
-		// se modifica nada del formulario, en caso contrario, se crearan variables con el puntaje de
-		// cada uno de los criterios y posteriormente se asignará a los radio buttons)
-		//$id = $project['p_id'];
-		//$subm = $project['nombrec'];
-		//$marc = $project['idmarca'];
-		#$ac   = ($project['ac'])?"S":"N";
-
-		// Obtener datos del proyecto
-		$pdo = Database::connect();
-		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = 'SELECT * 
-		        FROM PROYECTO 
-		        NATURAL JOIN CATEGORIA 
-		        WHERE p_id = ?';
-		$q = $pdo->prepare($sql);
-		$q->execute(array($id));
-		$project = $q->fetch(PDO::FETCH_ASSOC);
-		Database::disconnect();
-
-		//Datos Alumnos
-		$pdo = Database::connect();
-		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		// Students data
 		$sql = 'SELECT * 
 		        FROM PROYECTO_ALUMNO 
 		        NATURAL JOIN ALUMNO 
@@ -239,6 +224,7 @@
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
 		$alumno = $q->fetchAll(PDO::FETCH_ASSOC);
+		
 		Database::disconnect();
 	}
 ?>
