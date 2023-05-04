@@ -30,7 +30,7 @@
 
     foreach ($proyectos as $project) {
         echo $project['p_nombre'];
-        $judge_keys = array_rand($jueces, 2);
+        $judge_keys = array_rand($jueces, $totalJuecesProyecto);
         foreach ($judge_keys as $judge) {
             echo $jueces[$judge]['co_nombre'];
         }
