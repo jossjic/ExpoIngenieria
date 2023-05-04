@@ -95,7 +95,7 @@ header {
 	color: white;
 }
 .Explanation a:hover {
-	background-color: #75e6ff;
+	background-color: #00B1FF;
 }
 
 .Explanation h1 {
@@ -168,13 +168,13 @@ main h2 {
 .Proyectos {
 	display: flex; /* Agregado */
   align-items: center; /* Agregado */
-	border: solid #75e6ff 1px;
+	border: solid #00B1FF 1px;
 	transition:background-position 0.3s ease;
-	background:linear-gradient(to right, #0033A0 50%, #75e6ff 50%) no-repeat left / 200%;
+	background:linear-gradient(to right, #0033A0 50%, #00B1FF 50%) no-repeat left / 200%;
 	width: 13em;
 	height: 4em;
 	border-radius: 15px;
-	color : #75e6ff;
+	color : #00B1FF;
 	padding: 20px;
 	align-self: center;
 	display: grid;
