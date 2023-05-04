@@ -56,16 +56,14 @@
             <div class="Btns">
                 <div class="User-1">
                     <span>¿Eres docente o jurado?</span>
-                    <div class="Usuarios">
-                        <a href="./PHP/LoginUsuarios.php" rel="noopener noreferrer">Colaborador</a>
-                    </div>
+                        <a class="Usuarios" href="./PHP/LoginUsuarios.php" rel="noopener noreferrer">Colaborador</a>
                 </div>
     
                 <div class="User-2">
                     <span>¿Tienes un proyecto o quieres registrarlo?</span>
-                    <div class="Proyectos">
-                        <a href="./PHP/LoginProyecto.php" rel="noopener noreferrer">Proyecto</a>
-                    </div>
+
+                        <a class="Proyectos" href="./PHP/LoginProyecto.php" rel="noopener noreferrer">Proyecto</a>
+
                 </div>
             </div>
         </section>

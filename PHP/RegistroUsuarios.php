@@ -92,12 +92,28 @@
             $q = $pdo->prepare($sql);
             $q->execute(array($collaborator_email, $collaborator_payroll, $collaborator_name, $collaborator_lastname, $collaborator_pass, 0));
 
+
             // Get project data
             $sql = "SELECT * FROM COLABORADOR WHERE co_correo = ? AND co_pass = ?";
             $q = $pdo->prepare($sql);
             $q->execute(array($collaborator_email, $collaborator_pass));
             Database::disconnect();
             $collaborator = $q->fetch(PDO::FETCH_ASSOC);
+
+            date_default_timezone_set('America/Mexico_City');
+            $fechaActual = date('Y-m-d H:i:s');
+            $sql = "SELECT * FROM EDICION WHERE ed_fecha_inicio <=? AND ed_fecha_fin >=?";
+            $q = $pdo->prepare($sql);
+            $q->execute(array($fechaActual,$fechaActual));
+
+
+            if ($q->rowCount() == 1){
+              $ed = $q->fetch(PDO::FETCH_ASSOC);
+                $idEd = $ed['ed_id'];
+                $sql = "INSERT INTO EDICION_COLABORADOR (co_correo, ed_id) VALUES (?, ?)";
+                $q = $pdo->prepare($sql);
+                $q->execute(array($collaborator_email, $idEd));
+            }
             
             // Create session variables
             $_SESSION['logged_in'] = true;

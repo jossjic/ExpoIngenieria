@@ -60,26 +60,49 @@
 
         // Valid data
         if ($valid) {
-            $pdo = Database::connect();
+            $pdo = Database::connect();            
 
-            // Create project
-            $p_estado = "Registrado";
-            $sql = "INSERT INTO PROYECTO (p_nombre_clave, p_pass, p_estado) VALUES (?, ?, ?)";
+            //Insert project into PROYECTO_EDICION and create proyect
+            date_default_timezone_set('America/Mexico_City');
+            $fechaActual = date('Y-m-d H:i:s');
+            $sql = "SELECT * FROM EDICION WHERE ed_fecha_inicio <=? AND ed_fecha_fin >=?";
             $q = $pdo->prepare($sql);
-            $q->execute(array($project_name_code, $project_pass, $p_estado));
-            
-            // Get project data
+            $q->execute(array($fechaActual,$fechaActual));
+
+
+            if ($q->rowCount() == 1){
+              $ed = $q->fetch(PDO::FETCH_ASSOC);
+              $sql = "INSERT INTO PROYECTO (p_nombre_clave, p_pass, p_estado, ed_id) VALUES (?, ?, 'Registrado',?)";
+              $q = $pdo->prepare($sql);
+              $q->execute(array($project_name_code, $project_pass, $ed['ed_id']));
+
+              // Get project data
             $sql = "SELECT * FROM PROYECTO WHERE p_nombre_clave = ? AND p_pass = ?";
             $q = $pdo->prepare($sql);
             $q->execute(array($project_name_code, $project_pass));
             Database::disconnect();
             $project = $q->fetch(PDO::FETCH_ASSOC);
-            
+            }
+
+            else{
+                    $sql = "INSERT INTO PROYECTO (p_nombre_clave, p_pass, p_estado) VALUES (?, ?, 'Registrado')";
+              $q = $pdo->prepare($sql);
+              $q->execute(array($project_name_code, $project_pass));
+
+              // Get project data
+            $sql = "SELECT * FROM PROYECTO WHERE p_nombre_clave = ? AND p_pass = ?";
+            $q = $pdo->prepare($sql);
+            $q->execute(array($project_name_code, $project_pass));
+            Database::disconnect();
+            $project = $q->fetch(PDO::FETCH_ASSOC);
+              }
+
+              
             // Create session variables
             $_SESSION['logged_in'] = true;
             $_SESSION['user_type'] = "project";
             $_SESSION['id'] = $project['p_id'];
-            
+
             // Redirect
             header("Location: ../PHP/DashboardProyecto.php");
             exit();
