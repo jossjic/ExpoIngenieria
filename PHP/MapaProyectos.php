@@ -40,7 +40,7 @@
 
         <?php 
             if($_SESSION['user_type'] == "ADMIN"){
-                echo "<button class='btn-submit' style='width: 30%;'>Subir Mapa</button>";
+                echo "<button onclick='ShowMapaLinkInput()' class='btn-submit' style='width: 30%;'>Subir Mapa</button>";
             }
         ?>
 
