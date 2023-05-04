@@ -51,7 +51,7 @@
                     ?>
                     <thead>
                         <tr>Correo</tr>
-                        <tr>Nomina</tr>
+                        <tr>Nómina</tr>
                         <tr>Nombre</tr>
                         <tr>Apellido</tr>
                         <tr>Jurado?</tr>

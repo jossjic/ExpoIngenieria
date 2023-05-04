@@ -250,7 +250,7 @@
             echo '
                 <tr>
                 <td>
-                    <label for="">Nomina</label>
+                    <label for="">Nómina</label>
                 </td>
 
                 <td>
@@ -258,7 +258,7 @@
                     ';
 
 
-                    echo '<span class="help-inline">Si no introduce o no le aparece una nomina, el colaborador será guardado como externo</span>';
+                    echo '<span class="help-inline">Si no introduce o no le aparece una nómina, el colaborador será guardado como externo</span>';
 
                 echo '
                 </td>

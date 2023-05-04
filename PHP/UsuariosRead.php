@@ -97,7 +97,7 @@
             <td>'.$info['co_correo'].'</td>
           </tr>
           <tr>
-            <td>Nomina: </td>
+            <td>Nómina: </td>
             <td>'.$info['co_nomina'].'</td>
           </tr>
           <tr>
@@ -220,7 +220,7 @@
             <td>'.$info['co_correo'].'</td>
           </tr>
           <tr>
-            <td>Nomina: </td>
+            <td>Nómina: </td>
             <td>'.$info['co_nomina'].'</td>
           </tr>
           <tr>

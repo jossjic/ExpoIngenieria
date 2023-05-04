@@ -142,7 +142,7 @@
             <div class="Info__Header">
                 <p class="Winners__View__Column-1">&nbsp;</p>
                 <p class="Winners__View__Column-6"></p>
-                <p class="Winners__View__Column-2">Nomina</p>
+                <p class="Winners__View__Column-2">Nómina</p>
                 <p class="Winners__View__Column-3">Tipo</p>
                 <p class="Winners__View__Column-4">Nombre</p>
                 <p class="Winners__View__Column-5">Apellido</p>

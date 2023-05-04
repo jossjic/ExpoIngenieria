@@ -173,7 +173,7 @@
                             <td><input class="Text__Input" type="email" name="collaborator_email" value="<?php echo !empty($collaborator_email) ? $collaborator_email : ''; ?>" required></td>
                         </tr>
                         <tr>
-                            <td>Nomina</td>
+                            <td>Nómina</td>
                             <td><input class="Text__Input" type="text" name="collaborator_payroll" value="<?php echo !empty($collaborator_payroll) ? $collaborator_payroll : ''; ?>" required></td>
                         </tr>
                         <tr>
