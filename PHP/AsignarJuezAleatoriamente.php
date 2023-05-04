@@ -29,7 +29,7 @@
     $totalJuecesProyecto = floor($proyectoscount/$juecescount);
 
     if ($totalJuecesProyecto < 4) {
-        $totalJuecesProyecto = 2;
+        $totalJuecesProyecto = 3;
     }
 
     foreach ($proyectos as $project) {
@@ -70,10 +70,6 @@
         }
             
     }
-
-    echo $totalJuecesProyecto;
-    echo $proyectoscount;
-    echo $juecescount;
 
 ?>
 
