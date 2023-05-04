@@ -57,7 +57,7 @@
             $Mapa_Full_Link = "https://drive.google.com/file/d/".$Mapa_id."/preview";
             ?>
             <iframe
-                width="100%"
+                width="70%"
                 height="90%"
                 src="<?php echo $Mapa_Full_Link; ?>"
                 title="YouTube video player"
