@@ -1,5 +1,5 @@
 <?php
-	require 'dataBase.php';
+	require_once "dataBase.php";
 
 	session_name("EngineerXpoWeb");
     session_start();
@@ -7,32 +7,37 @@
     if (!isset($_SESSION['logged_in'])) {
         header("Location: ../index.php");
         exit();
-    } 
+    }
 
+    if ($_SESSION['user_type'] != "project") {
+    	header("Location: ../index.php");
+    	exit();
+    }
 
-	if ( $_SESSION['id']==null) {
-		header("Location: ../PHP/DashboardProyecto.php");
-	} else {
-		$pdo = Database::connect();
-		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "SELECT * FROM PROYECTO WHERE p_id = ?";
-		$q = $pdo->prepare($sql);
-		$q->execute(array($_SESSION['id']));
-		$data = $q->fetch(PDO::FETCH_ASSOC);
+	$pdo = Database::connect();
 
-		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    	$sql = "SELECT * FROM CATEGORIA";
-    	$q = $pdo->prepare($sql);
-    	$q->execute();
-    	$categorias = $q->fetchAll(PDO::FETCH_ASSOC);
+	// Project data
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$sql = "SELECT * FROM PROYECTO WHERE p_id = ?";
+	$q = $pdo->prepare($sql);
+	$q->execute(array($_SESSION['id']));
+	$project = $q->fetch(PDO::FETCH_ASSOC);
 
-		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    	$sql = "SELECT * FROM NIVEL";
-    	$q = $pdo->prepare($sql);
-    	$q->execute();
-    	$nivel = $q->fetchAll(PDO::FETCH_ASSOC);
-		Database::disconnect();
-	}
+	// Categories
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$sql = "SELECT * FROM CATEGORIA";
+	$q = $pdo->prepare($sql);
+	$q->execute();
+	$categorias = $q->fetchAll(PDO::FETCH_ASSOC);
+
+	// Levels
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$sql = "SELECT * FROM NIVEL";
+	$q = $pdo->prepare($sql);
+	$q->execute();
+	$nivel = $q->fetchAll(PDO::FETCH_ASSOC);
+	
+	Database::disconnect();
 
 
 ?>
@@ -45,9 +50,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/ico" href="../media/favicon.ico" />
-
-		<title>Administrador de Proyecto</title>
-
+		<title>Administrador de proyecto</title>
 		<link rel="stylesheet" href="../CSS/HeaderFooterStructure.css" />
 		<link rel="stylesheet" href="../CSS/Page5.css" />
 		<link rel="stylesheet" href="../CSS/Extra.css" />
@@ -61,59 +64,75 @@
             </ul>
             <nav>
                 <ul>
-                    <li><a href="../PHP/logout.php">Cerrar Sesion</a></li>
+                    <li><a href="../PHP/logout.php">Cerrar sesion</a></li>
                 </ul>
             </nav>
         </header>
-
 		<aside class="card">
 			<h1>
-				Bienvenido <br />
+				¡Bienvenido <br />
 				de nuevo!
 			</h1>
-
 			<div class="Upload__Video">
-				<iframe
-					width="100%"
-					height="90%"
-					<?php 
+				<?php if ($project['p_video'] == null): ?>
+					<dd><i>Sin url de video asignado</i></dd>
+					<button
+						class="btn-submit"
+						type="button"
+						onclick="showVideoLinkInput()"
+					>
+						Agregar video
+					</button>
+				<?php else: ?>
+					<iframe
+						width="100%"
+						height="90%"
+						<?php 
 
-						preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $data['p_video'], $match);
-                        $video_id = $match[1];
-                        $video_full_link = "https://drive.google.com/file/d/".$video_id."/preview";
-                        echo 'src="'.$video_full_link.'" title="YouTube video player" frameborder="0" allow="accelerometer"; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share allowfullscreen';
-					?>
-					
-				></iframe>
-
-				<button
-					class="btn-submit"
-					type="button"
-					onclick="showVideoLinkInput()"
-				>
-					Agregar Video
-				</button>
+							preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $project['p_video'], $match);
+	                        $video_id = $match[1];
+	                        $video_full_link = "https://drive.google.com/file/d/".$video_id."/preview";
+	                        echo 'src="'.$video_full_link.'" title="YouTube video player" frameborder="0" allow="accelerometer"; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share allowfullscreen';
+						?>
+					></iframe>
+					<button
+						class="btn-submit"
+						type="button"
+						onclick="showVideoLinkInput()"
+					>
+						Modificar video
+					</button>
+				<?php endif ?>
 			</div>
-
 			<div class="Upload__Poster">
-				<iframe
-					width="100%"
-					height="600px"
-					<?php
-                            preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $data['p_poster'], $match);
-                            $image_id = $match[1];
-                            $image_full_link = "https://drive.google.com/file/d/".$image_id."/preview";
-                            echo 'src="'.$image_full_link.'" allow="autoplay"';
-                    ?>
-				></iframe>
-
-				<button
-					class="btn-submit"
-					type="button"
-					onclick="showPosterLinkInput()"
-				>
-					Agregar Poster
-				</button>
+				<?php if ($project['p_poster'] == null): ?>
+					<dd><i>Sin url de imagen de póster asignado</i></dd>
+					<button
+						class="btn-submit"
+						type="button"
+						onclick="showPosterLinkInput()"
+					>
+						Agregar poster
+					</button>
+				<?php else: ?>
+					<iframe
+						width="100%"
+						height="600px"
+						<?php
+	                            preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $project['p_poster'], $match);
+	                            $image_id = $match[1];
+	                            $image_full_link = "https://drive.google.com/file/d/".$image_id."/preview";
+	                            echo 'src="'.$image_full_link.'" allow="autoplay"';
+	                    ?>
+					></iframe>
+					<button
+						class="btn-submit"
+						type="button"
+						onclick="showPosterLinkInput()"
+					>
+						Modificar poster
+					</button>
+				<?php endif ?>
 			</div>
 		</aside>
 
@@ -121,9 +140,9 @@
 		<div id="video-link-modal" class="modal-video">
 			<div class="modal-content">
 				<span class="close close-video">&times;</span>
-				<h2>Ingresa el enlace del video</h2>
-				<p>1. Asegurate de que el video lo compartas desde Google Drive <br>
-				   2. Cuando pegues el link del video compartido desde google drive debe tener el siguiente pattern:  <br>
+				<h2>Ingresa el enlace del video:</h2>
+				<p>1. Asegurate de que el video lo compartas desde Google Drive<br>
+				   2. Cuando pegues el link del video compartido desde google drive debe tener el siguiente formato:  <br>
 				   https://drive.google.com/file/d/.../view?usp=sharing</p>
 				<form action="../PHP/EnlaceVideo.php" method="post" >
 					<input
@@ -145,8 +164,8 @@
 			<div class="modal-content">
 				<span class="close close-poster">&times;</span>
 				<h2>Ingresa el enlace del poster en formato PDF</h2>
-				<p>1. Asegurate de que el poster lo compartas desde Google Drive <br>
-				   2. Cuando pegues el link del poster compartido desde google drive debe tener el siguiente pattern:  <br>
+				<p>1. Asegurate de que el poster lo compartas desde Google Drive<br>
+				   2. Cuando pegues el link del poster compartido desde google drive debe tener el siguiente formato:  <br>
 				   https://drive.google.com/file/d/.../view?usp=sharing</p>
 				<form action="../PHP/EnlacePoster.php" method="post">
 					<input
@@ -169,37 +188,32 @@
 					<tr>
 						<td>
 							<label for="project_name">
-								Nombre del Proyecto
+								Nombre del proyecto
 							</label>
 						</td>
 					</tr>
 					<tr>
-						
 						<td>
 								<input
 									type="text"
 									name="project_name"
 									id="project_name"
 									required
-									<?php echo "value='".$data['p_nombre']."'" ?>
+									<?php echo "value='".$project['p_nombre']."'" ?>
 								/>
 						</td>
-						
-						
 					</tr>
-
 					<tr>
 						<td>
-							<label for="category"> Categoría </label>
+							<label for="category">Categoría</label>
 						</td>
 					</tr>
 					<tr>
-					
 						<td>
 							<select name="category" id="category" required>
 								<?php 
 									foreach ($categorias as $row) {
-										if ($row['ca_id'] == $data['ca_id']) {
+										if ($row['ca_id'] == $project['ca_id']) {
 											echo "<option value='".$row['ca_id']."' selected>".$row['ca_nombre']."</option>";
 										} else {
 											echo "<option value='".$row['ca_id']."'>".$row['ca_nombre']."</option>";
@@ -209,19 +223,17 @@
 							</select>
 						</td>
 					</tr>
-
 					<tr>
 						<td>
-							<label for="status">Avance</label>
+							<label for="status">Nivel de avance</label>
 						</td>
 					</tr>
-
 					<tr>
 						<td>
 							<select name="level" id="level" required>
 								<?php 
 									foreach ($nivel as $row) {
-										if ($row['n_id'] == $data['n_id']) {
+										if ($row['n_id'] == $project['n_id']) {
 											echo "<option value='".$row['n_id']."' selected>".$row['n_nombre']."</option>";
 										} else {
 											echo "<option value='".$row['n_id']."'>".$row['n_nombre']."</option>";
@@ -231,39 +243,39 @@
 								?>
 							</select>
 						</td>
-						
 					</tr>
 					<tr>
 						<td colspan="2">
-
 							<input type="submit" class="btn-submit" value="Guardar" />
 
 						</td>
 						<td>
-						
-							
-						
 						</td>
 					</tr>
 				</table>
 				<table style="text-align: center" class="table-2">
 					<tr>
 						<td>
+							<label for="project_name">
+								Descripción del proyecto
+							</label>
+						</td>
+					</tr>
+					<tr>
+						<td>
 							<textarea
 								class="input card"
+								placeholder="Ingresa una descripción a tu proyecto"
 								name="project_description"
 								id="project_description"
 								cols="30"
 								rows="10"
 								required
-								style="display: inline; width: 100%; height: 100%; resize: none;"
-							> <?php echo	$data['p_descripcion'] ?>
-							</textarea>
+								style="display: inline; width: 100%; height: 100%; resize: none;"><?php echo $project['p_descripcion'] ?></textarea>
 						</td>
 					</tr>
 				</table>
 			</form>
-
 			<div class="Second__Form">
 				<div class="Add_People cardBtn">
 					<button
@@ -271,14 +283,14 @@
 						onclick="showStudentFieldInput()"
 						class="btn-submit"
 					>
-						Agregar Alumno
+						Agregar alumno
 					</button>
 					<button
 						id="add_teacher_btn"
 						onclick="showTeacherFieldInput()"
 						class="btn-submit"
 					>
-						Agregar Profesor
+						Agregar profesor
 					</button>
 				</div>
 				<div class="students_div card">
@@ -346,7 +358,7 @@
 					<label for="student_matricula">Matricula</label>
 					<input type="text" id="student_matricula" name="student_matricula" required />
 					<br><br>
-					<label for="student_email">Correo Electrónico:</label>
+					<label for="student_email">Correo electrónico:</label>
 					<input
 						type="email"
 						id="student_email"
