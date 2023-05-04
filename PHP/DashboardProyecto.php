@@ -42,7 +42,7 @@
     // Level
     if ($project['n_id'] != null) {
         $sql = "SELECT *
-                FROM nivel
+                FROM NIVEL
                 WHERE n_id = ?";
         $q = $pdo->prepare($sql);
         $q->execute(array($project['n_id']));
@@ -76,9 +76,7 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" type="image/ico" href="../media/favicon.ico"/>
-
-    
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dashboard proyecto | Expo ingenierías</title>
         <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
         <link rel="stylesheet" href="../CSS/Dashboards.css">
