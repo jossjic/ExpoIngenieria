@@ -1,10 +1,19 @@
 <?php 
     require_once 'dataBase.php';
 
+    $pdo = Database::connect();
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$sql = "SELECT * FROM EDICION ORDER BY ed_id DESC LIMIT 1";
+	$q = $pdo->query($sql);
+	$edicion = $q->fetch(PDO::FETCH_ASSOC);
+	Database::disconnect();
+
+
+
     $conexion = Database::connect();
     // Obtener los proyectos y los profesores, y Jurado
-    $proyectos = $conexion->query("SELECT * FROM PROYECTOS")->fetchAll(PDO::FETCH_ASSOC);
-    $jueces = $conexion->query("SELECT * FROM COLABORADORES WHERE co_es_jurado = true")->fetchAll(PDO::FETCH_ASSOC);
+    $proyectos = $conexion->query("SELECT * FROM PROYECTO")->fetchAll(PDO::FETCH_ASSOC);
+    $jueces = $conexion->query("SELECT * FROM COLABORADOR WHERE co_es_jurado = true")->fetchAll(PDO::FETCH_ASSOC);
     $totalJuecesProyecto = $proyectos/$jueces;
 
     // Crear un array vacío para los jueces asignados
@@ -36,3 +45,4 @@
         echo "<br>";
     }
 ?>
+
