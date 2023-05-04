@@ -18,11 +18,11 @@
 		if ($valid) {
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "UPDATE MAPA SET m_url = ?, WHERE m_id =  1 ";
+			$sql = "INSERT INTO MAPA(m_url) VALUES(?) ";
 			$q = $pdo->prepare($sql);
 			$q->execute(array($URL));
 			Database::disconnect();
-			header("Location: ../PHP/AdministradorProyecto.php");
+			header("Location: ../PHP/MapaProyectos.php");
 			exit();
 		}
 	}

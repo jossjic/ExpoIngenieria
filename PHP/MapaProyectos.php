@@ -9,6 +9,10 @@
 		exit();
 	}
 
+    $pdo = Database::connect();
+    $sql = "SELECT * FROM MAPA ORDER BY m_id DESC LIMIT 1";
+    $Mapa = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+
 
 ?>
 
