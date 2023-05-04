@@ -20,6 +20,7 @@
 			header("Location: ../PHP/AdministradorProyecto.php");
 			exit();
 		}
+		echo "NO";
 	}
 
 ?>

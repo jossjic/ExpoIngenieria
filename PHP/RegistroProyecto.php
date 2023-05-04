@@ -20,6 +20,8 @@
         $project_pass_confirm = $_POST['project_pass_confirm'];
 
         $valid = true;
+        $edition_available = true;
+        $edition_error = null;
 
         // Empty project name code
         if (empty($project_name_code)) {
@@ -71,41 +73,34 @@
 
 
             if ($q->rowCount() == 1){
-              $ed = $q->fetch(PDO::FETCH_ASSOC);
-              $sql = "INSERT INTO PROYECTO (p_nombre_clave, p_pass, p_estado, ed_id) VALUES (?, ?, 'Registrado',?)";
-              $q = $pdo->prepare($sql);
-              $q->execute(array($project_name_code, $project_pass, $ed['ed_id']));
+                $ed = $q->fetch(PDO::FETCH_ASSOC);
+                $sql = "INSERT INTO PROYECTO (p_nombre_clave, p_pass, p_estado, ed_id) VALUES (?, ?, 'Registrado',?)";
+                $q = $pdo->prepare($sql);
+                $q->execute(array($project_name_code, $project_pass, $ed['ed_id']));
 
-              // Get project data
-            $sql = "SELECT * FROM PROYECTO WHERE p_nombre_clave = ? AND p_pass = ?";
-            $q = $pdo->prepare($sql);
-            $q->execute(array($project_name_code, $project_pass));
-            Database::disconnect();
-            $project = $q->fetch(PDO::FETCH_ASSOC);
+                // Get project data
+                $sql = "SELECT * FROM PROYECTO WHERE p_nombre_clave = ? AND p_pass = ?";
+                $q = $pdo->prepare($sql);
+                $q->execute(array($project_name_code, $project_pass));
+                Database::disconnect();
+                $project = $q->fetch(PDO::FETCH_ASSOC);
             }
 
-            else{
-                    $sql = "INSERT INTO PROYECTO (p_nombre_clave, p_pass, p_estado) VALUES (?, ?, 'Registrado')";
-              $q = $pdo->prepare($sql);
-              $q->execute(array($project_name_code, $project_pass));
+            else {
+                $edition_error = "El registro de proyectos está inhabilitado mientras inicia la nueva edición de Expo Ingeniería";
+                $edition_available = false;
+            }
 
-              // Get project data
-            $sql = "SELECT * FROM PROYECTO WHERE p_nombre_clave = ? AND p_pass = ?";
-            $q = $pdo->prepare($sql);
-            $q->execute(array($project_name_code, $project_pass));
-            Database::disconnect();
-            $project = $q->fetch(PDO::FETCH_ASSOC);
-              }
+            if ($edition_available) {
+                // Create session variables
+                $_SESSION['logged_in'] = true;
+                $_SESSION['user_type'] = "project";
+                $_SESSION['id'] = $project['p_id'];
 
-              
-            // Create session variables
-            $_SESSION['logged_in'] = true;
-            $_SESSION['user_type'] = "project";
-            $_SESSION['id'] = $project['p_id'];
-
-            // Redirect
-            header("Location: ../PHP/DashboardProyecto.php");
-            exit();
+                // Redirect
+                header("Location: ../PHP/DashboardProyecto.php");
+                exit();
+            }
         }
     }
 
@@ -160,7 +155,13 @@
                             <td><input class="Text__Input" type="password" name="project_pass_confirm" value="<?php echo !empty($project_pass_confirm) ? $project_pass_confirm : ''; ?>" required></td>
                         </tr>
                         <tr>
-                            <td class="Td__Registrar" colspan="2"><input class="Btn__Registrar" type="submit" value="Registrar" name="submit"></td>
+                            <td class="Td__Registrar" colspan="2">
+                                <input class="Btn__Registrar" type="submit" value="Registrar" name="submit">
+                                <?php if (!empty($edition_error)): ?>
+                                    <br>
+                                    <span class="Error__Message"><?php echo $edition_error; ?></span>
+                                <?php endif; ?>
+                            </td>
                         </tr>
                     </table>
                 </form>
