@@ -90,8 +90,7 @@
             // Create collaborator
             $sql = "INSERT INTO COLABORADOR (co_correo, co_nomina, co_nombre, co_apellido, co_pass, co_es_jurado) VALUES (?, ?, ?, ?, ?, ?)";
             $q = $pdo->prepare($sql);
-            $is_judge = false;
-            $q->execute(array($collaborator_email, $collaborator_payroll, $collaborator_name, $collaborator_lastname, $collaborator_pass, $is_judge));
+            $q->execute(array($collaborator_email, $collaborator_payroll, $collaborator_name, $collaborator_lastname, $collaborator_pass, 0));
 
 
             // Get project data
