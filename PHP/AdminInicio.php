@@ -106,7 +106,7 @@
 					<td>
 						<a
 							class="Btn__Ancla"
-							href="../PHP/AdminMapaUpload.php"
+							href="../PHP/MapaProyectos.php"
 							>Subir Mapa</a
 						>
 					</td>
