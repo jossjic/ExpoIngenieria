@@ -38,7 +38,7 @@
 				<li><a href="../PHP/AvisosView.php">Avisos</a></li>
 				<li><a href="../PHP/EdicionView.php">Ediciones</a></li>
 				<li><a href="../PHP/NivelView.php">Nivel</a></li>
-				<li><a href="../PHP/CategoriasView.php">Categorias</a></li>
+				<li><a href="../PHP/CategoriaView.php">Categorias</a></li>
 				<li><a href="../PHP/UsuariosView.php">Usuarios</a></li>
 				<li><a href="../PHP/ProyectosView.php">Proyectos</a></li>
 				<li><a href="../PHP/AdministradoresView.php">Administradores</a></li>
@@ -70,9 +70,9 @@
 					</table>
 				</div>
 
-				<div class="Estadisticas__Btn">
-					<a class="Admin__Start__Right__Btn" href="../PHP/AdministradoresCreate.php">Crear Administrador</a>
-				</div>
+
+					<a class="Estadisticas__Btn" href="../PHP/AdministradoresCreate.php">Crear Administrador</a>
+
 			</div>
 
 			<form action="../PHP/AdministradoresBusqueda.php" method="post" class="Winners__Explorer">
@@ -120,18 +120,14 @@
 											<p>".$row['adm_nombre']."</p>
 											<p>".$row['adm_apellido']."</p>
                                             <p>".$row['adm_correo']."</p>
-                                            <p></p>
-											<div class='Btn__Green'>
-												<a href='../PHP/AdministradoresRead.php?id=".trim($row['adm_correo'])."'>Ver</a>
-											</div>
-											<div class='Btn__Blue'>
-												<a href='../PHP/AdministradoresUpdate.php?id=".trim($row['adm_correo'])."'>Actualizar</a>
-											</div>
-											<div class='Btn__Red'>
-												<a href='../PHP/AdministradoresDelete.php?id=".trim($row['adm_correo'])."'>Eliminar</a>
-											</div>
-											<p></p>
-										";
+                                            <p></p>";
+											echo '<a class="Btn__Green" href="../PHP/AdministradoresRead.php?id=' . trim($row['adm_correo']) . '">Ver</a>';
+											echo '<a class="Btn__Blue" href="../PHP/AdministradoresUpdate.php?id=' . trim($row['adm_correo']) . '">Actualizar</a>';
+											echo '<a class="Btn__Red" href="../PHP/AdministradoresDelete.php?id=' . trim($row['adm_correo']) . '">Eliminar</a>';
+
+											
+											echo '<p></p>';
+										
 									}
 									Database::disconnect();
 								?>

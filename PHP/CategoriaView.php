@@ -36,7 +36,7 @@
 				<li><a href="../PHP/AvisosView.php">Avisos</a></li>
 				<li><a href="../PHP/EdicionView.php">Ediciones</a></li>
 				<li><a href="../PHP/NivelView.php">Nivel</a></li>
-				<li><a href="../PHP/CategoriasView.php">Categorias</a></li>
+				<li><a href="../PHP/CategoriaView.php">Categorias</a></li>
 				<li><a href="../PHP/UsuariosView.php">Usuarios</a></li>
 				<li><a href="../PHP/ProyectosView.php">Proyectos</a></li>
 				<li><a href="../PHP/AdministradoresView.php">Administradores</a></li>
@@ -67,9 +67,9 @@
 					</table>
 				</div>
 
-				<div class="Estadisticas__Btn">
-					<a class="Admin__Start__Right__Btn" href="../PHP/CategoriaCreate.php">Crear Categoria</a>
-				</div>
+
+					<a class="Estadisticas__Btn"href="../PHP/CategoriaCreate.php">Crear Categoria</a>
+
 			</div>
 
 			<form action="../PHP/CategoriaBusqueda.php" method="post" class="Winners__Explorer">
@@ -119,15 +119,11 @@
                                             <p>".$row['ca_nombre']."</p>
                                             <p></p>
                                             <p></p>
-                                            <div class='Btn__Green'>
-                                                <a href='../PHP/CategoriaRead.php?id=".trim($row['ca_id'])."'>Ver</a>
-                                            </div>
-                                            <div class='Btn__Blue'>
-                                                <a href='../PHP/CategoriaUpdate.php?id=".trim($row['ca_id'])."'>Actualizar</a>
-                                            </div>
-                                            <div class='Btn__Red'>
-                                                <a href='../PHP/CategoriaDelete.php?id=".trim($row['ca_id'])."'>Eliminar</a>
-                                            </div>
+                                                <a class='Btn__Green' href='../PHP/CategoriaRead.php?id=".trim($row['ca_id'])."'>Ver</a>
+
+                                                <a class='Btn__Blue' href='../PHP/CategoriaUpdate.php?id=".trim($row['ca_id'])."'>Actualizar</a>
+
+                                                <a class='Btn__Red' href='../PHP/CategoriaDelete.php?id=".trim($row['ca_id'])."'>Eliminar</a>
 											<p></p>
 										";
 									}

@@ -152,15 +152,9 @@
                                             <p>" . $row['ca_nombre'] ."</p>
                                             <p>" . $row['p_estado'] ."</p>
                                             <p>" . $row['n_nombre'] ."</p>
-                                            <div class='Btn__Green'>
-                                                <a href='../PHP/ProyectosRead.php?id=".trim($row['p_id'])."'>Ver</a>
-                                            </div>
-                                            <div class='Btn__Blue'>
-                                                <a href='../PHP/ProyectosUpdate.php?id=".trim($row['p_id'])."'>Actualizar</a>
-                                            </div>
-                                            <div class='Btn__Red'>
-                                                <a href='../PHP/ProyectosDelete.php?id=".trim($row['p_id'])."'>Eliminar</a>
-                                            </div>
+                                                <a class='Btn__Green' href='../PHP/ProyectosRead.php?id=".trim($row['p_id'])."'>Ver</a>
+                                                <a class='Btn__Blue' href='../PHP/ProyectosUpdate.php?id=".trim($row['p_id'])."'>Actualizar</a>
+                                                <a class='Btn__Red' href='../PHP/ProyectosDelete.php?id=".trim($row['p_id'])."'>Eliminar</a>
                                             <p></p>
                                         ";
 

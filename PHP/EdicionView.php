@@ -38,7 +38,7 @@
 				<li><a href="../PHP/AvisosView.php">Avisos</a></li>
 				<li><a href="../PHP/EdicionView.php">Ediciones</a></li>
 				<li><a href="../PHP/NivelView.php">Nivel</a></li>
-				<li><a href="../PHP/CategoriasView.php">Categorias</a></li>
+				<li><a href="../PHP/CategoriaView.php">Categorias</a></li>
 				<li><a href="../PHP/UsuariosView.php">Usuarios</a></li>
 				<li><a href="../PHP/ProyectosView.php">Proyectos</a></li>
 				<li><a href="../PHP/AdministradoresView.php">Administradores</a></li>
@@ -70,9 +70,7 @@
 					</table>
 				</div>
 
-				<div class="Estadisticas__Btn">
-					<a class="Admin__Start__Right__Btn" href="../PHP/EdicionCreate.php">Crear Edicion</a>
-				</div>
+					<a class="Estadisticas__Btn" href="../PHP/EdicionCreate.php">Crear Edicion</a>
 			</div>
 
 			<form action="../PHP/ProyectosBusqueda.php" method="post" class="Winners__Explorer">
@@ -124,15 +122,9 @@
 											<p>".date("Y-m-d",strtotime(trim($row['ed_fecha_inicio'])))."</p>
 											<p>".date("Y-m-d",strtotime(trim($row['ed_fecha_fin'])))."</p>
 											<p></p>
-											<div class='Btn__Green'>
-												<a href='../PHP/EdicionRead.php?id=".trim($row['ed_id'])."'>Ver</a>
-											</div>
-											<div class='Btn__Blue'>
-												<a href='../PHP/EdicionUpdate.php?id=".trim($row['ed_id'])."'>Actualizar</a>
-											</div>
-											<div class='Btn__Red'>
-												<a href='../PHP/EdicionDelete.php?id=".trim($row['ed_id'])."'>Eliminar</a>
-											</div>
+												<a class='Btn__Green'href='../PHP/EdicionRead.php?id=".trim($row['ed_id'])."'>Ver</a>
+												<a class='Btn__Blue'href='../PHP/EdicionUpdate.php?id=".trim($row['ed_id'])."'>Actualizar</a>
+												<a class='Btn__Red'href='../PHP/EdicionDelete.php?id=".trim($row['ed_id'])."'>Eliminar</a>
 											<p></p>
 										";
 									}

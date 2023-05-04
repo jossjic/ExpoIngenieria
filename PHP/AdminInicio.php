@@ -101,6 +101,16 @@
 						>
 					</td>
 				</tr>
+
+				<tr>
+					<td>
+						<a
+							class="Btn__Ancla"
+							href="../PHP/AdminMapaUpload.php"
+							>Subir Mapa</a
+						>
+					</td>
+				</tr>
 			</table>
 		</main>
 

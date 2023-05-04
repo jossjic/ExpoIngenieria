@@ -189,7 +189,7 @@ a {
 	font-size: small;
 }
 .Btn__Red:hover{
-	rotate: 5deg;
+	rotate: 3deg;
 	transition: all 0.8s ease;
 }
 
@@ -221,7 +221,7 @@ a {
 }
 
 .Btn__Blue:hover{
-	rotate: 5deg;
+	rotate: 3deg;
 	transition: all 0.8s ease;
 }
 
@@ -238,7 +238,7 @@ a {
 }
 
 .Btn__Green:hover{
-	rotate: 5deg;
+	rotate: 3deg;
 	transition: all 0.8s ease;
 }
 

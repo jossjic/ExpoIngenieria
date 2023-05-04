@@ -69,9 +69,7 @@
 					</table>
 				</div>
 
-				<div class="Estadisticas__Btn">
-					<a class="Admin__Start__Right__Btn" href="../PHP/NivelCreate.php">Crear Nivel</a>
-				</div>
+					<a class="Estadisticas__Btn" href="../PHP/NivelCreate.php">Crear Nivel</a>
 			</div>
 
 			<form action="../PHP/NivelBusqueda.php" method="post" class="Winners__Explorer">
@@ -121,15 +119,9 @@
                                             <p>".$row['n_nombre']."</p>
                                             <p></p>
                                             <p></p>
-                                            <div class='Btn__Green'>
-                                                <a href='../PHP/NivelRead.php?id=".trim($row['n_id'])."'>Ver</a>
-                                            </div>
-                                            <div class='Btn__Blue'>
-                                                <a href='../PHP/NivelUpdate.php?id=".trim($row['n_id'])."'>Actualizar</a>
-                                            </div>
-                                            <div class='Btn__Red'>
-                                                <a href='../PHP/NivelDelete.php?id=".trim($row['n_id'])."'>Eliminar</a>
-                                            </div>
+                                                <a class='Btn__Green' href='../PHP/NivelRead.php?id=".trim($row['n_id'])."'>Ver</a>
+                                                <a class='Btn__Blue' href='../PHP/NivelUpdate.php?id=".trim($row['n_id'])."'>Actualizar</a>
+                                                <a class='Btn__Red' href='../PHP/NivelDelete.php?id=".trim($row['n_id'])."'>Eliminar</a>
 											<p></p>
 										";
 									}
