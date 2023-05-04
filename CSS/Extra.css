@@ -10,6 +10,11 @@
 	font-size: smaller;
 }
 
+.Btn-Ancla:hover{
+	box-shadow: 0 4px 16px #0033a0;
+  transition: all 0.2s ease;
+}
+
 .Btn-Ancla a {
 	color: white;
 	text-decoration: none;

@@ -29,12 +29,18 @@ main {
 .Estadisticas__Btn {
 	width: 20em;
 	height: 3.5em;
-	background-color: #325db8;
-
+	background-color: #0022bb;
 	display: grid;
 	place-self: center;
 	place-items: center;
+
 }
+
+.Estadisticas__Btn:hover {
+	box-shadow: 0 4px 16px #0022bb;
+  transition: all 0.2s ease;
+}
+
 
 .Admin__Start__Right__Btn {
 	text-decoration: none;
@@ -65,11 +71,19 @@ main {
 }
 
 .Search__Btn {
+	cursor: pointer;
 	width: 100px;
 	height: 25px;
-	background-color: #325db8;
 	color: white;
-	border: none;
+	border: solid white 2px;
+	transition:background-position 0.3s ease;
+	background:linear-gradient(to right, #0033A0 50%, white 50%) no-repeat left / 200%;
+	width: 13em;
+}
+.Search__Btn:hover {
+	background-position:right;
+	color: #0033A0;
+  border:solid #0033A0 2px;
 }
 
 .Projects__Explorer table,
@@ -174,6 +188,10 @@ a {
 
 	font-size: small;
 }
+.Btn__Red:hover{
+	rotate: 5deg;
+	transition: all 0.8s ease;
+}
 
 .Btn__Red__Delete {
 	border: none;
@@ -202,6 +220,11 @@ a {
 	font-size: small;
 }
 
+.Btn__Blue:hover{
+	rotate: 5deg;
+	transition: all 0.8s ease;
+}
+
 .Btn__Green {
 	border-radius: 5px;
 	background-color: green;
@@ -212,6 +235,11 @@ a {
 	place-items: center;
 
 	font-size: small;
+}
+
+.Btn__Green:hover{
+	rotate: 5deg;
+	transition: all 0.8s ease;
 }
 
 .Btn__Green__Delete {
