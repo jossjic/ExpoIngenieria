@@ -33,14 +33,28 @@
     }
 
     foreach ($proyectos as $project) {
-        echo $project['p_nombre'];
+        
         $judge_keys = array_rand($jueces, $totalJuecesProyecto);
         foreach ($judge_keys as $judge) {
-            echo $jueces[$judge]['co_nombre'];
-        }
-        // Asignar $judge1 y $judge2 al proyecto
 
-        
+            //Buscar existencia del juez y proyecto asociado
+            $pdo = Database::connect();
+            $sql = "SELECT * FROM PROYECTO_DOCENTE WHERE co_correo = ? AND p_id = ?";
+            $insertion = $pdo->prepare($sql);
+            $insertion->execute(array($jueces[$judge]['co_correo'],$project['p_id']));
+            $HayDocente = $insertion->rowCount();
+            Database::disconnect();
+
+            if ($HayDocente == 0){
+                $pdo = Database::connect();
+                $sql = "INSERT INTO PROYECTO_JURADO(co_correo,p_id) VALUES(?,?)";
+                $insertion = $pdo->prepare($sql);
+                $insertion->execute(array($jueces[$judge]['co_correo'],$project['p_id']));
+                Database::disconnect();
+            }
+            
+        }
+            
     }
 
     echo $totalJuecesProyecto;
