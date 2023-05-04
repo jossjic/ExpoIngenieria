@@ -40,7 +40,7 @@
 				</form>
 				<br />
 				<br />
-				<button>Asignar Jurado Aleatoriamente</button>
+				<button onclick="asignarJurado()">Asignar Jurado Aleatoriamente</button>
 			</div>
 			<div class="container">
 				<h1>Jurado</h1>
@@ -74,6 +74,32 @@
 					</tbody>
 				</table>
 			</div>
+
+			<script>
+				function asignarJurado() {
+					// Crea un objeto XMLHttpRequest
+					var xhr = new XMLHttpRequest();
+
+					// Configura la petición HTTP
+					xhr.open('GET', '../PHP/AsignarJuezAleatoriamente.php', true);
+
+					// Configura el callback que se llamará cuando se complete la petición
+					xhr.onreadystatechange = function() {
+						if (xhr.readyState === XMLHttpRequest.DONE) {
+						if (xhr.status === 200) {
+							// La petición se completó correctamente
+							alert('Jurado asignado aleatoriamente');
+						} else {
+							// La petición falló
+							alert('Error al asignar jurado: ' + xhr.status);
+						}
+						}
+					};
+
+					// Envía la petición HTTP
+					xhr.send();
+				}
+			</script>
 
 		</main>
 	</body>

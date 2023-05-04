@@ -108,6 +108,8 @@
                 </table>
             </div>
 
+            <a class="Estadisticas__Btn" href="../PHP/RegistroJurado.php">Agregar Jurado</a>
+
         </div>
 
             
