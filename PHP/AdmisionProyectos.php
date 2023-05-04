@@ -88,7 +88,6 @@
         </header>
 
         <main>
-
 			<div class="container">
 
                 <?php

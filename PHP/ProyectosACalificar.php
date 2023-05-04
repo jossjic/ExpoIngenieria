@@ -49,20 +49,18 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="icon" type="image/ico" href="../media/favicon.ico"/>
-
 		<title>Proyectos a calificar | EngineerXpoWeb</title>
+		<link rel="icon" type="image/ico" href="../media/favicon.ico"/>
 
 		<link rel="stylesheet" href="../CSS/estructuraProyecto.css">
         <link rel="stylesheet" href="../CSS/admisionProyecto.css">
         <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
-
 	</head>
 	<body>
 		<header>
             <a href="../index.php"><img class="Logo__Expo" src="../media/logo-expo.svg" alt="Logotipo de Expo ingenierías"></a>
             <ul>
-				<li><a href="../PHP/DashboardColaboradoresJurado.php">Dashboard</a></li>
+				<li><a href="../PHP/DashboardColaboradoresJuez.php">Dashboard</a></li>
                 <li><a href="../PHP/Mapa.php">Mapa de proyectos</a></li>
             </ul>
             <nav>
@@ -80,8 +78,6 @@
 					$sql = 'SELECT * 
 							FROM PROYECTO 
 							NATURAL JOIN CATEGORIA
-							NATURAL JOIN NIVEL
-							NATURAL JOIN EDICION
 							NATURAL JOIN PROYECTO_JURADO
 							WHERE p_estado = "Aceptado" AND co_correo = \''.$_SESSION['id'].'\'
 							ORDER BY p_nombre';
