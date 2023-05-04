@@ -59,7 +59,7 @@
             $NoMas = $insertion->rowCount();
             Database::disconnect();
 
-            if ($HayDocente == 0 && $HayJurado == 0 && $NoMas <= $totalJuecesProyecto){
+            if ($HayDocente == 0 && $HayJurado == 0 && $NoMas < $totalJuecesProyecto){
                 $pdo = Database::connect();
                 $sql = "INSERT INTO PROYECTO_JURADO(co_correo,p_id) VALUES(?,?)";
                 $insertion = $pdo->prepare($sql);
