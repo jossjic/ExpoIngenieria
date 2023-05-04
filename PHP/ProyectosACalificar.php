@@ -21,12 +21,7 @@
         /// validate input
         $valid = true;
 
-        if (empty($id)) {
-            header("Location: ProyectosACalificar.php");
-            exit();
-        }
-
-        if (empty($action)) {
+        if (empty($id) || empty($action)) {
             header("Location: ProyectosACalificar.php");
             exit();
         }
@@ -75,20 +70,33 @@
 
 				<?php
 					$pdo = Database::connect();
-					$sql = 'SELECT * 
-							FROM PROYECTO 
-							NATURAL JOIN CATEGORIA
-							NATURAL JOIN PROYECTO_JURADO
-							WHERE p_estado = "Aceptado" AND co_correo = \''.$_SESSION['id'].'\'
-							ORDER BY p_nombre';
 
-					$projects = $pdo->query($sql);
+					// Projects without evaluation
+					$sql = 'SELECT * 
+					        FROM PROYECTO 
+					        NATURAL JOIN CATEGORIA 
+					        NATURAL JOIN PROYECTO_JURADO 
+					        WHERE co_correo = ? AND 
+					        p_id IN (
+					            SELECT p_id 
+					            FROM PROYECTO 
+					            WHERE p_id NOT IN (
+					                SELECT p_id 
+					                FROM EVALUACION 
+					                WHERE co_correo = ?
+					            )
+					        ) 
+					        ORDER BY p_nombre';
+					$q = $pdo->prepare($sql);
+					$q->execute(array($_SESSION['id'], $_SESSION['id']));
+					$projects = $q->fetchAll();
+					$number_of_projects = $q->rowCount();
+
 					Database::disconnect();
-					$number_of_projects = $projects->rowCount();
 				?>
 
 				<?php if ($number_of_projects == 0): ?>
-					<div class="announce"><h2>Sin Proyectos Por Calificar</h2></div>
+					<div class="announce"><h2>Sin proyectos por calificar</h2></div>
 
 				<?php else: ?>
 
@@ -122,6 +130,84 @@
 											echo     '<td>'.$row['p_ult_modif'].'</td>';
 											echo     '<td>';
 											echo         '<button type="button" class="btn btn-secondary" type="button" onclick="gradeProject('.$row['p_id'].')">Calificar</button>';
+											echo     '</td>';
+											echo '</tr>';
+											
+										}
+									?>
+								</tbody>
+							</table>
+						</div>
+					</fieldset>
+
+				<?php endif ?>
+
+			</div>
+
+			<div class="container">
+
+				<?php
+					$pdo = Database::connect();
+
+					// Projects with evaluation
+					$sql = 'SELECT * 
+					        FROM PROYECTO 
+					        NATURAL JOIN CATEGORIA 
+					        NATURAL JOIN PROYECTO_JURADO 
+					        WHERE co_correo = ? AND 
+					        p_id IN (
+					            SELECT p_id 
+					            FROM PROYECTO 
+					            WHERE p_id IN (
+					                SELECT p_id 
+					                FROM EVALUACION 
+					                WHERE co_correo = ?
+					            )
+					        ) 
+					        ORDER BY p_nombre';
+					$q = $pdo->prepare($sql);
+					$q->execute(array($_SESSION['id'], $_SESSION['id']));
+					$projects = $q->fetchAll();
+					$number_of_projects = $q->rowCount();
+
+					Database::disconnect();
+				?>
+
+				<?php if ($number_of_projects == 0): ?>
+					<div class="announce"><h2>Sin proyectos calificados</h2></div>
+
+				<?php else: ?>
+
+					<form action="ProyectosACalificar.php" method="post" id="project-form-id">
+						<input type="hidden" name="project_id" value="" id="project-id">
+						<input type="hidden" name="project_action" value="" id="project-action">
+					</form>
+					<fieldset class="project-container">
+						<legend><strong>Proyectos calificados</strong></legend>
+						<br>
+						<hr>
+						<div class="rubric-elements">
+							<table>
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>Nombre</th>
+										<th>Categoría</th>
+										<th>Ultima Modificación</th>
+										<th>Acciones</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php
+										foreach ($projects as $row) {
+
+											echo '<tr>';
+											echo     '<td>'.$row['p_id'].'</td>';
+											echo     '<td>'.$row['p_nombre'].'</td>';
+											echo     '<td>'.$row['ca_nombre'].'</td>';
+											echo     '<td>'.$row['p_ult_modif'].'</td>';
+											echo     '<td>';
+											echo         '<button type="button" class="btn btn-secondary" type="button" onclick="gradeProject('.$row['p_id'].')">Modificar calificación</button>';
 											echo     '</td>';
 											echo '</tr>';
 											
