@@ -1,38 +1,83 @@
 <?php 
     require_once 'dataBase.php';
 
-    $conexion = Database::connect();
+    session_name("EngineerXpoWeb");
+    session_start();
+
+    if (!isset($_SESSION['logged_in'])) {
+        header("Location: ../index.php");
+        exit();
+    }
+
+    $pdo = Database::connect();
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$sql = "SELECT * FROM EDICION ORDER BY ed_id DESC LIMIT 1";
+	$q = $pdo->query($sql);
+	$edicion = $q->fetch(PDO::FETCH_ASSOC);
+	Database::disconnect();
+
+    $pdo = Database::connect();
     // Obtener los proyectos y los profesores, y Jurado
-    $proyectos = $conexion->query("SELECT * FROM PROYECTOS")->fetchAll(PDO::FETCH_ASSOC);
-    $jueces = $conexion->query("SELECT * FROM COLABORADORES WHERE co_es_jurado = true")->fetchAll(PDO::FETCH_ASSOC);
-    $totalJuecesProyecto = $proyectos/$jueces;
+    $sql = "SELECT * FROM PROYECTO NATURAL JOIN EDICION WHERE ed_id = ?";
+    $proyectos = $pdo->prepare($sql); 
+    $proyectos->execute(array($edicion['ed_id']));
+    $proyectoscount = $proyectos->rowCount();
 
-    // Crear un array vacío para los jueces asignados
-    $jueces_asignados = array();
+    $proyectos = $proyectos->fetchAll(PDO::FETCH_ASSOC);
 
-    // Recorrer cada proyecto
-    foreach ($proyectos as $proyecto) {
-        // Obtener los profesores que no están asociados con este proyecto
-        $jueces_disponibles = array_filter($jueces, function ($jueces) use ($proyecto) {
-            return $jueces['co_correo'] !== $jueces['profesor_1'] &&
-                $jueces['co_correo'] !== $jueces['profesor_2'] &&
-                $jueces['co_correo'] !== $proyecto['profesor_3'] &&
-                $jueces['co_correo'] !== $proyecto['profesor_4'];
-        });
+    $sql = "SELECT * FROM COLABORADOR NATURAL JOIN EDICION_COLABORADOR WHERE co_es_jurado = true AND ed_id = ?";
+    $jueces = $pdo->prepare($sql);
+    $jueces->execute(array($edicion['ed_id']));
+    $juecescount = $jueces->rowCount();
 
-        // Mezclar los profesores de forma aleatoria
-        shuffle($profesores_disponibles);
+    $jueces = $jueces->fetchAll(PDO::FETCH_ASSOC);
 
-        // Asignar los primeros 4 profesores aleatorios como jueces
-        $jueces_asignados[$proyecto['id']] = array_slice($profesores_disponibles, 0, 4);
+    Database::disconnect();
+
+    $totalJuecesProyecto = floor($proyectoscount/$juecescount);
+
+    if ($totalJuecesProyecto < 4) {
+        $totalJuecesProyecto = 3;
     }
 
-    // Mostrar los jueces asignados para cada proyecto
-    foreach ($jueces_asignados as $proyecto_id => $jueces) {
-        echo "Jueces asignados al proyecto $proyecto_id: ";
-        foreach ($jueces as $juez) {
-            echo $juez['nombre'] . ", ";
+    foreach ($proyectos as $project) {
+        
+        $judge_keys = array_rand($jueces, $totalJuecesProyecto);
+        foreach ($judge_keys as $judge) {
+
+            //Buscar existencia del juez y proyecto asociado
+            $pdo = Database::connect();
+            $sql = "SELECT * FROM PROYECTO_DOCENTE WHERE co_correo = ? AND p_id = ?";
+            $insertion = $pdo->prepare($sql);
+            $insertion->execute(array($jueces[$judge]['co_correo'],$project['p_id']));
+            $HayDocente = $insertion->rowCount();
+            Database::disconnect();
+
+            $pdo = Database::connect();
+            $sql = "SELECT * FROM PROYECTO_JURADO WHERE co_correo = ? AND p_id = ?";
+            $insertion = $pdo->prepare($sql);
+            $insertion->execute(array($jueces[$judge]['co_correo'],$project['p_id']));
+            $HayJurado = $insertion->rowCount();
+            Database::disconnect();
+
+            $pdo = Database::connect();
+            $sql = "SELECT * FROM PROYECTO_JURADO WHERE p_id = ?";
+            $insertion = $pdo->prepare($sql);
+            $insertion->execute(array($project['p_id']));
+            $NoMas = $insertion->rowCount();
+            Database::disconnect();
+
+            if ($HayDocente == 0 && $HayJurado == 0 && $NoMas < $totalJuecesProyecto){
+                $pdo = Database::connect();
+                $sql = "INSERT INTO PROYECTO_JURADO(co_correo,p_id) VALUES(?,?)";
+                $insertion = $pdo->prepare($sql);
+                $insertion->execute(array($jueces[$judge]['co_correo'],$project['p_id']));
+                Database::disconnect();
+            }
+            
         }
-        echo "<br>";
+            
     }
+
 ?>
+
