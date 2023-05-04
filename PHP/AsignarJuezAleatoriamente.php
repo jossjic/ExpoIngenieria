@@ -28,6 +28,10 @@
 
     $totalJuecesProyecto = floor($proyectoscount/$juecescount);
 
+    if ($totalJuecesProyecto < 4) {
+        $totalJuecesProyecto = 4;
+    }
+
     foreach ($proyectos as $project) {
         echo $project['p_nombre'];
         $judge_keys = array_rand($jueces, $totalJuecesProyecto);
