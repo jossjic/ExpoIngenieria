@@ -37,11 +37,21 @@ main form table {
 .Btn__Iniciar__Sesion,
 .Btn__Registrar,
 .Btn__Admin__Options {
-	border: none;
+	color: rgba(255, 255, 255, 0.9) !important;
+	cursor: pointer;
 	background-color: #0033a0;
-	color: white;
 	height: 40px;
 	width: 150px;
+	border: none;
+	transition: all 1s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.Btn__Iniciar__Sesion:hover,
+.Btn__Registrar:hover,
+.Btn__Admin__Options:hover {
+	color: rgba(255, 255, 255, 1) !important;
+	box-shadow: 0 4px 16px #0033a0;;
+	transition: all 0.2s ease;
 }
 
 .Td__Iniciar__Sesion,
@@ -81,7 +91,12 @@ main h2 a {
 	color: white;
 	line-height: 275%;
 	width: 150%;
+	transition: all 0.5s ease;
 	text-decoration: none;
+}
+.Btn__Ancla:hover {
+	background: #318aac;
+  color: #fff !important;
 }
 
 .Card-1 {
