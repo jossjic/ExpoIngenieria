@@ -23,15 +23,15 @@
 
     <title>Mapa</title>
 
-    <link rel="stylesheet" href="/CSS/Page3.css">
-    <link rel="stylesheet" href="/CSS/HeaderFooterStructure.css">
+    <link rel="stylesheet" href="../CSS/Page3.css">
+    <link rel="stylesheet" href="../CSS/HeaderFooterStructure.css">
     <script src="../JS/AdminMapa.js"></script>
 </head>
 <body>
     <header>
-        <img class="Logo__EscNegCie" src="/media/logotec-ings.svg" alt="Logo Escuela de Negocios">
+        <img class="Logo__EscNegCie" src="../media/logotec-ings.svg" alt="Logo Escuela de Negocios">
         <ul>
-            <li><a href="http://" target="_blank" rel="noopener noreferrer">Inicio</a></li>
+            <li><a href="../index.php" rel="noopener noreferrer">Inicio</a></li>
         </ul>
     </header>
 
