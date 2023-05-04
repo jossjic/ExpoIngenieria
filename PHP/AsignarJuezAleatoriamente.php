@@ -17,7 +17,7 @@
 
     $proyectos = $proyectos->fetchAll(PDO::FETCH_ASSOC);
 
-    $sql = "SELECT * FROM COLABORADOR NARTUAL JOIN EDICION COLABORADOR WHERE co_es_jurado = true AND ed_id = ?";
+    $sql = "SELECT * FROM COLABORADOR NATURAL JOIN EDICION COLABORADOR WHERE co_es_jurado = true AND ed_id = ?";
     $jueces = $pdo->prepare($sql);
     $jueces->execute(array($edicion['ed_id']));
     $juecescount = $jueces->rowCount();
