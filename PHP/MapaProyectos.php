@@ -95,8 +95,5 @@
         ?>
     </main>
     
-    <footer>
-        <img class="Logo__Tec" src="/media/LogoTec.png" alt="Logo TEC">
-    </footer>
 </body>
 </html>
