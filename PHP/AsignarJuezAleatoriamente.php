@@ -52,7 +52,14 @@
             $HayJurado = $insertion->rowCount();
             Database::disconnect();
 
-            if ($HayDocente == 0 && $HayJurado == 0){
+            $pdo = Database::connect();
+            $sql = "SELECT * FROM PROYECTO_JURADO WHERE p_id = ?";
+            $insertion = $pdo->prepare($sql);
+            $insertion->execute(array($project['p_id']));
+            $NoMas = $insertion->rowCount();
+            Database::disconnect();
+
+            if ($HayDocente == 0 && $HayJurado == 0 && $NoMas <= $totalJuecesProyecto){
                 $pdo = Database::connect();
                 $sql = "INSERT INTO PROYECTO_JURADO(co_correo,p_id) VALUES(?,?)";
                 $insertion = $pdo->prepare($sql);
