@@ -29,11 +29,11 @@
     $totalJuecesProyecto = $proyectoscount/$juecescount;
 
     foreach ($proyectos as $proyecto) {
-        echo $proyecto['p_nombre'];
+        echo $proyecto['p_nombre']."\n";
     }
 
     foreach ($jueces as $juez) {
-        echo $juez['co_nombre'];
+        echo $juez['co_nombre']."\n";
     }
 
     echo $totalJuecesProyecto;
