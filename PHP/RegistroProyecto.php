@@ -67,7 +67,7 @@
             //Insert project into PROYECTO_EDICION and create proyect
             date_default_timezone_set('America/Mexico_City');
             $fechaActual = date('Y-m-d H:i:s');
-            $sql = "SELECT * FROM EDICION WHERE ed_fecha_inicio <=? AND ed_fecha_fin >=?";
+            $sql = "SELECT * FROM EDICION WHERE ed_fecha_inicio <=? AND ed_fecha_fin >=? ORDER BY ed_id DESC LIMIT 1";
             $q = $pdo->prepare($sql);
             $q->execute(array($fechaActual,$fechaActual));
 

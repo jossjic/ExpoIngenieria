@@ -102,9 +102,9 @@
 
             date_default_timezone_set('America/Mexico_City');
             $fechaActual = date('Y-m-d H:i:s');
-            $sql = "SELECT * FROM EDICION WHERE ed_fecha_inicio <=? AND ed_fecha_fin >=?";
+            $sql = "SELECT * FROM EDICION ORDER BY ed_id DESC LIMIT 1";
             $q = $pdo->prepare($sql);
-            $q->execute(array($fechaActual,$fechaActual));
+            $q->execute();
 
 
             if ($q->rowCount() == 1){
@@ -117,7 +117,7 @@
             
             // Create session variables
             $_SESSION['logged_in'] = true;
-            $_SESSION['user_type'] = "collaborator";
+            $_SESSION['user_type'] = "collaborator-teacher";
             $_SESSION['id'] = $collaborator['co_correo'];
             
             // Redirect

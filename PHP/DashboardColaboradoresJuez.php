@@ -4,7 +4,7 @@
     session_name("EngineerXpoWeb");
     session_start();
 
-    if (!isset($_SESSION['logged_in']) || ($_SESSION['user_type'] != "collaborator-judge" && $_SESSION['user_type'] != "collaborator-teacher-judge") {
+    if (!isset($_SESSION['logged_in']) || ($_SESSION['user_type'] != "collaborator-judge" && $_SESSION['user_type'] != "collaborator-teacher-judge")) {
         header("Location: ../index.php");
         exit();
     }

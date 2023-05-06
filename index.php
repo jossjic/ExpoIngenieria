@@ -18,7 +18,7 @@
             exit();
         }
 
-        elseif ($_SESSION['user_type'] === "collaborator-judge") {
+        elseif ($_SESSION['user_type'] === "collaborator-judge" || $_SESSION['user_type'] === "collaborator-teacher-judge") {
             header("Location: ./PHP/DashboardColaboradoresJuez.php");
             exit();
         }
@@ -26,6 +26,9 @@
         elseif ($_SESSION['user_type'] === "ADMIN") {
             header("Location: ./PHP/AdminInicio.php");
             exit();
+        }
+        else {
+            header("Location: ./PHP/logout.php");
         }
     }
 ?>

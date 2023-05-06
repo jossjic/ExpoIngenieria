@@ -18,9 +18,9 @@
 
     $pdo = Database::connect();
     // Obtener los proyectos y los profesores, y Jurado
-    $sql = "SELECT * FROM PROYECTO NATURAL JOIN EDICION WHERE ed_id = ?";
+    $sql = "SELECT * FROM PROYECTO NATURAL JOIN EDICION WHERE p_estado = ? AND ed_id = ?";
     $proyectos = $pdo->prepare($sql); 
-    $proyectos->execute(array($edicion['ed_id']));
+    $proyectos->execute(array('Aceptado', $edicion['ed_id']));
     $proyectoscount = $proyectos->rowCount();
 
     $proyectos = $proyectos->fetchAll(PDO::FETCH_ASSOC);

@@ -96,7 +96,7 @@
 						type="button"
 						onclick="showVideoLinkInput()"
 					>
-						Modificar video
+						Editar video
 					</button>
 				<?php endif ?>
 			</div>
@@ -126,7 +126,7 @@
 						type="button"
 						onclick="showPosterLinkInput()"
 					>
-						Modificar poster
+						Editar poster
 					</button>
 				<?php endif ?>
 			</div>
