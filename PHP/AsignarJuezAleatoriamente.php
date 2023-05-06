@@ -32,6 +32,7 @@
 
     if ($juecescount < 3) {
         header("Location: ../PHP/RegistroJurado.php");
+        echo "alert('La cantidad de jurados y/o proyectos no es la adecuada')";
         exit();
     }
 
