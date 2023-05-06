@@ -4,9 +4,7 @@
     session_name("EngineerXpoWeb");
     session_start();
 
-    $_SESSION['user_type'] = "collaborator-teacher";
-
-    if (!isset($_SESSION['logged_in'])) {
+    if (!isset($_SESSION['logged_in']) || $_SESSION['user_type'] != "collaborator-teacher") {
         header("Location: ../index.php");
         exit();
     }
@@ -28,7 +26,8 @@
             FROM PROYECTO
             NATURAL JOIN CATEGORIA
             NATURAL JOIN PROYECTO_DOCENTE 
-            WHERE co_correo = ?";
+            WHERE p_estado = 'Registrado' AND
+            co_correo = ?";
     $q = $pdo->prepare($sql);
     $q->execute(array($_SESSION['id']));
     $proyectos_a_admitir = $q->rowCount();

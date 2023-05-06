@@ -1,11 +1,10 @@
 <?php
-
     require_once 'dataBase.php';
 
     session_name("EngineerXpoWeb");
     session_start();
 
-    if (!isset($_SESSION['logged_in'])) {
+    if (!isset($_SESSION['logged_in']) || $_SESSION['user_type'] != "ADMIN") {
         header("Location: ../index.php");
         exit();
     }

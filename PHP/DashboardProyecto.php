@@ -4,7 +4,7 @@
     session_name("EngineerXpoWeb");
     session_start();
 
-    if (!isset($_SESSION['logged_in'])) {
+    if (!isset($_SESSION['logged_in']) || $_SESSION['user_type'] != "project") {
         header("Location: ../index.php");
         exit();
     }
@@ -106,10 +106,11 @@
             <div class="Info__Other">
                 <div class="Info__Tittle">
                     <h2><?php echo $project['p_nombre'] != null ? $project['p_nombre'] : '<i>Sin nombre público asignado</i>'; ?></h2>
-
-                    <div class="Proyect__Edit">
-                        <a href="../PHP/AdministradorProyecto.php">Editar</a>
-                    </div>
+                    <?php if ($project['p_estado'] == 'Registrado'): ?>
+                        <div class="Proyect__Edit">
+                            <a href="../PHP/AdministradorProyecto.php">Editar</a>
+                        </div>
+                    <?php endif ?>
                 </div>
                 <div class="Info__Menu">
                     <dl>

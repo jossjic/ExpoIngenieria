@@ -1,16 +1,10 @@
 <?php
-
 	require_once 'dataBase.php';
 
 	session_name("EngineerXpoWeb");
 	session_start();
 
-	if (!isset($_SESSION['logged_in'])) {
-		header("Location: ../index.php");
-		exit();
-	}
-
-	if ($_SESSION['user_type'] != "collaborator-judge") {
+	if (!isset($_SESSION['logged_in']) || $_SESSION['user_type'] != "project") {
 		header("Location: ../index.php");
 		exit();
 	}

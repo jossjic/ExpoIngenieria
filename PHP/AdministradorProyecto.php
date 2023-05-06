@@ -4,14 +4,9 @@
 	session_name("EngineerXpoWeb");
     session_start();
 
-    if (!isset($_SESSION['logged_in'])) {
+    if (!isset($_SESSION['logged_in']) || $_SESSION['user_type'] != "project") {
         header("Location: ../index.php");
         exit();
-    }
-
-    if ($_SESSION['user_type'] != "project") {
-    	header("Location: ../index.php");
-    	exit();
     }
 
 	$pdo = Database::connect();
@@ -73,6 +68,7 @@
 				¡Bienvenido <br />
 				de nuevo!
 			</h1>
+			<p>Es importante que completes toda la información de tu proyecto para que este pueda ser admitido.</p>
 			<div class="Upload__Video">
 				<?php if ($project['p_video'] == null): ?>
 					<dd><i>Sin url de video asignado</i></dd>
