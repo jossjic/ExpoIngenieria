@@ -110,6 +110,7 @@
 						} else {
 							// La petición falló
 							alert('Error al asignar jurado: ' + xhr.status);
+							alert("La cantidad de jurados y/o proyectos no es la adecuada")
 						}
 						}
 					};

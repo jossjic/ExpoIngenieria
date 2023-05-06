@@ -30,6 +30,11 @@
     $jueces->execute(array($edicion['ed_id']));
     $juecescount = $jueces->rowCount();
 
+    if ($juecescount < 3) {
+        header("Location: ../PHP/RegistroJurado.php");
+        exit();
+    }
+
     $jueces = $jueces->fetchAll(PDO::FETCH_ASSOC);
 
     Database::disconnect();
