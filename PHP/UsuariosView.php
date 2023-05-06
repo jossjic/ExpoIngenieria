@@ -214,7 +214,7 @@
                                         echo '<p></p>';
 
                                         echo '<a class="Btn__Green" href="UsuariosRead.php?correo='.$row['co_correo'].'&type=co">Ver</a>';
-                                        echo '<a class="Btn__Blue" href="UsuariosUpdate.php?correo='.$row['co_correo'].'&type=co">Actualizar</a>';
+                                        echo '<a class="Btn__Blue" href="UsuariosUpdate.php?correo='.$row['co_correo'].'&type=co">Editar</a>';
                                         echo '<a class="Btn__Red" href="UsuariosDelete.php?correo='.$row['co_correo'].'&type=co">Eliminar</a>';
                                         
 								    }
@@ -237,7 +237,7 @@
                                         echo '<p></p>';
 
                                         echo '<a class="Btn__Green" href="UsuariosRead.php?correo='.$row['a_correo'].'&type=al">Ver</a>';
-                                        echo '<a class="Btn__Blue" href="UsuariosUpdate.php?correo='.$row['a_correo'].'&type=al">Actualizar</a>';
+                                        echo '<a class="Btn__Blue" href="UsuariosUpdate.php?correo='.$row['a_correo'].'&type=al">Editar</a>';
                                         echo '<a class="Btn__Red" href="UsuariosDelete.php?correo='.$row['a_correo'].'&type=al">Eliminar</a>';
                                         
                                         

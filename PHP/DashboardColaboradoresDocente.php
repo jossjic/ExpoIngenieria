@@ -29,7 +29,7 @@
             WHERE co_correo = ?";
     $q = $pdo->prepare($sql);
     $q->execute(array($_SESSION['id']));
-    $proyectosCalificar = $q->rowCount();
+    $proyectos_a_admitir = $q->rowCount();
 
     //Avisos
     $sql = "SELECT * 
@@ -94,7 +94,7 @@
         </header>
         <main>
             <div class="Action__Btn">
-                <a href="../PHP/AdmisionProyectos.php">Calificar Proyectos</a>
+                <a href="../PHP/AdmisionProyectos.php">Admitir Proyectos</a>
             </div>
 
             <div class="Counter">
@@ -107,7 +107,7 @@
             <div class="Info">
                 <p>Proyectos por revisar</p>
                 <h1>
-                    <?php echo $proyectosCalificar;?>
+                    <?php echo $proyectos_a_admitir;?>
                 </h1>
             </div>
 
