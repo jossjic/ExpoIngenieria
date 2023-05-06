@@ -25,7 +25,9 @@
 
     //Proyectos por revisar
     $sql = "SELECT *
-            FROM PROYECTO_DOCENTE 
+            FROM PROYECTO
+            NATURAL JOIN CATEGORIA
+            NATURAL JOIN PROYECTO_DOCENTE 
             WHERE co_correo = ?";
     $q = $pdo->prepare($sql);
     $q->execute(array($_SESSION['id']));
