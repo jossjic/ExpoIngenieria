@@ -2,23 +2,23 @@
     require "dataBase.php";
 
     // GET METHOD
-        // guardar el url completo y que el regex se haga al renderizar
+    // guardar el url completo y que el regex se haga al renderizar
 
-        // Regex for Google Drive video
-        $str = 'https://drive.google.com/file/d/1zna5luHn-cdM1Cyqkoz8M0sQixjVCqbY/view?usp=sharing';
-        if (preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $str, $match) == 1) {
-            $video_id = $match[1];
-        }
-        $video_full_link = "https://drive.google.com/file/d/".$video_id."/preview";
-        echo $video_full_link;
+    // Regex for Google Drive video
+    $str = 'https://drive.google.com/file/d/1zna5luHn-cdM1Cyqkoz8M0sQixjVCqbY/view?usp=sharing';
+    if (preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $str, $match) == 1) {
+        $video_id = $match[1];
+    }
+    $video_full_link = "https://drive.google.com/file/d/".$video_id."/preview";
+    echo $video_full_link;
 
-        // Regex for Google Drive image
-        $str = 'https://drive.google.com/file/d/1_YeOir5f72U8WrprQfbxhPWwt2VLGatb/view?usp=sharing';
-        if (preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $str, $match) == 1) {
-            $image_id = $match[1];
-        }
-        $image_full_link = "https://drive.google.com/uc?export=view&id=".$image_id;
-        echo $image_full_link;
+    // Regex for Google Drive image
+    $str = 'https://drive.google.com/file/d/1_YeOir5f72U8WrprQfbxhPWwt2VLGatb/view?usp=sharing';
+    if (preg_match('/^https:\/\/drive.google.com\/file\/d\/(.*?)\/view\?usp=sharing/', $str, $match) == 1) {
+        $image_id = $match[1];
+    }
+    $image_full_link = "https://drive.google.com/uc?export=view&id=".$image_id;
+    echo $image_full_link;
 ?>
 <!DOCTYPE html>
 <html lang="es">

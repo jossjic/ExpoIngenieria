@@ -1,16 +1,25 @@
 <?php
-require 'dataBase.php';
-require("../fpdf/fpdf.php");
-if ($_GET) {
-    if (isset($_GET['matricula'])) {
-        $pdo = Database::connect();
-        //$sql = "SELECT * FROM alumno";
-        $sql = "SELECT ALUMNO.a_nombre, ALUMNO.a_apellido, PROYECTO.p_nombre, EDICION.ed_nombre FROM ALUMNO JOIN PROYECTO_ALUMNO ON ALUMNO.a_correo = PROYECTO_ALUMNO.a_correo JOIN PROYECTO ON PROYECTO_ALUMNO.p_id = PROYECTO.p_id JOIN EDICION ON PROYECTO.ed_id = EDICION.ed_id WHERE ALUMNO.a_matricula = '{$_GET['matricula']}' AND PROYECTO.p_id = {$_GET['proyecto']};";
-        $q = $pdo->query($sql);
-        //var_dump($q);
-        $filas = $q->fetch();
-        //var_dump($filas);
-        //Database::disconnect();
+    require_once 'dataBase.php';
+    require("../fpdf/fpdf.php");
+
+    session_name("EngineerXpoWeb");
+    session_start();
+
+    if (!isset($_SESSION['logged_in']) || $_SESSION['user_type'] != "ADMIN") {
+        header("Location: ../index.php");
+        exit();
+    }
+    
+    if ($_GET) {
+        if (isset($_GET['matricula'])) {
+            $pdo = Database::connect();
+            //$sql = "SELECT * FROM alumno";
+            $sql = "SELECT ALUMNO.a_nombre, ALUMNO.a_apellido, PROYECTO.p_nombre, EDICION.ed_nombre FROM ALUMNO JOIN PROYECTO_ALUMNO ON ALUMNO.a_correo = PROYECTO_ALUMNO.a_correo JOIN PROYECTO ON PROYECTO_ALUMNO.p_id = PROYECTO.p_id JOIN EDICION ON PROYECTO.ed_id = EDICION.ed_id WHERE ALUMNO.a_matricula = '{$_GET['matricula']}' AND PROYECTO.p_id = {$_GET['proyecto']};";
+            $q = $pdo->query($sql);
+            //var_dump($q);
+            $filas = $q->fetch();
+            //var_dump($filas);
+            //Database::disconnect();
 
 //var_dump($filas);
 $nombre = $filas["a_nombre"] . " " . $filas["a_apellido"];

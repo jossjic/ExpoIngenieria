@@ -1,5 +1,10 @@
 <?php
 	require 'dataBase.php';
+
+	// Para que no se ejecute si llegan a acceder a este documento
+	header("Location: ../index.php");
+	exit();
+
 	$correo = 0;
 	$type = 0;
 	if ( !empty($_GET['correo'])&& !empty($_GET['type'])) {

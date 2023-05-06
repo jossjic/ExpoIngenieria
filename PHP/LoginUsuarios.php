@@ -69,8 +69,13 @@
                 // Create session variables
                 if ($collaborator['co_es_jurado'] == true){
                     $_SESSION['logged_in'] = true;
-                    $_SESSION['user_type'] = "collaborator-judge";
                     $_SESSION['id'] = $collaborator['co_correo'];
+                    if ($collaborator['co_nomina'] != null) {
+                        $_SESSION['user_type'] = "collaborator-teacher-judge";
+                    }
+                    else {
+                        $_SESSION['user_type'] = "collaborator-judge";
+                    }
                     // Redirect
                     header("Location: ../PHP/DashboardColaboradoresJuez.php");
                     exit();

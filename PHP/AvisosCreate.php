@@ -1,17 +1,17 @@
 <?php
-        require_once 'dataBase.php';
+    require_once 'dataBase.php';
 
-        session_name("EngineerXpoWeb");
-        session_start();
+    session_name("EngineerXpoWeb");
+    session_start();
 
-        if (!isset($_SESSION['logged_in'])) {
-            header("Location: ../index.php");
-            exit();
-        }
+    if (!isset($_SESSION['logged_in']) || $_SESSION['user_type'] != "ADMIN") {
+        header("Location: ../index.php");
+        exit();
+    }
 
-		$TituloError = null;
-		$ContenidoError = null;
-		$GrupoError = null;
+	$TituloError = null;
+	$ContenidoError = null;
+	$GrupoError = null;
 
 	if ( !empty($_POST)) {
 

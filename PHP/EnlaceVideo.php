@@ -1,8 +1,13 @@
 <?php
-	
 	require_once 'dataBase.php';
+
 	session_name("EngineerXpoWeb");
-    session_start();
+	session_start();
+
+	if (!isset($_SESSION['logged_in']) || $_SESSION['user_type'] != "project") {
+	    header("Location: ../index.php");
+	    exit();
+	}
 
 	$URL = $_POST['url'];
 	$URL_Error = null;

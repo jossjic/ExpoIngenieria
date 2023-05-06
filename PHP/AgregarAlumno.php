@@ -1,13 +1,13 @@
 <?php 
     require_once 'dataBase.php';
+
     session_name("EngineerXpoWeb");
     session_start();
 
-    if (!isset($_SESSION['logged_in'])) {
+    if (!isset($_SESSION['logged_in']) || $_SESSION['user_type'] != "project") {
         header("Location: ../index.php");
         exit();
     } 
-
 
     if (isset($_POST['student_name']) && isset($_POST['student_email']) && isset($_POST['student_matricula']) AND isset($_POST['student_lastname']) ) {
         $student_name = $_POST['student_name'];

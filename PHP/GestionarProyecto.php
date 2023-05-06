@@ -1,13 +1,7 @@
 <?php
-    require_once "dataBase.php";
-
-    session_name("EngineerXpoWeb");
-    session_start();
-
-    if (!isset($_SESSION['logged_in'])) {
-        header("Location: ../index.php");
-        exit();
-    }
+	// Para que no pueda ser accedida esta vista
+	header("Location: ../index.php");
+    exit();
 
     // GET METHOD
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
