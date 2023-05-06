@@ -184,7 +184,8 @@
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$sql = 'SELECT * 
 		        FROM PROYECTO 
-		        NATURAL JOIN CATEGORIA 
+		        NATURAL JOIN CATEGORIA
+		        NATURAL JOIN NIVEL 
 		        WHERE p_id = ?';
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
@@ -332,25 +333,25 @@
 												<p>El proyecto resuelve un problema actual en el área de interés y/o el proyecto da alta prioridad al cliente quien queda ampliamente satisfecho.</p>
 											</td>
 											<?php 
-												if ($p1 === '1') {
+												if ($p1 == '1') {
 													echo '<td><input type="radio" name="p_1" value="1" checked></td>';
 												}
 												else {
 													echo '<td><input type="radio" name="p_1" value="1"></td>';
 												}
-												if ($p1 === '2') {
+												if ($p1 == '2') {
 													echo '<td><input type="radio" name="p_1" value="2" checked></td>';
 												}
 												else {
 													echo '<td><input type="radio" name="p_1" value="2"></td>';
 												}
-												if ($p1 === '3') {
+												if ($p1 == '3') {
 													echo '<td><input type="radio" name="p_1" value="3" checked></td>';
 												}
 												else {
 													echo '<td><input type="radio" name="p_1" value="3"></td>';
 												}
-												if ($p1 === '4') {
+												if ($p1 == '4') {
 													echo '<td><input type="radio" name="p_1" value="4" checked></td>';
 												}
 												else {
@@ -367,25 +368,25 @@
 												<p>El proyecto presenta una idea nueva e impacta positivamente en el área de interés y/o el producto presenta una idea nueva e incrementa la productividad.</p>
 											</td>
 											<?php 
-												if ($p2 === '1') {
+												if ($p2 == '1') {
 													echo '<td><input type="radio" name="p_2" value="1" checked></td>';
 												}
 												else {
 													echo '<td><input type="radio" name="p_2" value="1"></td>';
 												}
-												if ($p2 === '2') {
+												if ($p2 == '2') {
 													echo '<td><input type="radio" name="p_2" value="2" checked></td>';
 												}
 												else {
 													echo '<td><input type="radio" name="p_2" value="2"></td>';
 												}
-												if ($p2 === '3') {
+												if ($p2 == '3') {
 													echo '<td><input type="radio" name="p_2" value="3" checked></td>';
 												}
 												else {
 													echo '<td><input type="radio" name="p_2" value="3"></td>';
 												}
-												if ($p2 === '4') {
+												if ($p2 == '4') {
 													echo '<td><input type="radio" name="p_2" value="4" checked></td>';
 												}
 												else {
@@ -402,25 +403,25 @@
 												<p>Ausencia de errores técnicos los resultados y/o producto resuelven el problema propuesto.</p>
 											</td>
 											<?php 
-												if ($p3 === '1') {
+												if ($p3 == '1') {
 													echo '<td><input type="radio" name="p_3" value="1" checked></td>';
 												}
 												else {
 													echo '<td><input type="radio" name="p_3" value="1"></td>';
 												}
-												if ($p3 === '2') {
+												if ($p3 == '2') {
 													echo '<td><input type="radio" name="p_3" value="2" checked></td>';
 												}
 												else {
 													echo '<td><input type="radio" name="p_3" value="2"></td>';
 												}
-												if ($p3 === '3') {
+												if ($p3 == '3') {
 													echo '<td><input type="radio" name="p_3" value="3" checked></td>';
 												}
 												else {
 													echo '<td><input type="radio" name="p_3" value="3"></td>';
 												}
-												if ($p3 === '4') {
+												if ($p3 == '4') {
 													echo '<td><input type="radio" name="p_3" value="4" checked></td>';
 												}
 												else {
@@ -437,25 +438,25 @@
 												<p>La presentación es concreta y clara.</p>
 											</td>
 											<?php 
-												if ($p4 === '1') {
+												if ($p4 == '1') {
 													echo '<td><input type="radio" name="p_4" value="1" checked></td>';
 												}
 												else {
 													echo '<td><input type="radio" name="p_4" value="1"></td>';
 												}
-												if ($p4 === '2') {
+												if ($p4 == '2') {
 													echo '<td><input type="radio" name="p_4" value="2" checked></td>';
 												}
 												else {
 													echo '<td><input type="radio" name="p_4" value="2"></td>';
 												}
-												if ($p4 === '3') {
+												if ($p4 == '3') {
 													echo '<td><input type="radio" name="p_4" value="3" checked></td>';
 												}
 												else {
 													echo '<td><input type="radio" name="p_4" value="3"></td>';
 												}
-												if ($p4 === '4') {
+												if ($p4 == '4') {
 													echo '<td><input type="radio" name="p_4" value="4" checked></td>';
 												}
 												else {
@@ -472,25 +473,25 @@
 												<p>Respuestas precisas de acuerdo al diseño, al estado de avance del proyecto, al impacto y a los resultados obtenidos.</p>
 											</td>
 											<?php 
-												if ($p5 === '1') {
+												if ($p5 == '1') {
 													echo '<td><input type="radio" name="p_5" value="1" checked></td>';
 												}
 												else {
 													echo '<td><input type="radio" name="p_5" value="1"></td>';
 												}
-												if ($p5 === '2') {
+												if ($p5 == '2') {
 													echo '<td><input type="radio" name="p_5" value="2" checked></td>';
 												}
 												else {
 													echo '<td><input type="radio" name="p_5" value="2"></td>';
 												}
-												if ($p5 === '3') {
+												if ($p5 == '3') {
 													echo '<td><input type="radio" name="p_5" value="3" checked></td>';
 												}
 												else {
 													echo '<td><input type="radio" name="p_5" value="3"></td>';
 												}
-												if ($p5 === '4') {
+												if ($p5 == '4') {
 													echo '<td><input type="radio" name="p_5" value="4" checked></td>';
 												}
 												else {

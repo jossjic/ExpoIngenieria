@@ -23,7 +23,7 @@
 		// delete data
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "DELETE FROM EVALUACION WHERE p_id = ? AND co_correo";
+		$sql = "DELETE FROM EVALUACION WHERE p_id = ? AND co_correo = ?";
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id,$correo));
 		Database::disconnect();
