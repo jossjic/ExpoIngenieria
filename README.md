@@ -41,7 +41,7 @@ La seguridad es una prioridad en nuestro proyecto. Se han implementado medidas p
 
 ## Documentación Adicional
 
-Para obtener más detalles técnicos, arquitectura del proyecto, diseño de la base de datos y otros aspectos clave, consulte la documentación en [DOCUMENTACIÓN](DOCUMENTACIÓN.md).
+Para obtener más detalles técnicos, arquitectura del proyecto, diseño de la base de datos y otros aspectos clave, consulte la documentación en [DOCUMENTACIÓN](https://github.com/jossjic/ExpoIngenieria/blob/main/Documentaci%C3%B3n.pdf).
 
 ## Feedback y Contribuciones
 
