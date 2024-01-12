@@ -1,5 +1,5 @@
 # Expo Ingenierías
-
+![Gif Test](expo.gif)
 ## Descripción del Proyecto
 
 Expo Ingenierías es un proyecto que abarca 6 meses de desarrollo, dirigido a la creación de una página web completa (Frontend y Backend) diseñada para la administración de proyectos del Tecnológico de Monterrey. La plataforma tiene como objetivo facilitar la gestión eficiente de proyectos, permitiendo a los usuarios colaborar, supervisar y presentar información relevante.
