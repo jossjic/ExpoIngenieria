@@ -1,5 +1,5 @@
 # Engineering Expo
-[Click here to see the Spanish version of the documentation](README.md)
+[Click here to see the Spanish version of the documentation](README_ES.md)
 
 ![Gif Test](expo.gif)
 ## Project Description
